@@ -232,6 +232,35 @@
         \[
             w^p = g+hE[\tilde{r}^p]   
         \]
+    
+    \subsubsection*{Covarianza tra portafogli in FP}
+    \[
+        Cov(\tilde{r}^q, \tilde{r}^p ) = \frac{C}{D} \left(E[\tilde{r}^p]-\frac{A}{C}\right) \left(E[\tilde{r}^q]-\frac{A}{C}\right) + \frac{1}{C}
+    \]
+    Da cui posso trovare la varianza
+
+    \subsection*{Con titolo privo di rischio}
+        Rendimento del titolo privo di rischio $r_f$\\
+        Calcolo il coefficiente $H$:
+        \[
+            H = (e-r_f\mathbf{1})^T V^{-1} (e-r_f\mathbf{1}) = B-2Ar_f+Cr_f^2>0
+        \]
+        La frontiera dei portafogli $FP^*$ sono tutti i portafogli:
+        \[
+            w^p = V^{-1} (e-r_f\mathbf{1}) \frac{E[\tilde{r}^p]-r_f}{H}
+        \]
+        Per ottenere la varianza:
+        \[
+            \sigma^2(w^p) = { w^p}^T V w^p = \frac{(E[\tilde{r}^p]-r_f)^2}{H}
+        \]
+
+    \subsection*{Portafoglio tangente}
+    E' il portafoglio comune a FP e FP*, o il portafoglio
+    a Covarianza nulla con $w^p\in FP$ con $E[\tilde{w}^p] = r_f$
+    \[
+        w^e = V^{-1} \frac{(e-r_f\mathbf{1})}{\mathbf{1}^TV^{-1}(e-r_f\mathbf{1})}    
+    \]
+
 
 
 \section*{Assicurazione}
