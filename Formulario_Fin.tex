@@ -321,7 +321,97 @@
     \end{enumerate}
 
 
-\blindtext[4]
+\section*{Arbitrage Pricing Theory}
+    N titoli e un titolo sicuro $r_f$\\
+    I rendimenti sono generati da una media e da $k$ fattori
+    di rischio $\tilde{x}_i$
+    \[
+        \tilde{r}_n = \sum_{h=1}^k b_{nh} \tilde{x}_h \quad \forall n  
+    \]
+
+    \subsection*{Portafogli Puri}
+    Il portafoglio puro $w_s$ è il portafoglio tale che:
+    \[
+        \left\{\begin{array}{l}
+            \sum_{n=1}^N w_s b_{ns} = 1 \\
+            \sum_{n=1}^N w_j b_{nj} = 0 \quad \forall j\neq s \\
+            \sum_{n=1}^N w_n  = 1
+        \end{array}\right.  
+    \]
+
+    \subsection*{Portafoglio privo di rischio}
+    Il portafoglio puro $w_s$ è il portafoglio tale che:
+    \[
+        \left\{\begin{array}{l}
+            \sum_{n=1}^N w_s b_{ns} = 0 \quad \forall s \\
+            \sum_{n=1}^N w_n  = 1
+        \end{array}\right.  
+    \]
+
+    \subsection*{Portafoglio di replica}
+    Dato un titolo:
+    \[
+        \tilde{r}_{N+1} = \alpha + \sum_{h=1}^k b_{N+1 \, k}\tilde{x}_h
+    \]
+    Il suo portafoglio di replica è il portafoglio tale che:
+    \[
+        \left\{\begin{array}{l}
+            \sum_{n=1}^N w_r b_{nk} = b_{N+1 \, k} \quad \forall k\\
+            \sum_{n=1}^N w_n  = 1
+        \end{array}\right.  
+    \]
+    Allora:
+    \[
+        E[\tilde{r}_r] = \alpha    
+    \]
+
+    \subsection*{Verifica APT}
+    Definiamo $\lambda_h = E[\tilde{r}_h]-r_f$ per ogni portafoglio puro.
+    Se non c'è arbitraggio allora:
+    \[
+        \alpha-r_f = w_r \cdot \lambda    
+    \]
+
+
+
+
+\section*{Value at Risk e Expected Shortfall}
+    I dati che ci servono sono: \\
+    $\mu$, media, $\sigma$, deviazione std (fai la radice),
+    $h$ le unità di tempo passato e il livello $p$
+    \begin{itemize}
+        \item \textbf{Logaritmici Normali} 
+            \begin{align*}
+                &VaR = -h\mu+\sigma\sqrt{h}\Phi(1-p) \\
+                &ES = -h\mu+\frac{\sigma}{ph} \Phi(\phi(1-p))
+            \end{align*}
+        \item \textbf{Giornalieri}
+            \begin{align*}
+                &VaR = h(1-\mu)+\sigma\sqrt{h}\Phi(1-p) \\
+                &ES = h(1-\mu)+\frac{\sigma}{ph} \Phi(\phi(1-p))
+            \end{align*}
+        \item \textbf{Perdita}
+            \begin{align*}
+                &VaR = h\mu+\sigma\sqrt{h}\Phi(1-p) \\
+                &ES = h\mu+\frac{\sigma}{ph} \Phi(\phi(1-p))
+            \end{align*}
+    \end{itemize}
+
+    \subsection*{Portafogli e Subadditività}
+    Se abbiamo un portafoglio:\\
+    $\mu = w\cdot e$ e $\sigma = \sqrt{W^tVw}$, inoltre, se vale
+    la Subadditività:
+    \[
+        VaR(\tilde{R}) \leq \sum_{i=1}^N VaR(\tilde{R}_n)  
+    \]
+    L'ES è sempre subadditivo.
+
+    \subsubsection*{Specchieto sulla normale}
+    \begin{align*}
+        & \Phi(0.99) = 0.83891\\
+        & \Phi(\phi(0.99)) = 0.00667
+    \end{align*}
+
     
 \end{multicols*}
 
