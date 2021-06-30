@@ -239,6 +239,12 @@
     \]
     Da cui posso trovare la varianza
 
+    \subsubsection*{Portafoglio a Varianza minima globale}
+    \[
+        w*=\frac{V^{-1}\mathbf{1}}{C}
+    \]
+    Da cui posso trovare la varianza
+
     \subsection*{Con titolo privo di rischio}
         Rendimento del titolo privo di rischio $r_f$\\
         Calcolo il coefficiente $H$:
@@ -378,21 +384,35 @@
     \]
 
 
-\section*{Albero Binomiale}
+\section*{Put e Call Option}
     Abbiamo un titolo rischioso (Stock) e uno non rischioso (Bond)
     i cui valori di mercato sono $S(t), B(t)$. \\
-    \begin{itemize}
-        \item \textbf{Bond}: passa dal valore $B(0)$ in $t=0$ al valore $B(0)r_f$ in $t=1$
-        \item \textbf{Stock}: il suo valore è una bernoulli di ragione $p$:
-            \[
-                \left\{\begin{array}{l}
-                    S(0)u \quad \pi = p \\
-                    S(0)d \quad \pi = 1-p
-                \end{array}\right.
-            \]
-            Dove $u,d$ stanno per \textit{up, down},
-            e perchè non ci sia arbitraggio: $u>r_f>d$
-    \end{itemize}
+    Abbiamo delle opzioni esercitabili sul sottostante $S$,
+    con strike-price $K$.
+    \subsection*{Call}
+    La call option restituisce:
+    \[
+        max(S-K,0)
+    \]
+    \subsection*{Put}
+    La put option restituisce:
+    \[
+        max(0,K-S)
+    \]
+
+    \section*{Albero Binomiale}
+        \begin{itemize}
+            \item \textbf{Bond}: passa dal valore $B(0)$ in $t=0$ al valore $B(0)r_f$ in $t=1$
+            \item \textbf{Stock}: il suo valore è una bernoulli di ragione $p$:
+                \[
+                    \left\{\begin{array}{l}
+                        S(0)u \quad \pi = p \\
+                        S(0)d \quad \pi = 1-p
+                    \end{array}\right.
+                \]
+                Dove $u,d$ stanno per \textit{up, down},
+                e perchè non ci sia arbitraggio: $u>r_f>d$
+        \end{itemize}
 
 
 \section*{Value at Risk e Expected Shortfall}
