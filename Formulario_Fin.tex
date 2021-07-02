@@ -406,7 +406,24 @@
     \[
         xB(0)+yS(0) = \frac{1}{r_f} \left[ F(S(0)u) \pi_u + F(S(0)d) \pi_d \right]
     \]
+
+
+    \subsection*{Delta hedging}
+    Voglio sapere quanto $\Delta$ devo vendere allo scoperto di S
+    per neutralizzare le oscillazioni del Derivato. \\
+    In pratica:
+    \[
+        \Delta = \frac{F(S(0)u) - F(S(0)d)}{S(0) (u-d)}    
+    \]
+    Anche questo modello nel caso di multiperiodale,
+    necessita di ricondursi a $t=1$.
     
+    \subsection*{Double checking}
+    Notiamo che possiamo controllare di aver ottenuto dei risultati
+    corretti se:
+    \[
+        \Delta = y
+    \]
 
 \section*{Value at Risk e Expected Shortfall}
     I dati che ci servono sono: \\
