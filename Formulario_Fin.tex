@@ -38,55 +38,6 @@
 
 \begin{multicols*}{2}
 
-\subsection*{Capitalizzazioni}
-    \begin{itemize}
-        \item \textbf{Semplice} $ W(t) = S(1+it)$ 
-        \item \textbf{Composta} $ W(t) = S(1+i)^t$
-        \item \textbf{Esponenziale} $ W(t) = Se^{yt = t \ln(1+i)}$
-    \end{itemize}
-
-\section*{A pronti e a Termine}
-
-    \subsubsection*{A pronti}
-    \begin{itemize}
-        \item $i(t,T)=-\frac{p(t,T)-1}{(T-t)p(t,T)}$
-        \item $y(t,T)=-\frac{\ln(p(t,T))}{(T-t)}$
-    \end{itemize}
-
-    \subsubsection*{Relazione Prezzi}
-    \[
-        p(t,S,T)=\frac{p(t,T)}{p(t,S)}
-    \]
-
-    \subsubsection*{A termine}
-    \begin{itemize}
-        \item $i(t,S,T)=-\frac{p(t,S,T)-1}{(T-S)p(t,S,T)}$
-        \item $y(t,S,T)=-\frac{\ln(p(t,S,T))}{(T-S)}$
-    \end{itemize}
-
-    \subsubsection*{Relazione Tassi}
-    \begin{align*}
-        &(1+i(t,t+k))^k=\prod_{j=1}^k (1+i(t,t+j-1,t+j)) \\
-        &y(t,t+k)=\frac{1}{k}\sum_{j=1}^k y(t,t+j-1,t+j)
-    \end{align*}
-
-    \subsection*{Bootstrapping}
-    $x\in [T_1,T_2]$
-    \[ 
-        i(t,x)=\frac{(T_2-x)i(t,T_1)+(x-T_1)i(t,T_2)}{T_2-T_1}
-    \]
-
-\section*{Investimenti}
-
-    \subsection*{Valore Attuale}
-    \[ 
-        Va(t)=\sum_{i=0}^N \frac{x_i}{(1+i(t,T_i))^{(T_n-t)}}
-    \]
-
-    \subsection*{TIR}
-    \[
-        i^* \text{ t.c. } \sum_{i=0}^N \frac{x_i}{(1+i*)^{(T_n-t)}} = 0
-    \]
 
 \section*{Indici Temporali}
 
@@ -96,10 +47,13 @@
 
     \subsection*{Duration e Convexity}
     \begin{align*}
-        &DU(t,x)=\frac{\sum_{n=1}^N (T_n-t) x_n (1+i(t,T_n))^{-(T_n-t)} }{p(t,x)} \\
-        &DU^2(t,x)=\frac{\sum_{n=1}^N (T_n-t)^2 x_n (1+i(t,T_n))^{-(T_n-t)} }{p(t,x)}
+        & DU(t,x) = \frac{ \sum^N (T_n-t) x_n (1+i(t,T_n))^{-(T_n-t)} }{p(t,x)} \\
+        & DU^2(t,x) = \frac{ \sum^N (T_n-t)^2 x_n (1+i(t,T_n))^{-(T_n-t)} }{p(t,x)} \\
+        & C(t,x) = \\
+        & \quad  = \frac{ \sum (T_n-t) (T_n-t+1) x_n (1+i(t,T_n))^{-(T_n-t+2)} }{p(t,x)}
     \end{align*}
-    Oppure con $e^{-y*(t,T_N)}$\\
+    Oppure con $e^{-y*(T_N-t)}$ al posto di \\ 
+    $(1+i)^{-(Tn-t)}$\\
     Per portafoglio $\alpha,X$:
     \[
         DU(t,\alpha X) = \sum_{k=1}^K \frac{\alpha_k p_k}{\sum_{k=1}^K \alpha_k p_k} Du(t,x^k)
@@ -108,14 +62,16 @@
     \subsection*{Approssimazione}
 
         \subsubsection*{Composta}
-        \[
-            \Delta p(t,x) = -\frac{1}{1+i} DU(t,x) p(t,x) \Delta i + \frac{1}{2} p(t,x) C(t,x) \Delta i^2
-        \]
+        \begin{align*}
+            & \Delta p(t,x) = -\frac{1}{1+i} DU(t,x) p(t,x) \Delta i + \\
+            & \quad + 1/2 p(t,x) C(t,x) \Delta i^2
+        \end{align*}
 
         \subsubsection*{Esponenziale}
-        \[
-            \Delta p(t,x) = -DU(t,x) p(t,x) \Delta y + \frac{1}{2} p(t,x) DU^2(t,x) \Delta y^2
-        \]
+        \begin{align*}
+            & \Delta p(t,x) = -DU(t,x) p(t,x) \Delta y + \\
+            & \quad + 1/2 p(t,x) DU^2(t,x) \Delta y^2
+        \end{align*}
     \subsection*{Immunizzazione}
 
         \subsubsection*{Fisher-Weil}
@@ -143,9 +99,6 @@
 
     \subsection*{Coefficiente di avversione}
     $r^a_u(x)=-\frac{u''(x)}{u'(x)}$ e moltiplico per $x$
-
-    \subsection*{Relazione}
-    $\rho_u(\tilde{x})\approx\frac{1}{2}r^a_u(x)\sigma^2$ localmente per $E[\tilde{x}]=x$
 
     \subsection*{Funzioni utilità}
     \begin{itemize}
@@ -269,25 +222,6 @@
     \end{align*}
 
 
-
-\section*{Assicurazione}
-
-    Danno $D$ con probabilità $q\in[0,1]$, $w$ coverage ratio.
-    \[
-        E[u(\tilde{x})] = \pi u(x-D-wq+w) + (1-\pi) u(x-wq)   
-    \]
-
-    \subsection*{Danno generico}
-    Danno generico $\tilde{z}$, pago $(1+\lambda)E[\tilde{z}]$, devo massimizzare:
-    \[
-        E[u( x - (1-w)\tilde{z} - w(1+\lambda)E[\tilde{z}] )]   
-    \]
-    Che equivale a fare
-    \[
-        E[ u'(x - (1-w)\tilde{z} - w(1+\lambda)E[\tilde{z} ) ( \tilde{z}-(1+\lambda) E[\tilde{z}] ) ] = 0
-    \]
-
-
 \section*{Modelli di Equilibrio}
     $N$ titoli e $S$ possibili stati. \\
     Vettore prezzi $q=(q_1,\dots,q_n)$,
@@ -318,27 +252,13 @@
         m  = D^{-T}q > 0     
     \]
 
-\section*{CAPM}
-
-
-
-\section*{CCAPM}
-    \begin{enumerate}
-        \item Trovo il ptf $\tilde{r}^m$ che riproduce la ricchezza in tutti i dati stati, il suo prezzo ed il suo rendimento atteso
-        \item Trovo $\beta_{CAPM} = \frac{Cov(u'(\tilde{x}^m,\tilde{r}_n))}{Cov(u'(\tilde{x}^m,\tilde{r}_m)}$
-        \item Trovo il rendimento del titolo privo di rischio $r_f$
-        \item Uso la relazione \[
-                E[\tilde{r}_n]-r_f = \beta (E[\tilde{r}^m]-r_f) 
-            \]
-    \end{enumerate}
-
 
 \section*{Arbitrage Pricing Theory}
     N titoli e un titolo sicuro $r_f$\\
     I rendimenti sono generati da una media e da $k$ fattori
     di rischio $\tilde{x}_i$
     \[
-        \tilde{r}_n = \sum_{h=1}^k b_{nh} \tilde{x}_h \quad \forall n  
+        \tilde{r}_n = \alpha + \sum_{h=1}^k b_{nh} \tilde{x}_h \quad \forall n  
     \]
 
     \subsection*{Portafogli Puri}
@@ -372,7 +292,7 @@
             \sum_{n=1}^N w_n  = 1
         \end{array}\right.  
     \]
-    Allora:
+    Allora, se non c'è arbitraggio:
     \[
         E[\tilde{r}_r] = \alpha    
     \]
@@ -381,7 +301,7 @@
     Definiamo $\lambda_h = E[\tilde{r}_h]-r_f$ per ogni portafoglio puro.
     Se non c'è arbitraggio allora:
     \[
-        \alpha-r_f = w_r \cdot \lambda    
+        \alpha-r_f = b_{N+1} \cdot \lambda    
     \]
 
 
@@ -393,15 +313,15 @@
     \subsection*{Call}
     La call option restituisce:
     \[
-        max(S-K,0)
+        max[S-K,0]
     \]
     \subsection*{Put}
     La put option restituisce:
     \[
-        max(0,K-S)
+        max[0,K-S]
     \]
 
-    \section*{Albero Binomiale}
+    \subsection*{Albero Binomiale}
         \begin{itemize}
             \item \textbf{Bond}: passa dal valore $B(0)$ in $t=0$ al valore $B(0)r_f$ in $t=1$
             \item \textbf{Stock}: il suo valore è una bernoulli di ragione $p$:
@@ -412,9 +332,81 @@
                     \end{array}\right.
                 \]
                 Dove $u,d$ stanno per \textit{up, down},
-                e perchè non ci sia arbitraggio: $u>r_f>d$
+                e perchè non ci sia arbitraggio: $u>r_f>d$.\\
+                E per non arbitraggio:
+                \[
+                    \pi_u = \frac{r_f - d}{u - d}
+                \]
         \end{itemize}
+    
+        \subsubsection*{Put e Call Europee}
+        Per ricostruire il loro valore iniziale $F(S(0))$,
+        possiamo procedere in due modi:
+        \begin{itemize}
+            \item \textbf{Con le probabilità:}
+                \begin{enumerate}
+                    \item Ricavo i payoff dalle foglie dell'albero di S(t)
+                    \item Iterativamente ricostruisco ogni nodo come:
+                        \[
+                            F(S(t)) = \frac{1}{r_f}[F(S(t)u)\pi_u + F(S(0)d)\pi_d]    
+                        \]
+                \end{enumerate}
+            \item \textbf{Con gli state price:}
+                \begin{enumerate}
+                    \item Ricostruisco i vari state price come:
+                        \[
+                            m = D^{-T}q  \text{ oppure } m_s = \frac{\pi_s}{r_f^T} 
+                        \]
+                    \item Ora prezzare le option equivale a prezzare
+                    il portafoglio con gli stessi rendimenti, cioè a fare:
+                        \[
+                            F(S(0)) = \vec{F}(S(T)) \cdot m
+                        \]
+                \end{enumerate}
+        \end{itemize}
+        
 
+        \subsubsection*{Put e Call Americane}
+            Il loro valore iniziale $F(S(0))$ si può ricostruire
+            solo nel caso binomiale
+            \begin{enumerate}
+                \item Ricostruire l'albero dei payoff per tutti i nodi
+                \item Partendo dalle foglie ricostruisco il valore come media pesata
+                \item Faccio il max tra questa e il payoff, e lo scrivo nell'albero e procedo
+            \end{enumerate}
+
+        \subsubsection*{Put-Call parity}
+            Viene soddisfatta solo dalle Europee:
+            \[
+                P(t) + S(t) = C(t) + \frac{K}{ r_f^{T-t} }    
+            \]
+    
+    
+    \subsection*{Portafoglio di Replica}
+    Cerchiamo un portafoglio costituito di B e S
+    che replichi i payoff a $t=1$ del derivato. \\
+    Nel caso di multiperiodale, prima dobbiamo ricostruire il valore
+    a $t=1$. Poi basta risolvere il sistema lineare:
+    \[
+        \begin{bmatrix}
+            r_f & S(0)u \\
+            r_f & S(0)d  
+        \end{bmatrix}
+        \begin{bmatrix}
+            x \\
+            y  
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            F(S(0)u) \\
+            F(S(0)d)  
+        \end{bmatrix}
+    \]
+    E il suo valore di mercato sarà:
+    \[
+        xB(0)+yS(0) = \frac{1}{r_f} \left[ F(S(0)u) \pi_u + F(S(0)d) \pi_d \right]
+    \]
+    
 
 \section*{Value at Risk e Expected Shortfall}
     I dati che ci servono sono: \\
@@ -423,24 +415,24 @@
     \begin{itemize}
         \item \textbf{Logaritmici Normali} 
             \begin{align*}
-                &VaR = -h\mu+\sigma\sqrt{h}\Phi(1-p) \\
-                &ES = -h\mu+\frac{\sigma}{ph} \Phi(\phi(1-p))
+                &VaR = -h\mu+\sigma\sqrt{h}\Phi^{-1}(1-p) \\
+                &ES = -h\mu+\frac{\sqrt{h}\sigma}{p} \phi(\Phi^{-1}(1-p))
             \end{align*}
         \item \textbf{Giornalieri}
             \begin{align*}
-                &VaR = h(1-\mu)+\sigma\sqrt{h}\Phi(1-p) \\
-                &ES = h(1-\mu)+\frac{\sigma}{ph} \Phi(\phi(1-p))
+                &VaR = h(1-\mu)+\sigma\sqrt{h}\Phi^{-1}(1-p) \\
+                &ES = h(1-\mu)+\frac{\sqrt{h}\sigma}{p} \phi(\Phi^{-1}(1-p))
             \end{align*}
         \item \textbf{Perdita}
             \begin{align*}
-                &VaR = h\mu+\sigma\sqrt{h}\Phi(1-p) \\
-                &ES = h\mu+\frac{\sigma}{ph} \Phi(\phi(1-p))
+                &VaR = h\mu+\sigma\sqrt{h}\Phi^{-1}(1-p) \\
+                &ES = h\mu+\frac{\sqrt{h}\sigma}{p} \phi(\Phi^{-1}(1-p))
             \end{align*}
     \end{itemize}
 
     \subsection*{Portafogli e Subadditività}
     Se abbiamo un portafoglio:\\
-    $\mu = w\cdot e$ e $\sigma = \sqrt{W^tVw}$, inoltre, se vale
+    $\mu = w\cdot e$ e $\sigma = \sqrt{w^TVw}$, inoltre, se vale
     la Subadditività:
     \[
         VaR(\tilde{R}) \leq \sum_{i=1}^N VaR(\tilde{R}_n)  
@@ -449,8 +441,8 @@
 
     \subsubsection*{Specchieto sulla normale}
     \begin{align*}
-        & \Phi(0.99) = 0.83891\\
-        & \Phi(\phi(0.99)) = 0.00667
+        & \Phi^{-1}(0.99) = 2.3263\\
+        & \phi(\Phi^{-1}(0.99)) = 0.0266
     \end{align*}
 
     
