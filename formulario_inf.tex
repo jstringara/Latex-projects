@@ -19,6 +19,7 @@
 \usepackage{titlesec}
 \usepackage{multicol}
 \usepackage{blindtext}
+\usepackage{cancel} % per cancellare le espressioni
 \setlength{\columnsep}{1cm}
 
 
@@ -74,7 +75,7 @@
     \end{align*}
 
 
-    \subsection*{LFGN}
+    \subsection*{Legge Forte Grandi Numeri}
     Sia $X_1, \dots, X_n$ iid con $\mu, \sigma^2$, allora:\\
     $\bar{X}_n \overset{q.c.}{\to} \mu$
 
@@ -110,7 +111,7 @@
     Questo vale anche per trasformazioni \textbf{biunivoche} di $T$
 
 
-    \subsection*{FE}
+    \subsection*{Famiglia Esponenziale}
     Se ho una distribuzione della FE:\\
     $f(\vec{x},\theta) = h(\vec{x}) c(\theta) \exp\left\{ \sum_{i=1}^k w_i(\theta) t_i(x) \right\}$ \\
     Allora $T=(\sum_j t_1(X_j), \dots, \sum_j t_k(X_j) )$ è sufficiente
@@ -124,10 +125,36 @@
     se tutte le altre statistiche sufficienti sono funzioni
     di essa.
 
+
     \subsection*{Lehmann-Scheffè sulla minimalità}
     Sia $f(\vec{x},\theta)$ e $T$ stat suff. $T$ è minimale se:\\
     $\frac{f(\vec{x},\theta)}{f(\vec{y},\theta)}=K$ con $K$ costante
-    $\iff$
+    $\iff$ \\
+    $T(x)=T(y)$
+
+
+\section*{Statistiche complete}
+
+
+    \subsection*{Definizione}
+    Sia $T(x)$ una statistica e $f(t,\theta)$ la sua legge.
+    Diciamo $T(x)$ completa se:
+    \[
+        \E_\theta[g(T)] = 0 \: \forall\theta \implies \p(g(T)=0)=1    
+    \]
+    Di solito usiamo la derivata rispetto a $\theta$:
+    \[
+        \frac{d}{d\theta} \E_\theta[g(T)] = 0 = h'(\theta) \overset{0}{\cancel{\E_\theta[g(T)]}} + h(\theta)[g(t)f_T(t)]
+    \]
+    Avremo:
+
+
+
+
+
+
+
+
 
 
 
