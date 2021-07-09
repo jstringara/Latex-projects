@@ -143,10 +143,10 @@
         \E_\theta[g(T)] = 0 \: \forall\theta \implies \p(g(T)=0)=1    
     \]
     Di solito usiamo la derivata rispetto a $\theta$:
-    \[
-        \frac{d}{d\theta} \E_\theta[g(T)] = 0 = h'(\theta) \overset{0}{\cancel{\E_\theta[g(T)]}} + h(\theta)[g(t)f_T(t)]
-    \]
-    Avremo:
+    \begin{align*}
+        & \frac{d}{d\theta} \E_\theta[g(T)] = 0 \\
+        & = h'(\theta) \overset{0}{\cancel{\E_\theta[g(T)]}} + h(\theta)g(t)f_T(t,\theta) \Big|_a^b
+    \end{align*}
 
 
 
