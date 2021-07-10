@@ -274,12 +274,50 @@
 
 
     \subsection*{Lemma di Neymann-Perason}
+    Sia $H_0: \theta = \theta_0 \quad H_1: \theta = \theta_1$
+    Allora se uso:
+    \begin{enumerate}
+        \item $R=\{x| f(x,\theta_1)>kf(x,\theta_0) \}$, $k\geq0$
+        \item $\alpha = \p_{\theta_0}(x\in R)$
+    \end{enumerate}
+    Allora:
+    \begin{enumerate}[label=\alph*]
+        \item Qualsiasi test che soddisfi queste due è UMP
+            di livello $\alpha$.
+        \item Se esiste un test UMP del punto a con $k\geq0$ allora:\\
+            Ogni UMP di livello $\alpha$ è anche di dimensione $\alpha$
+            e soddisfa la 1 tranne che per un insieme di misura nulla.
+    \end{enumerate}
+    \textbf{Nota:} questo si applica anche per le distribuzioni, 
+    basta usare: \\
+    $R=\{x| f_1(x,\theta)>kf_0(x,\theta) \}$
     
 
+    \subsection*{Monotone Likelihood Ratio}
+    Sia una famiglia di leggi $g(x,\theta) \quad\theta\in\Theta$,
+    la diciamo LRT se per $\theta_2 > \theta_1$ \\
+    $\frac{ g(t,\theta_2 )}{g(t,\theta_1 )}$ è monotona in $t$ (non-crescente o non-decrescente)
 
 
+    \subsection*{Teorema di Karlin-Rubin}
+    Sia $H_0: \theta \leq \theta_0 \quad H_1: \theta > \theta_1$,
+    $T$ statistica sufficiente con $MLR$ non-decrescente. Allora: \\
+    $\forall t_0$ il test con $R=\{ T > t_0 \}$ è UMP di livello
+    $\alpha= \p_{\theta_0}(T>t_0)$
 
-
+    \subsection*{Estensione di Karlin-Rubin}
+    \begin{itemize}
+        \item $H_0: \theta \leq \theta_0 \quad H_1: \theta > \theta_1$
+            \begin{itemize}
+                \item \textbf{Non-decrescente:} $R=\{T > t_0\}$
+                \item \textbf{Non-crescente:} $R=\{-T > t_0\}$
+            \end{itemize}
+        \item $H_0: \theta \geq \theta_0 \quad H_1: \theta < \theta_1$
+        \begin{itemize}
+            \item \textbf{Non-decrescente:} $R=\{T < t_0\}$
+            \item \textbf{Non-crescente:} $R=\{-T < t_0\}$
+        \end{itemize}
+    \end{itemize}
 
 
 
