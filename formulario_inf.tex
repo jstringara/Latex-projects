@@ -320,14 +320,98 @@
     \end{itemize}
 
 
+\section*{Stime intervallari}
 
 
+    \subsection*{Definzione}
+    E' una coppia di statistiche $L(x), U(X)$ con $L(X) \leq U(X)$
 
 
+    \subsection*{Probabilità di copertura}
+    $\p_\theta(\theta\in[L;U])$
 
 
+    \subsection*{Livello di Confidenza}
+    $\alpha = \inf_\Theta \p_\theta(\theta\in[L;U])$
 
 
+    \subsection*{Metodi di Costruzione}
+
+        \subsubsection*{Inversione di test d'ipotesi}
+        Sia $\forall \theta_0 \in \Theta$ sia $A(\theta_0)=R^C$
+        la regione d'accettazione di un test semplice di livello $\alpha$.\\
+        Definiamo:
+        $IC(X)=\{\theta| x\in A(\theta)  \}$
+
+
+        \subsubsection*{Metodo della quantità pivotale}
+        Definiamo una v.a. una quantità pivot $Q(x,\theta)$
+        se la sua distribuzione non dipende da $\theta$.
+        Cerchiamo a e b tali che: \\
+        $\p(a\leq Q \leq b) = 1-\alpha$ e $C = \{\theta | a\leq Q \leq b\} $
+
+
+        \subsubsection*{Unimodalità}
+        Una v.a. $X,f_X(x)$ è unimodale
+        se $\exists x*$ tale che:\\
+        $f_X(x)$ è crescente se $x\leq x*$ e decrescente se $x\geq x*$
+        cioè è fatta come una gaussiana. 
+
+        
+        \subsubsection*{Teorema lunghezza minima}
+        Sia $f_X$ unimodale, se lintervallo $[a,b]$ soddisfa:
+        \begin{itemize}
+            \item $\p(a\leq x\leq b) = \int_a^b f_X(x) dx = 1-\alpha$
+            \item $f_X(a)=f_X(b)\geq0$
+            \item $a\leq x* \leq b$ con $x*$ moda
+        \end{itemize}
+        Allora $[a,b]$ è l'intervallo minimo
+        tra quelli che soddisfano la 1. \\
+        Quindi:
+        \begin{itemize}
+            \item Se IC dipende direttamente da $(b-a)$ applico.
+            \item In caso negativo minimizzo come segue: \begin{enumerate}
+                \item Penso a $b$ come funzione di $a$, $b=b(a)$
+                \item Derivo il vincolo:\\
+                    $f(b(a))b'(a)-f(a)=0$ e trovo $b'(a)$
+                \item Derivo la lunghezza rispetto ad $a$ e sostituisco $b'$
+                \item Trovo se minimizzare o massimizzare $a$, scelgo b di conseguenza
+                    e sostituisco nel vincolo per ottenere $a$,
+                    fai attenzione al codominio di $Q$.
+            \end{enumerate}
+        \end{itemize}
+
+
+\section*{Statistica Asintotica}
+
+
+    \subsection*{Consistenza}
+    Diremo una succesione di stimatori $W_n$ consistente per $\theta$ se:\\
+    $\forall\epsilon > 0 \quad \lim_{n\to\infty} \p[|W_n-\theta|>\epsilon]=1$\\
+    Nota:\\
+    Se $W_n \overset{L}{\to} \theta$ e $\theta$ costante
+    $\implies W_n \overset{P}{\to} \theta$
+
+
+    \subsection*{Consistenza in MSE}
+    Se $MSE[W_n]\to0$, cioè:\\
+    $\lim_{n\to\infty} \E[W_n]=\theta$ \\
+    $\lim_{n\to\infty} Var[W_n] = 0$
+
+
+    \subsection*{Efficienza asintotica MLE}
+    Sia $\hat{\theta}_{MLE}$ e $f_X$ soddisfa Cramer-Rao:\\
+    $\sqrt{n}[\tau(\hat{\theta}_{MLE}) - \tau(\theta)]\overset{L}{\to} N(0,v(\theta))$\\
+    con $v(\theta)=\frac{[\tau'(\theta)]^2}{I_1(\theta)}$
+
+
+    \subsection*{Efficienza Relativa Asintotica}
+    Due successioni di stimatori:\\
+    $\sqrt{n}[W_n-\tau(\theta)]\overset{L}{\to} N(0,\sigma^2_W)$ \\
+    $\sqrt{n}[V_n-\tau(\theta)]\overset{L}{\to} N(0,\sigma^2_V)$ \\
+    Allora definiamo l'ARE come:\\
+    $ARE(V_n,W_n)=\frac{\sigma^2_W}{\sigma^2_V}$,
+    cerchiamo il più piccolo.
 
 
 
