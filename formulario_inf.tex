@@ -89,11 +89,11 @@
     \subsection*{Metodo delta}
     Sia $X_1, \dots, X_n$ iid con $\mu, \sigma^2$, tali che:\\
     $\sqrt{n}(\bar{X}_n - \mu) \overset{L}{\to} N(0,\sigma^2)$ \\
-    Prendiamo una funzione $g(x)$:
+    Prendiamo una funzione $g(x)$ e un certo $\theta$:
     \begin{itemize}
-        \item Se $g'(x)\neq0$: \\
+        \item Se $g'(\theta)\neq0$: \\
             $\sqrt{n}(g(\bar{X}_n) - g(\mu)) \overset{L}{\to} N(0,\sigma^2g'(\mu)^2)$
-        \item Se Se $g'(x)=0$: \\
+        \item Se Se $g'(\theta)=0$: \\
         $\sqrt{n}(g(\bar{X}_n) - g(\mu)) \overset{L}{\to} \frac{\sigma^2}{2} g''(\mu)\chi^2(1)$
     \end{itemize}
 
@@ -242,6 +242,53 @@
     e continua $\forall\theta$. Allora:\\
     $T(X) = \frac{1}{n} \sum_{i=1}^n T_1(X_j)$ è UMVUE
     per $\E_\theta[T_1(X)]$
+
+
+\section*{Test d'Ipotesi}
+
+
+    \subsection*{Regione Critica}
+    $R= \left\{ \vec{x}\in\R^k | \text{ rifiuto } H_0  \right\}$ \\
+    Di solito si basa su una statistica.
+
+        \subsubsection*{Rapporto di Verosimiglianza}
+        $R = \{ \vec{x} | \lambda(x) \leq c \}$ con $c\in[0,1]$
+        \[
+            \lambda(x) = \frac{ \sup_{\Theta_0} L(\theta, x) }{ \sup_{\Theta} L(\theta, x) }    
+        \]
+
+
+    \subsection*{Funzione potenza}
+    $\beta(\theta) = \p_\theta(x\in R)$
+
+        \subsubsection*{Dimensione}
+        $\alpha = sup_{\Theta_0} \beta(\theta)$
+
+        \subsubsection*{Livello}
+        $\alpha \geq sup_{\Theta_0} \beta(\theta)$
+
+
+    \subsection*{UMP}
+    Un test di una classe $C$ è UMP se:\\
+    $\beta(\theta)\geq\beta'(\theta) \quad \forall\theta\in\Theta_0^c\quad \forall \beta'\in C$
+
+
+    \subsection*{Lemma di Neymann-Perason}
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
