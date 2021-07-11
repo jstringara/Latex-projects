@@ -222,6 +222,31 @@
     \end{itemize}
     Inoltre l'UMVUE è \textbf{unico}.
 
+
+    \subsection*{Disuguaglianza di Cramer-Rao}
+    Siano $f(\vec{x},\theta)$ legge congiunta e $T$ stimatore che soddisfi:
+    \begin{itemize}
+        \item $\frac{d}{d\theta} \E_\theta[T(X)] = \int \frac{\partial}{\partial \theta}[T(x)f_X(x,\theta)]dx$
+        \item $Var_\theta[T]<\infty$
+    \end{itemize}
+    Allora:
+    \[
+        Var_\theta(T) \geq 
+        \frac{(\frac{d}{d\theta} \E_\theta[T(X)])^2}{\E\left[ \left( \frac{\partial}{\partial\theta}\ln f_X(x,\theta) \right)^2 \right]}
+        = \frac{(\frac{d}{d\theta} \E_\theta[T(X)])^2}{I_n(\theta)}
+    \]
+    Se alle ipotesi iniziali aggiungiamo:\\
+    $\frac{d}{d\theta}\E[\frac{\partial}{\partial\theta}f_X(x,\theta)] = \int \frac{\partial^2}{\partial\theta^2}f_X(x,\theta) dx$ allora \\
+    $I_n = - \E[\frac{\partial^2}{\partial\theta^2} \ln f_X(x,\theta)]$
+ 
+
+    \subsection*{Informazione di Fisher}
+    $I_n(\theta) = \left[ \left( \frac{\partial}{\partial\theta} \ln f_X(x,\theta) \right)^2 \right]$
+    Inoltre se iid:\\
+    $I_n = n I_1(\theta)$
+    Inoltre se viene rispettato
+
+
     \subsection*{Lehmann-Scheffè per UMVUE}
     Siano $T$ non distorto e $W$ sufficiente e completa (e minima).
     Allora: \\
@@ -241,7 +266,9 @@
     $\exists \frac{d}{d\theta} w(\theta) \neq 0$
     e continua $\forall\theta$. Allora:\\
     $T(X) = \frac{1}{n} \sum_{i=1}^n T_1(X_j)$ è UMVUE
-    per $\E_\theta[T_1(X)]$
+    per $\E_\theta[T_1(X)]$\\
+    E \textbf{raggiunge il limite di C-R} che vale:\\
+    $Var(T)=\frac{Var(T_1)}{n}$
 
 
 \section*{Test d'Ipotesi}
