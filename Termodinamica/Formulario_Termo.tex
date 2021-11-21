@@ -1,0 +1,475 @@
+%==== classe del documento ====
+\documentclass[a4paper]{report}
+
+%==== pacchetti ====
+\usepackage[T1]{fontenc} % codifica dei font per l'italiano
+\usepackage[utf8]{inputenc} % lettere accentate da tastiera
+\usepackage[italian]{babel} % lingua del documento
+\usepackage{framed}% per riquadrare il testo
+\usepackage{amsmath}% per avere le formule matematiche fatte bene
+\usepackage{amssymb}% per avere le formule matematiche fatte bene
+\usepackage[big]{layaureo} %per avere i margini più stretti
+\usepackage{graphicx} %per inserire le immagini
+\usepackage{mathtools}
+\usepackage{mathabx}
+\usepackage{empheq}
+\usepackage{tikz}
+\usepackage{dirtytalk}
+\usepackage{gensymb}
+
+
+%==== new commands ====
+\newcommand*\widefbox[1]{\fbox{\hspace{2em}#1\hspace{2em}}}
+
+
+%==== path delle immagini ====
+\graphicspath{ {./images/} }
+
+
+%==== inizio documento ====
+\begin{document}
+
+
+%==== titolo ====
+\begin{center}
+\section*{Formulario di Termodinamica}
+\end{center}   
+
+
+%==== valore costanti fisiche ====
+\subsection*{Costanti fisiche notevoli}
+\[
+   R = 8.314
+\]
+
+%==== Equazione di stato gai ideali ====
+\subsection*{Equazione di stato dei gas ideali}
+\[
+   \boxed{PV=nRT} \iff \boxed{PV=mR^*T} \iff \boxed{Pv=R^*T} \text{ con } R^*=\frac{R}{M}
+\]
+
+%==== primo principio ====
+\subsection*{Primo principio: Conservazione dell'Energia}
+\[
+    \boxed{\Delta U = Q^\leftarrow - L^\rightarrow} \iff \boxed{du = \delta q^\leftarrow - \delta l^\rightarrow}
+\]
+\textbf{Nota Bene: } $\Delta U_{ciclo} \equiv 0$
+
+%==== Secondo principio ====
+\subsection*{Secondo principio: Bilancio Entropico}
+\begin{align*}
+    \Aboxed{\Delta S  = & S_Q^\leftarrow + S_{IRR}} \longrightarrow \left\{\begin{array}{l}
+        S_{IRR}\geq 0 \longrightarrow \left\{\begin{array}{l}
+            S_{IRR} = 0 \text{ se reversibile}\\
+            S_{IRR} > 0 \text{ se irreversibile}
+        \end{array}\right.\\
+        S_Q^\leftarrow \gtreqless 0 \longrightarrow \left\{\begin{array}{l}
+            S_Q =  0 \iff Q=0\\
+            S_Q > 0 \iff Q^\leftarrow \\
+            S_Q < 0 \iff Q^\rightarrow
+        \end{array}\right.
+    \end{array}\right. \\
+    &\downarrow \\
+    & S_Q^\leftarrow = \int \frac{dQ^\leftarrow_{REV}}{T}
+\end{align*}
+\textbf{N.B.} $\rightsquigarrow$ Sia $U$ che $S$ sono grandezze estensive:
+\begin{align*}
+    U_{Sistema} &= \sum U_{Sottosistemi} \\
+    S_{Sistema} &= \sum S_{Sottosistemi}
+\end{align*}
+
+%==== Lavoro ====
+\subsection*{Lavoro}
+\[
+  \boxed{\delta L = PdV} \longrightarrow \boxed{L = \int_i^f PdV} \longrightarrow \left\{\begin{array}{l}
+      L>0 \rightarrow \text{ Ciclo Diretto}\\
+      L<0 \rightarrow \text{ Ciclo Inverso}
+  \end{array}\right.  
+\]
+
+%==== Capacità Termica ====
+\subsection*{Capacità Termica}
+\[
+  \boxed{c_x = \left(\frac{\delta Q^\leftarrow}{dT}\right)_x}
+\]
+
+%==== Calore Specifico ====
+\subsection*{Calore Specifico}
+\[
+  \boxed{c = \frac{c_x}{m}=\left(\frac{\delta q^\leftarrow}{dT}\right)_x} \longrightarrow \left\{\begin{array}{l}
+    \boxed{c_V = \left(\frac{\partial u}{\partial T}\right)_V }\text{ a V costante}\\
+    \boxed{c_P = \left(\frac{\partial h}{\partial T}\right)_P }\text{ a P costante}    
+  \end{array}\right.  
+\]
+
+%==== Entalpia ====
+\subsection*{Entalpia}
+\[
+  \boxed{h = u + Pv} \iff \boxed{H = U+PV}
+\]
+
+%==== Gas Ideali ====
+\subsection*{Gas Ideali}
+Per Gas Ideali possiamo suppore $c_v=c_v(T)$ e $c_p=c_p(T)$ e costanti per intervalli limitati di T.
+\begin{itemize}
+    \item \textbf{GP mononatomico}: $\boxed{c_v = \frac{35}{2}R^*, \quad c_p = \frac{5}{2}R^*}$
+    \item \textbf{GP biatomico (o poliatomico lineare)}: $\boxed{c_v = \frac{5}{2}R^*, \quad c_p = \frac{7}{2}R^*}$
+    \item \textbf{GP poliatomico non lineare}: $\boxed{c_v = \frac{6}{2}R^*, \quad c_p = \frac{8}{2}R^*}$
+\end{itemize}
+
+
+%==== Calore ====
+\subsection*{Calore}
+\[
+    Q = \Delta U + L \xrightarrow[L=\int P dV]{\Delta U = mc_v\Delta T} \boxed{mc_v\Delta T + \int P dV}
+\]
+
+%==== Politropiche ====
+\subsection*{Politropiche}
+Categoriziamo le trasformazioni al variare di $\boxed{n = \frac{c_x-c_p}{c_x-c_v} }$ :
+\[
+    \boxed{PV^n=\text{ costante}},\boxed{TV^{n-1}=\text{ costante}}, \boxed{PT^{\frac{n}{n-1}}=\text{ costante}}
+\]
+\begin{align*}
+    & \rightarrow : \text{ isoterma } PV= \text{ cost}\rightarrow n=1 \\
+    & \rightarrow : \text{ isocora } V= \text{ cost}\rightarrow n=\pm \infty \quad (c_x=c_v)\\
+    & \rightarrow : \text{ isobara } P= \text{ cost}\rightarrow n= 0 \quad (c_x=c_p)\\
+    & \rightarrow : \text{ adiabatica } PV^n= \text{ cost}\rightarrow n> 1, \quad n=k=\frac{c_p}{c_v}
+\end{align*}
+
+\begin{align*}
+    \rightsquigarrow & n \neq 1 \implies \boxed{ L^\rightarrow = \frac{P_1V_1}{n-1}\left[1-\left(\frac{V_1}{V_2}\right)^{n-1}\right]=\frac{P_1V_1}{n-1}\left[1-\left(\frac{P_1}{P_2}\right)^{n-1}\right]}\\
+    & n = 1 \implies \boxed{L^\rightarrow = P_1V_1\ln\left(\frac{V_2}{V_1}\right)=P_1V_1\ln\left(\frac{P_1}{P_2}\right)=R^*T\ln\left(\frac{V_2}{V_1}\right)}\\
+\end{align*}
+\begin{align*}
+    \rightsquigarrow \Delta S & = s_2-s_1 = c_v \ln\left(\frac{T_2}{T_1}\right)\\
+    \Delta S & = s_2-s_1 = c_p \ln\left(\frac{T_2}{T_1}\right)\\
+    \Delta S & = s_2-s_1 = c_v \ln\left(\frac{P_2}{P_1}\right)
+\end{align*}
+
+
+%==== Macchina Termica ====
+\subsection*{Macchina Termica}
+\begin{align*}
+    \textbf{Macchina Motrice:} &\left\{\begin{array}{l}
+        \square\left\{\begin{array}{l}
+            \text{Sistemi Chiusi}\\
+            \text{Serbatoi a T costante}\\
+            \text{Macchina Ideale }\rightarrow S_{IRR}
+        \end{array}\right]\implies\boxed{\eta=\frac{L}{Q}}=\boxed{1-\frac{Q_F}{Q_C}}=\boxed{1-\frac{T_F}{T_C}}\\
+        \square\left\{\begin{array}{l}
+            \text{Sistemi Chiusi}\\
+            \text{Serbatoi a T costante}\\
+            \text{Macchina Non Ideale }
+        \end{array}\right]\implies \boxed{\eta = 1-\frac{T_F}{T_C}-\frac{T_F\cdot S_{IRR}}{Q_C}}
+    \end{array}\right.\\
+    \textbf{Macchina Operatrice}&\left\{\begin{array}{l}
+        \square\left\{\begin{array}{l}
+            \text{Sistemi Chiusi}\\
+            \text{Serbatoi a T costante}\\
+            \text{100\% Reversibile }
+        \end{array}\right]\implies\left\{\begin{array}{l}
+            \overset{\text{Pompa di Calore}}{\boxed{COP_{PDC}=\frac{Q_C}{L}=\frac{T_C}{T_C-T_F}}}\\
+            \overset{\text{Macchina Frigorifera}}{\boxed{COP_F=\frac{Q_F}{L}=\frac{T_F}{T_C-T_F}}}
+        \end{array}\right.\\
+        \square\left\{\begin{array}{l}
+            \text{Sistemi Chiusi}\\
+            \text{Serbatoi a T costante}\\
+            \text{Macchina Non Ideale }
+        \end{array}\right]\implies \left\{\begin{array}{l}
+            \boxed{COP_{PDC}=\frac{T_C}{T_C-T_F+\frac{T_C\cdot T_F \cdot S_{IRR}}{Q_C}}}\\
+            \boxed{COP_F = \frac{T_F}{T_C-T_F+\frac{T_CT_FS_{IRR}}{Q_F}}}
+        \end{array}\right.
+    \end{array}\right.
+\end{align*}
+\textbf{N.B.} $\boxed{COP_{PDC}=COP_F+1}$ e $\boxed{COP_{PDC}>1}$
+
+%==== Sistemi Aperti ====
+\subsection*{Sistemi Aperti}
+\subsubsection*{Bilancio di Massa}
+\[
+    \frac{dm}{dt}=\sum_i \dot{m}_i \text{ con }(\dot{m}=\overset{\overset{\text{Densità}}{\uparrow}}{\rho} \cdot \underset{\underset{\text{Velocità}}{\downarrow}}{w} \cdot \overset{\overset{Sezione}{\uparrow}}{\Omega})
+\]
+\subsubsection*{Bilancio di Energia}
+\[
+    \frac{dE}{dt}=\sum_i \dot{E}^{\leftarrow}_i=\sum_i \dot{m}_i\left(h+gz+\frac{w^2}{2}\right)+\dot{Q}^{\leftarrow}-\dot{L}^{\rightarrow}
+\]
+\subsubsection*{Bilancio di Entropia}
+\[
+    \frac{dS}{dt}=\sum_i \dot{S}_i= \sum_i \dot{m}_is_i+\dot{S}_Q+\dot{S}_{IRR}
+\]
+\subsubsection*{Regime Stazionario}
+I bilanci diventano:
+\begin{itemize}
+    \item $\boxed{\dot{m}_i^\leftarrow = -\dot{m}_u^\leftarrow}$
+    \item $\boxed{\dot{m}\left[h_i-h_u+g(z_i-z_u)+\frac{w_i^2}{2}-\frac{w_u^2}{2}\right] + \dot{Q}^\leftarrow - \dot{L}^\rightarrow = 0}\xrightarrow[dw=0]{dz=0}\boxed{\dot{m}\Delta h = \dot{Q}-\dot{L}}$
+    \item $\boxed{\dot{m}(s_i-s_u)+\dot{S}_Q+\dot{S}_{IRR}=0}\xrightarrow[dw=0]{dz=0}\boxed{\dot{m}\Delta S = \dot{S}_Q+\dot{S}_{IRR}}$
+\end{itemize}
+
+
+%==== Macchine Aperte ====
+\subsection*{Macchine Aperte}
+Adiabatico + $dz=0$ + $dw=0$:
+\begin{align*}
+    &\text{Turbina }\longrightarrow \text{ Motrice } (\dot{L}>0)\\
+    &\left.\begin{array}{l}
+        \text{Compressore}\\
+        \text{Pompa}
+    \end{array} \right\}\longrightarrow \text{ Operatrici }(\dot{L}<0)
+\end{align*}
+
+
+%==== Scambiatore di Calore ====
+\subsection*{Scambiatore di Calore}
+Nessuno scambio di $\dot{L}$ + $dz=0$ + $dw=0$
+
+
+%==== Diffusore e Ugello ====
+\subsection*{Diffusore e Ugello}
+Nessuno scambio di $\dot{L}$ + $dz=0$ + $dw=0$ e:
+\begin{itemize}
+    \item \textbf{Diffusore}$\longrightarrow (w\downarrow)$
+    \item  \textbf{Ugello}$\longrightarrow (w\uparrow)$
+\end{itemize}
+
+
+%==== Valvola di Laminazione ====
+\subsection*{Valvola di Laminazione}
+Nessuno scambio di $\dot{L}$ + $dz=0$ + $dw=0$
+
+
+%==== Rendimento Isentropico Macchina Aperta ====
+\subsection*{Rendimento Isentropico Macchina Aperta}
+\begin{align*}
+    &\boxed{\eta_{\begin{tiny}\begin{array}{l}
+        \text{Turbina}\\
+        \text{Is}
+    \end{array}\end{tiny}} = \frac{\dot{L}_{Reale}}{\dot{L}_{Ideale}} = \frac{h_1-h_2'}{h_1-h_2} }\\
+    &\boxed{\eta_{\begin{tiny}\begin{array}{l}
+        \text{Compr/Pompa}\\
+        \text{Is}
+    \end{array}\end{tiny}} = \frac{\dot{L}_{Ideale}}{\dot{L}_{Reale}} = \frac{h_1-h_2}{h_1-h_2'} }
+\end{align*}
+
+
+%==== Lavoro per Sistema Aperto ====
+\subsection*{Lavoro per Sistema Aperto}
+\[
+    \boxed{L_{REV} = -\int v dP} \iff \boxed{\dot{L}_{REV} = -\int V dP}
+\]
+
+
+%==== Rendimento di Secondo Principio ====
+\subsection*{Rendimento di Secondo Principio}
+\[
+    \eta_{II\degree P} = \frac{\eta_{Reale}}{\eta_{Ideale}}    
+\]
+
+
+%==== Sistemi Eterogenei ====
+\subsection*{Sistemi Eterogenei $\longrightarrow$ Bifase}
+\[
+    \boxed{m=m_\alpha+m_\beta}, \quad \boxed{E=E_\alpha+E_\beta}, \quad \boxed{\rho = \frac{m_\alpha \rho_\alpha + m_\beta \rho_\beta}{m_\alpha + m_\beta}}
+\]
+\subsubsection*{Frazione Massica}
+\[
+    \boxed{\chi_\alpha=\frac{m_\alpha}{m}} \rightsquigarrow \boxed{ \chi_\alpha + \chi_\beta = 1}
+\]
+\subsubsection*{Transizione di Fase}
+Succede a \textbf{Pressione Costante} $\implies\boxed{dh= \delta q}$
+\subsubsection*{Fasi}
+\[
+    \left\{ \begin{array}{l}
+        \text{Liquido sottoraffreddato}\\
+        \text{Liquido saturo} \rightarrow\text{ prossimo ad evaporare}
+        \text{Miscela satura liquido-vapore}\\
+        \text{Vapore saturo}\rightarrow\text{ prossimo ad evaporare}\\
+        \text{Vapore surriscaldato}
+    \end{array}\right.   
+\]
+\subsubsection*{Sistemi Liquido-Vapore}
+\[
+    \text{Titolo di Vapore} = \boxed{x_V=\frac{m_V}{m}}, \quad \text{Titolo di Liquido} = \boxed{x_L = 1 - x_V}
+\]
+Scegliamo $x=x_V$:
+\[
+    \implies \left\{\begin{array}[]{l}
+        \boxed{ u = x\cdot u_V + (1-x)u_L}\\
+        \boxed{ s = x\cdot s_V + (1-x)s_L}\\
+        \boxed{ h = x\cdot h_V + (1-x)h_L}\\
+        \boxed{ v = x\cdot v_V + (1-x)v_L}
+    \end{array}
+    \right.
+\]
+
+
+\subsection*{Miscele di Gas Ideali}
+\[
+    \text{Frazione Massica: }\boxed{m_m = \sum_i m_i} \rightarrow \boxed{x_i = \frac{m_i}{m_m}}, \quad \text{Frazione Molare: }\boxed{N_m=\sum_i N_i}\rightarrow\boxed{y_i = \frac{N_i}{N_m}}
+\]
+\subsubsection*{Formule}
+\begin{itemize}
+    \item \textbf{Legge di Dalton:} $P_m = \sum_i P_i(T_m, V_m)$
+    \item \textbf{Legge di Amagat:} $V_m = \sum_i V_i(T_m, P_m)$
+    \item \textbf{Notiamo:} $\left\{\begin{array}{l}
+    P_i = y_iP_m \\
+    V_i = y_iV_m
+    \end{array}\right.$
+    \item \textbf{Inoltre:} $\phi \in \{s,u,h,c_v,c_p\} \quad \phi_m = \sum_i (x_i\cdot\phi_i )$
+    \item $\boxed{\Delta s_i = c_p\ln\left(\frac{T_{2i}}{T_{1i}}\right)-R^*\ln\left(\frac{P_{2i}}{P_1i}\right)}$
+\end{itemize}
+
+
+%==== Aria Umida ====
+\subsection*{Aria Umida}
+Miscela ideale: aria secca + vapor d'acqua, considero vapore e aria come \textbf{Gas Perfetti}
+\subsubsection*{Umidità Assoluta}
+\[
+   \boxed{x = \frac{m_v}{m_{as}} = 0.622 \cdot \frac{P_V}{P-P_V}}
+\]
+\subsubsection*{Umidità Relativa}
+\[
+   \boxed{UR = \frac{m_v}{m_{Vsat@T}} = \frac{P_v}{P_{Vsat@T}}}
+\]
+\textbf{Notiamo:}
+\[
+    \boxed{x = \frac{0,622 \cdot UR \cdot P_{Vsat@T}}{P-UR\cdot P_{Vsat@T}} } \quad \boxed{UR=\frac{x\cdot P}{(0,622+x)P_{Vsat@T}} }
+\]
+\subsubsection{Entalpia}
+\[
+    \boxed{H=H_A+H_V}\xrightarrow{\text{divido per } M_A}\boxed{h=h_A+xh_V}
+\]
+\textbf{Inoltre:}
+\begin{itemize}
+    \item Sotto la curva di Saturazione abbia un comportamento \textbf{Isotermobarico}
+    \item \textbf{Temperatura di Rugiada:} T alla quale l'aria raffreddata a T costante inizia a condensare
+\end{itemize}
+
+
+%==== Exergia ====
+\subsection*{Exergia}
+\begin{align*}
+    &\boxed{Ex_Q = Q(1-\frac{T_\infty}{T})} \intertext{ (Lavoro massimo ottenibile da Q alla temperatura T mediante una macchina ciclica che evolve reversibilmente fino a $T_\infty$)}\\
+    &\boxed{Ex_{QC} = L_{Reale}+T_\infty \Delta S_{IRR} + Ex_{QF}}\\
+    &\boxed{\eta_{Ex}=\frac{L_{Reale}}{Ex_{QC}-Ex_{QF}} = \frac{L_{Reale}}{L_{Reale}+T_\infty \Delta S_{IRR}} }\\
+    &\boxed{\Pi_{Ex}=1-\eta_{Ex}} \say{Perdita Exergetica}
+\end{align*}
+
+
+%==== Formalismo Termodinamico ====
+\subsection*{Formalismo Termodinamico}
+\subsubsection*{Potenziali Termodinamici}
+\[
+    \left\{\begin{array}{l}
+        \text{Helmotz }= u-Ts\\
+        \text{Entalpia }= u+Pv\\
+        \text{Gibbs }= u-Ts+Pv
+    \end{array}\right.
+\]
+\begin{itemize}
+    \item Equazione Fondamentale $\longrightarrow\boxed{du=Tds-Pdv}$
+    \item Entalpia $\longrightarrow\boxed{dh=Tds+vdP}$
+    \item Funzione di Helmotz $\longrightarrow\boxed{df=-sdT-Pdv}$
+    \item Funzione di Gibbs $\longrightarrow\boxed{dg=-sdT+vdP}$
+\end{itemize}
+\subsubsection*{Relazioni}
+
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Shape: Ellipse [id:dp39490302622802265] 
+\draw   (44.95,39.76) .. controls (44.95,33.72) and (49.87,28.82) .. (55.95,28.82) .. controls (62.02,28.82) and (66.94,33.72) .. (66.94,39.76) .. controls (66.94,45.81) and (62.02,50.7) .. (55.95,50.7) .. controls (49.87,50.7) and (44.95,45.81) .. (44.95,39.76) -- cycle ;
+
+%Shape: Ellipse [id:dp8073887245703708] 
+\draw   (44.95,135.27) .. controls (44.95,129.23) and (49.87,124.33) .. (55.95,124.33) .. controls (62.02,124.33) and (66.94,129.23) .. (66.94,135.27) .. controls (66.94,141.31) and (62.02,146.21) .. (55.95,146.21) .. controls (49.87,146.21) and (44.95,141.31) .. (44.95,135.27) -- cycle ;
+
+%Shape: Ellipse [id:dp19338323486890663] 
+\draw   (140.02,40.36) .. controls (140.02,34.31) and (144.94,29.41) .. (151.01,29.41) .. controls (157.08,29.41) and (162,34.31) .. (162,40.36) .. controls (162,46.4) and (157.08,51.3) .. (151.01,51.3) .. controls (144.94,51.3) and (140.02,46.4) .. (140.02,40.36) -- cycle ;
+
+%Shape: Ellipse [id:dp27538174359337075] 
+\draw   (140.02,135.27) .. controls (140.02,129.23) and (144.94,124.33) .. (151.01,124.33) .. controls (157.08,124.33) and (162,129.23) .. (162,135.27) .. controls (162,141.31) and (157.08,146.21) .. (151.01,146.21) .. controls (144.94,146.21) and (140.02,141.31) .. (140.02,135.27) -- cycle ;
+
+%Straight Lines [id:da931179762374658] 
+\draw    (66.64,39.76) -- (139.72,39.76) ;
+%Straight Lines [id:da7652264392332884] 
+\draw    (151.01,51.3) -- (151.01,124.03) ;
+%Straight Lines [id:da9318568422642115] 
+\draw    (67.09,135.27) -- (140.17,135.27) ;
+%Straight Lines [id:da9552237810027575] 
+\draw    (55.95,51.15) -- (55.95,123.89) ;
+%Straight Lines [id:da6508537217049795] 
+\draw    (143.58,127.58) -- (65.98,50.34) ;
+\draw [shift={(64.56,48.93)}, rotate = 404.87] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da8826738241497376] 
+\draw    (63.37,127.58) -- (140.98,50.34) ;
+\draw [shift={(142.39,48.93)}, rotate = 495.13] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+
+
+% Text Node
+\draw (49.95,31.26) node [anchor=north west][inner sep=0.75pt]   [align=left] {S};
+% Text Node
+\draw (50.45,126.77) node [anchor=north west][inner sep=0.75pt]   [align=left] {T};
+% Text Node
+\draw (145.01,126.77) node [anchor=north west][inner sep=0.75pt]   [align=left] {V};
+% Text Node
+\draw (145.01,31.86) node [anchor=north west][inner sep=0.75pt]   [align=left] {P};
+% Text Node
+\draw (97.18,21.81) node [anchor=north west][inner sep=0.75pt]    {$h$};
+% Text Node
+\draw (152.73,80.07) node [anchor=north west][inner sep=0.75pt]    {$g$};
+% Text Node
+\draw (97.63,134.18) node [anchor=north west][inner sep=0.75pt]    {$f$};
+% Text Node
+\draw (42.82,79.92) node [anchor=north west][inner sep=0.75pt]    {$u$};
+
+
+\end{tikzpicture}
+\subsubsection*{Coefficienti}
+\begin{itemize}
+    \item Calore specifico a P costante $\longrightarrow c_P = T \left(\frac{\partial S}{\partial T}\right)_P$
+    \item Calore specifico a V costante $\longrightarrow c_V= T \left(\frac{\partial S}{\partial T}\right)_V$
+    \item Coefficiente di dilatazione Isobaro $\longrightarrow \beta_V = \frac{1}{V}\left(\frac{\partial V}{\partial T}\right)_P$
+    \item Coefficiente di comprimibilità Isotermo $\longrightarrow k_T= -\frac{1}{V} \left(\frac{\partial V}{\partial P}\right)_T$
+    \item Coefficiente di comprimibilità Isoentropico $\longrightarrow k_S= -\frac{1}{V} \left(\frac{\partial V}{\partial P}\right)_S$
+\end{itemize}
+\textbf{Note:}\\ 
+Coefficiente di Joule-Thompson $\rightarrow\boxed{\mu = \frac{v(\beta_v\cdot T-1)}{c_P}}$ e $\boxed{k=\frac{c_P}{c_V}=\frac{k_T}{k_S}}$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
