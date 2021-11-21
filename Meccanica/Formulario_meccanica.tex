@@ -1,0 +1,220 @@
+\documentclass[a4paper]{report}
+
+
+\usepackage[T1]{fontenc} % codifica dei font per l'italiano
+\usepackage[utf8]{inputenc} % lettere accentate da tastiera
+\usepackage[italian]{babel} % lingua del documento
+\usepackage[shortlabels]{enumitem}%per fare elenchi ad hoc
+\usepackage{framed}% per riquadrare il testo
+\usepackage{amsmath}% per avere le formule matematiche fatte bene
+\usepackage{amssymb}% per avere le formule matematiche fatte bene
+\usepackage{amsthm}%per fare i teoremi in modo ordinato
+\usepackage[big]{layaureo} %per avere i margini più stretti
+\usepackage{graphicx} %per inserire le immagini
+\usepackage{mathtools}
+\usepackage{mathabx}
+
+
+\newcommand{\parallelsum}{\mathbin{\|}}%parallelo
+
+
+\begin{document}
+
+\begin{center}
+\section*{Formulario Meccanica}
+\end{center}
+
+\subsection*{Definizioni}
+\textbf{Vettore AB:}
+\[
+AB = A\longrightarrow B
+\]
+\textbf{Vincoli:}
+\begin{itemize}
+    \item \textbf{Olonomo:} vincolo in funzione solo delle coordinate.
+    \item \textbf{Anolonomo:} vincolo anche in funzione delle derivate.
+    \item \textbf{Unilatero:} vincolo con $\Phi > 0$
+    \item \textbf{Bilatero:} vincolo con $\Phi\gtreqless 0 $
+\end{itemize}
+\textbf{Forze:}
+\begin{itemize}
+    \item \textbf{Attive:} Prescritte a priori da leggi
+    \item \textbf{Reattive:} Reazione Vincolare, sconosciuta a priori
+    \item \textbf{Interne}
+    \item \textbf{Esterne}
+\end{itemize}
+\subsection*{Velocità}
+\textbf{Atto di moto rigido:} 
+\[
+\vec{v}(P)=\vec{v}(Q)+\vec{\omega}\wedge \vec{QP}
+\]
+\textbf{Invariante cinematico: } 
+\[
+I=v(P)\cdot\omega    
+\]
+\textbf{Legge di composizione delle velocità: }
+\[
+\vec{v}_{ass}(P)=\vec{v}_{rel}(P) + \vec{v}_{trasc} = \vec{v}_{rel} +\vec{v}(Q) + \vec{\omega}\wedge \vec{QP}   
+\]
+
+\subsection*{Forze}
+\textbf{Risultante: }
+\[
+\vec{R} = \sum_i \vec{f}_i    
+\]
+\textbf{Momento: }
+\[
+    \vec{M}_A=\sum_i \vec{AP}_i\wedge\vec{f}_i    
+\]
+\textbf{Legge cambiamento di polo: }
+\[
+\vec{M}_B=\vec{M}_A+\vec{R}\wedge \vec{AB}    
+\]
+\textbf{Invariante scalare: }
+\[
+I=\vec{M}_A\cdot \vec{R}
+\]
+\textbf{Reazione Vincolare per RSS: }
+\[
+    \mu\cdot\Phi_N \geq \Phi_T \longrightarrow \mu \geq \frac{\Phi_T}{\Phi_N}
+\]
+
+
+\subsection*{Statica}
+\textbf{Equazioni Cardinali: }
+\[
+\vec{R}^{Est}=0 \quad \vec{M}^{Est}=0      
+\]
+\textbf{Principio dei Lavori Virtuali (PLV):}
+In un sistema con vincoli ideali:
+\[
+\delta L^{att} = 0 \quad \forall \delta P     
+\]
+\textbf{Principio di Stazionarietà del Potenziale (PSP)}\\
+Per forze attive conservative (es. elastica e gravitazionale):
+\[
+\exists U(q_k): Q_k = \frac{\partial U}{\partial q_k} = 0 \quad \forall q_k \iff \text{Equilibrio}
+\]
+
+\subsection*{Dinamica}
+\textbf{Centro di Massa: }
+\[
+    x_G=\frac{\sum_i m_i x_i}{\sum_i m_i}=\frac{\int x\rho (x) dx}{\int  \rho (x) dx}    
+\]
+\textbf{Baricentro:}
+\[
+x(G)=\frac{\sum p_i x_i}{\sum p_i} = \frac{\int_V \rho(x) x dV }{\int_V \rho(x) dV}
+\]
+\textbf{Momento d'Inerzia: }
+\[
+I_a = mR^2 = \sum_i m_i R_i^2 = \int_V \rho (P) R^2(P) dV    
+\]
+Per un corpo piano:
+\[
+    I_z = I_x + I_y \text{ e l'asse z è sempre il principale}    
+\]
+\textbf{Teorema di Huygens: }\\
+Con $\bar{\mu}$ passante per il baricentro
+\[
+    I_\mu = I_{\bar{\mu}}+ m \Delta^2 
+\]
+\textbf{Quantità di Moto:} 
+\[
+\underline{Q} = m \underline{v} = \sum_i m_i \underline{v}_i = \int_V \rho \underline{v} dV    
+\]
+Con $G$ centro di Massa:
+\[
+\underline{Q} = m \cdot \underline{v}(G)    
+\]
+\textbf{Momento delle quantità di Moto:}
+\[
+\underline{K}_A = m \underline{v}(G) \wedge \underline{GA} = \sum_i \underline{AP}_i \wedge m_i\underline{v}_i = \int_V \underline(AP) \wedge\rho \underline{v} dV
+\]
+Con $G$ centro di massa:
+\[
+   K_A =  m \vec{v}(G) \wedge GA \implies K_G \equiv 0
+\]
+Con moto rotatorio, A è il C.I.R. :
+\[
+    K_A = I_A \cdot \omega 
+\]
+\textbf{Legge del Cambiamento di Polo:}
+\[
+    \underline{K}_B = \underline{K}_A + \underline{Q}\wedge\underline{AB }
+\]
+Moto rototraslatorio, Q polo qualunque, G centro di massa:
+\[
+   K_Q = I_G \cdot \omega + mv(G) \wedge GQ
+\]
+\textbf{Energia Cinetica:}
+\[
+T = \frac{1}{2} m v^2 = \frac{1}{2} \sum m_i v_i^2 = \frac{1}{2} \int _V \rho(P) v^2(P) dV = \frac{1}{2} m v^2 + \frac{1}{2} I_\omega \omega^2
+\]
+\textbf{Teorema di K\"onig:}
+\[
+T_{ass} = \frac{1}{2}mv^2 + T_{rel} 
+\]
+\textbf{Energia Potenziale:}
+\[
+U = mgh - \frac{1}{2} k s^2    
+\]
+\textbf{Equazioni cardinali della Dinamica:}
+\[
+\vec{R}^{Est}=\frac{dQ}{dt}= m\cdot a(G) \quad \vec{M}_A = \frac{d}{dt}\vec{K}_A+\dot{A}\wedge Q
+\]
+\textbf{Potenza delle forze per Corpo Rigido:}
+\[
+\Pi = \sum-i \vec{f}_i \cdot \vec{v}_i = \vec{R}\cdot\vec{v}(Q)+\vec{M}_Q\cdot \omega   
+\]
+\textbf{Teorema dell'Energia Cinetica:}\\
+\[
+    \frac{d}{dt}T = \Pi^{tutte}
+\]
+Con vincoli ideali, bilateri e fissi:
+\[
+\frac{d}{dt}T=\Pi^{attive}    
+\]
+\textbf{Teorema di Conservazione dell'Energia Meccanica:}\\
+Con vincoli ideali, bilateri e fissi, forze conservative
+\[
+  E=T-U=costante \text{(serve spesso una c.l. in t=0 )} \iff \Delta T - \Delta U = 0  
+\]
+\textbf{Teorema dell'Energia Cinetica per un Corpo Rigido:}
+\[
+    \frac{d}{dt}T = \Pi^{Est}
+\]
+\textbf{Equazioni di Langrange:}
+\[
+    L=T+U \longrightarrow \frac{d}{dt}\left(\frac{\partial L}{\partial \dot{q}_k}\right) - \frac{\partial L}{\partial q_k}=0
+\]
+\textbf{Momento Cinetico e Integrale del Moto:}
+\[
+    P_i = \frac{\partial L}{\partial \dot{q}_i} \text{ è detto momento cinetico} 
+\]
+Per Lagrange se:
+\begin{align*}
+&\frac{\partial L}{\partial q_k}=0 \text{ è detto 'Interale del Moto' } \implies \frac{d}{dt}\left(\frac{\partial L}{\partial \dot{q}_k}\right)=0 \implies \frac{\partial L}{\partial \dot{q}_k}=costante \text{  (Utile se in quiete per mettere in connesione due velocità)}\\
+&\frac{\partial L}{\partial q_k}=costante \implies \frac{d}{dt}\left(\frac{\partial L}{\partial \dot{q}_k}\right)= costante\text{  (Utile per scoprire accelerazioni)} 
+\end{align*}
+\textbf{Forza e Potenziale Centrifughi:}
+\[
+F_C = m \omega^2 R \text{ e } U_C = \frac{1}{2} I\cdot \omega    
+\]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
