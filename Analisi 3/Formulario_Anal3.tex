@@ -1,0 +1,423 @@
+\documentclass[a4paper,notitlepage]{report}%imposto la classe la dimensione
+
+
+\usepackage[T1]{fontenc} % codifica dei font per l'italiano
+\usepackage[utf8]{inputenc} % lettere accentate da tastiera
+\usepackage[italian]{babel} % lingua del documento
+\usepackage[shortlabels]{enumitem}%per fare elenchi ad hoc
+\usepackage{amsmath}% per avere le formule matematiche fatte bene
+\usepackage{amssymb}% per avere le formule matematiche fatte bene
+\usepackage{amsthm}%per fare i teoremi in modo ordinato
+\usepackage[big]{layaureo} %per avere i margini più stretti
+\usepackage[table]{xcolor}%per colorare le tabelle
+\usepackage{framed}% per riquadrare il testo
+\usepackage{calrsfs}% per avere le lettere calligrafiche
+\usepackage{empheq} %per fare le equazioni per bene
+\usepackage{titling}% per modificare il titolo
+\usepackage{graphicx} %per inserire le immagini 
+\usepackage{dirtytalk}% per mettere èiù facilmente le virgolette
+\usepackage{titlesec}
+\usepackage{multicol}
+\setlength{\columnsep}{1cm}
+
+
+%ridefinisco i set di numeri
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}%naturali
+\newcommand{\R}{\mathbb{R}}%reali
+\newcommand{\Z}{\mathbb{Z}} %relativi 
+
+\setlist[itemize]{leftmargin=*}
+\setlength\parindent{0pt}
+
+
+\begin{document}
+
+\begin{multicols*}{2}
+
+
+\section*{Analisi Complessa}
+
+\subsection*{Serie di Potenze}
+
+\subsubsection*{Forma}
+\[
+\text{Classica }\sum_{n=0}^\infty a_n z^n \text{ Laurent }\sum_{n=-\infty}^\infty a_n z^n
+\]
+
+\subsubsection*{Raggio di Convergenza}
+\begin{align*}
+    \frac{1}{R} &= \limsup\limits_{x\rightarrow \infty} \sqrt[n]{ |a_n|} \\
+    \frac{1}{R} &= \lim\limits_{x\rightarrow\infty} \frac{ |a_{n+1}| }{ |a_n| } \text{ se vale }\frac{\infty}{0}\implies R = \frac{0}{\infty}
+\end{align*}
+
+\subsection*{Funzioni a Valori Complessi}
+
+\subsubsection*{Olomorfia}
+Una funzione $f = u+iv:A\subset\C\to \C$ si dice Olormorfa in un aperto A se
+è derivabile in senso complesso in tutto A.\\
+Inoltre la sua parte reale e immaginaria sono entrambe armoniche ($\Delta f = 0$)
+e rispetta le \textbf{Condizioni di Cauchy Riemann}
+\[
+    u,v \in C^1 \quad u_x = v_y \quad u_y = - v_x
+\]
+
+\subsubsection*{Analiticità}
+Una funzione si dice \textbf{Analitica} se è localmente scrivibile come serie di Potenze.\\
+Inoltre se $R=\infty$ si dice Intera
+
+\subsubsection*{Singolarità}
+Tipi di Singolarità al finito $z_0$:
+\begin{itemize}
+    \item \textbf{Eliminabile:} se $\exists\lim\limits_{x\rightarrow z_0} f(z) \in \C$ e $a_n = 0 \quad \forall n<0$.
+    \item \textbf{Polo:} se $\exists\lim\limits_{x\rightarrow z_0} f(z) = \infty$, $a_n = 0 \quad \forall n<m$ e $m$ è il grado.
+    \item \textbf{Essenziale:} se $\nexists\lim\limits_{x\rightarrow z_0} f(z)$ o $m=\infty$
+    \item \textbf{Non Isolata: } se trovo una Successione di Singolarità $z_k\xrightarrow{k\rightarrow\infty}z_0$
+\end{itemize}
+All'infinito $z=\infty$
+\begin{itemize}
+    \item \textbf{Eliminabile:} se $\exists\lim\limits_{x\rightarrow \infty} f(z) \in \C$ e $a_n = 0 \quad \forall n<0$.
+    \item \textbf{Polo:} se $\exists\lim\limits_{x\rightarrow \infty} f(z) = \infty$, $a_n = 0 \quad \forall n<m$ e $m$ è il grado.
+    \item \textbf{Essenziale:} se $\nexists\lim\limits_{x\rightarrow \infty} f(z)$ o $m=\infty$
+    \item \textbf{Non Isolata: } se trovo una Successione di Singolarità $z_k\xrightarrow{k\rightarrow\infty}\infty$
+\end{itemize}
+
+\subsubsection*{Studio dei Poli}
+Le seguenti sono equivalenti:
+\begin{itemize}
+    \item $f$ ha un polo in $z_0$ di ordine $m$
+    \item $g(z)=(z-z_0)^mf(x)$ ha una singolarità eliminabile in $z_0$ e $\lim\limits_{x\rightarrow z_0} g(z)\neq 0$
+    \item $f(z)\approx  |z-z_0 |^m$ per $z\rightarrow z_0$
+    \item $\frac{1}{f(z)}$ ha uno zero di ordine $m$ in $z_0$
+\end{itemize}
+
+\subsubsection*{Residui}
+Il residuo in $z_0$ è:
+\[
+    Res(f,z_0) = a_{-1} = a_n z^{-1} = \frac{1}{2\pi i} \int_\gamma f(z) dz
+\]
+\textbf{NB.} $Res(f,\infty) = -a_{-1}$\\
+\textbf{Inoltre:}
+\begin{itemize}
+    \item $z_0\neq\infty$:
+    \begin{itemize}[leftmargin=*]
+        \item \textbf{Eliminabile} $\implies Res(f,z_0)=0$
+        \item \textbf{Poli:} \begin{itemize}[leftmargin=*]
+            \item $p=1$ \[
+                Res(f,z_0) = \lim\limits_{x\rightarrow z_0} f(z)(z-z_0)   
+            \]
+            \item $p\geq 2$ \[
+                Res(f,z_0) = \frac{\lim\limits_{x\rightarrow z_0}\left[f(z)(z-z_0)^p\right]^{(p-1)}}{(p-1)!}
+            \]
+        \end{itemize}
+        \item \textbf{Essenziale: } Svolgo Laurent
+    \end{itemize}
+    \item $z=\infty$\[
+        Res(f,\infty) = Res\left(-\frac{1}{z^2}f\left(\frac{1}{z}\right), 0 \right)
+    \]
+\end{itemize}
+\textbf{Infine Ricordo:}
+\begin{align*}
+    &\sum_{k=1}^n Res(f,z_k)+ Res(f,\infty) = 0 \\
+    &F=\frac{f}{g}, g(z_0)=0 \text{ primo ° e } g'(z_0)\neq0 :\\
+    &Res\left(\frac{f}{g},z_0\right)=\frac{f(z_0)}{g'(z_0)}
+\end{align*}
+
+
+
+\subsection*{Integrali Complessi}
+\subsubsection{Teorema sull'integrale nullo di Cauchy}
+Sia $f\in H(A)$ ($u,v\in C^1$), $A$ semplicemente connesso, $\gamma:[a,b]\to A$ chiusa, semplice e regolare ($\gamma(a)=\gamma(b)$), allora:
+\[
+    \int_\gamma f(z) dz = \int_a^b f(\gamma(t))\cdot \gamma'(t) dt = 0
+\]
+\textbf{Inoltre:}\\
+Siano $f\in H(A)\cap C^1(\bar{A})$, $\gamma_1 = \partial A$ e $\gamma_2 \subset A $ chiusa, allora:
+\[
+    \int_{\gamma_1} f(z) dz = \int_{\gamma_2} f(z) dz
+\]
+
+\subsubsection*{Teorema dei Residui}
+Sia $f\in H(\C\setminus\{z_1,\dots, z_n\})$ se $R>max|z_k|$ allora:
+\[
+    \int_{\partial B(0,R)} f(z) dz = 2\pi i \left[\sum_{k=1}^n Res(f,z_n)\right]
+\]
+\subsubsection*{Lemmi di Jordan}
+\textbf{Primo:}\\
+Sia $f(z)$ funzione Olomorfa:  
+\begin{itemize}
+    \item Se $|f(z)|\leq \frac{k}{ |z^\alpha| } $ con $\alpha>1 \quad \forall z, |z | >k$, allora:\[
+        \int_{C_R(\theta_1,\theta_2)} \xrightarrow{R\rightarrow\infty} 0
+    \]
+    \item Similmente se vale lo stesso con $\alpha<1, \forall z, |z|<k$:\[
+        \int_{C_R(\theta_1,\theta_2)} \xrightarrow{R\rightarrow 0} 0
+    \]
+\end{itemize}
+\textbf{Secondo:}\\
+Sia $g(z)e^{i\alpha z}$, allora:
+\begin{itemize}
+    \item $\alpha>0$ : Va a zero sulla circonferenza \textbf{Sopra}
+    \item $\alpha<0$ : Va a zero sulla circonferenza di \textbf{Sotto}
+\end{itemize}
+\textbf{Per Dribling:}\\
+Sia $z_0$ polo semplice per $f(z)$, allora:\[
+    \lim\limits_{\epsilon\rightarrow 0^+} \int_{C_\epsilon(\alpha, \beta)} f(z) dz = (\beta-\alpha)i\cdot Res(f,z_0)
+\]
+
+\subsubsection{Tipi di Integrali}
+\begin{itemize}
+    \item $\int_0^{2\pi}R(\cos{t},\sin{t})dt$, uso:\begin{align*}
+        &z= e^{it}, dz= ie^{it} dt, \text{ e uso la formula di Eulero: }\\
+        &\rightarrow \int_{ |z | = 1} R\left(\frac{z+z^{-1}}{2},\frac{z-z^{-1}}{2i}\right) \frac{dz}{iz}
+    \end{align*}
+    \item $\int_\R R(x)dx$ o $\int_\R R(x)\left\{\begin{array}{l}
+        e^{ix}\\
+        \cos{x}\\
+        \sin{x}
+    \end{array}\right\}dx$\\
+    Integro su un semicerchio, eventualmente evitando singolarità sulla l'asse reale con piccoli semicerchi.
+    \item $\int_\R R(e^{x})\left\{\begin{array}{l}
+        1\\
+        e^{ix}
+    \end{array}\right\} dx$\\
+    Integro su un rettangolo con eventuali dribling di Singolarità
+    \item $\int_0^\infty x^\alpha R(x^m)$ con $\alpha\in\R, m>2\in\N$,
+    Riscrivo $x^\alpha = e^{\alpha \ln (z)}$
+    \begin{itemize}
+        \item Se $\alpha\in\N$: spicchio di circonferenza di angolo $\frac{2\pi}{m}$ e raggio $R$
+        \item Se $\alpha\notin\N$: spicchio di corona fra $\epsilon$ e $R$ con angolo $\frac{2\pi}{m}$
+    \end{itemize}
+    \item $\int_0^\infty x^\alpha R(x) dx, \int_0^\infty R(x)dx, \int_0^\infty \ln(x)R(x) dx$:\\
+        Circonferenza Interna di raggio $\epsilon$ e esterna di raggio $R$, con due segmenti lungo l'asse $x$ positivo e cambio in:
+        \[
+            e^{\alpha \ln_{2\pi}z}R(z) \quad \ln_{2\pi}z R(z) \quad (\ln_{2\pi}z)^2 R(z)
+        \]
+\end{itemize}
+
+
+\section*{Spazi $L^p$}
+\subsubsection*{Appartenenza}
+Diciamo che $f(z)\in L^p(\Omega)$ se:
+\[
+    \int_\Omega |f(z)|^p dz < \infty   
+\]
+
+\subsection*{Teoremi su Integrali}
+\subsubsection*{Teorema di Convergenza Monotona}
+Sia $f_n:A\to[0,+\infty)$, $\lim\limits_{n\rightarrow\infty} f_n(x)=f(x)\quad \tilde{\forall}x\in A$
+e $f_n(x)\leq f_{n+1}(x) \quad \forall n,x$, allora:
+\[
+    \lim\limits_{n\rightarrow\infty}\int_A f_n(x)dx = \int_A f(x) dx
+\]
+\subsubsection*{Teorema di Convergenza Dominata}
+Sia $f_n:A\to\C$ e $\lim\limits_{n\rightarrow\infty} f_n(x)=f(x)\quad \tilde{\forall}x\in A$, allora:
+\begin{align*}
+    &\text{Se }\exists g \in L^1(A) \text{ tale che } |f_n(x)|\leq g(x) \quad \tilde{\forall}x\in A\\
+    &\implies \lim\limits_{n\rightarrow\infty}\int_A f_n(x)dx = \int_A f(x) dx \text{ e } f\in L^1
+\end{align*}
+
+\section*{Serie di Fourier}
+\subsubsection{Coefficienti}
+Sia $f\in L^2(A)$ con periodo $T$, allora:
+\[
+    F(x)  = \frac{a_0}{2} + \sum_{n=1}^\infty a_n \cos{\frac{2\pi n}{T}x} + b_n \sin{\frac{2\pi n}{T}x}
+\]
+con:
+\begin{align*}
+    &a_0 = \frac{2}{T} \int_A f(x) dx \\
+    &a_n = \frac{2}{T} \int_A f(x) \cos{\frac{2\pi n}{T}x} dx \\
+    &b_n = \frac{2}{T} \int_A f(x) \sin{\frac{2\pi n}{T}x} dx
+\end{align*}
+\textbf{Inoltre:}\\
+In tutti i punti in cui $f$ è continua avremo: $F(x)=f(x)$\\
+Nei punti di salto $F(x) = \frac{f(x^+)+f(x^-)}{2}$
+
+\subsection*{Convergenza}
+
+\subsubsection*{Puntuale}
+Continua a tratti $\implies$ Convergenza Puntuale
+\subsubsection*{Uniforme}
+Se f non è continua non si può avere convergenza Uniforme. Se no classico metodo.
+\subsubsection*{Totale}
+Dico che la serie converge \textbf{Totalmente} se
+\[
+    \sum_{k=1}^\infty |a_k|+|b-k|<\infty \implies \text{ Uniforme e Puntuale}
+\]
+
+\subsubsection*{Quadratica}
+\[
+    \sum_{k=1}^\infty  |a_k|^2+|b_k|^2 < \infty
+\]
+
+
+\section*{Parceval}
+\[
+   \frac{1}{\pi} \int_{-\pi}^\pi |f(x)|^2dx = \frac{a^2_0}{2} + \sum_{k=1}^\infty |a_n|^2 + |b_n|^2     
+\]
+
+
+\section*{Trasformata di Fourier}
+Una funzione $f(x)$ si dice \textbf{Fourier-Trasformabile} se:\[
+    f\in L^1(\R) \text{ e } \hat{f}(\xi):\R\to\C = \int_\R e^{-i\xi x}f(x) dx<\infty
+\]
+\subsubsection*{Proprietà}
+\begin{itemize}
+    \item \textbf{Scaling:} $u(ax) = \frac{1}{ |a| }\hat{u}(\frac{\xi}{a})$
+    \item \textbf{Shifting:} $u(x-a) = e^{-ia\xi}\hat{u}(\xi)$
+    \item \textbf{Modulazione:} $u(x)e^{iax} = \hat{u}(\xi-a)$
+    \item \textbf{Linearità:} $F(au(x)+bv(x)) = a\hat{u}(\xi)+b\hat{v}(\xi)$
+    \item \textbf{Derivazione:} $\hat{u}'(\xi) = i\xi\hat{u}(\xi)$ e $F(u')=i\xi\hat{u}$
+    \item \textbf{Integrazione:} $u(x) = \hat{u}(\xi)$
+    \item \textbf{Convoluzione: } $F(f*g)=\hat{f}\hat{g}$
+    \item \textbf{Prodotto con Polinomio} $F(xf(x))=i\hat{f}'(\xi)$
+\end{itemize}
+\subsubsection*{Inversa}
+\[
+    f(x)=\frac{1}{2\pi}\int_\R e^{i\xi z}\hat{f} dz
+\]
+\subsubsection{Plancherel}
+Sia $u\in L^2\cap L^1$ allora $\|\hat{u}\|_2=\sqrt{2\pi}\|u\|_2$
+\subsubsection{Fourier su S'}
+Sia $u\in S', \hat{u}\in S', \phi \in S,\phi' \in S'$, allora:
+\[
+    (\hat{u},\phi)=(u,\hat{\phi})    
+\]
+\subsubsection*{Trasformate Notevoli}
+
+
+\section*{Trasformata di Laplace}
+Sia $u\in L^1_{loc}:\R\to\R, S(u)\subset [0,\infty),\exists\lambda\in\R$ tc $e^{-\lambda x}\in L^1(\R)$, allora:
+\[
+    L(u)=\int_\R^+ e^{-sx}u(x)dx
+\]
+\subsubsection*{Proprietà}
+\begin{itemize}
+    \item \textbf{Scaling:} $u(ax) = \frac{1}{a}\hat{u}(\frac{s}{a})$
+    \item \textbf{Shifting:} $u(x-a) = e^{-as}\hat{u}(s)$
+    \item \textbf{Modulazione:} $u(x)e^{ax} = \hat{u}(s-a)$
+    \item \textbf{Linearità:} $F(au(x)+bv(x)) = a\hat{u}(s)+b\hat{v}(s)$
+    \item \textbf{Derivazione:} $\hat{u}'(s) = -L(tf(t))$ e $L(y')=s\hat{y}-y(0)$
+    \item \textbf{Integrazione:} $L(\int_0^t f(\tau)d\tau) = \frac{1}{s}\hat{f}$
+    \item \textbf{Convoluzione: } $L(f*g)=\hat{f}\hat{g}$
+\end{itemize}
+\subsubsection*{Inversa}
+\[
+    u(x)=\frac{1}{2\pi}\int_\R \hat{u}(s)e^sx ds
+\]
+\subsubsection*{Trasformate Notevoli}
+\begin{align*}
+    \sin{\omega t} &\rightarrow \frac{\omega}{s^2+\omega^2}\\
+    \cos{\omega t} &\rightarrow \frac{s}{s^2+\omega^2}\\
+    t^n &\rightarrow \frac{n!}{s^{n+1}}\\
+    \chi_[a,b](t) &\rightarrow \frac{e^{-as}-e^{-bs}}{s}\\
+    \delta_0 &\rightarrow 1
+\end{align*}
+
+
+\section*{Funzioni a Supporto Compatto}
+$\phi\in D(A)$ se $\phi:A\to\R \in C^\infty(A)$ con supporto compatto (cioè si deve annullare).
+Queste vengono anche dette funzioni test. 
+\subsection*{Convergenza}
+Sia $f_n\subset D(A)$, allora $f_n\xrightarrow{D(A)}f$ se :
+\begin{itemize}
+    \item $\exists K\subset A $ tale che $S(f_n)\subset K$
+    \item $\forall k\in\N , \quad f_n^{(n)}\to f^{(n)}$ uniformemente
+\end{itemize}
+\section*{Funzioni di Schwartz}
+$\phi\in S(A)$ se $\phi\in C^\infty(A)$ e $x^kf^{(n)}$ è limitata $\forall k\in \N$
+\subsection*{Convergenza}
+Sia $f_n\subset S(\R)$, allora $f_n\xrightarrow{D(A)}f$ se :
+\begin{itemize}
+    \item $f\in C^\infty(\R)$
+    \item $x^kf^{(k)}$ è limitata $\forall k\in\N$
+\end{itemize}
+\section*{Distribuzioni}
+Sia $A\subset\R$ un aperto, una distribuzione su $A$ è un funzionale $f:D(A)\to D'(A)$
+\subsection*{Prodotto Scalare}
+\[
+    (f,\phi)=\int_A f(x)\phi(x)dx
+\]
+\subsection*{Convergenza}
+\[(\Lambda_k,\phi(x))\to(\lambda,\phi) \text{ con }\Lambda_n\subset D'(A)\]
+\subsection*{Derivata}
+Sia $\Lambda\in D'(A)$, allora:
+\[
+    \forall\phi\in D(A) \quad (\Lambda',\phi)=-(\Lambda,\phi')
+\]
+\subsection*{Temperate}
+Distribuzione da $S(\R)\to\R$. Notiamo che $\psi\in D(\R)\implies\psi\in S(\R)$.
+Dunque $S'(\R)\subset D'(\R)$
+\subsubsection*{Da $L^1_{loc} a S'$}
+Sia $u\in L^1_{loc}$, è temperata se:
+\[
+    \exists n \text{ tale che } (1+|x|)^{-n}u\in L^1(\R)
+\]
+\subsubsection*{Da $L^p a S'$}
+Sia $u\in L^p$, allora $u\in S'(\R)$
+
+\end{multicols*}
+\newpage
+\section*{Formule Utili e Risultati Notevoli}
+
+\subsection*{Funzioni Trigonometriche, Iperboliche ed Esponenziali}
+\begin{align*}
+    e^{iz} &= \cos{z}+i\sin{z}\\
+    \sin{z} &= \frac{e^{iz}-e^{-iz} }{2i}\\
+    \cos{z} &= \frac{e^{iz}+e^{-iz} }{2}\\
+    \sinh{z} &= \frac{e^{z}-e^{-z}}{2}= \frac{e^{2z}-1}{2e^z}=\frac{1-e^{-2z}}{2e^{-z}}\\
+    \cosh{z} &={\frac {e^{z}+e^{-z}}{2}}={\frac {e^{2z}+1}{2e^{z}}}={\frac {1+e^{-2z}}{2e^{-z}}}
+\end{align*}
+
+\subsection*{Serie di Laurent}
+\begin{align*}
+    e^z &= \sum^\infty_{n=0} \frac{z^n}{n!}\\
+    \cosh{z} &= \sum^\infty_{n=0} \frac{z^{2n}}{(2n)!}\\
+    \sinh{z} &= \sum^\infty_{n=0} \frac{z^{2n+1}}{(2n+1)!}\\
+    \cos{z} &= \sum^\infty_{n=0} \frac{(-1)^n z^{2n}}{(2n)!} \\
+    \sin{z} &= \sum^\infty_{n=0} \frac{(-1)^n z^{2n+1}}{(2n+1)!}\\
+    \frac{1}{1-z} &= \sum^\infty_{n=0} z^n
+\end{align*}
+
+\subsection*{Convoluzione}
+Date $u,v\in L^1(\R)$ allora:
+\[
+    (u*v)(x)=\int_\R u(x-t)v(t)dt = \int_R u(t)v(x-t)dt 
+\]
+
+
+
+
+
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
