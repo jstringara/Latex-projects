@@ -1,0 +1,506 @@
+\documentclass[a4paper,notitlepage]{report}%imposto la classe la dimensione
+
+
+\usepackage[T1]{fontenc} % codifica dei font per l'italiano
+\usepackage[utf8]{inputenc} % lettere accentate da tastiera
+\usepackage[italian]{babel} % lingua del documento
+\usepackage[shortlabels]{enumitem}%per fare elenchi ad hoc
+\usepackage{amsmath}% per avere le formule matematiche fatte bene
+\usepackage{amssymb}% per avere le formule matematiche fatte bene
+\usepackage{amsthm}%per fare i teoremi in modo ordinato
+\usepackage[big]{layaureo} %per avere i margini più stretti
+\usepackage[table]{xcolor}%per colorare le tabelle
+\usepackage{framed}% per riquadrare il testo
+\usepackage{calrsfs}% per avere le lettere calligrafiche
+\usepackage{empheq} %per fare le equazioni per bene
+\usepackage{titling}% per modificare il titolo
+\usepackage{graphicx} %per inserire le immagini 
+\usepackage{dirtytalk}% per mettere più facilmente le virgolette
+\usepackage{titlesec}
+\usepackage{multicol}
+\usepackage{blindtext}
+\setlength{\columnsep}{1cm}
+
+
+%ridefinisco i set di numeri
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}%naturali
+\newcommand{\R}{\mathbb{R}}%reali
+\newcommand{\Z}{\mathbb{Z}} %relativi 
+
+\setlist[itemize]{leftmargin=*}
+\setlength\parindent{0pt}
+
+
+\begin{document}
+
+\section*{Formule}
+
+\begin{multicols*}{2}
+
+
+\section*{Indici Temporali}
+
+    \[
+        p(t,x)=\sum_{n=1}^N x_n(1+i(t,T_n))^{-(T_n-t)}    
+    \]
+
+    \subsection*{Duration e Convexity}
+    \begin{align*}
+        & DU(t,x) = \frac{ \sum^N (T_n-t) x_n (1+i(t,T_n))^{-(T_n-t)} }{p(t,x)} \\
+        & DU^2(t,x) = \frac{ \sum^N (T_n-t)^2 x_n (1+i(t,T_n))^{-(T_n-t)} }{p(t,x)} \\
+        & C(t,x) = \\
+        & \quad  = \frac{ \sum (T_n-t) (T_n-t+1) x_n (1+i(t,T_n))^{-(T_n-t+2)} }{p(t,x)}
+    \end{align*}
+    Oppure con $e^{-y*(T_N-t)}$ al posto di \\ 
+    $(1+i)^{-(Tn-t)}$\\
+    Per portafoglio $\alpha,X$:
+    \[
+        DU(t,\alpha X) = \sum_{k=1}^K \frac{\alpha_k p_k}{\sum_{k=1}^K \alpha_k p_k} Du(t,x^k)
+    \]
+
+    \subsection*{Approssimazione}
+
+        \subsubsection*{Composta}
+        \begin{align*}
+            & \Delta p(t,x) = -\frac{1}{1+i} DU(t,x) p(t,x) \Delta i + \\
+            & \quad + 1/2 p(t,x) C(t,x) \Delta i^2
+        \end{align*}
+
+        \subsubsection*{Esponenziale}
+        \begin{align*}
+            & \Delta p(t,x) = -DU(t,x) p(t,x) \Delta y + \\
+            & \quad + 1/2 p(t,x) DU^2(t,x) \Delta y^2
+        \end{align*}
+    \subsection*{Immunizzazione}
+
+        \subsubsection*{Fisher-Weil}
+        Unica uscita $L$ in $H>t$, per immunizzare $(V(t^+,x)\geq V(t^+,L))$ basta:
+        \[
+            \left\{\begin{array}{l}
+                V(t,x) = V(t,L)\\
+                DU(t,x)=H-t
+            \end{array}\right.
+        \]
+
+        \subsubsection*{Redington}
+        Sia $V(t,x) = V(t,y)$, per immunizzare $(V(t^+,x)\geq V(t^+,L))$ basta:
+        \[
+            \left\{\begin{array}{l}
+                DU(t,x)=DU(t,y) \\
+                DU^2(t,x) \geq DU^2(t,y)
+            \end{array}\right.
+        \]
+
+\section*{Scelte in rischio}
+
+    \subsection*{Premio per il rischio}
+    $\rho_u(\tilde{x})$ t.c. $u(\underbrace{E[\tilde{x}]-\rho_u(\tilde{x})}_{Certo Equivalente})=E[u(\tilde{x})]$
+
+    \subsection*{Coefficiente di avversione}
+    $r^a_u(x)=-\frac{u''(x)}{u'(x)}$ e moltiplico per $x$
+
+    \subsection*{Funzioni utilità}
+    \begin{itemize}
+        \item \textbf{Esponenziale} $-\frac{1}{a}e^{-xa}$ e $r_u^a(x)=a$
+        \item \textbf{Quadratica} $x-\frac{b}{2}x^2$ e $r_u^a(x)=\frac{b}{1-bx}$
+    \end{itemize}
+
+\section*{Media-Varianza}
+
+    \subsection*{Per due titoli rischiosi}
+    $(w,1-w)$
+    \[
+        \left\{\begin{array}{l}
+            \tilde{r}=w\tilde{r}_1+(1-w)\tilde{r}_2 \\
+            E[\tilde{r}]=wE[\tilde{r}_1]+(1-w)E[\tilde{r}_2] \\
+            \sigma^2(\tilde{r}) = w^2\sigma^2(\tilde{r}_1) + (1-w)^2\sigma^2(\tilde{r}_2)\\
+            \quad +2w(1-w)\rho \sigma_1\sigma_2
+        \end{array}\right.
+    \]
+
+\section*{Scelte di Portafoglio}
+
+    Massimiziamo utilità attesa $E[u(\tilde{x})]$, abbiamo un titolo sicuro $r_f$
+
+    \begin{align*}
+        & \tilde{W} =  xr_f +\sum_{n=1}^N w_n (\tilde{r}_n-r_f) \\
+        & E[u'(xr_f+w(\tilde{r}-r_f))(\tilde{r}-r_f)] = 0
+    \end{align*}
+    
+    \subsection*{Con un titolo}
+
+    \subsubsection*{Quadratica}
+    \begin{align*}
+        & xr_f+w(E[\tilde{r}]-r_f)-\frac{b}{2} [(xr_f+w(E[\tilde{r}]-r_f))^2+\\
+        &\quad w^2\sigma^2(\tilde{r})] \\
+        & E[(1-b(xr_f + w (\tilde{r}-r_f) ) (\tilde{r}-r_f)] \\
+        & w^* = \frac{(1-bxr_f) E[\tilde{r}-r_f]}{ b (\sigma^2(\tilde{r} + (E[\tilde{r}]-r_f)^2))}
+    \end{align*}
+
+    \subsubsection*{Esponenziale + Normali}
+    Massimizzare $E[u(\tilde{w})]$ equivale a massimizzare l'esponente (lognormale)
+    \begin{align*}
+        & E[\tilde{W}]-\frac{a}{2}\sigma^2(\tilde{W})\\
+        & w^* = \frac{1}{a\sigma^2(\tilde{r})}(E[\tilde{r}]-r_f)
+    \end{align*}
+
+    \subsection*{Con più titoli}
+    Vettore media $e$ e matrice Varianza $V$
+
+    \subsubsection*{Quadratica}
+    \begin{align*}
+        & E[(1-b\tilde{W}) (\tilde{r}_n-r_f)]=0 \quad \forall n \in \{ 1,\dots,N \} \\
+        & w^* = \frac{(1-bxE[\tilde{r}])}{b} V^{-1}(e-r_f\mathbf{1})
+    \end{align*}
+
+    \subsubsection*{Esponenziale + Normali}
+    Massimizzare $E[u(\tilde{w})]$ equivale a massimizzare l'esponente (lognormale)
+    \begin{align*}
+        & xr_f + w\cdot (e-r_f\mathbf{1})-\frac{1}{2} aw^TVw\\
+        & w^* = \frac{1}{a} V^{-1}(e-r_f\mathbf{1})
+    \end{align*}
+
+
+\section*{Frontiera dei portafogli}
+
+    \subsection*{Solo rischiosi}
+        Vettore delle medie $e$ e matrice varianza $V$
+
+        Bisogna calcolare i \textbf{coefficienti}:
+        \begin{align*}
+            & A = \mathbf{1}^T V^{-1} e \\
+            & B = e^T V^{-1} e \\
+            & C = \mathbf{1}^T V^{-1} \mathbf{1} \\
+            & D = BC-A^2
+        \end{align*}
+
+        Ora ci scriviamo i vettori di frontiera $g$ e $h$:
+        \begin{align*}
+            & g = \frac{(BV^{-1}\mathbf{1} - AV^{-1}e)}{D} \\
+            & h = \frac{(CV^{-1}e - AV^{-1}\mathbf{1})}{D}
+        \end{align*}
+
+        Possiamo scrivere i ptf della frontiera come:
+        \[
+            w^p = g+hE[\tilde{r}^p]   
+        \]
+    
+    \subsubsection*{Covarianza tra portafogli in FP}
+    \[
+        Cov(\tilde{r}^q, \tilde{r}^p ) = \frac{C}{D} \left(E[\tilde{r}^p]-\frac{A}{C}\right) \left(E[\tilde{r}^q]-\frac{A}{C}\right) + \frac{1}{C}
+    \]
+    Da cui posso trovare la varianza
+
+    \subsubsection*{Portafoglio a Varianza minima globale}
+    \[
+        w*=\frac{V^{-1}\mathbf{1}}{C}
+    \]
+    Da cui posso trovare la varianza
+
+    \subsection*{Con titolo privo di rischio}
+        Rendimento del titolo privo di rischio $r_f$\\
+        Calcolo il coefficiente $H$:
+        \[
+            H = (e-r_f\mathbf{1})^T V^{-1} (e-r_f\mathbf{1}) = B-2Ar_f+Cr_f^2>0
+        \]
+        La frontiera dei portafogli $FP^*$ sono tutti i portafogli:
+        \[
+            w^p = V^{-1} (e-r_f\mathbf{1}) \frac{E[\tilde{r}^p]-r_f}{H}
+        \]
+        Per ottenere la varianza:
+        \[
+            \sigma^2(w^p) = { w^p}^T V w^p = \frac{(E[\tilde{r}^p]-r_f)^2}{H}
+        \]
+
+    \subsection*{Portafoglio tangente}
+    E' il portafoglio comune a FP e FP*, o il portafoglio
+    a Covarianza nulla con $w^p\in FP$ con $E[\tilde{w}^p] = r_f$
+    \begin{align*}
+        & w^e = V^{-1} \frac{(e-r_f\mathbf{1})}{\mathbf{1}^TV^{-1}(e-r_f\mathbf{1})}  \\
+        & E[\tilde{r}^e] = \frac{Ar_f-B}{Cr_f-A}  
+    \end{align*}
+
+
+\section*{Modelli di Equilibrio}
+    $N$ titoli e $S$ possibili stati. \\
+    Vettore prezzi $q=(q_1,\dots,q_n)$,
+    matrice dei dividendi $D\in\R^{S\times N}$,
+    ricchezza negli stati $y=Dw\in\R^S$
+
+    \subsection*{Completezza}
+        Un mercato si dice completo se $rank(D)=S$ (con $N\geq S$).\\
+        Di solito si usa $\det(D)\neq0$.
+
+    \subsection*{State price}
+    Prezzo $m_s$ che paga 1 nello stato $s$ e 0 negli altri.\\
+    Dalla loro somma otteniamo il prezzo del titolo sicuro $m_0 = {\sum_{s=1}^S m_s}$
+    ed il suo rendimento $r_f = \frac{1}{m_0}$\\
+    Se il mercato è completo, possiamo invertire $D$ e fare:
+    \[
+        m=(D^T)^{-1} q   
+    \]
+    Per replicarle mi basta creare il portafoglio
+    il cui valore sia uguale ad $m$ facendo:
+    \[
+        Dw=\mathbf{1}   
+    \]
+
+    \subsection*{Assenza di Arbitraggio}
+    In assenza di opportunità di Arbitraggio troveremo che:
+    \[
+        m  = D^{-T}q > 0     
+    \]
+
+
+\section*{Arbitrage Pricing Theory}
+    N titoli e un titolo sicuro $r_f$\\
+    I rendimenti sono generati da una media e da $k$ fattori
+    di rischio $\tilde{x}_i$
+    \[
+        \tilde{r}_n = \alpha + \sum_{h=1}^k b_{nh} \tilde{x}_h \quad \forall n  
+    \]
+
+    \subsection*{Portafogli Puri}
+    Il portafoglio puro $w_s$ è il portafoglio tale che:
+    \[
+        \left\{\begin{array}{l}
+            \sum_{n=1}^N w_s b_{ns} = 1 \\
+            \sum_{n=1}^N w_j b_{nj} = 0 \quad \forall j\neq s \\
+            \sum_{n=1}^N w_n  = 1
+        \end{array}\right.  
+    \]
+
+    \subsection*{Portafoglio privo di rischio}
+    Il portafoglio puro $w_s$ è il portafoglio tale che:
+    \[
+        \left\{\begin{array}{l}
+            \sum_{n=1}^N w_s b_{ns} = 0 \quad \forall s \\
+            \sum_{n=1}^N w_n  = 1
+        \end{array}\right.  
+    \]
+
+    \subsection*{Portafoglio di replica}
+    Dato un titolo:
+    \[
+        \tilde{r}_{N+1} = \alpha + \sum_{h=1}^k b_{N+1 \, k}\tilde{x}_h
+    \]
+    Il suo portafoglio di replica è il portafoglio tale che:
+    \[
+        \left\{\begin{array}{l}
+            \sum_{n=1}^N w_r b_{nk} = b_{N+1 \, k} \quad \forall k\\
+            \sum_{n=1}^N w_n  = 1
+        \end{array}\right.  
+    \]
+    Allora, se non c'è arbitraggio:
+    \[
+        E[\tilde{r}_r] = \alpha    
+    \]
+
+    \subsection*{Verifica APT}
+    Definiamo $\lambda_h = E[\tilde{r}_h]-r_f$ per ogni portafoglio puro.
+    Se non c'è arbitraggio allora:
+    \[
+        \alpha-r_f = b_{N+1} \cdot \lambda    
+    \]
+
+
+\section*{Put e Call Option}
+    Abbiamo un titolo rischioso (Stock) e uno non rischioso (Bond)
+    i cui valori di mercato sono $S(t), B(t)$. \\
+    Abbiamo delle opzioni esercitabili sul sottostante $S$,
+    con strike-price $K$.
+    \subsection*{Call}
+    La call option restituisce:
+    \[
+        max[S-K,0]
+    \]
+    \subsection*{Put}
+    La put option restituisce:
+    \[
+        max[0,K-S]
+    \]
+
+    \subsection*{Albero Binomiale}
+        \begin{itemize}
+            \item \textbf{Bond}: passa dal valore $B(0)$ in $t=0$ al valore $B(0)r_f$ in $t=1$
+            \item \textbf{Stock}: il suo valore è una bernoulli di ragione $p$:
+                \[
+                    \left\{\begin{array}{l}
+                        S(0)u \quad \pi = p \\
+                        S(0)d \quad \pi = 1-p
+                    \end{array}\right.
+                \]
+                Dove $u,d$ stanno per \textit{up, down},
+                e perchè non ci sia arbitraggio: $u>r_f>d$.\\
+                E per non arbitraggio:
+                \[
+                    \pi_u = \frac{r_f - d}{u - d}
+                \]
+        \end{itemize}
+    
+        \subsubsection*{Put e Call Europee}
+        Per ricostruire il loro valore iniziale $F(S(0))$,
+        possiamo procedere in due modi:
+        \begin{itemize}
+            \item \textbf{Con le probabilità:}
+                \begin{enumerate}
+                    \item Ricavo i payoff dalle foglie dell'albero di S(t)
+                    \item Iterativamente ricostruisco ogni nodo come:
+                        \[
+                            F(S(t)) = \frac{1}{r_f}[F(S(t)u)\pi_u + F(S(0)d)\pi_d]    
+                        \]
+                \end{enumerate}
+            \item \textbf{Con gli state price:}
+                \begin{enumerate}
+                    \item Ricostruisco i vari state price come:
+                        \[
+                            m = D^{-T}q  \text{ oppure } m_s = \frac{\pi_s}{r_f^T} 
+                        \]
+                    \item Ora prezzare le option equivale a prezzare
+                    il portafoglio con gli stessi rendimenti, cioè a fare:
+                        \[
+                            F(S(0)) = \vec{F}(S(T)) \cdot m
+                        \]
+                \end{enumerate}
+        \end{itemize}
+        
+
+        \subsubsection*{Put e Call Americane}
+            Il loro valore iniziale $F(S(0))$ si può ricostruire
+            solo nel caso binomiale
+            \begin{enumerate}
+                \item Ricostruire l'albero dei payoff per tutti i nodi
+                \item Partendo dalle foglie ricostruisco il valore come media pesata
+                \item Faccio il max tra questa e il payoff, e lo scrivo nell'albero e procedo
+            \end{enumerate}
+
+        \subsubsection*{Put-Call parity}
+            Viene soddisfatta solo dalle Europee:
+            \[
+                P(t) + S(t) = C(t) + \frac{K}{ r_f^{T-t} }    
+            \]
+    
+    
+    \subsection*{Portafoglio di Replica}
+    Cerchiamo un portafoglio costituito di B e S
+    che replichi i payoff a $t=1$ del derivato. \\
+    Nel caso di multiperiodale, prima dobbiamo ricostruire il valore
+    a $t=1$. Poi basta risolvere il sistema lineare:
+    \[
+        \begin{bmatrix}
+            r_f & S(0)u \\
+            r_f & S(0)d  
+        \end{bmatrix}
+        \begin{bmatrix}
+            x \\
+            y  
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            F(S(0)u) \\
+            F(S(0)d)  
+        \end{bmatrix}
+    \]
+    E il suo valore di mercato sarà:
+    \[
+        xB(0)+yS(0) = \frac{1}{r_f} \left[ F(S(0)u) \pi_u + F(S(0)d) \pi_d \right]
+    \]
+
+
+    \subsection*{Delta hedging}
+    Voglio sapere quanto $\Delta$ devo vendere allo scoperto di S
+    per neutralizzare le oscillazioni del Derivato. \\
+    In pratica:
+    \[
+        \Delta = \frac{F(S(0)u) - F(S(0)d)}{S(0) (u-d)}    
+    \]
+    Anche questo modello nel caso di multiperiodale,
+    necessita di ricondursi a $t=1$.
+    
+    \subsection*{Double checking}
+    Notiamo che possiamo controllare di aver ottenuto dei risultati
+    corretti se:
+    \[
+        \Delta = y
+    \]
+
+\section*{Value at Risk e Expected Shortfall}
+    I dati che ci servono sono: \\
+    $\mu$, media, $\sigma$, deviazione std (fai la radice),
+    $h$ le unità di tempo passato e il livello $p$
+    \begin{itemize}
+        \item \textbf{Logaritmici Normali} 
+            \begin{align*}
+                &VaR = -h\mu+\sigma\sqrt{h}\Phi^{-1}(1-p) \\
+                &ES = -h\mu+\frac{\sqrt{h}\sigma}{p} \phi(\Phi^{-1}(1-p))
+            \end{align*}
+        \item \textbf{Giornalieri}
+            \begin{align*}
+                &VaR = h(1-\mu)+\sigma\sqrt{h}\Phi^{-1}(1-p) \\
+                &ES = h(1-\mu)+\frac{\sqrt{h}\sigma}{p} \phi(\Phi^{-1}(1-p))
+            \end{align*}
+        \item \textbf{Perdita}
+            \begin{align*}
+                &VaR = h\mu+\sigma\sqrt{h}\Phi^{-1}(1-p) \\
+                &ES = h\mu+\frac{\sqrt{h}\sigma}{p} \phi(\Phi^{-1}(1-p))
+            \end{align*}
+    \end{itemize}
+
+    \subsection*{Portafogli e Subadditività}
+    Se abbiamo un portafoglio:\\
+    $\mu = w\cdot e$ e $\sigma = \sqrt{w^TVw}$, inoltre, se vale
+    la Subadditività:
+    \[
+        VaR(\tilde{R}) \leq \sum_{i=1}^N VaR(\tilde{R}_n)  
+    \]
+    L'ES è sempre subadditivo.
+
+    \subsubsection*{Specchieto sulla normale}
+    \begin{align*}
+        & \Phi^{-1}(0.99) = 2.3263\\
+        & \phi(\Phi^{-1}(0.99)) = 0.0266
+    \end{align*}
+
+    
+\end{multicols*}
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
