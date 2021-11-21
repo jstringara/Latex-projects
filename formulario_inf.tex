@@ -1,0 +1,474 @@
+\documentclass[a4paper,notitlepage]{report}%imposto la classe la dimensione
+
+
+\usepackage[T1]{fontenc} % codifica dei font per l'italiano
+\usepackage[utf8]{inputenc} % lettere accentate da tastiera
+\usepackage[italian]{babel} % lingua del documento
+\usepackage[shortlabels]{enumitem}%per fare elenchi ad hoc
+\usepackage{amsmath}% per avere le formule matematiche fatte bene
+\usepackage{amssymb}% per avere le formule matematiche fatte bene
+\usepackage{amsthm}%per fare i teoremi in modo ordinato
+\usepackage[big]{layaureo} %per avere i margini più stretti
+\usepackage[table]{xcolor}%per colorare le tabelle
+\usepackage{framed}% per riquadrare il testo
+\usepackage{calrsfs}% per avere le lettere calligrafiche
+\usepackage{empheq} %per fare le equazioni per bene
+\usepackage{titling}% per modificare il titolo
+\usepackage{graphicx} %per inserire le immagini 
+\usepackage{dirtytalk}% per mettere più facilmente le virgolette
+\usepackage{titlesec}
+\usepackage{multicol}
+\usepackage{blindtext}
+\usepackage{cancel} % per cancellare le espressioni
+\setlength{\columnsep}{1cm}
+
+
+%ridefinisco i set di numeri
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}%naturali
+\newcommand{\R}{\mathbb{R}}%reali
+\newcommand{\Z}{\mathbb{Z}} %relativi 
+\newcommand{\p}{\mathbb{P}} %probabilità
+\newcommand{\E}{\mathbb{E}} %media
+\newcommand{\indep}{\perp \!\!\! \perp} %indipendenza
+\DeclareMathOperator*{\argsup}{arg\,sup} % argsup
+
+\setlist[itemize]{leftmargin=*}
+\setlength\parindent{0pt}
+
+
+\begin{document}
+
+\chapter*{Formule e Teoremi utili}
+
+\begin{multicols*}{2}
+
+\section*{Probabilità}
+
+
+    \subsection*{Distribuzione della trasformata}
+    Sia $f_X(x)$ e $y=g(x)$.
+    \begin{itemize}
+        \item Se $g$ crescente: $F_Y(y) = F_X(g^{-1}(y))$
+        \item Se $g$ decrescente: $F_Y(y) = 1 - F_X(g^{-1}(y))$
+        \item Se $g^{-1}$ derivabile: \\
+            $f_Y(y) = f_X(g^{-1}(y)) |\dot{g}^{-1}(y)| $
+    \end{itemize}
+
+
+    \subsection*{Varianza}
+    \[
+        Var[X] = \E[(X-\E[X])^2] = \E[X^2]-\E[X]^2    
+    \]
+
+
+    \subsection*{Marginali, Congiunte e Condizionate}
+    \begin{align*}
+        & f_{x,y} = f_{x|y}f_y \\
+        & f_x = \int f_{x,y} dy
+    \end{align*}
+
+
+    \subsection*{Media e Varianza Condizionati}
+    \begin{align*}
+        & \E[X] = \E[\E[X|Y]] \\
+        & Var[X] = \E[Var[X|Y]] + Var[\E[X|Y]]
+    \end{align*}
+
+
+    \subsection*{Legge Forte Grandi Numeri}
+    Sia $X_1, \dots, X_n$ iid con $\mu, \sigma^2$, allora:\\
+    $\bar{X}_n \overset{q.c.}{\to} \mu$
+
+
+    \subsection*{Teorema centrale del limite}
+    Sia $X_1, \dots, X_n$ iid con $\mu, \sigma^2$, allora:\\
+    $\sqrt{n}(\bar{X}_n - \mu) \overset{L}{\to} N(0,\sigma^2)$
+
+
+    \subsection*{Metodo delta}
+    Sia $X_1, \dots, X_n$ iid con $\mu, \sigma^2$, tali che:\\
+    $\sqrt{n}(\bar{X}_n - \mu) \overset{L}{\to} N(0,\sigma^2)$ \\
+    Prendiamo una funzione $g(x)$ e un certo $\theta$:
+    \begin{itemize}
+        \item Se $g'(\theta)\neq0$: \\
+            $\sqrt{n}(g(\bar{X}_n) - g(\mu)) \overset{L}{\to} N(0,\sigma^2g'(\mu)^2)$
+        \item Se Se $g'(\theta)=0$: \\
+        $\sqrt{n}(g(\bar{X}_n) - g(\mu)) \overset{L}{\to} \frac{\sigma^2}{2} g''(\mu)\chi^2(1)$
+    \end{itemize}
+
+
+\section*{Statistiche sufficienti}
+
+
+    \subsection*{Definizione}
+    Una statistica $T$ è sufficiente per $\theta$ se:\\
+    $f(\vec{x}|T=t) \indep \theta \quad \forall t$
+
+
+    \subsection*{Teorema di Fattorizzazione}
+    Data la congiunta $f(\vec{x},\theta)$, $T(x)$ è suff se:\\
+    $f(\vec{x},\theta) = h(\vec{x}) g(T(x),\theta)$\\
+    Questo vale anche per trasformazioni \textbf{biunivoche} di $T$
+
+
+    \subsection*{Famiglia Esponenziale}
+    Se ho una distribuzione della FE:\\
+    $f(\vec{x},\theta) = h(\vec{x}) c(\theta) \exp\left\{ \sum_{i=1}^k w_i(\theta) t_i(x) \right\}$ \\
+    Allora $T=(\sum_j t_1(X_j), \dots, \sum_j t_k(X_j) )$ è sufficiente
+
+
+\section*{Statistiche sufficienti e minimali}
+
+
+    \subsection*{Definizione}
+    Una statistica sufficiente $T$ viene detta minimale
+    se tutte le altre statistiche sufficienti sono funzioni
+    di essa.
+
+
+    \subsection*{Lehmann-Scheffè sulla minimalità}
+    Sia $f(\vec{x},\theta)$ e $T$ stat suff. $T$ è minimale se:\\
+    $\frac{f(\vec{x},\theta)}{f(\vec{y},\theta)}=K$ con $K$ costante in $\theta$
+    $\iff$ \\
+    $T(x)=T(y)$
+
+
+\section*{Statistiche complete}
+
+
+    \subsection*{Definizione}
+    Sia $T(x)$ una statistica e $f(t,\theta)$ la sua legge.
+    Diciamo $T(x)$ completa se:
+    \[
+        \E_\theta[g(T)] = 0 \: \forall\theta \implies \p(g(T)=0)=1    
+    \]
+    Di solito usiamo la derivata rispetto a $\theta$:
+    \begin{align*}
+        & \frac{d}{d\theta} \E_\theta[g(T)] = 0 \\
+        & = h'(\theta) \overset{0}{\cancel{\E_\theta[g(T)]}} + h(\theta)g(t)f_T(t,\theta) \Big|_a^b
+    \end{align*}
+
+    
+    \subsection*{Teorema di Bahadur}
+    Se $T$ è una statistica sufficiente e completa $\implies$ minima
+
+
+    \subsection*{Famiglia Esponenziale}
+    Sia:\\
+    $f(\vec{x},\theta) = h(\vec{x}) c(\theta) \exp\left\{ \sum_{i=1}^k w_i(\theta) t_i(x) \right\}$ \\
+    Allora $T=(\sum_j t_1(X_j), \dots, \sum_j t_k(X_j) )$ è sufficiente
+    ed è completa se il codominio di $w_1,\dots,w_k: \Theta \to \R^k$
+    contiene un aperto di $\R^k$.
+    
+    
+\section*{Stimatori Puntuali}
+
+
+    \subsection*{Metodo dei Momenti}
+    \[
+        \left\{\begin{array}{l}
+            m_1 = \frac{1}{n}\sum_{i=0}^n X_i = \E[X] \\
+            \vdots \\
+            m_k = \E[X^k]
+        \end{array}\right.
+    \]
+    I momenti saranno funzione di $\theta$, risolvo il sistema lineare
+    e trovo $\hat{\theta}_{Mom}$\\
+    Il risultato potrebbe non appartenere a $\Theta$
+
+
+    \subsection*{Metodo della Verosomiglianza}
+    Massimizzo la congiunta:\\
+    \[
+        \hat{\theta}_{MLE} = \argsup_{\theta\in\Theta} L(\theta,\vec{x})
+    \]
+    Con $L(\theta,\vec{x}) = f(\vec{x},\theta)$, dà sempre valori ammissibili.
+    Di solito usiamo:\\
+    $\frac{\partial L(\theta,\vec{x})}{\partial \theta} = 0$
+
+        \subsubsection*{Proprietà}
+            \textbf{Invarianza}\\
+            L'MLE per $\tau(\theta)$ è $\tau(\hat{\theta}_{MLE})$
+            per qualsiasi funzione $\tau$
+
+
+\section*{Scarto quadratico media}
+
+
+    \subsection*{Definizione}
+    $MSE[T] = \E_\theta[(T-\theta)^2]$
+
+
+    \subsection*{Bias}
+    $Bias[T] = \E_\theta[T]-\theta$
+
+    
+    \subsection*{Scomposizione}
+    $MSE[t] = Var_\theta[T] + Bias[T]^2$
+
+
+    \subsection*{Stimatore non distorto}
+    Uno stimatore $T$ è non distorto se:
+
+
+\section*{UMVUE}
+
+    \subsection*{Definizione}
+    Uno stimatore $T$ è UMVUE se:
+    \begin{itemize}
+        \item è non distorto: $\E[T]=\theta$
+        \item $Var[T] \leq Var[T^*] \quad \forall T^*$ non distorto
+    \end{itemize}
+    Inoltre l'UMVUE è \textbf{unico}.
+
+
+    \subsection*{Disuguaglianza di Cramer-Rao}
+    Siano $f(\vec{x},\theta)$ legge congiunta e $T$ stimatore che soddisfi:
+    \begin{itemize}
+        \item $\frac{d}{d\theta} \E_\theta[T(X)] = \int \frac{\partial}{\partial \theta}[T(x)f_X(x,\theta)]dx$
+        \item $Var_\theta[T]<\infty$
+    \end{itemize}
+    Allora:
+    \[
+        Var_\theta(T) \geq 
+        \frac{(\frac{d}{d\theta} \E_\theta[T(X)])^2}{\E\left[ \left( \frac{\partial}{\partial\theta}\ln f_X(x,\theta) \right)^2 \right]}
+        = \frac{(\frac{d}{d\theta} \E_\theta[T(X)])^2}{I_n(\theta)}
+    \]
+    Se alle ipotesi iniziali aggiungiamo:\\
+    $\frac{d}{d\theta}\E[\frac{\partial}{\partial\theta}f_X(x,\theta)] = \int \frac{\partial^2}{\partial\theta^2}f_X(x,\theta) dx$ allora \\
+    $I_n = - \E[\frac{\partial^2}{\partial\theta^2} \ln f_X(x,\theta)]$
+ 
+
+    \subsection*{Informazione di Fisher}
+    $I_n(\theta) = \E\left[ \left( \frac{\partial}{\partial\theta} \ln f_X(x,\theta) \right)^2 \right]$
+    Inoltre se iid:\\
+    $I_n = n I_1(\theta)$
+    Inoltre se viene rispettato
+
+
+    \subsection*{Lehmann-Scheffè per UMVUE}
+    Siano $T$ non distorto e $W$ sufficiente e completa (e minima).
+    Allora: \\
+    $M=\E_\theta[T|W]$ è UMVUE.\\
+    E analogamente per una funzione di $\theta$
+
+
+    \subsection*{UMVUE per $\phi(\theta)$}
+    Sia $T$ sufficiente e completa e $\phi(T)$, allora
+    $\phi(T)$ è UMVUE per $\E_\theta[\phi(T)]$
+
+
+    \subsection*{UMVUE per Famiglia Esponenziale}
+    Se $X_1,\dots,X_n\in EF$ e: \\
+    $f(\vec{x},\theta) = h(\vec{x}) c(\theta) \exp\left\{ w_1(\theta) t_1(x) \right\}$
+    Tale che 
+    $\exists \frac{d}{d\theta} w(\theta) \neq 0$
+    e continua $\forall\theta$. Allora:\\
+    $T(X) = \frac{1}{n} \sum_{i=1}^n T_1(X_j)$ è UMVUE
+    per $\E_\theta[T_1(X)]$\\
+    E \textbf{raggiunge il limite di C-R} che vale:\\
+    $Var(T)=\frac{Var(T_1)}{n}$
+
+
+\section*{Test d'Ipotesi}
+
+
+    \subsection*{Regione Critica}
+    $R= \left\{ \vec{x}\in\R^k | \text{ rifiuto } H_0  \right\}$ \\
+    Di solito si basa su una statistica.
+
+        \subsubsection*{Rapporto di Verosimiglianza}
+        $R = \{ \vec{x} | \lambda(x) \leq c \}$ con $c\in[0,1]$
+        \[
+            \lambda(x) = \frac{ \sup_{\Theta_0} L(\theta, x) }{ \sup_{\Theta} L(\theta, x) }    
+        \]
+
+
+    \subsection*{Funzione potenza}
+    $\beta(\theta) = \p_\theta(x\in R)$
+
+        \subsubsection*{Dimensione}
+        $\alpha = sup_{\Theta_0} \beta(\theta)$
+
+        \subsubsection*{Livello}
+        $\alpha \geq sup_{\Theta_0} \beta(\theta)$
+
+
+    \subsection*{UMP}
+    Un test di una classe $C$ è UMP se:\\
+    $\beta(\theta)\geq\beta'(\theta) \quad \forall\theta\in\Theta_0^c\quad \forall \beta'\in C$
+
+
+    \subsection*{Lemma di Neymann-Perason}
+    Sia $H_0: \theta = \theta_0 \quad H_1: \theta = \theta_1$
+    Allora se uso:
+    \begin{enumerate}
+        \item $R=\{x| f(\vec{x},\theta_1)>kf(\vec{x},\theta_0) \}$, $k\geq0$
+        \item $\alpha = \p_{\theta_0}(x\in R)$
+    \end{enumerate}
+    Allora:
+    \begin{enumerate}[label=\alph*]
+        \item Qualsiasi test che soddisfi queste due è UMP
+            di livello $\alpha$.
+        \item Se esiste un test UMP del punto a con $k\geq0$ allora:\\
+            Ogni UMP di livello $\alpha$ è anche di dimensione $\alpha$
+            e soddisfa la 1 tranne che per un insieme di misura nulla.
+    \end{enumerate}
+    \textbf{Nota:} questo si applica anche per le distribuzioni, 
+    basta usare: \\
+    $R=\{x| f_1(x,\theta)>kf_0(x,\theta) \}$
+    
+
+    \subsection*{Monotone Likelihood Ratio}
+    Sia una famiglia di leggi $g(x,\theta) \quad\theta\in\Theta$,
+    la diciamo LRT se per $\theta_2 > \theta_1$ \\
+    $\frac{ g(t,\theta_2 )}{g(t,\theta_1 )}$ è monotona in $t$ (non-crescente o non-decrescente)
+
+
+    \subsection*{Teorema di Karlin-Rubin}
+    Sia $H_0: \theta \leq \theta_0 \quad H_1: \theta > \theta_1$,
+    $T$ statistica sufficiente con $MLR$ non-decrescente. Allora: \\
+    $\forall t_0$ il test con $R=\{ T > t_0 \}$ è UMP di livello
+    $\alpha= \p_{\theta_0}(T>t_0)$
+
+    \subsection*{Estensione di Karlin-Rubin}
+    \begin{itemize}
+        \item $H_0: \theta \leq \theta_0 \quad H_1: \theta > \theta_1$
+            \begin{itemize}
+                \item \textbf{Non-decrescente:} $R=\{T > t_0\}$
+                \item \textbf{Non-crescente:} $R=\{-T > t_0\}$
+            \end{itemize}
+        \item $H_0: \theta \geq \theta_0 \quad H_1: \theta < \theta_1$
+        \begin{itemize}
+            \item \textbf{Non-decrescente:} $R=\{T < t_0\}$
+            \item \textbf{Non-crescente:} $R=\{-T < t_0\}$
+        \end{itemize}
+    \end{itemize}
+
+
+\section*{Stime intervallari}
+
+
+    \subsection*{Definzione}
+    E' una coppia di statistiche $L(x), U(X)$ con $L(X) \leq U(X)$
+
+
+    \subsection*{Probabilità di copertura}
+    $\p_\theta(\theta\in[L;U])$
+
+
+    \subsection*{Livello di Confidenza}
+    $\alpha = \inf_\Theta \p_\theta(\theta\in[L;U])$
+
+
+    \subsection*{Metodi di Costruzione}
+
+        \subsubsection*{Inversione di test d'ipotesi}
+        Sia $\forall \theta_0 \in \Theta$ sia $A(\theta_0)=R^C$
+        la regione d'accettazione di un test semplice di livello $\alpha$.\\
+        Definiamo:
+        $IC(X)=\{\theta| x\in A(\theta)  \}$
+
+
+        \subsubsection*{Metodo della quantità pivotale}
+        Definiamo una v.a. una quantità pivot $Q(x,\theta)$
+        se la sua distribuzione non dipende da $\theta$.
+        Cerchiamo a e b tali che: \\
+        $\p(a\leq Q \leq b) = 1-\alpha$ e $C = \{\theta | a\leq Q \leq b\} $
+
+
+        \subsubsection*{Unimodalità}
+        Una v.a. $X,f_X(x)$ è unimodale
+        se $\exists x*$ tale che:\\
+        $f_X(x)$ è crescente se $x\leq x*$ e decrescente se $x\geq x*$
+        cioè è fatta come una gaussiana. 
+
+        
+        \subsubsection*{Teorema lunghezza minima}
+        Sia $f_X$ unimodale, se lintervallo $[a,b]$ soddisfa:
+        \begin{itemize}
+            \item $\p(a\leq x\leq b) = \int_a^b f_X(x) dx = 1-\alpha$
+            \item $f_X(a)=f_X(b)\geq0$
+            \item $a\leq x* \leq b$ con $x*$ moda
+        \end{itemize}
+        Allora $[a,b]$ è l'intervallo minimo
+        tra quelli che soddisfano la 1. \\
+        Quindi:
+        \begin{itemize}
+            \item Se IC dipende direttamente da $(b-a)$ applico.
+            \item In caso negativo minimizzo come segue: \begin{enumerate}
+                \item Penso a $b$ come funzione di $a$, $b=b(a)$
+                \item Derivo il vincolo:\\
+                    $f(b(a))b'(a)-f(a)=0$ e trovo $b'(a)$
+                \item Derivo la lunghezza rispetto ad $a$ e sostituisco $b'$
+                \item Trovo se minimizzare o massimizzare $a$, scelgo b di conseguenza
+                    e sostituisco nel vincolo per ottenere $a$,
+                    fai attenzione al codominio di $Q$.
+            \end{enumerate}
+        \end{itemize}
+
+
+\section*{Statistica Asintotica}
+
+
+    \subsection*{Consistenza}
+    Diremo una succesione di stimatori $W_n$ consistente per $\theta$ se:\\
+    $\forall\epsilon > 0 \quad \lim_{n\to\infty} \p[|W_n-\theta|>\epsilon]=1$\\
+    Nota:\\
+    Se $W_n \overset{L}{\to} \theta$ e $\theta$ costante
+    $\implies W_n \overset{P}{\to} \theta$
+
+
+    \subsection*{Consistenza in MSE}
+    Se $MSE[W_n]\to0$, cioè:\\
+    $\lim_{n\to\infty} \E[W_n]=\theta$ \\
+    $\lim_{n\to\infty} Var[W_n] = 0$
+
+
+    \subsection*{Efficienza asintotica MLE}
+    Sia $\hat{\theta}_{MLE}$ e $f_X$ soddisfa Cramer-Rao:\\
+    $\sqrt{n}[\tau(\hat{\theta}_{MLE}) - \tau(\theta)]\overset{L}{\to} N(0,v(\theta))$\\
+    con $v(\theta)=\frac{[\tau'(\theta)]^2}{I_1(\theta)}$
+
+
+    \subsection*{Efficienza Relativa Asintotica}
+    Due successioni di stimatori:\\
+    $\sqrt{n}[W_n-\tau(\theta)]\overset{L}{\to} N(0,\sigma^2_W)$ \\
+    $\sqrt{n}[V_n-\tau(\theta)]\overset{L}{\to} N(0,\sigma^2_V)$ \\
+    Allora definiamo l'ARE come:\\
+    $ARE(V_n,W_n)=\frac{\sigma^2_W}{\sigma^2_V}$,
+    cerchiamo il più piccolo.
+
+
+
+
+\end{multicols*}
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
