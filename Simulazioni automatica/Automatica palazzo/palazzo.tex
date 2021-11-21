@@ -1,0 +1,276 @@
+\documentclass[a4paper]{report}
+
+
+\usepackage[T1]{fontenc} % codifica dei font per l'italiano
+\usepackage[utf8]{inputenc} % lettere accentate da tastiera
+\usepackage[italian]{babel} % lingua del documento
+\usepackage[shortlabels]{enumitem}%per fare elenchi ad hoc
+\usepackage{framed}% per riquadrare il testo
+\usepackage{amsmath}% per avere le formule matematiche fatte bene
+\usepackage{amssymb}% per avere le formule matematiche fatte bene
+\usepackage{amsthm}%per fare i teoremi in modo ordinato
+\usepackage[big]{layaureo} %per avere i margini più stretti
+\usepackage{graphicx} %per inserire le immagini
+\usepackage{mathtools}
+\usepackage{wrapfig} %per avvolgere le immagini
+\usepackage{mathabx}
+
+\makeatletter
+\newcommand{\superimpose}[2]{%
+  {\ooalign{$#1\@firstoftwo#2$\cr\hfil$#1\@secondoftwo#2$\hfil\cr}}}
+\makeatother
+\def\retro{\ensuremath{%
+  \reflectbox{\rotatebox[origin=c]{180}{$\circlearrowleft$}}}}
+\newcommand{\R}{\mathbb{R}}%reali
+\newcommand{\retroneg}{\mathpalette\superimpose{{\retro}{-}}} %retroazione negativa
+\DeclareMathOperator{\tr}{tr} %traccia
+\newcommand{\parallelsum}{\mathbin{\|}}%parallelo
+
+\graphicspath{ {./images/} }
+
+\begin{document}
+% titolo e sottotitolo
+\begin{center}
+  \section*{Risoluzione Esercizio:}
+  \section*{"Controllo attivo delle oscillazioni di un grattacielo"}
+  L. Maci, L. Paparo, M. Poggi, J. Stringara e G. Venturini
+\end{center}
+
+%traccia del problema
+\subsubsection{Problema}
+La sezione Ricerca e Sviluppo dell’industria elettromeccanica in cui lavori deve effettuare uno studio di fattibilità sul controllo attivo delle oscillazioni dei palazzi (innescate da intense raffiche di vento o scosse telluriche) che, com’è noto, possono essere notevoli e fastidiose. Si tratta di installare sul tetto del palazzo un reattore capace di esercitare una forza di direzione e intensità variabile e di mettere a punto una regola di conduzione del reattore capace di ridurre la durata delle oscillazioni. Tale regola di conduzione deve essere basata su misure effettuate in tempo reale sulla struttura. Per questo potrebbero esserci delle difficoltà poiché è possibile misurare solo la posizione dell’ultimo piano della struttura e trasmetterla istantaneamente a una centrale di elaborazione. Il responsabile della sezione ti ha chiesto di studiare il problema dal punto di vista teorico-concettuale. Egli vuole sapere, in particolare, se è possibile dimezzare la durata delle oscillazioni del palazzo controllando il reattore. Le caratteristiche geometriche e meccaniche della struttura sono dettagliati più avanti.
+
+
+\subsubsection{Schematizzazione teorica del sistema}
+%schema del problema
+Schematiziamo il problema come segue:
+
+%equazioni di stato (sulla sinistra)
+\begin{align*}
+\dot{x}_1&=x_{1+n}\\
+&\vdots\\
+\dot{x}_n&=x_{2n}\\
+\dot{x}_{1+n}&=\frac{1}{m} \cdot (-hx_{1+n}-2kx_1-kx_2)\\
+\dot{x}_{2+n}&=\frac{1}{m} \cdot (-hx_{2+n}-2x_2+kx_1+kx_3)\\
+&\vdots\\
+\dot{x}_{2n-1}&=\frac{1}{m} \cdot (-hx_{2n-1}-2kx_{n-1}+kx_{n-2}+kx_n)\\
+\dot{x}_{2n}&=\frac{1}{m} \cdot (-hx_{2n}-kx_n+kx_{n-1}+u)
+\end{align*}
+Dove $h$ indica il coefficiente di attrito viscoso, $k$ il  coefficiente di elasticità, $m$ la massa di ogni trave, $u(t)$ la forza esercitata dal reattore, $x_i(t)$ lo spostamento laterale dell’i-esima trave rispetto alla condizione di riposo e $x_{i+n}(t)$ la velocità dell’i-esima trave.
+\newline
+Notiamo infatti che tutte le variabili $x_1,\dots,x_n$ hanno come derivata la corrispondete variabile $x_{1+n},\dots,x_{2n}$, per scrivere invece la derivata delle variabili $x_{1+n},\dots,x_{2n}$ dobbiamo scriverci le corrispondenti equazioni di Newton. Con i =$\{1,\dots,n\}$ :
+\[
+  m\cdot\dot{x}_{i+n}=-hx_{i+n}-2kx_i+kx_{i-1}+kx_{i+1}
+\]
+Notiamo i due casi speciali di $i=1$ e $i=n$ dove $x_{i-1}=0$ e $x_{i+1}=0$ rispettivamente. 
+Inoltre ci scegliamo $y=x_n$ poichè vogliamo misurare lo spostamento della punta del grattacielo
+\newpage
+Da queste equazioni ricaviamo la seguente configurazione di stato:
+%matrice di stato e vettori vari
+\begin{align*}
+A=\begin{bmatrix}
+0 & \dotsc  & \dotsc  & \dotsc  & 0 & 1 & 0 & \dotsc  & \dotsc  & 0\\
+\vdots  &  &  &  &  & \ddots  & \ddots  & \ddots  &  & \vdots \\
+\vdots  &  &  &  &  &  & \ddots  & \ddots  & \ddots  & \vdots \\
+\vdots  &  &  &  &  &  &  & \ddots  & \ddots  & 0\\
+0 & \dotsc  & \dotsc  & \dotsc  & \dotsc  & \dotsc  & \dotsc  & \dotsc  & 0 & 1\\
+-\frac{2k}{m} & \frac{k}{m} & 0 & \dotsc  & 0 & -\frac{h}{m} & 0 & \dotsc  & \dotsc  & 0\\
+\frac{k}{m} & -\frac{2k}{m} & \frac{k}{m} & 0 & \dotsc  & 0 & \ddots  & \ddots  &  & \vdots \\
+0 & \ddots  & \ddots  & \ddots  &  & \vdots  & \ddots  & \ddots  & \ddots  & \vdots \\
+\vdots  & \ddots  & \ddots  & -\frac{2k}{m} & \frac{k}{m} & \vdots  &  & \ddots  & \ddots  & 0\\
+0 & \dotsc  & 0 & \frac{k}{m} & -\frac{k}{m} & 0 & \dotsc  & \dotsc  & 0 & -\frac{h}{m}\\
+\end{bmatrix} b=\begin{bmatrix}
+0\\
+\vdots\\
+\vdots\\
+\vdots\\
+\vdots\\
+\vdots\\
+\vdots\\
+\vdots\\
+0\\
+\frac{1}{m}
+\end{bmatrix}\\
+c=\begin{bmatrix}
+0&\dots&\dots&0&1&0&\dots&\dots&\dots&0
+\end{bmatrix}\quad \quad\quad\quad \quad d=0
+\end{align*}
+\underline{Nota:} Si vede bene che la matrice A avrà dimensioni $2n\times 2n$ e che di conseguenza b sarà $2n\times 1$ e c $1\times 2n$.
+
+\subsubsection*{Svolgimento}
+Dopo aver completato la schematizzazione teorica del sistema
+passiamo alla pratica prendendo:
+\[
+n = 5, m = 0.5, k = 0.6, h = 0.5
+\]
+Apriamo quindi matlab e scriviamo il sistema  con equazione di stato $\dot{x}(t)=Ax(t)+bu(t)$ e uscita $y=cx(t)$
+Per prima cosa scriviamoci le variabili:
+\begin{verbatim}
+n=5;
+m=0.5;
+k=0.6;
+h=0.5;
+\end{verbatim}
+Ora creamo la matrice e i vari vettori:
+\begin{verbatim}
+%=== matrice ==========================================
+A=diag(ones(n,1),n)+diag(k/m*ones(1,4),-6)+...
+  diag(-2*k/m*ones(1,5),-5)+diag(k/m*ones(1,6),-4)+...
+  diag([zeros(n,1),-h/m*ones(n,1)]);
+A(10,6)=0;
+A(5,1)=0;
+A(10,5)=-k/m;
+A
+%=== vettore b ========================================
+b=zeros(10,1);
+b(2*n,1)=1/m;
+b
+%=== vettore c ========================================
+c=zeros(1,2*n);
+c(1,n)=1;
+c
+\end{verbatim}
+\newpage
+Che da come output:
+\begin{verbatim}
+>> A
+
+A =
+  
+     0        0        0        0        0      1.0        0        0        0        0
+     0        0        0        0        0        0      1.0        0        0        0
+     0        0        0        0        0        0        0      1.0        0        0
+     0        0        0        0        0        0        0        0      1.0        0
+     0        0        0        0        0        0        0        0        0      1.0
+  -2.4      1.2        0        0        0     -1.0        0        0        0        0
+   1.2     -2.4      1.2        0        0        0     -1.0        0        0        0
+     0      1.2     -2.4      1.2        0        0        0     -1.0        0        0
+     0        0      1.2     -2.4      1.2        0        0        0     -1.0        0
+     0        0        0      1.2     -1.2        0        0        0        0     -1.0
+  
+>> b
+  
+b =
+  
+    0
+    0
+    0
+    0
+    0
+    0
+    0
+    0
+    0
+    2
+  
+>> c
+  
+c =
+  
+    0     0     0     0     1     0     0     0     0     0
+\end{verbatim}
+Ora per determinare se questo sistema ammetta regolatore asintotico lineare
+che dimezzi la durata delle oscillazioni del palazzo dobbiamo assicurarci che il sistema
+sia completamente osservabile e completamente controllabile
+Dunque usiamo i comandi matlab \verb|obsv| e \verb|ctrb| per trovare le matrici O ed R e poi
+studiarne il determinante:
+\begin{verbatim}
+O=obsv(A,c);
+R=ctrb(A,b);
+if det(O) && det(R)
+   disp('Il sistema ammette regolatore asintotico lineare')
+end
+\end{verbatim}
+Che da come ouput:
+\begin{verbatim}
+  Il sistema ammette regolatore asintotico lineare
+\end{verbatim}
+Dunque possiamo affermare che $\det (O) \neq 0$ e $\det(R) \neq 0$ e che il sistema è
+\textbf{completamente raggiungibile} e \textbf{completamente osservabile}. 
+Dunque scelti degli opportuni $l$ e $k$ possiamo scegliere a piacimento i suoi autovalori.
+
+Ora per dimezzare il tempo dobbiamo dimezzare il tempo di risposta $T_R$, 
+ma ciò significa raddoppiare l'autovalore dominante $\lambda_D$, poichè
+$T_R=-\frac{5}{\lambda_D}$. Utilizzando il comando \verb|acker| di matlab
+per ottenere il $k$ tale che la matrice $A+bk$ abbia l'unico autovalore 
+$\lambda_{D_{A+bk}} = 2\lambda_D$
+\begin{verbatim}
+%trovo l'autovalore lambdaD
+lambdaD=max(real(eig(A)));
+k=-acker(A,b,2*lambdaD*ones(2*n,1))
+\end{verbatim}
+Che da come output:
+\begin{verbatim}
+Warning: Pole locations are more than 10% in error.
+
+k =
+  
+  22.2742 -32.0990 26.5527 -13.9002 3.6933 32.6697 -40.1467 25.5038 -8.9777 1.4087
+\end{verbatim}
+Per trovare invece $l$ svolgiamo un \verb|acker| ma con $A^T$ e $c^T$ al posto di $A$ e $b$
+\begin{verbatim}
+l=-acker(A',c',2*ld*ones(2*n,1))
+\end{verbatim}
+che da l'output:
+\begin{verbatim}
+Warning: Pole locations are more than 10% in error.
+l =
+
+  65.3394 -80.2934 51.0076 -17.9554 2.8175 -20.7910 16.0954 2.0979 -9.8449 4.5690
+
+\end{verbatim}
+Dunque i due vettori cercati sono:
+\begin{align*}
+k&=\begin{bmatrix}
+22.2742 &-32.0990 &26.5527 &-13.9002 &3.6933 &32.6697 &40.1467 &25.5038 &8.9777 &-1.4087\\
+\end{bmatrix}\\
+l&=\begin{bmatrix}
+65.3394 &-80.2934 &51.0076 &-17.9554 &2.8175 &-20.7910 &16.0954 &2.0979 &-9.8449 &4.5690\\
+\end{bmatrix}^T
+\end{align*}
+Tuttavia se si calcolano gli autovalori di $A+bk$ e $A+lc$ troviamo che non sono nè tutti uguali 
+nè tutti il doppio di $\lambda_D$, ciò è imputabile alla poca affidabilità
+numerica di \verb|acker| per sistemi ordine uguale o superiore a 10.
+\subsection*{Soluzione Numerica}
+Dato che la soluzione con \verb|2*lambdaD*ones(2*n,1)| dobbiamo quindi
+trovare dei moltiplicatori maggiori. Notiamo empiricamente che la scrittura
+\verb|3*lambdaD*ones(2*n,1)| soddisfa ampiamente la richiesta. Dunque la nostra soluzione
+sarà compresa fra 2 e 3. Utiliziamo quindi il seguente algoritmo:
+\begin{verbatim}
+format long
+l=-acker(A',c',3*max(real(eig(A)))*ones(1,10));
+g=7;
+N=10^g;
+a=linspace(2,3,N);
+i=1;
+aopt=2;
+lambdaD=max(real(eig(A)));
+err=1;
+while a(i)<3 & max(abs(err))>10^(-g)
+  k=-acker(A,b,a(i)*lambdaD*ones(1,10));
+  err=2*lambdaD*ones(2*n,1)-max(real(eig(A+b*k)));
+  aopt=a(i);
+  i=i+1;
+end
+aopt
+i
+\end{verbatim}
+\newpage
+Che da come ouput:
+\begin{verbatim}
+aopt=
+    2.340994254099425
+i=
+  308741
+\end{verbatim}
+Quello che abbiamo fatto dunque è stato scegliere un $l$ tale che
+gli autovalori di $A+lc$ fossero abbastanza minori del valore cercato,
+poi abbiamo iniziato a valutare k tramite valori crescenti di a da 2 verso 3
+e ci siamo fermati quando abbiamo trovato un valore tale che l'errore
+assoluto massimo fosse uguale o inferiore della soglia di tolleranza $10^{-g}$.
+\newline
+Ovviamente il procedimento è lungo e poco efficiente ma ci da una risposta
+comunque migliore e più vicina all'\textbf{effettivo risultato numerico}.
+\end{document}
+
+
