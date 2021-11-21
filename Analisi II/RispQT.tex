@@ -1,0 +1,90 @@
+\documentclass[a4paper]{report}%imposto la classe la dimensione
+
+
+\usepackage[T1]{fontenc} % codifica dei font per l'italiano
+\usepackage[utf8]{inputenc} % lettere accentate da tastiera
+\usepackage[italian]{babel} % lingua del documento
+\usepackage[shortlabels]{enumitem}%per fare elenchi ad hoc
+\usepackage{amsmath}% per avere le formule matematiche fatte bene
+\usepackage{amssymb}% per avere le formule matematiche fatte bene
+\usepackage{amsthm}%per fare i teoremi in modo ordinato
+\usepackage[big]{layaureo} %per avere i margini più stretti
+\usepackage[table]{xcolor}%per colorare le tabelle
+\usepackage{framed}% per riquadrare il testo
+\usepackage{calrsfs}% per avere le lettere calligrafiche
+\usepackage{empheq} %per fare le equazioni per bene
+\usepackage{titling}% per modificare il titolo
+\usepackage{graphicx} %per inserire le immagini 
+\usepackage{dirtytalk}% per mettere èiù facilmente le virgolette
+\usepackage{titlesec}
+
+
+%per mettere il sottotitolo
+\newcommand{\subtitle}[1]{%
+  \posttitle{%
+    \par\end{center}
+    \begin{center}\large#1\end{center}
+    \vskip0.5em}%
+}
+
+
+%ridefinisco i set di numeri
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\N}{\mathbb{N}}%naturali
+\newcommand{\R}{\mathbb{R}}%reali
+\newcommand{\prob}{\mathbb{P}} %probabilità
+\newcommand{\Q}{\mathbb{Q}}%insieme Q
+
+
+%ridefinisco alcune lettere greche per comodità
+\renewcommand{\epsilon}{\varepsilon} %epsilon
+\renewcommand{\theta}{\vartheta}%theta
+
+%modifico i capitoli
+\titleformat
+{\chapter} % command
+[display] % shape
+{\normalfont\huge\bfseries} % format
+{} % label
+{0.5ex} % sep
+{
+    \vspace{1ex}
+    \centering
+} % before-code
+[
+\vspace{-0.5ex}%
+] % after-code
+
+
+\graphicspath{ {./images/} }
+
+
+\begin{document}
+
+%titolo
+\title{Risposte ai Quesiti Teorici}
+\subtitle{del corso di Analisi II del prof. Fabio Punzo}
+\author{Jacopo Stringara}
+
+\maketitle
+
+%indice
+\tableofcontents
+\newpage
+
+%fogli vari
+\input{Fogli/Foglio 1.tex}
+\input{Fogli/Foglio 2.tex}
+\input{Fogli/Foglio 3.tex}
+\input{Fogli/Foglio 4.tex}
+\input{Fogli/Foglio 5.tex}
+\input{Fogli/Foglio 6.tex}
+\input{Fogli/Foglio 7.tex}
+\input{Fogli/Foglio 8.tex}
+\input{Fogli/Foglio 9.tex}
+\input{Fogli/Foglio 10.tex}
+\input{Fogli/Foglio 11.tex}
+\input{Fogli/Foglio 12.tex}
+
+
+\end{document}
