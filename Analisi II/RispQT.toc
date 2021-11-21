@@ -1,0 +1,134 @@
+\babel@toc {italian}{}
+\babel@toc {italian}{}
+\contentsline {chapter}{\numberline {1}Foglio \ 1}{4}%
+\contentsline {section}{Quesito 1}{4}%
+\contentsline {section}{Quesito 2}{4}%
+\contentsline {section}{Quesito 3}{5}%
+\contentsline {section}{Quesito 4}{5}%
+\contentsline {section}{Quesito 5}{6}%
+\contentsline {section}{Quesito 6}{6}%
+\contentsline {section}{Quesito 7}{6}%
+\contentsline {section}{Quesito 8}{6}%
+\contentsline {section}{Quesito 9}{6}%
+\contentsline {section}{Quesito 10}{6}%
+\contentsline {chapter}{\numberline {2}Foglio \ 2}{7}%
+\contentsline {section}{Quesito 1}{7}%
+\contentsline {section}{Quesito 2}{7}%
+\contentsline {section}{Quesito 3}{7}%
+\contentsline {section}{Quesito 4}{7}%
+\contentsline {section}{Quesito 5}{7}%
+\contentsline {section}{Quesito 6}{8}%
+\contentsline {section}{Quesito 7}{8}%
+\contentsline {section}{Quesito 8}{8}%
+\contentsline {section}{Quesito 9}{8}%
+\contentsline {section}{Quesito 10}{8}%
+\contentsline {chapter}{\numberline {3}Foglio \ 3}{9}%
+\contentsline {section}{Quesito 1}{9}%
+\contentsline {section}{Quesito 2}{9}%
+\contentsline {section}{Quesito 3}{9}%
+\contentsline {section}{Quesito 4}{9}%
+\contentsline {section}{Quesito 5}{9}%
+\contentsline {section}{Quesito 6}{10}%
+\contentsline {section}{Quesito 7}{10}%
+\contentsline {section}{Quesito 8}{10}%
+\contentsline {section}{Quesito 9}{10}%
+\contentsline {section}{Quesito 10}{10}%
+\contentsline {chapter}{\numberline {4}Foglio \ 4}{11}%
+\contentsline {section}{Quesito 1}{11}%
+\contentsline {section}{Quesito 2}{11}%
+\contentsline {section}{Quesito 3}{11}%
+\contentsline {section}{Quesito 4}{11}%
+\contentsline {section}{Quesito 5}{11}%
+\contentsline {section}{Quesito 6}{11}%
+\contentsline {section}{Quesito 7}{12}%
+\contentsline {section}{Quesito 8}{12}%
+\contentsline {section}{Quesito 9}{12}%
+\contentsline {section}{Quesito 10}{12}%
+\contentsline {chapter}{\numberline {5}Foglio \ 5}{13}%
+\contentsline {section}{Quesito 1}{13}%
+\contentsline {section}{Quesito 2}{13}%
+\contentsline {section}{Quesito 3}{13}%
+\contentsline {section}{Quesito 4}{13}%
+\contentsline {section}{Quesito 5}{13}%
+\contentsline {section}{Quesito 6}{13}%
+\contentsline {section}{Quesito 7}{14}%
+\contentsline {section}{Quesito 8}{14}%
+\contentsline {section}{Quesito 9}{14}%
+\contentsline {section}{Quesito 10}{14}%
+\contentsline {chapter}{\numberline {6}Foglio \ 6}{15}%
+\contentsline {section}{Quesito 1}{15}%
+\contentsline {section}{Quesito 2}{15}%
+\contentsline {section}{Quesito 3}{15}%
+\contentsline {section}{Quesito 4}{15}%
+\contentsline {section}{Quesito 5}{15}%
+\contentsline {section}{Quesito 6}{15}%
+\contentsline {section}{Quesito 7}{16}%
+\contentsline {section}{Quesito 8}{16}%
+\contentsline {section}{Quesito 9}{16}%
+\contentsline {section}{Quesito 10}{16}%
+\contentsline {chapter}{\numberline {7}Foglio \ 7}{17}%
+\contentsline {section}{Quesito 1}{17}%
+\contentsline {section}{Quesito 2}{17}%
+\contentsline {section}{Quesito 3}{17}%
+\contentsline {section}{Quesito 4}{17}%
+\contentsline {section}{Quesito 5}{17}%
+\contentsline {section}{Quesito 6}{17}%
+\contentsline {section}{Quesito 7}{18}%
+\contentsline {section}{Quesito 8}{18}%
+\contentsline {section}{Quesito 9}{18}%
+\contentsline {section}{Quesito 10}{18}%
+\contentsline {chapter}{\numberline {8}Foglio \ 8}{19}%
+\contentsline {section}{Quesito 1}{19}%
+\contentsline {section}{Quesito 2}{19}%
+\contentsline {section}{Quesito 3}{19}%
+\contentsline {section}{Quesito 4}{19}%
+\contentsline {section}{Quesito 5}{19}%
+\contentsline {section}{Quesito 6}{20}%
+\contentsline {section}{Quesito 7}{20}%
+\contentsline {section}{Quesito 8}{20}%
+\contentsline {section}{Quesito 9}{20}%
+\contentsline {section}{Quesito 10}{20}%
+\contentsline {chapter}{\numberline {9}Foglio \ 9}{21}%
+\contentsline {section}{Quesito 1}{21}%
+\contentsline {section}{Quesito 2}{21}%
+\contentsline {section}{Quesito 3}{21}%
+\contentsline {section}{Quesito 4}{21}%
+\contentsline {section}{Quesito 5}{21}%
+\contentsline {section}{Quesito 6}{22}%
+\contentsline {section}{Quesito 7}{22}%
+\contentsline {section}{Quesito 8}{22}%
+\contentsline {section}{Quesito 9}{22}%
+\contentsline {section}{Quesito 10}{22}%
+\contentsline {chapter}{\numberline {10}Foglio \ 10}{23}%
+\contentsline {section}{Quesito 1}{23}%
+\contentsline {section}{Quesito 2}{23}%
+\contentsline {section}{Quesito 3}{23}%
+\contentsline {section}{Quesito 4}{23}%
+\contentsline {section}{Quesito 5}{23}%
+\contentsline {section}{Quesito 6}{23}%
+\contentsline {section}{Quesito 7}{24}%
+\contentsline {section}{Quesito 8}{24}%
+\contentsline {section}{Quesito 9}{24}%
+\contentsline {section}{Quesito 10}{24}%
+\contentsline {chapter}{\numberline {11}Foglio \ 11}{25}%
+\contentsline {section}{Quesito 1}{25}%
+\contentsline {section}{Quesito 2}{25}%
+\contentsline {section}{Quesito 3}{25}%
+\contentsline {section}{Quesito 4}{25}%
+\contentsline {section}{Quesito 5}{25}%
+\contentsline {section}{Quesito 6}{25}%
+\contentsline {section}{Quesito 7}{26}%
+\contentsline {section}{Quesito 8}{26}%
+\contentsline {section}{Quesito 9}{26}%
+\contentsline {section}{Quesito 10}{26}%
+\contentsline {chapter}{\numberline {12}Foglio \ 12}{27}%
+\contentsline {section}{Quesito 1}{27}%
+\contentsline {section}{Quesito 2}{27}%
+\contentsline {section}{Quesito 3}{27}%
+\contentsline {section}{Quesito 4}{27}%
+\contentsline {section}{Quesito 5}{27}%
+\contentsline {section}{Quesito 6}{28}%
+\contentsline {section}{Quesito 7}{28}%
+\contentsline {section}{Quesito 8}{28}%
+\contentsline {section}{Quesito 9}{28}%
+\contentsline {section}{Quesito 10}{28}%
