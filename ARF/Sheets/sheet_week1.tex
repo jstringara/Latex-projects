@@ -1,0 +1,408 @@
+\sheet
+
+%==== Question 1 ====%
+
+\question
+Write the definitions of: sequence of sets $\seq{E}$; increasing and decreasing sequence of sets $\seq{E}$;
+$\limsup_{n\to\infty} E_n$, $\liminf_{n\to\infty} E_n$, $\lim_{n\to\infty} E_n$.
+
+\subsection*{Solution}
+
+\provdefs
+\begin{itemize}
+    \item \subsection{Sequence of sets} A family (or collection) of sets $\{E_i\}_{i\in I}$ is called a sequence of sets if $I=\N$ (i.e. it is indexed by the set of natural numbers $\N$)
+    \item \subsection{Increasing sequence of sets} a sequence of sets $\seq{E}$ is said to be increasing (or ascending) if:
+    \[
+        E_n \subseteq E_{n+1} \quad \forall n\in\N    
+    \]
+    \item \subsection{Decreasing sequence of sets}
+    A sequence of sets $\seq{E}$ is said to be decreasing (or descending) if:
+    \[
+        E_n \supseteq E_{n+1} \quad \forall n\in\N    
+    \]
+    \item \subsection{Limsup for a sequence of sets} for a sequence of sets $\seq{E}$ we define:
+    \[
+        \limsup_{n\to\infty} E_n \coloneqq \bigcap_{k=1}^{\infty} \bigcup_{n=k}^\infty E_n
+    \]
+    \item \subsection{Liminf for a sequence of sets} analogously:
+    \[
+        \limsup_{n\to\infty} E_n \coloneqq \bigcup_{k=1}^{\infty} \bigcap_{n=k}^\infty E_n
+    \]
+    \item \subsection{Limit for a sequence of sets} as for a sequence of real numbers if the limsup and liminf coincide we may define:
+    \[
+        \lim_{n\to\infty} E_n \coloneqq \liminf_{n\to\infty} E_n = \limsup_{n\to\infty} E_n    
+    \]
+\end{itemize}
+
+%==== Question 2 ====%
+
+\question
+Write the definitions of: cover (or covering) of a set; subcover.
+
+\subsection*{Solution}
+\provdefs
+\begin{itemize}
+    \item \subsection{Cover of a set} a family of sets $\{E_i\}_{i\in I}$ is called a cover (or covering) of $X$ if:
+    \[
+        X \subseteq \bigcup_{i\in I} E_i    
+    \]
+    \item \subsection{Subcover} a sub-family of a cover $\{E_i\}_{i\in J}$ ($J\subseteq I$) which forms a cover is called a subcover.  
+\end{itemize}
+
+%==== Question 3 ====%
+
+\question
+Write the definitions of: equivalence relation, equivalence class, quotient set.
+
+\subsection*{Solution}
+\provdefs
+\begin{itemize}
+    \item \subsection{Equivalence relation} a relation $R$ in $X$ (i.e. a subset $R\subseteq X\times X$) is an equivalence relation if:
+    \begin{enumerate}[i)]
+        \item $(x,x) \in R$ $\forall x\in X$ (\textbf{reflexivity})
+        \item $(x,y) \in R \implies (y,x)\in R$ (\textbf{simmetry})
+        \item $(x,y) \in R, \, (y,z)\in R \implies (x,z)\in R$ (\textbf{transitivity})
+    \end{enumerate}
+    \item \subsection{Equivalence class} we define an equivalence class for $x$ w.r.t. $R$ as:
+    \[
+        E_x \coloneqq \{y\in X : yRx\}
+    \]
+    i.e. the set of all elements equivalent to $x$ for $R$
+    \item \subsection{Quotient set} we define the quotient set of $X$ over $R$ as:
+    \[
+        X / R \coloneqq \{E_x: x\in X \}    
+    \]
+    i.e. it is the set of all equivalence classes.
+\end{itemize}
+
+%==== Question 4 ====%
+
+\question
+Write the definition of equipotent sets. Write the definition of cardinality of a set.
+
+\subsection*{Solution}
+\provdefs
+\begin{itemize}
+    \item \subsection{Equipotent sets} Two sets $X$ and $Y$ are called equipotent if there exists a bijections, that is, a function:
+    \[
+        f:X\to Y    
+    \]
+    that is both injective and surjective.
+    \item \subsection{Cardinality of a set} the cardinality of a set $X$ is the collection of all sets equipotent to X.
+\end{itemize}
+
+
+%==== Question 5 ====%
+
+\question
+Write the definitions of: infinite set, finite set, countable set, uncountable set. Provide examples.
+
+\subsection*{Solution}
+\provdefs
+\begin{itemize}
+    \item \subsection{Finite sets} a set $X$ is finite if $\exists n\in\N$ such that there is a bijection:
+    \[
+        f:X\to {1,\dots,n}    
+    \]
+    \textbf{Example:} $\{\frac{1}{1}, \dots, \frac{1}{n}\}$
+    \item \subsection{Infinite sets} $X$ is infinite if it is not finite.\\
+    \textbf{Example:} $\N$ is clearly infinite
+    \item \subsection{Countable sets} $X$ is countable if $X$ is equipotent to $\N$\\
+    \textbf{Example:} $\Q$ can be put in bijection with $\N$
+    \item \subsection{Uncountable sets} $X$ is uncountable if it is infinite and not countable.\\
+    \textbf{Example:} $\R$ is clearly infinite and not countable since it has the cardinality of continuum.
+\end{itemize}
+
+%==== Question 6 ====%
+
+\question
+Write the definitions of: algebra, $\salg$, measurable space, measurable set. Show that if $\A$
+is a $\salg$ and $\{E_k\}\subset \A$, then $\bigcap^{+\infty}_{k=1} E_k \in \A $.
+
+\subsection*{Solution}
+\provdefs
+\begin{itemize}
+    \item \subsection{Algebra} A family $\A\subseteq\Parts{X}$ is an algebra if:
+    \begin{enumerate}[i)]
+        \item $\emptyset \in \A$
+        \item $E\in\A \implies E^\complement \in\A$
+        \item $A,B\in\A \implies A\cup B\in\A$
+    \end{enumerate}
+    \item \subsection{\texorpdfstring{$\salg$}{TEXT}} A family $\A\subseteq\Parts{X}$ is a $\salg$ if:
+    \begin{enumerate}[i)]
+        \item $\emptyset \in \A$
+        \item $E\in\A \implies E^\complement \in\A$
+        \item $\seq{E}_{n\in\N} \subseteq\A \implies \bigcup_{n=1}^\infty E_n \in\A$
+    \end{enumerate}
+    \item \subsection{Measurable space} The couplet $(X,\A)$ where $\A$ is a $\salg$ is called a measurable space.
+    \item \subsection{Measurable set} the elements of the $\salg$ of a measurable space are called measurable sets.
+\end{itemize}
+
+%==== Question 7 ====%
+
+\question
+State the theorem concerning the existence of the $\salg$ generated by a given set. Give an
+idea of the proof.
+
+\subsection*{Solution}
+
+\subsection{Minimal \texorpdfstring{$\salg$}{TEXT}}
+Let $S\subseteq\Parts{X}$, then there exists a $\salg$ $\sigma_0(S)$ such that:\\
+\begin{enumerate}
+    \item $S\subseteq \sigma_0(S)$
+    \item $\forall \salg \A\subseteq\Parts{X}$ such that $S\subseteq\A$ we have $\sigma_0(S) \subseteq\A$
+\end{enumerate}
+thus $\sigma_0(S)$ is the minimal $\salg$ generated by $S$.\\
+
+\subsection*{Sketch of Proof}
+We construct the set:
+\[
+    \mathcal{V} \coloneqq \{\A \subseteq \Parts{X} \| \A \supseteq S, \; \A \quad \salg \}    
+\]
+we may define:
+\[
+    \sigma_0(S)\coloneqq \bigcap \{\A: \: \A\in\mathcal{V}\}    
+\]
+%==== Question 8 ====%
+
+\question
+Write the definition of the Borel $\salg$ in a metric space. Provide classes of Borel sets.
+Characterize $\B[\R], \B[\Rcomp]$ and $\B[\R^N]$.
+
+\subsection*{Solution}
+
+\subsection{Borel \texorpdfstring{$\salg$}{TEXT}}
+Let $(X,d)$ be a metric space and let $\mathcal{G}$ be the family of open sets of $X$, then we define the Borel $\salg$ as:
+\[
+    \B[X] \coloneqq \sigma_0(\mathcal{G})    
+\]
+The elements of $\mathcal{G}$ are called Borel sets,   let us enumerate some classes of them:
+
+\subsection{Classes of Borel sets} 
+\begin{enumerate}[i)]
+    \item open sets
+    \item closed sets (they are the complementary of open sets and this is a $\salg$)
+    \item countable intersections of open sets, known as the family $G_\delta$
+    \item countable union of closed sets, known as the family $F_\delta$.
+\end{enumerate} 
+Lastly, let us characterize the Borel $\salg$s $\B[\R],\B[\Rcomp]$ and $\B[\R^N]$:
+\subsection{Characterization of \texorpdfstring{$\B[\R],\B[\Rcomp]$}{TEXT} and \texorpdfstring{$\B[\R^N]$}{TEXT}}
+\begin{enumerate}
+    \item $\B[\R]=\sigma_0(I)=\sigma_0(I_1)=\sigma_0(I_2)=\sigma_0(I_0)=\sigma_0(\hat{I})$\\
+    where:
+    \begin{align*}
+        I&=\{ (a,b): a,b \in \R, a\leq b \} \\
+        I_1&=\{ [a,b]: a,b \in \R, a\leq b \} \\
+        I_2&=\{ (a,b]: a,b \in \R, a\leq b \} \\
+        I_0&=\{ (a,b): -\infty\leq a < b <\infty \} \cup \{ (a,\infty): a\in\R \} \\
+        \hat{I}&=\{ (a,\infty): a\in\R \}
+    \end{align*}
+    \item $\B[\Rcomp]=\sigma_0(\tilde{I})=\sigma_0(\tilde{I}_1)$\\
+    where:
+    \begin{align*}
+        \tilde{I} &= \{ (a,b): a,b \in \R, a < b \} \cup \{ [-\infty,b): b\in\R \} \cup \{ (a,+\infty] : a\in\R \} \\
+        \tilde{I}_1 &= \{ (a,+\infty] : a\in\R \}
+    \end{align*}
+    \item $\B[\R^N] = \sigma_0(K_1)=\sigma_0(K_2)$\\
+    where:
+    \begin{align*}
+        K_1 &= \{ \text{n-dimensional closed rectangles}\}\\
+        K_2 &= \{ \text{n-dimensional open rectangles }\}
+    \end{align*}
+\end{enumerate}
+%==== Question 9 ====%
+
+\question
+Write the definitions of: measure, finite measure, $\s{finite measure}$, measure space, probability
+space. Provide some examples of measures.
+
+\subsection*{Solution}
+\provdefs
+\begin{itemize}
+    \item \subsection{Measure} Let $X$ be a set and $\mathcal{C}\subseteq\Parts{X}$, then a function $\mu$:
+    \[
+        \mu:\mathcal{C}\to\Rcomppos    
+    \]
+    is a measure if:
+    \begin{enumerate}
+        \item $\mu(\emptyset)=0$
+        \item \textbf{$\s{additivity}$:}\\
+        $\forall \seq{E}\subseteq\mathcal{C}$ disjoint ($E_i\cap E_j\quad \forall i\neq j$) such that $\bigcup_{k=1}^{\infty} E_k \in \mathcal{C}$ we have that:
+        \[
+            \mu \left( \bigcup_{k=1}^{\infty} E_k \right) = \sum_{k=1}^{\infty} \mu(E_k) 
+        \]
+    \end{enumerate}
+    \item \subsection{Finite measure} a measure $\mu$ defined as above is said to bw finite if:
+    \[
+        \mu(X) < + \infty    
+    \]
+    \item \subsection{\texorpdfstring{$\s{finite measure}$}{TEXT}} a measure $\mu$ is said to be $\s{finite}$ if there exists a sequence $\seq{E}$ such that:
+    \[
+        X = \bigcup_{k=1}^\infty E_k, \quad \mu(E_k) <+\infty
+    \]
+    \item \subsection{Measure space} Let $\A\subseteq\Parts{X}$ be a $\salg$ and $\mu:\A\to\Rcomppos$ a measure, then the triplet $(X,\A,\mu)$ is called  a measure space.
+    \item \subsection{Probability space} if $\mu(X)=1$ then we say that $(X,\A,\mu)$ is a probability space.
+\end{itemize}
+%====  Question 10 ====%
+
+\question
+State and prove the theorem regarding properties of measures. Why the two continuity properties
+are called in this way? For what concerns continuity w.r.t. a descending sequence ${E_k}$, show that
+the hypothesis $\mu(E_1) < +\infty$ is essential.
+
+\subsection*{Solution}
+\subsection{Properties of measures}
+Let us state and prove the properties of a measure $\mu$ on a set $X$ and $\salg$ $\A$:
+\begin{enumerate}[i)]
+    \item \label{prop:1} \textbf{Additivity:} \\
+    $\forall \{ E_1, \dots, E_n \} \subseteq \A$ disjoint we have:
+    \[
+        \mu\left( \bigcup_{k=1}^{\infty} E_k \right) = \sum_{k=1}^{\infty} \mu(E_k)
+    \]
+    \begin{proof}
+    indeed if we define a sequence such that:
+    \[
+        \seq{E} = \left\{ \begin{array}{l}
+            B_k = E_k \quad \forall k \leq n\\
+            B_k = \emptyset \quad \forall k > n
+        \end{array} \right.
+    \]
+    this sequence is also disjoint ($\A\cap\emptyset = \emptyset$ $\forall \A\in X$), thus we may write:
+    \[
+        \mu \underbrace{ \left( \bigcup_{k=1}^{\infty} E_k \right) }_{=\bigcup_{k=1}^{n} E_k \cup \emptyset}
+         = \sum_{k=1}^{\infty} \mu(E_k) = \sum_{k=1}^{n} \mu(E_k) + \sum_{k=n+1}^{\infty} \underbrace{\xcancel{\mu(E_k)}}_{=0}
+    \]
+    \end{proof}
+
+    \item \label{prop:2} \textbf{Monotonicity:} \\
+    $\forall E,F \in \A$ we have:
+    \[
+        E\subseteq F \implies \mu(E) \leq \mu(F)    
+    \]
+    \begin{proof}
+    We may write $F$ in the following way:
+    \[
+        F=E\cup (F \setminus E) 
+    \]
+    and since these two sets are obviously disjoint we may use (\ref{prop:1}) to write:
+    \[
+        \mu(F) = \mu(E)+\underbrace{\mu(E \setminus F)}_{\geq 0} > \mu(E)
+    \]
+    \end{proof}
+    
+    \item \label{prop:3} \textbf{$\s{subadditivity}$:} \\
+    $\forall \seq{E}\subseteq\A$ (\textbf{not} disjoint) we have:
+    \[
+        \mu\left( \bigcup_{k=1}^{\infty} E_k \right) \leq \sum_{k=1}^{\infty} \mu(E_k)
+    \]
+    \begin{proof}
+    \provdef{}
+    \[
+        \left\{ \begin{array}{l}
+            F_1 \coloneqq E_1 \\
+            F_n \coloneqq E_n \setminus \bigcup_{k=1}^{n-1} E_k \quad \forall n > 1
+        \end{array} \right.  
+    \]
+    Clearly $\seq{F} \subseteq \A$ and $\seq{F}$ is a disjoint sequence and:
+    \[
+        \begin{array}{l}
+            F_k \subseteq E_k \quad \forall k\in\N \implies \mu(F_k) \leq \mu(E_k) \text{ by (\ref{prop:2})} \\
+            \bigcup_{k=1}^{\infty} F_k = \bigcup_{k=1}^{\infty} E_k    
+        \end{array}
+    \]
+    thus we may write:
+    \[
+        \mu\left( \bigcup_{k=1}^{\infty} E_k \right) = \mu\left( \bigcup_{k=1}^{\infty} F_k \right) = \sum_{k=1}^{\infty} \mu(F_k) \leq \sum_{k=1}^{\infty} \mu(E_k)   
+    \]
+    \end{proof}
+
+    \item \label{prop:4} \textbf{Continuity from below:} \\
+    $\forall \seq{E}\subseteq\A, \; E_k \nearrow$ we have:
+    \[
+        \mu \left( \lim_{k\to\infty}E_k \right)  = \lim_{k\to\infty} \mu(E_k)    
+    \]
+    \begin{proof}
+    \provdef[a new sequence $\seq{F}$]
+    \[
+        \left\{ \begin{array}{l}
+            F_k \coloneqq E_k \setminus E_{k-1} \quad \forall k \in\N \text{ and } E_0 \coloneqq \emptyset \\
+            \implies \bigcup_{k=1}^n F_k = E_n ,\; \bigcup_{k=1}^{\infty} F_k = \bigcup_{k=1}^{\infty} E_k
+        \end{array} \right.
+    \]
+    and since $\seq{F}$ is a disjoint sequence (we may visually think of it as a set of ever increasing rings) we may use (\ref{prop:1}) to write:
+    \begin{align*}
+        \mu\left( \lim_{n\to\infty} E_n \right) &\tikzmarknode{eq1}{=} \mu\left( \bigcup_{k=1}^{\infty} E_k \right) = \mu\left( \bigcup_{k=1}^{\infty} F_k \right) \\
+        & \tikzmarknode{eq2}{=} \lim_{n\to\infty}\sum_{k=1}^{n} \mu(F_k) = \lim_{n\to\infty} \mu \left( \bigcup_{k=1}^{\infty} F_k \right) \\
+        & \tikzmarknode{eq3}{=} \lim_{n\to\infty} \mu(E_n)
+    \end{align*} \tikz[overlay,remember picture]{\draw[shorten >=1pt,shorten <=1pt] (eq1) -- (eq2) -- (eq3);}
+    \end{proof}
+
+    \item \label{prop:5} \textbf{Continuity from above:} \\
+    $\forall \seq{E} \subseteq \A$, $E_k\searrow$, $\mu(E_1) < +\infty$ we have:
+    \[
+        \mu\left( \lim_{n\to\infty} E_n \right) = \lim_{n\to\infty} \mu(E_n)
+    \]
+    \begin{proof}
+    Like we did above \provdef{a new sequence $\seq{F}$}
+    \[
+            F_k \coloneqq E_1 \setminus E_k \quad \forall k \in\N
+    \]
+    let us note that $\seq{F}$ is an increasing sequence thus by (\ref{prop:4}) we can write:
+    \[
+        \mu\left( \bigcup_{k=1}^{\infty} F_k \right) = \lim_{k\to\infty} \mu(F_k) = \mu(E_1) - \lim_{k\to\infty}  (E_k)   
+    \]
+    because by (\ref*{prop:2}) $\\mu(F \setminus E) = \mu(F)-\mu(E)$, moreover:
+    \begin{align*}
+        \bigcup_{k=1}^{\infty} F_k & = \bigcup_{k=1}^{\infty} (E_1\cap E_k^\complement) = E_1\cap \left( \bigcup_{k=1}^{\infty} E_k^\complement \right) = E_1 \setminus \left( \bigcap_{k=1}^{\infty} E_k \right) \\
+        &\implies \mu\left( \bigcup_{k=1}^{\infty} F_k \right) = \mu(E_1) - \mu \left( \bigcap_{k=1}^{\infty} E_k \right)
+    \end{align*}
+    thus combining these two and canceling the $\mu(E_1)$ on both sides we obtain:
+    \[
+        \lim_{k\to\infty} \mu(E_k) = \mu \left( \bigcap_{k=1}^{\infty} E_k \right)
+    \]
+    \end{proof}
+    let us note that for this last, crucial, step $\mu(E_1)$ must be finite, otherwise we would not be able to cancel it out from both sides.
+\end{enumerate}
+
+%====  Question 11 ====%
+
+\question
+Write the definitions of: sets of zero measure; negligible sets. What is meant by saying that a
+property holds a.e.? Provide typical properties that can be true a.e. .
+
+\subsection*{Solution}
+
+\provdefs
+\begin{itemize}
+    \item \subsection{Sets of zero measure} 
+    Given a measure space $(X,\A,\mu)$, we say that a set $E\subseteq X$ has zero measure if $E\in\A$ and $\mu(E)=0$. We denote the set of all sets of zero measure by $\mathcal{N}_{\mu}$
+    \item \subsection{Negligible sets} a set $E\subseteq X$ is negligible if:
+    \[
+        \exists N\in\A \text{ s.t. } E \subseteq N, \; \mu(N)=0
+    \]
+    So any subset of a set of zero measure is negligible, we denote the collection of all negligible sets by $\tau_{\mu}$. Moreover let us note that $E$ doesn't need to be an element of $\A$ ($E\notin\A$)
+    \item \subsection{Almost Everywhere} a property $P$ on $X$ is said to hold almost everywhere if:
+    \[
+       \mu( \{ x\in X: P(x) \text{ is false } \} ) = 0    
+    \]
+    We may also say that $\{ x\in X: P(x) \text{ is false } \} \in \mathcal{N}_{\mu}$\\
+    \subsection*{Examples} typical properties that can be true a.e. are: equality, continuity, monotonicity, etc. etc.
+\end{itemize}
+
+%====  Question 12 ====%
+
+\question
+Write the definition of complete measure space. Exhibit an example of a measure space which
+is not complete.
+
+\subsection*{Solution}
+\subsection{Complete measure space}
+A measure space $(X,\A,\mu)$ is said to be complete if $\tau_{\mu}\subseteq\A$
+\subsection*{Counterexample}
+Let $X=\{a,b,c\}$, $\A = \sigma (\{\emptyset, \{a\}, \{b,c\}, X \})$ and $\mu\equiv 0$, clearly here we have:
+\[
+    \tau_{\mu} \setminus \mathcal{N}_{\mu}= \{ \{b\}, \{c\} \}    
+\]
+and clearly $\{b\}, \{c\} \notin \A$. So this measure space is not complete.
+
+
