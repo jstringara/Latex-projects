@@ -2,5 +2,7 @@
 *.fdb_latexmk
 *.fls
 *.log
+*.out
+*.toc
 *.synctex.gz
 wksp_fin.code-workspace
