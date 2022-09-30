@@ -17,7 +17,7 @@
 
 \usepackage{framed} % for framing text
 \usepackage{titling} % for customizing title
-\usepackage{titlesec} %for customizing title
+\usepackage{titlesec} %for customizing sections title
 \usepackage[big]{layaureo} % for smaller margins
 \usepackage{xifthen} %for conditional statements
 \usepackage{enumerate} %to modify lists
@@ -27,17 +27,7 @@
 \usepackage{tikz}
 \usetikzlibrary{tikzmark}
 
-%==== Commands ====%
-
-%subtitle
-\newcommand{\subtitle}[1]{%
-  \posttitle{%
-    \par\end{center}
-    \begin{center}\large#1\end{center}
-    \vskip0.5em}%
-}
-
-%==== Cahpter ====% 
+%==== Chapter ====% 
 
 %redefine chapters
 \titleformat{\chapter}[display]{\normalfont\Huge\bfseries} % format
@@ -142,16 +132,7 @@
 %==== Document ====%
 \begin{document}
 
-
-%==== Title ====%
-\title{Answers to the Theory Questions }
-\subtitle{of the course of Real and Functional Analysis of prof. Fabio Punzo}
-\author{by Jacopo Stringara \\
-\href{mailto:jstringara@gmail.com}{jstringara@gmail.com}
-}
-\date{\today}
-
-\maketitle
+\input{ARF-titlepage.tex}
 
 %==== Table of contents ====%
 \tableofcontents
