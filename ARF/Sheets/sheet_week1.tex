@@ -128,7 +128,7 @@ is a $\salg$ and $\{E_k\}\subset \A$, then $\bigcap^{+\infty}_{k=1} E_k \in \A $
         \item $E\in\A \implies E^\complement \in\A$
         \item $A,B\in\A \implies A\cup B\in\A$
     \end{enumerate}
-    \item \subsection{\texorpdfstring{$\salg$}{TEXT}} A family $\A\subseteq\Parts{X}$ is a $\salg$ if:
+    \item \subsection{\texorpdfstring{$\salg$}{Sigma-algebra}} A family $\A\subseteq\Parts{X}$ is a $\salg$ if:
     \begin{enumerate}[i)]
         \item $\emptyset \in \A$
         \item $E\in\A \implies E^\complement \in\A$
@@ -146,7 +146,7 @@ idea of the proof.
 
 \subsection*{Solution}
 
-\subsection{Minimal \texorpdfstring{$\salg$}{TEXT}}
+\subsection{Minimal \texorpdfstring{$\salg$}{sigma-algebra}}
 Let $S\subseteq\Parts{X}$, then there exists a $\salg$ $\sigma_0(S)$ such that:\\
 \begin{enumerate}
     \item $S\subseteq \sigma_0(S)$
@@ -171,7 +171,7 @@ Characterize $\B[\R], \B[\Rcomp]$ and $\B[\R^N]$.
 
 \subsection*{Solution}
 
-\subsection{Borel \texorpdfstring{$\salg$}{TEXT}}
+\subsection{Borel \texorpdfstring{$\salg$}{sigma-algebra}}
 Let $(X,d)$ be a metric space and let $\mathcal{G}$ be the family of open sets of $X$, then we define the Borel $\salg$ as:
 \[
     \B[X] \coloneqq \sigma_0(\mathcal{G})    
@@ -186,7 +186,7 @@ The elements of $\mathcal{G}$ are called Borel sets,   let us enumerate some cla
     \item countable union of closed sets, known as the family $F_\delta$.
 \end{enumerate} 
 Lastly, let us characterize the Borel $\salg$s $\B[\R],\B[\Rcomp]$ and $\B[\R^N]$:
-\subsection{Characterization of \texorpdfstring{$\B[\R],\B[\Rcomp]$}{TEXT} and \texorpdfstring{$\B[\R^N]$}{TEXT}}
+\subsection{Characterization of \texorpdfstring{$\B[\R],\B[\Rcomp]$}{B(R), B(Rcomp)} and \texorpdfstring{$\B[\R^N]$}{B(Rn)}}
 \begin{enumerate}
     \item $\B[\R]=\sigma_0(I)=\sigma_0(I_1)=\sigma_0(I_2)=\sigma_0(I_0)=\sigma_0(\hat{I})$\\
     where:
@@ -236,7 +236,7 @@ space. Provide some examples of measures.
     \[
         \mu(X) < + \infty    
     \]
-    \item \subsection{\texorpdfstring{$\s{finite measure}$}{TEXT}} a measure $\mu$ is said to be $\s{finite}$ if there exists a sequence $\seq{E}$ such that:
+    \item \subsection{\texorpdfstring{$\s{finite measure}$}{Sigma-finite measure}} a measure $\mu$ is said to be $\s{finite}$ if there exists a sequence $\seq{E}$ such that:
     \[
         X = \bigcup_{k=1}^\infty E_k, \quad \mu(E_k) <+\infty
     \]
@@ -254,7 +254,7 @@ the hypothesis $\mu(E_1) < +\infty$ is essential.
 \subsection{Properties of measures}
 Let us state and prove the properties of a measure $\mu$ on a set $X$ and $\salg$ $\A$:
 \begin{enumerate}[i)]
-    \item \label{prop:1} \textbf{Additivity:} \\
+    \item \label{meas:add} \textbf{Additivity:} \\
     $\forall \{ E_1, \dots, E_n \} \subseteq \A$ disjoint we have:
     \[
         \mu\left( \bigcup_{k=1}^{\infty} E_k \right) = \sum_{k=1}^{\infty} \mu(E_k)
@@ -274,7 +274,7 @@ Let us state and prove the properties of a measure $\mu$ on a set $X$ and $\salg
     \]
     \end{proof}
 
-    \item \label{prop:2} \textbf{Monotonicity:} \\
+    \item \label{meas:mono} \textbf{Monotonicity:} \\
     $\forall E,F \in \A$ we have:
     \[
         E\subseteq F \implies \mu(E) \leq \mu(F)    
@@ -284,13 +284,13 @@ Let us state and prove the properties of a measure $\mu$ on a set $X$ and $\salg
     \[
         F=E\cup (F \setminus E) 
     \]
-    and since these two sets are obviously disjoint we may use (\ref{prop:1}) to write:
+    and since these two sets are obviously disjoint we may use (\ref{meas:add}) to write:
     \[
         \mu(F) = \mu(E)+\underbrace{\mu(E \setminus F)}_{\geq 0} > \mu(E)
     \]
     \end{proof}
     
-    \item \label{prop:3} \textbf{$\s{subadditivity}$:} \\
+    \item \label{meas:sub} \textbf{$\s{subadditivity}$:} \\
     $\forall \seq{E}\subseteq\A$ (\textbf{not} disjoint) we have:
     \[
         \mu\left( \bigcup_{k=1}^{\infty} E_k \right) \leq \sum_{k=1}^{\infty} \mu(E_k)
@@ -306,7 +306,7 @@ Let us state and prove the properties of a measure $\mu$ on a set $X$ and $\salg
     Clearly $\seq{F} \subseteq \A$ and $\seq{F}$ is a disjoint sequence and:
     \[
         \begin{array}{l}
-            F_k \subseteq E_k \quad \forall k\in\N \implies \mu(F_k) \leq \mu(E_k) \text{ by (\ref{prop:2})} \\
+            F_k \subseteq E_k \quad \forall k\in\N \implies \mu(F_k) \leq \mu(E_k) \text{ by (\ref{meas:mono})} \\
             \bigcup_{k=1}^{\infty} F_k = \bigcup_{k=1}^{\infty} E_k    
         \end{array}
     \]
@@ -316,7 +316,7 @@ Let us state and prove the properties of a measure $\mu$ on a set $X$ and $\salg
     \]
     \end{proof}
 
-    \item \label{prop:4} \textbf{Continuity from below:} \\
+    \item \label{meas:contbel} \textbf{Continuity from below:} \\
     $\forall \seq{E}\subseteq\A, \; E_k \nearrow$ we have:
     \[
         \mu \left( \lim_{k\to\infty}E_k \right)  = \lim_{k\to\infty} \mu(E_k)    
@@ -329,7 +329,7 @@ Let us state and prove the properties of a measure $\mu$ on a set $X$ and $\salg
             \implies \bigcup_{k=1}^n F_k = E_n ,\; \bigcup_{k=1}^{\infty} F_k = \bigcup_{k=1}^{\infty} E_k
         \end{array} \right.
     \]
-    and since $\seq{F}$ is a disjoint sequence (we may visually think of it as a set of ever increasing rings) we may use (\ref{prop:1}) to write:
+    and since $\seq{F}$ is a disjoint sequence (we may visually think of it as a set of ever increasing rings) we may use (\ref{meas:add}) to write:
     \begin{align*}
         \mu\left( \lim_{n\to\infty} E_n \right) &\tikzmarknode{eq1}{=} \mu\left( \bigcup_{k=1}^{\infty} E_k \right) = \mu\left( \bigcup_{k=1}^{\infty} F_k \right) \\
         & \tikzmarknode{eq2}{=} \lim_{n\to\infty}\sum_{k=1}^{n} \mu(F_k) = \lim_{n\to\infty} \mu \left( \bigcup_{k=1}^{\infty} F_k \right) \\
@@ -337,7 +337,7 @@ Let us state and prove the properties of a measure $\mu$ on a set $X$ and $\salg
     \end{align*} \tikz[overlay,remember picture]{\draw[shorten >=1pt,shorten <=1pt] (eq1) -- (eq2) -- (eq3);}
     \end{proof}
 
-    \item \label{prop:5} \textbf{Continuity from above:} \\
+    \item \label{meas:contab} \textbf{Continuity from above:} \\
     $\forall \seq{E} \subseteq \A$, $E_k\searrow$, $\mu(E_1) < +\infty$ we have:
     \[
         \mu\left( \lim_{n\to\infty} E_n \right) = \lim_{n\to\infty} \mu(E_n)
@@ -347,11 +347,11 @@ Let us state and prove the properties of a measure $\mu$ on a set $X$ and $\salg
     \[
             F_k \coloneqq E_1 \setminus E_k \quad \forall k \in\N
     \]
-    let us note that $\seq{F}$ is an increasing sequence thus by (\ref{prop:4}) we can write:
+    let us note that $\seq{F}$ is an increasing sequence thus by (\ref{meas:contbel}) we can write:
     \[
         \mu\left( \bigcup_{k=1}^{\infty} F_k \right) = \lim_{k\to\infty} \mu(F_k) = \mu(E_1) - \lim_{k\to\infty}  (E_k)   
     \]
-    because by (\ref*{prop:2}) $\\mu(F \setminus E) = \mu(F)-\mu(E)$, moreover:
+    because by (\ref*{meas:mono}) $\\mu(F \setminus E) = \mu(F)-\mu(E)$, moreover:
     \begin{align*}
         \bigcup_{k=1}^{\infty} F_k & = \bigcup_{k=1}^{\infty} (E_1\cap E_k^\complement) = E_1\cap \left( \bigcup_{k=1}^{\infty} E_k^\complement \right) = E_1 \setminus \left( \bigcap_{k=1}^{\infty} E_k \right) \\
         &\implies \mu\left( \bigcup_{k=1}^{\infty} F_k \right) = \mu(E_1) - \mu \left( \bigcap_{k=1}^{\infty} E_k \right)
@@ -367,8 +367,7 @@ Let us state and prove the properties of a measure $\mu$ on a set $X$ and $\salg
 %====  Question 11 ====%
 
 \question
-Write the definitions of: sets of zero measure; negligible sets. What is meant by saying that a
-property holds a.e.? Provide typical properties that can be true a.e. .
+Write the definitions of: sets of zero measure; negligible sets. What is meant by saying that a property holds a.e.? Provide typical properties that can be true a.e. .
 
 \subsection*{Solution}
 
@@ -392,8 +391,7 @@ property holds a.e.? Provide typical properties that can be true a.e. .
 %====  Question 12 ====%
 
 \question
-Write the definition of complete measure space. Exhibit an example of a measure space which
-is not complete.
+Write the definition of complete measure space. Exhibit an example of a measure space which is not complete.
 
 \subsection*{Solution}
 \subsection{Complete measure space}
