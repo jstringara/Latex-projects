@@ -14,8 +14,8 @@ A measure space $(X,\A,\mu)$ is said to be complete if $\tau_{\mu}\subseteq\A$
 \subsection{Existence of the completion}
 Let $(X,\A,\mu)$ be a measure space. \provdef{$\bar{\A}, \bar{\mu}$}
 \begin{align*}
-\bar{\A} &=\{ E\subseteq X: \exists F,G \in \A \text{ s.t. } F\subseteq E \subseteq G \; \mu(G \setminus F) =0 \}\\
-\bar{\mu} & : \bar{\A}\to\Rcomppos,\quad \bar{\mu}(E) \coloneqq \mu(F) 
+    \bar{\A}  & =\{ E\subseteq X: \exists F,G \in \A \text{ s.t. } F\subseteq E \subseteq G \; \mu(G \setminus F) =0 \} \\
+    \bar{\mu} & : \bar{\A}\to\Rcomppos,\quad \bar{\mu}(E) \coloneqq \mu(F)
 \end{align*}
 then:
 \begin{enumerate}
@@ -28,43 +28,43 @@ We  must prove two things:
 \begin{itemize}
     \item \textbf{First:} that $\bar{\A}$ is a $\salg$ and that it contains $\A$, the latter is trivial since $\forall A\in\A \quad A\subseteq A\subseteq A \implies A\in\bar{\A}$ while the former is quite hardous so we shall just assume it to be true.
     \item \textbf{Second:} that $\bar{\mu}$ is a complete measure and $\bar{\mu}|_{\A}=\mu$.\\
-    The latter is trivial (see above). We can also easily prove that it is a measure:
-    \begin{enumerate}[i)]
-        \item $\bar{\mu}(\emptyset)=\mu(\emptyset)=0$ since the only set contained inside $\emptyset$ is $\emptyset$ itself, as the container set we may take any zero set measure inside $\A$.
-        \item that $\s{additivity}$ holds is clear since for any disjoint sequence $\seq{E}\subseteq\bar{\A}$ we may construct two sequences:
-        \[
-           \left\{ \begin{array}{l}
-                \seq{F}, \; F_k \subseteq E_k \\
-                \seq{G}, \; G_k \supseteq E_k
-            \end{array} \right. \forall k\in\N \text{ s.t. } \mu(G_k\setminus F_k) = 0
-        \]
-        Let us note the following:
-        \begin{itemize}
-            \item $\seq{F}$ is also disjoint because $\seq{E}$ is disjoint.
-            \item Moreover:
-                \begin{align*}
-                    & \bigcup_{k=1}^{\infty} F_k \subseteq \bigcup_{k=1}^{\infty} E_k \subseteq \bigcup_{k=1}^{\infty} G_k \\
-                    & \bigcup_{k=1}^{\infty} G_k \setminus \bigcup_{k=1}^{\infty} F_k \subseteq \bigcup_{k=1}^{\infty} (G_k \setminus F_k ) \\
-                    & \mu\left(\bigcup_{k=1}^{\infty} G_k \setminus \bigcup_{k=1}^{\infty} F_k \right) \leq \mu\left(\bigcup_{k=1}^{\infty} (G_k \setminus F_k )\right) \leq \sum_{k=1}^{\infty} \mu(G_k\setminus F_k) = 0
-            \end{align*}
-            The last inequality is true thanks to the $\s{subadditivity}$ and monotonicty of $\mu$.
-        \end{itemize}
-        Thus we can say that:
-        \[
-            \bar{\mu}\left( \bigcup_{k=1}^{\infty} E_k \right) = \mu \left( \bigcup_{k=1}^{\infty} F_k \right) = \sum_{k=1}^{\infty} \mu(F_k) = \sum_{k=1}^{\infty} \bar{\mu}(E_k)
-        \]
-    \end{enumerate}
-    thus $\bar{\mu}$ is a measure.\\
-    Let us prove that $\bar{\mu}$ is complete.
-    Let $E_1 \in X$ and $E_2 \in \bar{\A}$ such that $\bar{\mu}(E_2)=\mu(F_2)=0$ and $E_1 \subseteq E_2$, let us note that:
-    \[
-        \left\{ \begin{array}{l}
-            \mu(G_2) = \xcancel{\mu(G_2\setminus F_2)}^0+\xcancel{\mu(F_2)}^0\\
-            \mu(G_2 \setminus \emptyset) = \mu(G_2) - 0\\
-            \emptyset \subseteq E_1 \subseteq G_2 
-        \end{array} \right. \implies E_1\in \bar{\A}, \; \bar{\mu}(E_1)=\mu(\emptyset) = 0
-    \]
-    thus any negligible set is also a zero measure set and $\bar{\mu}$ is complete.
+          The latter is trivial (see above). We can also easily prove that it is a measure:
+          \begin{enumerate}[i)]
+              \item $\bar{\mu}(\emptyset)=\mu(\emptyset)=0$ since the only set contained inside $\emptyset$ is $\emptyset$ itself, as the container set we may take any zero set measure inside $\A$.
+              \item that $\s{additivity}$ holds is clear since for any disjoint sequence $\seq{E}\subseteq\bar{\A}$ we may construct two sequences:
+                    \[
+                        \left\{ \begin{array}{l}
+                            \seq{F}, \; F_k \subseteq E_k \\
+                            \seq{G}, \; G_k \supseteq E_k
+                        \end{array} \right. \forall k\in\N \text{ s.t. } \mu(G_k\setminus F_k) = 0
+                    \]
+                    Let us note the following:
+                    \begin{itemize}
+                        \item $\seq{F}$ is also disjoint because $\seq{E}$ is disjoint.
+                        \item Moreover:
+                              \begin{align*}
+                                   & \bigcup_{k=1}^{\infty} F_k \subseteq \bigcup_{k=1}^{\infty} E_k \subseteq \bigcup_{k=1}^{\infty} G_k                                                                                                 \\
+                                   & \bigcup_{k=1}^{\infty} G_k \setminus \bigcup_{k=1}^{\infty} F_k \subseteq \bigcup_{k=1}^{\infty} (G_k \setminus F_k )                                                                                \\
+                                   & \mu\left(\bigcup_{k=1}^{\infty} G_k \setminus \bigcup_{k=1}^{\infty} F_k \right) \leq \mu\left(\bigcup_{k=1}^{\infty} (G_k \setminus F_k )\right) \leq \sum_{k=1}^{\infty} \mu(G_k\setminus F_k) = 0
+                              \end{align*}
+                              The last inequality is true thanks to the $\s{subadditivity}$ and monotonicty of $\mu$.
+                    \end{itemize}
+                    Thus we can say that:
+                    \[
+                        \bar{\mu}\left( \bigcup_{k=1}^{\infty} E_k \right) = \mu \left( \bigcup_{k=1}^{\infty} F_k \right) = \sum_{k=1}^{\infty} \mu(F_k) = \sum_{k=1}^{\infty} \bar{\mu}(E_k)
+                    \]
+          \end{enumerate}
+          thus $\bar{\mu}$ is a measure.\\
+          Let us prove that $\bar{\mu}$ is complete.
+          Let $E_1 \in X$ and $E_2 \in \bar{\A}$ such that $\bar{\mu}(E_2)=\mu(F_2)=0$ and $E_1 \subseteq E_2$, let us note that:
+          \[
+              \left\{ \begin{array}{l}
+                  \mu(G_2) = \xcancel{\mu(G_2\setminus F_2)}^0+\xcancel{\mu(F_2)}^0 \\
+                  \mu(G_2 \setminus \emptyset) = \mu(G_2) - 0                       \\
+                  \emptyset \subseteq E_1 \subseteq G_2
+              \end{array} \right. \implies E_1\in \bar{\A}, \; \bar{\mu}(E_1)=\mu(\emptyset) = 0
+          \]
+          thus any negligible set is also a zero measure set and $\bar{\mu}$ is complete.
 \end{itemize}
 
 %==== Question 2 ====%
@@ -88,9 +88,9 @@ We say that a function: $\mu^*:\Parts{X}\to\Rcomppos$ (where $X$ is any set) is 
 Let $K\subseteq\Parts{X}, \, \emptyset\in K, \: \nu:K\to\Rcomppos, \; \nu(\emptyset)=0$, then we can generate an outer measure $\mu^*$ on $X$ defined as:
 \[
     \left\{ \begin{array}{l}
-        \mu^*(E) \coloneqq \inf \left\{ \sum_{k=1}^{\infty} \nu(I_k) : E\subseteq \bigcup_{k=1}^{\infty} I_k,\; \seq{I}\subseteq K \right\} , \text{ if } E \text{ can be covered by a countable union of sets } I_n\in K.\\
+        \mu^*(E) \coloneqq \inf \left\{ \sum_{k=1}^{\infty} \nu(I_k) : E\subseteq \bigcup_{k=1}^{\infty} I_k,\; \seq{I}\subseteq K \right\} , \text{ if } E \text{ can be covered by a countable union of sets } I_n\in K. \\
         \mu^*(E) \coloneqq +\infty, \text{ otherwise.}
-    \end{array} \right.  
+    \end{array} \right.
 \]
 
 \begin{proof}
@@ -98,45 +98,45 @@ Let $K\subseteq\Parts{X}, \, \emptyset\in K, \: \nu:K\to\Rcomppos, \; \nu(\empty
     \begin{enumerate}[i)]
         \item $\emptyset\in K$, $0\leq\mu^*(\emptyset)\leq\nu(\emptyset)=0$ by the definition of $\mu^*$.
         \item $E_1\subseteq E_2$, we have two possible cases
-        \begin{itemize}
-            \item if there exists a countable covering of $E_2$ then it is also a covering of $E_1$ and from the definitio of $\mu^*$ it follows that:
-            \[
-                \mu^*(E_1) \leq \mu^*(E_2)    
-            \]
-            \item if there is no countable covering of $E_2$ then:
-            \[
-                \mu^*(E_1) \leq \mu^*(E_2) = +\infty 
-            \]
-        \end{itemize}
+              \begin{itemize}
+                  \item if there exists a countable covering of $E_2$ then it is also a covering of $E_1$ and from the definitio of $\mu^*$ it follows that:
+                        \[
+                            \mu^*(E_1) \leq \mu^*(E_2)
+                        \]
+                  \item if there is no countable covering of $E_2$ then:
+                        \[
+                            \mu^*(E_1) \leq \mu^*(E_2) = +\infty
+                        \]
+              \end{itemize}
         \item this condition is obviously met if:
-        \[
-            \sum_{k=1}^{\infty} \mu^*(E_k) = +\infty
-        \]
-        otherwise if we suppose that:
-        \[
-            \sum_{k=1}^{\infty} \mu^*(E_k) < +\infty
-        \]
-        thus $\mu^*(E_k)<+\infty$ $\forall k\in\N$, by the definition of $\mu^*$ and $\inf$:
-        \[
-            \forall \epsilon>0, \; \forall n\in\N \quad \exists \{ I_{n,k} \} \subseteq K    
-        \]
-        such that:
-        \[
-            E_n \subseteq \bigcup_{k=1}^{\infty} I_{n,k} \quad \text{ and } \quad \mu^*(E_n)+\frac{\epsilon}{2^n} > \sum_{k=1}^{\infty} \nu(I_{n,k})
-        \]
-        Now, since:
-        \[
-            \bigcup_{n=1}^{\infty} E_n \subseteq \bigcup_{n,k=1}^{\infty} I_{n,k}, \quad \{ I_{n,k} \} \subseteq K
-        \]
-        it clearly follows that:
-        \[
-            \mu^*(\bigcup_{n=1}^{\infty} E_n) \leq \sum_{n=1}^{\infty} \sum_{k=1}^{\infty} \nu(I_{n,k}) < \sum_{n=1}^{\infty}\mu^*(E_n) + \epsilon\cdot\xcancel{\sum_{n=1}^{\infty} \frac{1}{2^n}}^1
-        \]
-        because $\epsilon$ is arbitrary, we have the cocnlusion.
+              \[
+                  \sum_{k=1}^{\infty} \mu^*(E_k) = +\infty
+              \]
+              otherwise if we suppose that:
+              \[
+                  \sum_{k=1}^{\infty} \mu^*(E_k) < +\infty
+              \]
+              thus $\mu^*(E_k)<+\infty$ $\forall k\in\N$, by the definition of $\mu^*$ and $\inf$:
+              \[
+                  \forall \epsilon>0, \; \forall n\in\N \quad \exists \{ I_{n,k} \} \subseteq K
+              \]
+              such that:
+              \[
+                  E_n \subseteq \bigcup_{k=1}^{\infty} I_{n,k} \quad \text{ and } \quad \mu^*(E_n)+\frac{\epsilon}{2^n} > \sum_{k=1}^{\infty} \nu(I_{n,k})
+              \]
+              Now, since:
+              \[
+                  \bigcup_{n=1}^{\infty} E_n \subseteq \bigcup_{n,k=1}^{\infty} I_{n,k}, \quad \{ I_{n,k} \} \subseteq K
+              \]
+              it clearly follows that:
+              \[
+                  \mu^*(\bigcup_{n=1}^{\infty} E_n) \leq \sum_{n=1}^{\infty} \sum_{k=1}^{\infty} \nu(I_{n,k}) < \sum_{n=1}^{\infty}\mu^*(E_n) + \epsilon\cdot\xcancel{\sum_{n=1}^{\infty} \frac{1}{2^n}}^1
+              \]
+              because $\epsilon$ is arbitrary, we have the cocnlusion.
     \end{enumerate}
 \end{proof}
 
-The intuitive meaning $(K,\nu)$ is that $K$ is a special class of sets in $X$ and $\nu$ is a function that assigns a value to each set in $K$. On the other hand $\nu$ can be any real valued positive function, thus it is not necessary to be a measure. 
+The intuitive meaning $(K,\nu)$ is that $K$ is a special class of sets in $X$ and $\nu$ is a function that assigns a value to each set in $K$. On the other hand $\nu$ can be any real valued positive function, thus it is not necessary to be a measure.
 
 %==== Question 3 ====%
 
@@ -163,7 +163,7 @@ Let $\mu^*$ be an outer measure on a set $X$, then we say that $E\subset X$ is $
     \]
     and thus by the subadditivity of $\mu^*$ (\ref{outer:sub}) we get:
     \[
-        \mu^*(Z) \leq \mu^*(Z\cap E) + \mu^*(Z\setminus E) \quad \forall Z\in X    
+        \mu^*(Z) \leq \mu^*(Z\cap E) + \mu^*(Z\setminus E) \quad \forall Z\in X
     \]
     and we may combine this inequality with the other to yield an equality.
 \end{proof}
@@ -195,7 +195,7 @@ State the theorem concerning generation of a measure as a restriction of an oute
 \subsection{Generation of a measure from an outer measure}\label{meas:gen}
 \provdef[$\mathcal{L}$]
 \[
-    \mathcal{L} \coloneqq \{ E\subseteq X : \; E \text{ is } \mu^*-\text{measurable } \}    
+    \mathcal{L} \coloneqq \{ E\subseteq X : \; E \text{ is } \mu^*-\text{measurable } \}
 \]
 where $\mu^*$ is an outer measure on $X$, then:
 \begin{enumerate}[i)]
@@ -216,7 +216,7 @@ Let us see that such a measure as the one described in the previous question is 
     Let $N\in\Leb$ such that $\mu(N)=\mu^*(N)=0$ and let $E\subseteq N$.\\
     By monotonicty of $\mu^*$ (\ref{outer:mono}):
     \[
-        0\leq \mu^*(E)\leq \mu^*(N)=0 \implies \mu^*(E)=0   
+        0\leq \mu^*(E)\leq \mu^*(N)=0 \implies \mu^*(E)=0
     \]
     thus by the lemma seen in \ref{outer:zeromeas} we get that $E\in\Leb$ and so $\Leb$ is complete.
 \end{proof}
@@ -231,41 +231,41 @@ Describe the construction of the Lebesgue measure in $\R$ and in $\R^n$.
 \subsection{Construction of the Lebesgue measure on \texorpdfstring{$\R$}{R}}
 Let $I$ be a family of open, bounded intervals in $\R$:
 \[
-    I \coloneqq \{ (a,b) : a,b\in\R, a\leq b \}    
+    I \coloneqq \{ (a,b) : a,b\in\R, a\leq b \}
 \]
 Let us note that $\emptyset\in I$.\\
 Now let us consider a function $\lambda_0$:
 \begin{align*}
-    &\lambda_0 : I \to \R_+ \\
-    &\lambda_0 (\emptyset) =0\\
-    &\lambda_0 ((a,b)) = b-a
+     & \lambda_0 : I \to \R_+   \\
+     & \lambda_0 (\emptyset) =0 \\
+     & \lambda_0 ((a,b)) = b-a
 \end{align*}
 Here we take $X=\R$, $(K,\nu)=(I,\lambda_0)$ and construct the outer Lebesgue measure $\lambda^*$ as seen above (\ref{outer:gen}):
 \[
     \lambda^*(E) \coloneqq \left\{ \begin{array}{l}
-        \inf \left\{ \sum_{n=1}^{\infty} \lambda_0(I_n) \, : \quad E\subseteq \bigcup_{n=1}^{\infty} I_n ,\; \seq{I}\subseteq I \right\}, \quad \forall E\subseteq\R \text{ s.t. } E \text{ has a countable covering }\seq{I}\subseteq I\\
+        \inf \left\{ \sum_{n=1}^{\infty} \lambda_0(I_n) \, : \quad E\subseteq \bigcup_{n=1}^{\infty} I_n ,\; \seq{I}\subseteq I \right\}, \quad \forall E\subseteq\R \text{ s.t. } E \text{ has a countable covering }\seq{I}\subseteq I \\
         +\infty, \text{ otherwise}
-    \end{array}\right.        
+    \end{array}\right.
 \]
 The corresponding $\salg$ is the Lebesgue $\salg$ $\Leb(\R)$ and now we define the Lebesgue measure $\lambda$ as the measure generated by the outer Lebesgue measure (as seen in \ref{meas:gen}):
 \[
-    \lambda \coloneqq \lambda^*|_{\Leb(\R)}    
+    \lambda \coloneqq \lambda^*|_{\Leb(\R)}
 \]
 
 \subsection{Construction of the Lebesgue measure on \texorpdfstring{$\R^n$}{Rn}}
 Analogously to what we have seen above we first define an outer measure and then a (complete) measure but we take:
 \[
-    I^n = \left\{ \bigtimes_{k=1}^{n} (a_k,b_k): \; a_k,b_k\in\R, \; a_k\leq b_k  \right\}    
+    I^n = \left\{ \bigtimes_{k=1}^{n} (a_k,b_k): \; a_k,b_k\in\R, \; a_k\leq b_k  \right\}
 \]
 and accordingly we define:
 \begin{align*}
-    &\lambda_0^n : I^n \to \R_+ \\
-    &\lambda_0^n (\emptyset) = 0\\
-    &\lambda_0^n \left( \bigtimes_{k=1}^{n} (a_k,b_k) \right) = \prod_{k=1}^n (b_k-a_k)
+     & \lambda_0^n : I^n \to \R_+                                                         \\
+     & \lambda_0^n (\emptyset) = 0                                                        \\
+     & \lambda_0^n \left( \bigtimes_{k=1}^{n} (a_k,b_k) \right) = \prod_{k=1}^n (b_k-a_k)
 \end{align*}
 and therefore we take $X=\R^n$ and $(K,\nu)=(I^n,\lambda_0^n)$, we define the outer Lebesgue measure $\lambda^{*,n}$ on $\R^n$ and the Lebesgue $\salg$ $\Leb(\R^n)$ and finally we construct the n-dimensional Lebesgue measure as:
 \[
-    \lambda^n \coloneqq \lambda^{*,n} |_{\Leb(\R^n)}    
+    \lambda^n \coloneqq \lambda^{*,n} |_{\Leb(\R^n)}
 \]
 
 %==== Question 8 ====%
@@ -315,7 +315,7 @@ $(\R, \B[\R], \lambda)$?
     \]
     For every $k\in\N$ we define:
     \begin{align*}
-        I_k' \coloneqq I_k \cap (-\infty, a)\\
+        I_k' \coloneqq I_k \cap (-\infty, a) \\
         I_k'' \coloneqq I_k \cap (a,+\infty)
     \end{align*}
     then:
@@ -352,8 +352,8 @@ Is the translate of a measurable set measurable?
 The translate of a measurable set is also measurable. \\
 Let us see a simple example: let $(a,b)$ be an interval and $(a+h,b+h)$ its translate.
 \begin{align*}
-    & \lambda((a,b)) = b-a \\
-    & \lambda((a+h,b+h)) = (b+h)-(a+h) = b-a
+     & \lambda((a,b)) = b-a                   \\
+     & \lambda((a+h,b+h)) = (b+h)-(a+h) = b-a
 \end{align*}
 
 %==== Question 11 ====%
@@ -366,16 +366,16 @@ the regularity of the Lebesgue measure on $\R$.
 \subsection{Excision property}\label{ExcProp}
 If $A\in\Leb(\R)$, $\lambda^*(A)\leq +\infty$ and $A\subseteq B$, then:
 \[
-    \lambda^*(B\setminus A) = \lambda^* (B) - \lambda^*(A)    
+    \lambda^*(B\setminus A) = \lambda^* (B) - \lambda^*(A)
 \]
 \begin{proof}
     Since $A\in\Leb(\R)$ we can use the Caratheodory equality (\ref{CarEq}) using $Z=B$, $E=A$:
     \[
-        \lambda^*(B) = \lambda^*(\underbrace{B\cap A}_{=A \; (A\subseteq B)}) + \lambda^* (B\setminus A)    
+        \lambda^*(B) = \lambda^*(\underbrace{B\cap A}_{=A \; (A\subseteq B)}) + \lambda^* (B\setminus A)
     \]
     so, since $\lambda^*(A)\leq +\infty$ we may write:
     \[
-        \lambda^*(B\setminus A) = \lambda^*(B)-\lambda^*(A)  
+        \lambda^*(B\setminus A) = \lambda^*(B)-\lambda^*(A)
     \]
 \end{proof}
 
@@ -384,71 +384,71 @@ Let $E\subseteq\R$, \tfae
 \begin{enumerate}[i)]
     \item\label{LebReg:1} $E\in\Leb(\R)$
     \item\label{LebReg:2} $\forall \epsilon >0$ $\exists A \subseteq \R$ open s.t.
-        \[
-           E\subseteq A \quad \lambda^*(A\setminus E) < \epsilon 
-        \]
+          \[
+              E\subseteq A \quad \lambda^*(A\setminus E) < \epsilon
+          \]
     \item\label{LebReg:3} $\exists G \subseteq \R$ in the class $G_{\delta}$ (countable intersections of open sets) s.t.
-        \[
-            E\subseteq G \quad \lambda^*(G\setminus E)=0  
-        \]
+          \[
+              E\subseteq G \quad \lambda^*(G\setminus E)=0
+          \]
     \item\label{LebReg:4} $\forall \epsilon >0$ $\exists C \subseteq \R$ closed s.t.
-    \[
-       C\subseteq E \quad \lambda^*(E\setminus C) < \epsilon 
-    \]
+          \[
+              C\subseteq E \quad \lambda^*(E\setminus C) < \epsilon
+          \]
     \item\label{LebReg:5} $\exists F \subseteq \R$ in the class $F_{\delta}$ (countable unions of closed sets) s.t.
-        \[
-            F\subseteq E \quad \lambda^*(E\setminus F)=0  
-        \]
+          \[
+              F\subseteq E \quad \lambda^*(E\setminus F)=0
+          \]
 \end{enumerate}
 \begin{proof}
     Let us give a (partial) proof:\\
     \begin{itemize}
-        \item 
-            $(\ref{LebReg:1})\implies(\ref{LebReg:2})$: if $E\in\Leb(\R)$, $\lambda(E)<+\infty$ then by definition of outer measure (\ref{outer:def}):
-            \[
-                \forall \epsilon >0 \; \exists\seq{I}\text{ that covers } E \text{ and } \sum_{k=1}^{\infty} \lambda_0(I_k) < \lambda^*(E)+\epsilon    
-            \]
-            Let us now define the set $O$:
-            \[
-                O\coloneqq \bigcup_{k=1}^{\infty} I_k, \; O \text{ is open}, \; E\subseteq O    
-            \]
-            and so we may write:
-            \begin{align*}
-                & \lambda^*(O) \overset{sub-add \; (\ref{outer:sub})}{\leq} \sum_{k=1}^{\infty} \lambda_0(I_k) < \lambda^*(E)+\epsilon \\
-                & \implies \lambda^*(O)-\lambda^*(E) < \epsilon
-            \end{align*}
-            and by the Excision property (\ref{ExcProp}) ($E\in\Leb(\R), \; \lambda^*(E)<+\infty$):
-            \[
-                \lambda^*(O\setminus E) = \lambda^*(O)-\lambda^*(E) < \epsilon
-            \]
-            and so we have obtained the second statement (\ref{LebReg:2}).
-        \item 
-            $(\ref{LebReg:2}) \implies (\ref{LebReg:3})$, $\forall k\in\N$ we choose $O_k \supseteq E$ open for which:
-            \[
-                \lambda^*(O_k\setminus E) < \frac{1}{k}    
-            \]
-            and then define:
-            \[
-                G = \bigcap_{k=1}^{\infty} O_k \implies G\in G_{\delta}, \; G\supseteq E     
-            \]
-            Moreover $\forall k\in \N$:
-            \[
-                G\setminus E \subseteq O_k\setminus E    
-            \]
-            so by monotonicty (\ref{outer:mono}):
-            \[
-                \lambda^*(G\setminus E) \leq \lambda^*(O_k\setminus E) < \frac{1}{k}    
-            \]
-            let us apply a limit $k\to\infty$ to both sides:
-            \[
-                \lambda^*(G\setminus E) = 0    
-            \]
-        \item 
-            $(\ref{LebReg:3}) \implies (\ref{LebReg:1})$, let us note that $G\setminus E\in\Leb(\R)$ since $\lambda^*(G\setminus E)=0 $ by lemma \ref{zerosetsaremeas} and:
-            \begin{align*}
-                & G\in\Leb(\R) \text{ since } G\in G_{\delta} \subseteq \B[\R] \subseteq \Leb(\R) \\
-                & \implies E = \underset{\in\Leb}{G} \cap (\underset{\in\Leb}{G \setminus E})^\complement \in \Leb 
-            \end{align*}
+        \item
+              $(\ref{LebReg:1})\implies(\ref{LebReg:2})$: if $E\in\Leb(\R)$, $\lambda(E)<+\infty$ then by definition of outer measure (\ref{outer:def}):
+              \[
+                  \forall \epsilon >0 \; \exists\seq{I}\text{ that covers } E \text{ and } \sum_{k=1}^{\infty} \lambda_0(I_k) < \lambda^*(E)+\epsilon
+              \]
+              Let us now define the set $O$:
+              \[
+                  O\coloneqq \bigcup_{k=1}^{\infty} I_k, \; O \text{ is open}, \; E\subseteq O
+              \]
+              and so we may write:
+              \begin{align*}
+                   & \lambda^*(O) \overset{sub-add \; (\ref{outer:sub})}{\leq} \sum_{k=1}^{\infty} \lambda_0(I_k) < \lambda^*(E)+\epsilon \\
+                   & \implies \lambda^*(O)-\lambda^*(E) < \epsilon
+              \end{align*}
+              and by the Excision property (\ref{ExcProp}) ($E\in\Leb(\R), \; \lambda^*(E)<+\infty$):
+              \[
+                  \lambda^*(O\setminus E) = \lambda^*(O)-\lambda^*(E) < \epsilon
+              \]
+              and so we have obtained the second statement (\ref{LebReg:2}).
+        \item
+              $(\ref{LebReg:2}) \implies (\ref{LebReg:3})$, $\forall k\in\N$ we choose $O_k \supseteq E$ open for which:
+              \[
+                  \lambda^*(O_k\setminus E) < \frac{1}{k}
+              \]
+              and then define:
+              \[
+                  G = \bigcap_{k=1}^{\infty} O_k \implies G\in G_{\delta}, \; G\supseteq E
+              \]
+              Moreover $\forall k\in \N$:
+              \[
+                  G\setminus E \subseteq O_k\setminus E
+              \]
+              so by monotonicty (\ref{outer:mono}):
+              \[
+                  \lambda^*(G\setminus E) \leq \lambda^*(O_k\setminus E) < \frac{1}{k}
+              \]
+              let us apply a limit $k\to\infty$ to both sides:
+              \[
+                  \lambda^*(G\setminus E) = 0
+              \]
+        \item
+              $(\ref{LebReg:3}) \implies (\ref{LebReg:1})$, let us note that $G\setminus E\in\Leb(\R)$ since $\lambda^*(G\setminus E)=0 $ by lemma \ref{zerosetsaremeas} and:
+              \begin{align*}
+                   & G\in\Leb(\R) \text{ since } G\in G_{\delta} \subseteq \B[\R] \subseteq \Leb(\R)                  \\
+                   & \implies E = \underset{\in\Leb}{G} \cap (\underset{\in\Leb}{G \setminus E})^\complement \in \Leb
+              \end{align*}
 
     \end{itemize}
 \end{proof}
@@ -478,25 +478,7 @@ There are disjoint sets $A,B\subseteq\R$ for which:
     \]
     Now $\forall E,Z \subseteq \R$ we write:
     \[
-        \lambda^*(\underbrace{Z\cap E}_{=A}) + \lambda^*(\underbrace{Z\cap E^{\complement}}_{=B}) = \lambda^*(\underbrace{Z}_{=A\cup B})    
+        \lambda^*(\underbrace{Z\cap E}_{=A}) + \lambda^*(\underbrace{Z\cap E^{\complement}}_{=B}) = \lambda^*(\underbrace{Z}_{=A\cup B})
     \]
     thus any set $E$ would satisfy the Caratheodory condition (\ref{CarEq}) and be $\Leb$-measurable which is absurd since we know that Vitali's sets exist.
 \end{proof}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
