@@ -12,6 +12,7 @@
 \usepackage{amsthm}
 \usepackage{mathrsfs}
 \usepackage{mathtools}
+\usepackage{centernot} %for centered negation
 
 %==== Other packages ====%
 
@@ -107,13 +108,16 @@
 }
 \newcommand{\Parts}[1]{\mathcal{P}\left(#1\right)} %set of all parts
 \renewcommand{\complement}{\mathsf{c}} %complement
-\newcommand{\Leb}{\mathcal{L}} %calligraphic L
-
+\newcommand{\Leb}{\mathcal{L}} %Lebesgue sigma-algebra
+\newcommand{\Mes}{\mathcal{M}} %measurable functions
+\newcommand{\Smes}{\mathcal{S}} %measurable simple functions
 
 %==== Math symbols ====%
 
 \renewcommand{\epsilon}{\varepsilon} %epsilon
 \renewcommand{\theta}{\vartheta} %theta
+\DeclareMathOperator*{\esssup}{ess\,sup} %esssup
+\DeclareMathOperator*{\essinf}{ess\,inf} %essinf
 
 %==== Math jargon ====%
 
@@ -141,6 +145,7 @@
 %==== Sheets ====%
 \input{Sheets/sheet_week1.tex}
 \input{Sheets/sheet_week2.tex}
+\input{Sheets/sheet_week3.tex}
 
 %==== End Document ====%
 
