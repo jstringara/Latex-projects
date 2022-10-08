@@ -1,0 +1,472 @@
+\sheet 
+
+%==== Question 1 ====%
+
+\question
+
+Define the Cantor set. State its main properties and prove some of them.
+
+\subsection*{Solution}
+
+\subsection{Definition of the Cantor set}
+The Cantor set is defined iteratively, let us illustrate the first two steps:
+\begin{enumerate}[Step 1:]
+    \item We start with the interval $[0,1]$ and remove from it the open interval $(1/3, 2/3)$. We define the following sets:
+        \[
+            I_{1,1} = \left(\frac{1}{3}, \frac{2}{3} \right) \quad J_{1,1} = \left[0, \frac{1}{3} \right] \quad J_{1,2} = \left[\frac{2}{3}, 1 \right]
+        \]
+        and:
+        \[
+            C_1 = \bigcup_{k=1}^2 J_{1,k} \quad \lambda(C_1) = 2\cdot \frac{1}{3} = \frac{2}{3}
+        \]
+    \item We now remove the open set (1/9, 2/9) from $J_{1,1}$ and the open set (7/9, 8/9) from $J_{1,2}$. We define the following sets:
+        \begin{align*}
+            & I_{2,1} = \left(\frac{1}{9}, \frac{2}{9} \right) \quad J_{2,1} = \left[0, \frac{1}{9} \right] \quad J_{2,2} = \left[\frac{2}{9}, \frac{1}{3} \right] \\
+            & I_{2,2} = \left(\frac{7}{9}, \frac{8}{9} \right) \quad J_{2,3} = \left[\frac{2}{3}, \frac{7}{9} \right] \quad J_{2,4} = \left[\frac{8}{9}, 1 \right]
+        \end{align*}
+        and:
+        \[
+            C_2 = \bigcup_{k=1}^4 J_{2,k} \quad \lambda(C_2) = 4\cdot \frac{1}{9} = \frac{4}{9}
+        \]
+\end{enumerate}
+So at the $n$-th step we will have:
+\[
+    C_n = \bigcup_{k=1}^{2^n} J_{n,k} \quad \lambda(C_n) = 2^n \cdot \frac{1}{3^n} = \left( \frac{2}{3} \right)^n  
+\]
+Thus we can finally define the Cantor set $\mathcal{C}$ as:
+\[
+    \mathcal{C} = \bigcup_{n=1}^\infty C_n
+\]
+let us note that since the endpoints of all the closed intervals are always preserved at each step we have that $C_n \supseteq C_{n+1}$ and thus $C_n \downarrow \mathcal{C}$.
+
+\subsection{Properties of the Cantor set}
+\begin{enumerate}[i)]
+    \item $\mathcal{C}$ is closed since it is the countable intersection of closed sets ($C_n$ closed $\forall n\in\N$);
+    \item $\mathcal{C} \in \B[\R] \subseteq \Leb(\R)$ by virtue of its closedness;
+    \item $\lambda(\mathcal{C}) = \lim_{n\to\infty} \lambda(C_n) = \lim_{n\to\infty} (2/3)^n = 0$ since $\lambda(C_1) = 1/3 < +\infty$ and $\lambda$ is continous from above (\ref{meas:contab}).
+    \item $int(\mathcal{C}) = \emptyset$ \\
+        \begin{proof}
+            \[
+            int (\mathcal{C}) \subseteq \mathcal{C} \quad \lambda(\mathcal{C}) = 0 \implies \lambda(int(\mathcal{C})) = 0    
+            \]
+            by the monotonicity of $\lambda$ (\ref{meas:mono}). Now, since $int(\mathcal{C})$ is open ($\mathcal{C}$ is closed) it must contain an interval, but intervals have positive measure (this holds true only in $\Leb(\R)$) and thus $int(\mathcal{C}) = \emptyset$.
+        \end{proof}
+        Alternatively:
+        \begin{proof}
+            Let us assume that $int(\mathcal{C}) \neq \emptyset$, then:
+            \[
+                \exists J \text{ open } \subseteq int(\mathcal{C})    
+            \]
+            now, since $\lambda(J)=l >0$ we may write that:
+            \[
+                \lambda(J) = l > \left( \frac{2}{3} \right)^n = \lambda(C_n) \quad \exists n \in\N 
+            \]
+            in other words $\exists n \in\N$ such that $J \supseteq C_n \implies J \centernot \subseteq C_n$ which is absurd since we assumed that $J \subseteq int (\mathcal{C}) \implies J \subseteq C_n$ $\forall n\in\N$. Thus $int(\mathcal{C}) = \emptyset$.
+        \end{proof}
+    \item $\mathcal{C}$ is uncountable, indeed each of its elements can be written as an alternating series of 0s and 2s divided by $3^n$. This would be equal to approximanting each element by going right or left through the sets $J_{n,k}$ where 0 represents a choice to go right and 2 a choice to go left. We can write this as follows:
+        \[
+            \mathcal{C} = \left\{ x\in [0,1] | \; x = \sum_{n=1}^\infty \frac{x_n}{3^n}, \; x_n \in \{0,2\} \right\}
+        \]
+        and thus $\mathcal{C}$ can be put into a bijection with $\{0,2\}^\N$ which is uncountable.
+\end{enumerate}
+
+%==== Question 2 ====%
+
+\question
+
+Define the Vitali-Lebesgue function. State its main properties and prove some of 
+them.
+
+\subsection*{Solution}
+
+\subsection{Vitali-Lebesgue Function}
+As for the cantor set we shall define Vitali's function iteratively as a sequence of functions $\seq{f}$. This sequence is defined as follows:
+\begin{align*}
+    & f_0(x) = 0 \quad x\in [0,1] \\
+    & f_1(x) = \begin{cases}
+        \frac{3}{2}t \quad & t\in [0,1/3] \\
+        \frac{1}{2} \quad & t\in (1/3,2/3) \\
+        \frac{3}{2}t - \frac{1}{2} \quad & t\in [1/3,2/3]
+    \end{cases} \\
+    & \quad \vdots \\
+    & f_{n}(x) = \begin{cases}
+        \frac{1}{2}f_{n-1}(3t) \quad & t\in [0,1/3] \\
+        f_{n-1}(t) \quad & t\in (1/3,2/3) \\
+        \frac{1}{2}f_{n-1}(3t - 2) \quad & t\in [1/3,2/3]
+    \end{cases}
+\end{align*}
+and we define Vitali's function $V$ as:
+\[
+    f_n \to V \in C([0,1])    
+\]
+let us prove that such a function exists and is unique.
+
+\begin{proof}
+    Let us prove that $f_n$ is a Cauchy sequence in $C([0,1])$, we may prove that:
+    \[
+        || f ||_{\infty} = \max_{t\in[0,1]} |f(t)| \rightarrow ||f_n - f_{n-1} ||_{\infty} < \frac{1}{2^n} 
+    \]
+    let us assume this to be true, for now, then to prove that $\seq{f}$ is Cauchy we have to prove that:\
+    \[
+        ||f_m - f_n ||_{\infty} < \epsilon \quad \forall m>n \in \N, \; \exists \epsilon >0    
+    \]
+    indeed we may write:
+    \begin{align*}
+        ||f_m - f_n ||_{\infty} & \tikzmarknode{eq1}{=} ||f_m - f_{n+1} + f_{n+1} - f_n ||_{\infty} \\
+        & \tikzmarknode{eq2}{\leq} ||f_m - f_{n+1}||_\infty + ||f_{n+1} - f_n ||_{\infty} \text{ by the triangular inequality} \\
+        & \tikzmarknode{eq3}{\leq} \sum_{k=n}^m ||f_{k+1} - f_k ||_{\infty} \text{by repeating the previous step} \\
+        & \tikzmarknode{eq4}{\leq} \sum_{k=n}^{m-1} \frac{1}{2^{k+1}} < \epsilon \text{ since the series is convergent}
+    \end{align*} \tikz[overlay,remember picture]{\draw[shorten >=1pt,shorten <=1pt] (eq1) -- (eq2) -- (eq3) -- (eq4);}
+    thus the limit exists and is unique and we have a function:
+    \[
+        V:[0,1]\to [0,1]
+    \]
+\end{proof}
+
+\subsection{Properties of Vitali's function}
+Vitali's function has the following properties:
+\begin{enumerate}[i)]
+    \item $V(0)=0$, $V(1)=1$ and $V$ is continuous since it is the uniform limit of continuous functions.
+    \item $V$ is non-decreasing in $[0,1]$ since $f_n$ is non-decreasing for all $n\in\N$.
+        \begin{proof}
+            Let $0\leq x < y \leq 1$ then:
+            \[
+                V(x) = \lim_{n\to\infty} f_n(x) \leq \lim_{n\to\infty} f_n(y) = V(y)   
+            \]
+        \end{proof}
+    \item $V([0,1]) = [0,1]$ since $V\in C([0,1])$ and $V(0)=0$ and $V(1)=1$. Thus by Intermediate value theorem $V$ must cross all the values in between.
+    \item $V'=0$ almost everywhere since $V$ is constant on $[0,1]\setminus \mathcal{C}$ and $\lambda(\mathcal{C})=0$. 
+\end{enumerate}
+
+%==== Question 3 ====%
+
+\question
+
+Write the definitions of the Lebesgue integral of a nonnegative measurable simple 
+function over $X$ and over a measurable subset $E \subseteq X$. Write the main properties of the integral and prove some of them.
+
+\subsection*{Solution}
+
+\subsection{Lebesgue integral of nonnegative simple functions}
+Let $(X,\A,\mu)$ be a measure space and $s\in\Smes_+(X,\A)$ a nonnegative simple function with canonical form as in (\ref{simple:canon}). We define the Lebesgue integral of $s$ over $X$ as:
+\[
+    \int_X s\,d\mu \coloneqq \sum_{k=1}^n c_k \mu(E_k)
+\]
+And its integral over a measurable subset $E\in \A$ as:
+\[
+    \int_E s\,d\mu \coloneqq \int_X s\cdot \chi_E \, d\mu = \sum_{k=1}^n c_k \mu(E_k\cap E)
+\]
+
+\subsection{Properties of the Lebesgue integral}
+\begin{enumerate}[i)]
+    \item 
+        \[
+            \int_X \chi_E\,d\mu = \mu(E) \quad \forall E\in \A
+        \]
+    \item \label{LebInt:null}
+        \[
+            \int_N s\,d\mu = 0 \quad \forall N \in \mathcal{N}_\mu
+        \]
+    \item Let $s\in\Smes_+(X,\A)$, $c\geq 0$, then:
+        \[
+            \int_X c\cdot s \,d\mu = c\cdot\int_X  s \,d\mu   
+        \]
+    \item $s,t\in \Smes_+(X,\A)$, then:
+        \[
+            \int_X (s+t) \,d\mu = \int_X s \,d\mu + \int_X t \,d\mu
+        \]
+    \item \label{LebInt:monofunc}$s,t \in \Smes_+(X,\A)$, such that $s\leq t$ then:
+        \[
+            \int_X s \,d\mu \leq \int_X t \,d\mu
+        \]
+    \item \label{LebInt:monoset}$s\in\Smes_+(X,\A)$, $E\subseteq F \in\A$ then:
+        \[
+            \int_E s \,d\mu \leq \int_F s \,d\mu
+        \]
+\end{enumerate}
+
+\begin{proof}
+    \hspace*{\fill} %leave a blank line
+    \begin{enumerate}[i)]
+        \item We may write:
+            \[
+                \chi_E = \sum_{k=1}^2 c_k \chi_{E_k} = \begin{cases}
+                    c_1 = 1 & \;E_1 = E \\
+                    c_2 = 0 & \; E_2 = E^\complement
+                \end{cases}
+            \]
+            thus by applying the definition of the Lebesgue integral we get:
+            \[
+                \int_X \chi_E\,d\mu = \sum_{k=1}^2 c_k \mu(E_k) = 1\cdot\mu(E) + 0 \cdot \mu(E^\complement) = \mu(E)
+            \]
+        \item Let us apply the definition:
+            \[
+                \int_N s\,d\mu = \sum_{k=1}^n c_k \mu(E_k\cap N)
+            \]
+            but by the monotonicity of $\mu$ (\ref{meas:mono}) we have:
+            \[
+                E_k\cap N \subseteq N \implies \mu(E_k\cap N) \leq \mu(N) = 0      
+            \]
+            so the previous sum is equal to $0$.
+    \end{enumerate}
+\end{proof}
+%==== Question 4 ====%
+
+\question
+
+Let $s \in \Smes_+(X, \A)$. For any $E \in \A$, let $\phi(E) \coloneqq \int_E s d\mu$. Prove that $\phi$ is a measure.
+
+\subsection*{Solution}
+
+\subsection{Measure induced by a function}
+Let $(X,\A,\mu)$ be a measure space and $s\in\Smes_+(X,\A)$ a nonnegative simple function. We define the measure $\phi$ induced by $s$ as:
+\[
+    \phi(E) \coloneqq \int_E s\,d\mu \quad \forall E\in \A
+\]
+
+\begin{proof}
+    Let us see that $\phi$ meets the definition of a measure:\\
+    Clearly:
+    \[
+        \phi : \A \to \Rcomppos    
+    \]
+    Furthermore:
+    \begin{enumerate}[i)]
+        \item $\phi(\emptyset) = 0$ by property 2 of the Lebesgue integral (\ref{LebInt:null}).
+        \item Let $\seq{E}\subseteq\A$ disjoint and $E=\bigcup_{k=1}^\infty E_k$, let us write:
+            \[
+                s \coloneqq \sum_{l=1}^m d_l \chi_{F_l} \quad F_l \in \A    
+            \]
+            thus:
+            \begin{align*}
+                \phi(E) &\tikzmarknode{eq1}{=} \int_E s\,d\mu = \sum_{l=1}^m d_l \mu(F_l\cap E) \\
+                &\tikzmarknode{eq2}{=} \sum_{l=1}^m d_l \sum_{k=1}^\infty \mu(F_l\cap E_k) \text{ by the $\s{additivity}$ of $\mu$ (\ref{meas:mono})}\\
+                &\tikzmarknode{eq3}{=} \sum_{k=1}^\infty \sum_{l=1}^m d_l \mu(F_l\cap E_k) \\
+                &\tikzmarknode{eq4}{=} \sum_{k=1}^\infty \int_{E_k} s \, d\mu = \sum_{k=1}^\infty \phi(E_k)
+            \end{align*} \tikz[overlay,remember picture]{\draw[shorten >=1pt,shorten <=1pt] (eq1) -- (eq2) -- (eq3)--(eq4);}
+    \end{enumerate}
+\end{proof}
+
+%==== Question 5 ====%
+
+\question
+
+Write the two possible equivalent definitions of Lebesgue integral of a measurable nonnegative function.
+
+\subsection*{Solution}
+
+Let $f:X\to\Rcomppos$ be a measurable nonnegative function ($f\in\Mes_+(X,\A))$. Let us define the set $\Smes_f$:
+\[
+    \Smes_f = \{ s\in \Smes_+ : \; s\leq f \text{ in } X\}    
+\]
+We then have two possible and equivalent definitions of the Lebesgue integral of $f$.
+
+\subsection{Definition by \texorpdfstring{$\sup$}{the supremum}}
+We define the integral of $f$ as:
+\[
+    \int_X f \,d\mu = \sup_{s\in\Smes_f} \int_X s \,d\mu
+\]
+
+\subsection{Definition by \texorpdfstring{$\lim$}{the limit}}
+Thanks to the Simple Approximation Theorem (\ref{SAT}) we know:
+\[
+    \exists \seq{s} \subseteq \Smes_f \quad s_n\leq s_{n+1} \; n\in\N, \; s_n\xrightarrow{n\to\infty} s \text{ in } X
+\]
+So we can define the integral as:
+\[
+    \int_X f \,d\mu = \lim_{n\to\infty} \int_X s_n \,d\mu    
+\]
+Let us note that the integral must be independent of the choice of the sequence $\seq{s}$.
+
+%==== Question 6 ====%
+
+\question
+
+State and prove the Chebychev inequality.
+
+\subsection*{Solution}
+
+\subsection{Chebychev inequality}\label{ChebIneq}
+
+Let $f\in\Mes_+(X,\A)$ then $\forall c>0$ we have:
+\[
+    \mu( \{  f\geq c \}) \leq \frac{1}{c} \int_{ \{ f \geq c \}} f\; d\mu \leq \frac{1}{c} \int_X f\; d\mu    
+\]
+\begin{proof}
+    Clearly
+    \[
+        E_C \coloneqq \{ f\geq c \} \in \A \text{ since } f\in\Mes_+(X,\A) \text{ (see (\ref{statomeas:3}))} 
+    \]
+    and we have that:
+    \[
+        c\cdot \chi_{E_C} \leq f \cdot \chi_{E_C}    
+    \]
+    thus by the monotonicity of the integral for functions (\ref{LebInt:monofunc}) and for sets (\ref{LebInt:monoset}) we have:
+    \[
+        c\cdot \mu(E_C) = \int_ X c\cdot \chi_{E_C} \, d\mu \leq \int_ X f \cdot \chi_{E_C} \, d\mu = \int_{E_C} f \, d\mu \leq \int_X f \, d\mu
+    \]
+    so we have the Chebychev inequality.
+\end{proof}
+
+%==== Question 7 ====%
+
+\question
+
+Let $f \in \Mes_+(X, \A)$ be such that $\int_X f \, d\mu < +\infty$. Show that $f$ is finite a.e. in $X$.
+
+\subsection*{Solution}
+
+\subsection{f is finite a.e. in X if \texorpdfstring{$\int_X f d\mu < +\infty$}{ its integral is finite}}
+Let $f \in \Mes_+(X, \A)$ be such that $\int_X f \, d\mu < +\infty$, then $f$ is finite a.e. in $X$.
+
+\begin{proof}
+    Let us note that the thesis is equivalent to $\mu(\{ f = +\infty\}) = 0$. Let us define:
+    \[
+        \{ f = + \infty \} = \bigcap_{n=1}^\infty \{ f > n \}    
+    \]
+    Clearly we have that:
+    \begin{enumerate}[a)]
+        \item $\{ f > n\} \downarrow \{ f = +\infty \}$
+        \item $\mu (\{ f > n \}) \leq \frac{1}{n}\cdot \int_X f\, d\mu$ $\forall n\in\N$ by the Chebychev inequality (\ref{ChebIneq}).
+    \end{enumerate}
+    So since $\mu(\{f > 1\}) \leq \frac{1}{1}\cdot \int_X f \, d\mu < +\infty$ we may apply the continuity from above of $\mu$ (\ref{meas:contab}):
+    \[
+        \mu (\{ f= +\infty \}) = \mu \left( \bigcap_{n=1}^\infty \{f>n\} \right) = \lim_{n\to\infty} \mu(\{f>n\}) = \lim_{n\to\infty} \frac{1}{n}\cdot \underbrace{\int_X f \, d\mu}_{<+\infty} \longrightarrow 0  
+    \]
+\end{proof}
+
+%==== Question 8 ====%
+
+\question
+
+State and prove the vanishing lemma for functions $f \in \Mes_+(X, \A)$.
+
+\subsection*{Solution}
+
+\subsection{Vanishing lemma for \texorpdfstring{$f \in \Mes_+(X, \A)$}{nonnegative measurable functions}}
+
+Let $f \in \Mes_+(X, \A)$ be such that $\int_X f \, d\mu = 0 $, then we have that $f=0$ a.e. in $X$.
+
+\begin{proof}
+    Let us note that the thesis is equivalent to $\mu(\{ f > 0\}) = 0$. Let us define:
+    \[
+        \{ f > 0 \} = \bigcup_{n=1}^\infty \left\{ f > \frac{1}{n} \right\}    
+    \]
+    Clearly we have that:
+    \begin{enumerate}[a)]
+        \item $\left\{ f > \frac{1}{n} \right\} \uparrow \{ f > 0 \}$
+        \item $\frac{1}{n} \cdot \chi_{\left\{ f > \frac{1}{n} \right\}} \leq f \cdot \chi_{\left\{ f > \frac{1}{n} \right\}}$
+    \end{enumerate}
+    by Chebychev inequality (\ref{ChebIneq}) we have:
+    \[
+        \mu \left( \left\{ f > \frac{1}{n} \right\} \right) \leq \frac{1}{1/n} \cdot \int_X f \, d\mu = 0 \quad \forall n\in\N
+    \]
+    thus by the continuity from below of $\mu$ (\ref{meas:contbel}) we have:
+    \[
+        \mu(\{ f > 0 \}) = \mu \left( \bigcup_{n=1}^\infty \left\{ f > \frac{1}{n} \right\} \right) = \lim_{n\to\infty} \mu \left( \left\{ f > \frac{1}{n} \right\} \right) = = 0
+    \]
+\end{proof}
+
+%==== Question 9 ====%
+
+\question
+
+State and prove the Monotone Convergence Theorem (or Beppo Levi Theorem).
+
+\subsection*{Solution}
+
+\subsection{Monotone Convergence Theorem}\label{MCT}
+Let $\seq{f} \subseteq \Mes_+(X,\A)$ and $f:X\to\Rcomppos$ be such that:
+\begin{enumerate}[i)]
+    \item $f_n \leq f_{n+1}$ in $X$ $\forall n\in\N$
+    \item $f_n \xrightarrow{n\to\infty} f$ pointwise in $X$
+\end{enumerate}
+then:
+\[
+    \lim_{n\to\infty} \int_X f_n \, d\mu = \int_X \lim_{n\to\infty} f_n \, d\mu =\int_X f \, d\mu    
+\]
+
+\begin{proof}
+    $f\in\Mes_+(X,\A)$ \\
+    by monotonicity of the integral for functions (\ref{LebInt:monofunc}) we have:
+    \[
+        \alpha \coloneqq \int_X f_n \, d\mu \leq \int_X f_{n+1} \, d\mu \leq \int_X f \, d\mu  \longrightarrow \alpha \leq \int_X f \, d\mu
+    \]
+    now, we have to prove that $\alpha \geq \int_X f \, d\mu$. Indeed $\forall \epsilon \in (0,1)$, $\forall s \in \Smes_f$ let:
+    \[
+        E_n \coloneqq \{ (1-\epsilon) s \leq f_n \} \quad n\in\N    
+    \]
+    Let us note that:
+    \begin{enumerate}[a)]
+        \item $\seq{E} \subseteq \A$;
+        \item $\seq{E} \uparrow$, since $\seq{f} \uparrow$;
+        \item $X=\bigcup_{n=1}^\infty E_n$.
+    \end{enumerate}
+    Clearly $\bigcup_{n=1}^\infty E_n \subseteq X$, we have to show that $X \subseteq \bigcup_{n=1}^\infty E_n$. Now, let us fix $x\in X$, we have two possibilities:
+    \begin{itemize}
+        \item \textbf{$f(x)=+\infty$:} then $\exists \bar{n}\in\N$ such that $\forall n> \bar{n}$:
+            \[
+                (1-\epsilon) s(x) < f_n(x) \implies x\in E_n \; \forall n > \bar{n} \implies x \in \bigcup_{n=1}^\infty E_n
+            \]
+        \item \textbf{$f(x)<+\infty$:} then $\exists \bar{n}\in\N$ such that $\forall n> \bar{n}$:
+            \[
+                (1-\epsilon) s(x) \leq (1-\epsilon) f(x) < f_n(x) \implies x\in E_n \; \forall n > \bar{n} \implies x \in \bigcup_{n=1}^\infty E_n
+            \]
+    \end{itemize}
+    Thus we have that $X \subseteq \bigcup_{n=1}^\infty E_n$ and $\bigcup_{n=1}^\infty E_n \subseteq X$ $\implies X = \bigcup_{n=1}^\infty E_n$ . \\
+    It clearly follows that:
+    \[
+        (1-\epsilon)\cdot \int_{E_n} s \, d\mu \leq \int_{E_n} f_n \, d\mu \leq \int_X f \, d\mu    
+    \]
+    now let $n\to\infty$ ($E_n \xrightarrow{n\to\infty} X$):
+    \[
+        (1-\epsilon)\cdot \int_{X} s \, d\mu \leq  \lim_{n\to\infty} \int_{X} f_n \, d\mu = \alpha 
+    \]
+    but since $\epsilon \in (0,1)$ can be arbitrarily small we have:
+    \[
+        \int_X s \, d\mu \leq \alpha \implies \sup_{s\in\Smes_f} \int_X s \, d\mu  = \int_X f \, d\mu \leq \alpha    
+    \]
+    thus we have proved that $\int_X f \, d\mu = \alpha $.
+\end{proof}
+
+%==== Question 10 ====%
+
+\question
+
+State and prove Fatou's Lemma.
+
+\subsection*{Solution}
+
+\subsection{Fatou's lemma}
+
+Let $\seq{f} \subseteq \Mes_+(X,\A)$, then:
+\[
+    \liminf_{n\to\infty} \int_X f_n \, d\mu \geq \int_X \left( \liminf_{n\to\infty} f_n \right) \, d\mu
+\]
+
+\begin{proof}
+    We already know that $\liminf_{n\to\infty} f_n \in \Mes_+(X,\A)$ by (\ref{meas:extremes}).\\
+    Let us a define a new sequence $\seq{g}$ such that:
+    \[
+        g_k: X \to \Rcomppos \quad g_k \coloneqq \inf_{n\geq k} f_n    
+    \]
+    We can clearly see that:
+    \begin{enumerate}[a)]
+        \item $\seq{g} \subseteq \Mes_+(X,\A)$, $\seq{g} \uparrow$;
+        \item $g_k \leq f_k$ for all $k\in\N$;
+        \item $\lim_{k\to\infty} g_k = \sup_{k\geq 1} g_k = \sup_{k\geq 1} \inf_{n\geq k} f_n = \liminf_{n\to\infty} f_n$.
+    \end{enumerate}
+    thus by monotonicty of the integral for functions (\ref{LebInt:monofunc}) and (b) we have:
+    \[
+        \int_X g_k \, d\mu \leq \int_X  f_k \, d\mu \quad \forall k\in\N   
+    \]
+    Now, since $\seq{g}$ is an increasing sequence so is $\int_X g_k \, d\mu$ and thus it admits a limit (which coincides with its $\liminf$), thus, if we apply the $\liminf$ to both sides, we have:
+    \[
+        \liminf_{k\to\infty} \int_X g_k \, d\mu = \lim_{k\to\infty} \int_X  g_k \, d\mu \leq \liminf_{k\to\infty} \int_X f_k \, d\mu 
+    \]
+    Now let us apply the Monotone Convergence Theorem (\ref{MCT}) to the right hand side:
+    \[
+        \int_X \lim_{k\to\infty} g_k \, d\mu \overset{(c)}{=} \int_X \left( \liminf_{n\to\infty} f_n \right) \, d\mu \leq \liminf_{k\to\infty} \int_X f_k \, d\mu
+    \]
+    and so we have obtained our thesis.
+\end{proof}
