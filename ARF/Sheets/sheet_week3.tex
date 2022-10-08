@@ -12,7 +12,7 @@ Write the definition of measurable function. Show the measurability of the compo
 
 Let $(X,\A)$ and $(X',\A')$ be two measurable spaces and $f$ a function:
 \[
-    f:X\to X'    
+    f:X\to X'
 \]
 $f$ is said to be measurable if:
 \[
@@ -24,12 +24,12 @@ Let $(X,\A)$, $(X',\A')$ and $(X'',\A'')$ be three measurable spaces and $f:X\to
 
 \begin{proof}
     \begin{align*}
-        & \forall E \in \A' \quad f^{-1}(E)\in\A \\
-        & \forall F \in \A'' \quad g^{-1}(F)\in\A' \\
+         & \forall E \in \A' \quad f^{-1}(E)\in\A   \\
+         & \forall F \in \A'' \quad g^{-1}(F)\in\A' \\
     \end{align*}
     thus:
     \[
-        \forall F\in \A'' \quad (g\circ f)^{-1}(F) = f^{-1} \left[ \underbrace{g^{-1}(F)}_{\coloneqq E \in \A'} \right] \in\A   
+        \forall F\in \A'' \quad (g\circ f)^{-1}(F) = f^{-1} \left[ \underbrace{g^{-1}(F)}_{\coloneqq E \in \A'} \right] \in\A
     \]
 \end{proof}
 
@@ -45,7 +45,7 @@ Characterize measurability of functions and prove it.
 
 Let $(X,\A)$ and $(X',\A')$ be two measurable spaces and $\mathcal{C} ' \subseteq \Parts{X'}$ such that $\sigma_0(\mathcal{C}')=\A'$ then:
 \[
-    f:X\to X' \text{ measurable } \iff f^{-1}(E)\in\A \quad \forall E\in\mathcal{C}'    
+    f:X\to X' \text{ measurable } \iff f^{-1}(E)\in\A \quad \forall E\in\mathcal{C}'
 \]
 
 \begin{proof}
@@ -53,14 +53,14 @@ Let $(X,\A)$ and $(X',\A')$ be two measurable spaces and $\mathcal{C} ' \subsete
     \begin{itemize}
         \item \textbf{$(\implies)$:} Suppose $f$ be measurable $\implies$ $\mathcal{C}'\subseteq \A'$ and so we get the thesis.
         \item \textbf{$(\impliedby)$:} Let us define the following:
-            \[
-                \Sigma \coloneqq \{ E\subseteq X': \; f^{-1}(E)\in\A \}
-            \]
-            We can easily see that $\Sigma$ is a $\salg$ so $\mathcal{C}'\subseteq \Sigma$ and thus:
-            \[
-                \A'=\sigma_0(\mathcal{C}')\subseteq\Sigma    
-            \]
-            and we get the thesis.
+              \[
+                  \Sigma \coloneqq \{ E\subseteq X': \; f^{-1}(E)\in\A \}
+              \]
+              We can easily see that $\Sigma$ is a $\salg$ so $\mathcal{C}'\subseteq \Sigma$ and thus:
+              \[
+                  \A'=\sigma_0(\mathcal{C}')\subseteq\Sigma
+              \]
+              and we get the thesis.
     \end{itemize}
 \end{proof}
 
@@ -70,7 +70,7 @@ Let $(X,\A)$ and $(X',\A')$ be two measurable spaces and $\mathcal{C} ' \subsete
 
 Write the definitions of:
 \begin{enumerate}[a)]
-    \item \label{Bmeas} Borel measurable functions; 
+    \item \label{Bmeas} Borel measurable functions;
     \item \label{Lmeas} Lebesgue measurable functions.
 \end{enumerate}
 
@@ -79,14 +79,14 @@ Write the definitions of:
 \subsection{\ref{Bmeas}) Borel measurable functions}
 Let $(X,d), (X,\B)$ and $(X',d'), (X', \B')$ be couples of metric spaces and measurable spaces. A function $f$:
 \[
-    f:X\to X' \text{ measurable}    
+    f:X\to X' \text{ measurable}
 \]
-is called Borel-measurable or $\B$-meaurable. 
+is called Borel-measurable or $\B$-meaurable.
 
 \subsection{\ref{Lmeas}) Lebesgue measurable functions}
 Let $(X,\Leb)$ be a measurable space and $(X',d')$ a metric space, $(X',\B')$ a measurable space, then:
 \[
-    f:X\to X' \text{ measurable}    
+    f:X\to X' \text{ measurable}
 \]
 is called Lebesgue-measurable or $\Leb$-measurable.
 
@@ -127,7 +127,7 @@ Characterize Lebesgue measurability of functions and prove it.
 \subsection{Characterization of Lebesgue measurability}
 All we must do is apply the Characterization of Measurability (\ref{CharMeas}) taking $(X,\A=\Leb)$, $(X', \A'=\B')$ and $\mathcal{C}'$ the class of open sets of $X'$, since $\B=\sigma_0(\mathcal{C}')$. We then can write:
 \[
-    f:X\to X' \text{ Lebesgue measurable } \iff f^{-1}(E)\in\Leb \quad \forall E\in\mathcal{C}'  
+    f:X\to X' \text{ Lebesgue measurable } \iff f^{-1}(E)\in\Leb \quad \forall E\in\mathcal{C}'
 \]
 
 \begin{proof}
@@ -135,14 +135,14 @@ All we must do is apply the Characterization of Measurability (\ref{CharMeas}) t
     \begin{itemize}
         \item \textbf{$(\implies)$:} Suppose $f$ be Lebesgue measurable $\implies$ $\mathcal{C}'\subseteq \B$ and so we get the thesis.
         \item \textbf{$(\impliedby)$:} Let us define the following:
-            \[
-                \Sigma \coloneqq \{ E\subseteq X': \; f^{-1}(E)\in\Leb \}
-            \]
-            We can easily see that $\Sigma$ is a $\salg$ so $\mathcal{C}'\subseteq \Sigma$ and thus:
-            \[
-                \B=\sigma_0(\mathcal{C}')\subseteq\Sigma    
-            \]
-            and we get the thesis.
+              \[
+                  \Sigma \coloneqq \{ E\subseteq X': \; f^{-1}(E)\in\Leb \}
+              \]
+              We can easily see that $\Sigma$ is a $\salg$ so $\mathcal{C}'\subseteq \Sigma$ and thus:
+              \[
+                  \B=\sigma_0(\mathcal{C}')\subseteq\Sigma
+              \]
+              and we get the thesis.
     \end{itemize}
 \end{proof}
 
@@ -169,24 +169,24 @@ Let $(X,\A)$ be a measurable space and $f:X\to\Rcomp$ a function, \tfae
     Let us prove all the coimplications:\\
     \textbf{(\ref{statomeas:1}) $\iff$ (\ref{statomeas:3}):}
     \begin{align*}
-        & \A'=\B[\Rcomp]=\sigma_0( \overbrace{ \{(\alpha,+\infty]:\; \alpha\in\R\} }^{\mathcal{C}'} ) \\
-        & f \text{ is measurable } \iff f^{-1} ( \underbrace{(\alpha,+\infty]}_{E} ) \in \A \quad \forall \alpha \in \R
+         & \A'=\B[\Rcomp]=\sigma_0( \overbrace{ \{(\alpha,+\infty]:\; \alpha\in\R\} }^{\mathcal{C}'} )                   \\
+         & f \text{ is measurable } \iff f^{-1} ( \underbrace{(\alpha,+\infty]}_{E} ) \in \A \quad \forall \alpha \in \R
     \end{align*}
     \textbf{(\ref{statomeas:2}) $\implies$ (\ref{statomeas:3}):}
     \[
-        \{ f\geq \alpha \} = \cap_{n=1}^\infty \overbrace{\{ f > \alpha-\frac{1}{n} \}}^{\in\A} \in\A 
+        \{ f\geq \alpha \} = \cap_{n=1}^\infty \overbrace{\{ f > \alpha-\frac{1}{n} \}}^{\in\A} \in\A
     \]
     \textbf{(\ref{statomeas:3}) $\implies$ (\ref{statomeas:4}):}
     \[
-        \{ f<\alpha \} = \{ f\geq\alpha \}^\complement \in\A    
+        \{ f<\alpha \} = \{ f\geq\alpha \}^\complement \in\A
     \]
     \textbf{(\ref{statomeas:4}) $\implies$ (\ref{statomeas:5}):}
     \[
-        \{ f \leq \alpha \} = \cap_{n=1}^\infty \overbrace{\{ f < \alpha+\frac{1}{n} \}}^{\in\A} \in\A   
+        \{ f \leq \alpha \} = \cap_{n=1}^\infty \overbrace{\{ f < \alpha+\frac{1}{n} \}}^{\in\A} \in\A
     \]
     \textbf{(\ref{statomeas:5}) $\implies$ (\ref{statomeas:2}):}
     \[
-        \{ f>\alpha \} = \{ f\leq\alpha \}^\complement \in\A    
+        \{ f>\alpha \} = \{ f\leq\alpha \}^\complement \in\A
     \]
 \end{proof}
 
@@ -223,7 +223,7 @@ Let $\{f_n\} \subset \Mes(X, \A)$. Show that $\sup_n f_n, \inf_n f_n, \limsup_n 
 
 \subsection*{Solution}
 
-\subsection{Measurability of \texorpdfstring{$\sup_n f_n, \inf_n f_n, \limsup_n f_n, \liminf_n f_n$}{sup fn, inf fn, limsup fn, liminf fn}}
+\subsection{Measurability of \texorpdfstring{$\sup_n f_n, \inf_n f_n, \limsup_n f_n, \liminf_n f_n$}{sup fn, inf fn, limsup fn, liminf fn}} \label{meas:extremes}
 Let $\{f_n\} \subset \Mes(X, \A)$, we have:
 \begin{enumerate}[i)]
     \item $\sup_n f_n \in \Mes(X, \A)$
@@ -258,13 +258,13 @@ Let $f,g:X\to\R$ and $f,g\in\Mes(X,\A)$, we have that $f+g, f\cdot g \in \Mes(X,
     \[
         \left\{ \begin{array}{l}
             \phi(x) = X\to\R^2 \quad \phi(x) \coloneqq \left( f(x), g(x) \right) \\
-            \psi(x) = \R^2\to\R \quad \psi(s,t) \coloneqq s+t \\
+            \psi(x) = \R^2\to\R \quad \psi(s,t) \coloneqq s+t                    \\
             \chi(x) = \R^2\to\R \quad \chi(s,t) \coloneqq s\cdot t
-        \end{array} \right. 
-        \implies 
+        \end{array} \right.
+        \implies
         \left\{ \begin{array}{l}
-                \psi \circ \phi = f + g \\
-                \chi \circ \phi = f \cdot g
+            \psi \circ \phi = f + g \\
+            \chi \circ \phi = f \cdot g
         \end{array} \right.
     \]
     Now, clearly $\psi,\chi \in C^0(\R^2)$ (hence measurable), let us prove that $\phi $ is also measurable. We use the Characterization of Measurability (\ref{CharMeas}):
@@ -273,19 +273,19 @@ Let $f,g:X\to\R$ and $f,g\in\Mes(X,\A)$, we have that $f+g, f\cdot g \in \Mes(X,
     \]
     We take:
     \begin{align*}
-        E & = R \coloneqq (a,b) \times (c,d) \\
-        \phi^{-1}(R) & \tikzmarknode{eq1}{=} \{ x\in X: \; (f(x),g(x))\in R \} \\
-        & \tikzmarknode{eq2}{=} \{ x\in X: \; f(x)\in (a,b) \} \cap \{ x\in X: \; g(x)\in (c,d) \} \\
-        & \tikzmarknode{eq3}{=} f^{-1}(a,b) \cap g^{-1}(c,d) \in \A
+        E            & = R \coloneqq (a,b) \times (c,d)                                                         \\
+        \phi^{-1}(R) & \tikzmarknode{eq1}{=} \{ x\in X: \; (f(x),g(x))\in R \}                                  \\
+                     & \tikzmarknode{eq2}{=} \{ x\in X: \; f(x)\in (a,b) \} \cap \{ x\in X: \; g(x)\in (c,d) \} \\
+                     & \tikzmarknode{eq3}{=} f^{-1}(a,b) \cap g^{-1}(c,d) \in \A
     \end{align*} \tikz[overlay,remember picture]{\draw[shorten >=1pt,shorten <=1pt] (eq1) -- (eq2) -- (eq3);}
     Thus $\forall E \subseteq \R^2$ open, we may write:
     \begin{align*}
-        E & = \bigcup_{k=1}^\infty R_k, \quad R_k = (a_k,b_k) \times (c_k,d_k) \\
+        E         & = \bigcup_{k=1}^\infty R_k, \quad R_k = (a_k,b_k) \times (c_k,d_k)                                       \\
         \phi^{-1} & = \bigcup_{k=1}^\infty \phi^{-1}(R_k) = \bigcup_{k=1}^\infty f^{-1}(a_k,b_k) \cap g^{-1}(c_k,d_k) \in \A
     \end{align*}
     Hence $\phi \in \Mes(X,\A)$, and we have:
     \[
-        \psi \circ \phi, \; \chi \circ \phi \in \Mes(X,\A)    
+        \psi \circ \phi, \; \chi \circ \phi \in \Mes(X,\A)
     \]
 \end{proof}
 
@@ -301,20 +301,20 @@ Prove that A is measurable if and only if $\chi_A$ is a measurable function.
 
 Let $A\subseteq X$ and $\chi_A$ be the indicator function of $A$. We have:
 \[
-    \chi_A \in \Mes(X, \A) \iff \quad A \in \A    
+    \chi_A \in \Mes(X, \A) \iff \quad A \in \A
 \]
 
 \begin{proof}
     \[
         \{ \chi_A > \alpha \}  = \left\{ \begin{array}{l}
-            X \quad \alpha <0 \\
+            X \quad \alpha <0         \\
             A \quad 1 > \alpha \geq 0 \\
             \emptyset \quad \alpha \geq 1
         \end{array} \right.
     \]
     Now, $X,\emptyset\in\A$ by definition, so:
     \[
-        A\in\A \iff \chi_A \in \Mes    
+        A\in\A \iff \chi_A \in \Mes
     \]
 \end{proof}
 
@@ -342,13 +342,13 @@ Let $f:X\to\R$, we have:
     \hspace*{\fill} %leave a blank line
     \begin{enumerate} [i)]
         \item \begin{itemize}
-            \item \textbf{($\implies$):} if $f \in \Mes(X, \A)$, then we define $f_+$ as:
-            \[
-                f_+(x) = \max\{f(x),0\} \geq 0 \quad \forall x\in X
-            \]
-            and since $f,0 \in \Mes(X,\A)$ and $\max$ is a measurable function we have that $f_+ = \max \circ (f,0) \in \Mes_+(X,\A)$ by (\ref{meas:comp}). We may analogously prove the same for $f_-$.
-            \item \textbf{($\impliedby$):} if $f_+ \in \Mes_+(X, \A)$, then we define $f = f_+ - f_-$, and since $f_+,f_-,f \in \Mes(X,\A)$ we have that $f \in \Mes(X,\A)$ by (\ref{meas:sumprod}).
-        \end{itemize}
+                  \item \textbf{($\implies$):} if $f \in \Mes(X, \A)$, then we define $f_+$ as:
+                        \[
+                            f_+(x) = \max\{f(x),0\} \geq 0 \quad \forall x\in X
+                        \]
+                        and since $f,0 \in \Mes(X,\A)$ and $\max$ is a measurable function we have that $f_+ = \max \circ (f,0) \in \Mes_+(X,\A)$ by (\ref{meas:comp}). We may analogously prove the same for $f_-$.
+                  \item \textbf{($\impliedby$):} if $f_+ \in \Mes_+(X, \A)$, then we define $f = f_+ - f_-$, and since $f_+,f_-,f \in \Mes(X,\A)$ we have that $f \in \Mes(X,\A)$ by (\ref{meas:sumprod}).
+              \end{itemize}
         \item $f\in\Mes \implies f_{+}, f_{-} \in \Mes$ by the previous point $\implies |f|=f_+ + f_- \in \Mes$ by (\ref{meas:sumprod}).
     \end{enumerate}
 \end{proof}
@@ -365,38 +365,38 @@ Write the definition of simple function. What is its canonical form? How can we 
 Let $X$ be a set and $s:X\to\R$ a function. We say that $s$ is a simple function if $s(X)$ is a finite set. \\
 Furthermore we define the two sets:
 \begin{align*}
-    & \Smes(X, \A) \coloneqq \{ \text{ measurable simple functions}  \} \\
-    & \Smes_+(X, \A) \coloneqq \{ \text{ measurable simple functions with non-negative values} \} 
+     & \Smes(X, \A) \coloneqq \{ \text{ measurable simple functions}  \}                           \\
+     & \Smes_+(X, \A) \coloneqq \{ \text{ measurable simple functions with non-negative values} \}
 \end{align*}
 
-\subsection{Canonical form of simple function}
+\subsection{Canonical form of simple function} \label{simple:canon}
 The canonical form of a simple function is:
 \[
     s(x) = \sum_{i=1}^n c_i \chi_{E_i}(x)
 \]
 where:
 \begin{align*}
-    & c_i \in \R \; \forall i=1,\dots,n \\
-    & E_i = \{ x\in X : \; s(x)=c_i \} \; \forall i=1,\dots,n \\
-    & X = \bigcup_{i=1}^n E_i, \; E_k\cap E_l = \emptyset \; \forall k\neq l
+     & c_i \in \R \; \forall i=1,\dots,n                                      \\
+     & E_i = \{ x\in X : \; s(x)=c_i \} \; \forall i=1,\dots,n                \\
+     & X = \bigcup_{i=1}^n E_i, \; E_k\cap E_l = \emptyset \; \forall k\neq l
 \end{align*}
 i.e. $E_i$ is a partition of $X$.
 
 \subsection{Measurability of simple function}
 A simple function is measurable if and only if we have the following:
 \[
-    E_i \in \A \; \forall i=1,\dots,n    
+    E_i \in \A \; \forall i=1,\dots,n
 \]
 i.e. :
 \[
-    s(x)\in \Mes(X,\A) \iff E_i \in \A \; \forall i=1,\dots,n  
+    s(x)\in \Mes(X,\A) \iff E_i \in \A \; \forall i=1,\dots,n
 \]
 this is because $s(x)$ is a linear combination of indicator functions.
 
 \subsection{Step Functions}
 Let $I=[a_0,a_1)$ be an interval and $P=\{ a_o \equiv x_0 < x_1 < \dots < x_n \equiv a_1 \}$ a partition of $I$. A function $f:I\to\R$ is a step function if:
 \[
-    f \coloneqq \sum_{k=0}^{n-1} c_k \chi_{[x_k,x_{k+1})} (x)   
+    f \coloneqq \sum_{k=0}^{n-1} c_k \chi_{[x_k,x_{k+1})} (x)
 \]
 
 %==== Question 13 ====%
@@ -407,10 +407,10 @@ State and give a sketch of the proof of the Simple Approximation Theorem.
 
 \subsection*{Solution}
 
-\subsection{Simple Approximation Theorem}
+\subsection{Simple Approximation Theorem}\label{SAT}
 Let $(X,\A)$ be a measurable space and $f:X\to\Rcomp$. Then there exists a sequence of simple functions $\seq{s}$ such that:
 \[
-    s_n \xrightarrow{n\to\infty} f \text{ in } X \text{ (pointwise)}   
+    s_n \xrightarrow{n\to\infty} f \text{ in } X \text{ (pointwise)}
 \]
 \textbf{Furthermore:}
 \begin{enumerate}[i)]
@@ -422,12 +422,12 @@ Let $(X,\A)$ be a measurable space and $f:X\to\Rcomp$. Then there exists a seque
 \subsection*{Sketch of proof}
 Let $f\leq0$, bounded and $0 \leq f \leq 1$ $\forall x\in X$.
 \[
-    f : X \to [0,1] 
+    f : X \to [0,1]
 \]
 Let us divide $[0,1]$ in $2^n$ intervals of equal length $\forall n \in \N$, then we define:
 \begin{align*}
-    & E_k^{(n)} \coloneqq \left\{ x\in X: \; \frac{k}{2^n} \leq f(x) \leq \frac{k+1}{2^n} \right\} \quad k = 0,\dots,2^n-1 \\
-    & s_n \coloneqq \sum_{k=0}^{2^n-1} \frac{k}{2^n} \chi_{E_k^{(n)}}(x) \quad \forall n\in\N
+     & E_k^{(n)} \coloneqq \left\{ x\in X: \; \frac{k}{2^n} \leq f(x) \leq \frac{k+1}{2^n} \right\} \quad k = 0,\dots,2^n-1 \\
+     & s_n \coloneqq \sum_{k=0}^{2^n-1} \frac{k}{2^n} \chi_{E_k^{(n)}}(x) \quad \forall n\in\N
 \end{align*}
 Clearly $\seq{s}$ has the desired properties.
 
@@ -467,20 +467,20 @@ Let $(X, \A, \mu)$ be a measure space and $f,g\in\Mes(x,\A)$ two functions on $X
     Let us give a partial proof:
     \begin{enumerate}[i)]
         \item Suppose $\esssup_X f < +\infty$, $\forall k\in\N$ $\exists N_k \in \mathcal{N}_\mu$ such that:
-        \[
-            \sup_{x\in N_k} f < \esssup_X f + \frac{1}{k}
-        \]
-        We define $N \coloneqq \bigcup_{k=1}^\infty N_k$. Then $N \in \mathcal{N}_\mu$ and:
-        \begin{align*}
-            &N^\complement = \bigcap_{k=1}^\infty N^\complement_k \subseteq N^\complement_k \quad \forall k \in \N \\
-            & \implies  \esssup_X f \leq \sup_{N^\complement} f \leq \sup_{N^\complement_k} f < \esssup_X f + \frac{1}{k} \quad \forall k \in \N
-        \end{align*}
-        Now we pass apply a limit $k\to+\infty$ and we get:
-        \begin{align*}
-            & \sup_{N^\complement} f = \esssup_X f \\
-            & N \supseteq \bar{N} \coloneqq \{ x\in X: \; f(x) > \esssup_X f(x) \} \in\A \\
-            & \implies \bar{N} \in \mathcal{N}_\mu \implies f \leq \esssup_X f \text{ almost everywhere in } X
-        \end{align*}
+              \[
+                  \sup_{x\in N_k} f < \esssup_X f + \frac{1}{k}
+              \]
+              We define $N \coloneqq \bigcup_{k=1}^\infty N_k$. Then $N \in \mathcal{N}_\mu$ and:
+              \begin{align*}
+                   & N^\complement = \bigcap_{k=1}^\infty N^\complement_k \subseteq N^\complement_k \quad \forall k \in \N                              \\
+                   & \implies  \esssup_X f \leq \sup_{N^\complement} f \leq \sup_{N^\complement_k} f < \esssup_X f + \frac{1}{k} \quad \forall k \in \N
+              \end{align*}
+              Now we pass apply a limit $k\to+\infty$ and we get:
+              \begin{align*}
+                   & \sup_{N^\complement} f = \esssup_X f                                                             \\
+                   & N \supseteq \bar{N} \coloneqq \{ x\in X: \; f(x) > \esssup_X f(x) \} \in\A                       \\
+                   & \implies \bar{N} \in \mathcal{N}_\mu \implies f \leq \esssup_X f \text{ almost everywhere in } X
+              \end{align*}
     \end{enumerate}
 \end{proof}
 
@@ -499,7 +499,7 @@ Let $(X, \A, \mu)$ be a measure space. A function $f\in\Mes(X,\A)$ is said to be
 \]
 and we define the set of essentially bounded functions as:
 \[
-    \Leb^\infty (X,\A,\mu) \coloneqq \{ f:X\to\Rcomp : \; \text{ f is essentially bounded }\}    
+    \Leb^\infty (X,\A,\mu) \coloneqq \{ f:X\to\Rcomp : \; \text{ f is essentially bounded }\}
 \]
 
 \subsection{Relation between functions finite a.e. and essentially bounded functions}
@@ -512,24 +512,24 @@ We have that:
 \begin{proof}
     \begin{enumerate}
         \item We can easily see that:
-        \[
-            |f| \leq \esssup |f| < + \infty \text{ almost everywhere in } X    
-        \]
-        thus $f$ is finite almost everywhere in $X$;
+              \[
+                  |f| \leq \esssup |f| < + \infty \text{ almost everywhere in } X
+              \]
+              thus $f$ is finite almost everywhere in $X$;
         \item Let us assume that:
-        \[
-            f \text{ is finite a.e. in }  X \implies f\in\Leb^\infty
-        \]
-        and let us see a clear counterexample of this, take:
-        \[
-            f(x): \R \to \Rcomp \coloneqq \begin{cases}
-                \frac{1}{|x|} & x \neq 0 \\
-                + \infty & x = 0
-            \end{cases}    
-        \]
-        Clearly $f$ is finite in $E=\R\setminus\{0\}$, i.e. $f$ is finite a.e. in $\R$. Let us note that $\lambda(\{0\}) = 0 $. Thus:
-        \[
-            \esssup_X |f| = +\infty \implies f \notin \Leb^\infty
-        \]
+              \[
+                  f \text{ is finite a.e. in }  X \implies f\in\Leb^\infty
+              \]
+              and let us see a clear counterexample of this, take:
+              \[
+                  f(x): \R \to \Rcomp \coloneqq \begin{cases}
+                      \frac{1}{|x|} & x \neq 0 \\
+                      + \infty      & x = 0
+                  \end{cases}
+              \]
+              Clearly $f$ is finite in $E=\R\setminus\{0\}$, i.e. $f$ is finite a.e. in $\R$. Let us note that $\lambda(\{0\}) = 0 $. Thus:
+              \[
+                  \esssup_X |f| = +\infty \implies f \notin \Leb^\infty
+              \]
     \end{enumerate}
 \end{proof}
