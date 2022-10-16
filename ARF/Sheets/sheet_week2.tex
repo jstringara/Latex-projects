@@ -23,7 +23,9 @@ then:
     \item $\bar{\mu}$ is a complete measure, $\bar{\mu}|_{\A}=\mu$
 \end{enumerate}
 and the triplet $(X,\bar{A}, \bar{\mu})$ is a complete measure space and is called the completion of $(X,\A,\mu)$, i.e. it the smallest (w.r. to inclusion) complete measure space that cointains $(X,\A,\mu)$
-\subsection*{Sketch of proof}
+\subsection*{Sketch of proof} \footnote{
+    This is a partial proof of my own making. It has been review by the TA and professor Punzo and stated to be correct.
+}
 We  must prove two things:
 \begin{itemize}
     \item \textbf{First:} that $\bar{\A}$ is a $\salg$ and that it contains $\A$, the latter is trivial since $\forall A\in\A \quad A\subseteq A\subseteq A \implies A\in\bar{\A}$ while the former is quite hardous so we shall just assume it to be true.
@@ -59,7 +61,7 @@ We  must prove two things:
           Let $E_1 \in X$ and $E_2 \in \bar{\A}$ such that $\bar{\mu}(E_2)=\mu(F_2)=0$ and $E_1 \subseteq E_2$, let us note that:
           \[
               \left\{ \begin{array}{l}
-                  \mu(G_2) = \xcancel{\mu(G_2\setminus F_2)}^0+\xcancel{\mu(F_2)}^0 \\
+                  \mu(G_2) = \cancelnum{0}{\mu(G_2\setminus F_2)} + \cancelnum{0}{\mu(F_2)}\\
                   \mu(G_2 \setminus \emptyset) = \mu(G_2) - 0                       \\
                   \emptyset \subseteq E_1 \subseteq G_2
               \end{array} \right. \implies E_1\in \bar{\A}, \; \bar{\mu}(E_1)=\mu(\emptyset) = 0
@@ -130,7 +132,7 @@ Let $K\subseteq\Parts{X}, \, \emptyset\in K, \: \nu:K\to\Rcomppos, \; \nu(\empty
               \]
               it clearly follows that:
               \[
-                  \mu^*(\bigcup_{n=1}^{\infty} E_n) \leq \sum_{n=1}^{\infty} \sum_{k=1}^{\infty} \nu(I_{n,k}) < \sum_{n=1}^{\infty}\mu^*(E_n) + \epsilon\cdot\xcancel{\sum_{n=1}^{\infty} \frac{1}{2^n}}^1
+                  \mu^*(\bigcup_{n=1}^{\infty} E_n) \leq \sum_{n=1}^{\infty} \sum_{k=1}^{\infty} \nu(I_{n,k}) < \sum_{n=1}^{\infty}\mu^*(E_n) + \epsilon\cdot\cancelnum{1}{\sum_{n=1}^{\infty} \frac{1}{2^n}}
               \]
               because $\epsilon$ is arbitrary, we have the cocnlusion.
     \end{enumerate}
@@ -181,7 +183,7 @@ There cannot exist such a set $E$ because all sets of zero aouter measure meet t
 \begin{proof}\label{outer:zeromeas}
     Indeed $\forall Z \subseteq X$ by the monotonicty of $\mu^*$ (\ref{outer:mono}) we have:
     \[
-        \mu^*(\underbrace{Z\cap E}_{\subseteq E}) + \mu^*(\underbrace{Z\setminus E}_{\subseteq Z}) \leq \xcancel{\mu^*(E)}^0 + \mu^*(Z)
+        \mu^*(\underbrace{Z\cap E}_{\subseteq E}) + \mu^*(\underbrace{Z\setminus E}_{\subseteq Z}) \leq \cancelnum{0}{\mu^*(E)} + \mu^*(Z)
     \]
 \end{proof}
 
