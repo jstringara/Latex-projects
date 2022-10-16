@@ -57,7 +57,7 @@ Write the definitions of: equivalence relation, equivalence class, quotient set.
 \subsection*{Solution}
 \provdefs
 \begin{itemize}
-    \item \subsection{Equivalence relation} a relation $R$ in $X$ (i.e. a subset $R\subseteq X\times X$) is an equivalence relation if:
+    \item \subsection{Equivalence relation} \label{equivrel} a relation $R$ in $X$ (i.e. a subset $R\subseteq X\times X$) is an equivalence relation if:
     \begin{enumerate}[i)]
         \item $(x,x) \in R$ $\forall x\in X$ (\textbf{reflexivity})
         \item $(x,y) \in R \implies (y,x)\in R$ (\textbf{simmetry})
@@ -270,7 +270,7 @@ Let us state and prove the properties of a measure $\mu$ on a set $X$ and $\salg
     this sequence is also disjoint ($\A\cap\emptyset = \emptyset$ $\forall \A\in X$), thus we may write:
     \[
         \mu \underbrace{ \left( \bigcup_{k=1}^{\infty} E_k \right) }_{=\bigcup_{k=1}^{n} E_k \cup \emptyset}
-         = \sum_{k=1}^{\infty} \mu(E_k) = \sum_{k=1}^{n} \mu(E_k) + \sum_{k=n+1}^{\infty} \underbrace{\xcancel{\mu(E_k)}}_{=0}
+         = \sum_{k=1}^{\infty} \mu(E_k) = \sum_{k=1}^{n} \mu(E_k) + \sum_{k=n+1}^{\infty} \underbrace{\cancelnum{}{\mu(E_k)}}_{=0}
     \]
     \end{proof}
 

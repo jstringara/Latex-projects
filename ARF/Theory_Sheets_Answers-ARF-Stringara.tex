@@ -23,6 +23,7 @@
 \usepackage{xifthen} %for conditional statements
 \usepackage{enumerate} %to modify lists
 \usepackage{hyperref} %to insert hyperlinks
+%\usepackage[open]{bookmark} %to have bookmarks open by default
 \usepackage{titletoc} %to modify the toc
 \usepackage[makeroom]{cancel} %to cancel out stuff
 \usepackage{tikz}
@@ -134,6 +135,10 @@
 
 \newcommand*{\cvrule}{\smash{\rule{0.4pt}{2ex}}}
 
+%==== Custom commands ====%
+
+\newcommand{\cancelnum}[2]{\overset{\text{\normalsize#1}}{\xcancel{#2}}}
+
 %==== Document ====%
 \begin{document}
 
@@ -148,6 +153,7 @@
 \input{Sheets/sheet_week2.tex}
 \input{Sheets/sheet_week3.tex}
 \input{Sheets/sheet_week4.tex}
+\input{Sheets/sheet_week5.tex}
 
 %==== End Document ====%
 
