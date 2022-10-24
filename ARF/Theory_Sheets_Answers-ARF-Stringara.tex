@@ -130,9 +130,10 @@
 } %smart definition
 %define #1
 \newcommand{\provdefs}{Let us define the following:} %multiple definitions
-\newcommand{\seq}[1]{ \{ #1_n \} }
+\newcommand{\seq}[1]{ \{ #1_n \} } %sequence
+\newcommand{\subseq}[1]{ \{ #1_{n_k} \} } %subsequence
 \newcommand{\tfae}{the following are equal:}  %the following are equal
-
+\newcommand{\toin}[1]{\xrightarrow[n\to\infty]{#1} } %to in 
 \newcommand*{\cvrule}{\smash{\rule{0.4pt}{2ex}}}
 
 %==== Custom commands ====%
@@ -154,6 +155,7 @@
 \input{Sheets/sheet_week3.tex}
 \input{Sheets/sheet_week4.tex}
 \input{Sheets/sheet_week5.tex}
+\input{Sheets/sheet_week6.tex}
 
 %==== End Document ====%
 

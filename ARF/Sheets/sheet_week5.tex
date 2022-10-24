@@ -342,6 +342,7 @@ in particular:
     \[
         g_n \geq 0 \text{ a.e. in } X \; \forall n \in \N \implies g_n \in Mes_+    
     \]
+    \newpage
     thus we can write:
     \begin{align*}
         2 \int_X g \, d\mu & \tikzmarknode{eq1}{=} \int_X \left( \lim_{n\to\infty} g_n \right) \, d\mu \\
@@ -464,7 +465,7 @@ and we denote the classes of equivalence inside of it as:
     [f] \coloneqq \{ g\in\Leb^1 : \; fRg\}    
 \]
 
-\subsection{Defintion of \texorpdfstring{$L^\infty$}{Linf}}
+\subsection{Definition of \texorpdfstring{$L^\infty$}{Linf}}
 As done above we define $L^\infty$ as:
 \[
     L^\infty(X,\A,\mu) \coloneqq \Leb^\infty(X,\A,\mu)/R    
@@ -535,7 +536,7 @@ Let $\seq{f}\subseteq L^\infty$ and assume (for now) $f\in L^\infty$. We say tha
     d_\infty(f_n,f) = \esssup_X |f_n-f| \xrightarrow{n\to\infty} 0
 \]
 
-\subsection{Convergence in measure}
+\subsection{Convergence in measure}\label{conv:meas}
 We say that $f_n \xrightarrow{n\to\infty} f$ in measure if:
 \[
     \mu (\{ |f_n-f| \geq \epsilon \}) \xrightarrow{n\to\infty} 0 \quad \forall \epsilon > 0   
