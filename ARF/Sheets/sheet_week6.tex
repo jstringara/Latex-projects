@@ -1,0 +1,433 @@
+\sheet
+
+%==== Question 1 ====%
+
+\question
+Is it true that if $f_n \to f$ in measure, then $f_n \to f$ a.e.? Justify the answer.
+
+\subsection*{Solution}
+
+\subsection{Convergence in measure does not imply convergence a.e.}
+In general, convergence in measure does not imply convergence a.e.. This can be clearly shown by way of Rademacher's sequence (a.k.a. the typewriter sequence):
+
+\subsection{Rademacher sequence}
+Coming soon...
+My guess is that we'll cover this sequence next week during the next exercise session.
+%TODO Rademacher sequence
+
+%==== Question 2 ====%
+
+\question
+What is the relation between convergence in measure and convergence a.e. up to subsequences?
+
+\subsection*{Solution}
+
+\subsection{Convergence in measure implies convergence a.e. up to subsequences} \label{measure->aesubs}
+Let $f_n,f \in \Mes(X,\A)$ be finite a.e. in $X$. If $f_n \to f$ in measure, then there exists a subsequence $\subseq{f}$ such that:
+\[
+    f_{n_k} \xrightarrow{k\to\infty} f \text{ a.e. in } X.
+\]
+
+%==== Question 3 ====%
+
+\question
+Under which hypothesis on $X$, does convergence a.e. imply convergence in measure? What happens if one omits the key assumption on $X$?
+
+\subsection*{Solution}
+
+\subsection{Convergence a.e. implies convergence in measure when \texorpdfstring{$\mu(X)<+\infty$}{ the measure of X is finite}}
+Let $\mu(X)<+\infty$ and $f_n,f \in \Mes(X,\A)$ be finite a.e. in $X$. If $f_n \to f$ a.e. in $X$, then:
+\[
+    f_n \xrightarrow{n\to\infty} f \text{ in measure}    
+\]
+The assumption that $\mu(X)<+\infty$ is necessary, as the following counterexample shows:
+
+\subsection{Counterexample}
+Let us take $f_n \coloneqq \chi_{[n,+\infty)}$, clearly $f_n \to 0$ pointwise (and thus a.e.) in $\R$ but we have that $\lambda(\R)=+\infty$ and thus $f_n \centernot\to 0$ in measure. Indeed we have:
+\[
+    \mu \left( \left\{ f_n \geq \frac{1}{2} \right\} \right) = +\infty \quad \forall n \in \N 
+\]
+
+%==== Question 4 ====%
+
+\question
+Show that convergence in $L^1$ implies convergence in measure.
+
+\subsection*{Solution}
+
+\subsection{Convergence in \texorpdfstring{$L^1$}{L1} implies convergence in measure} \label{L1->measure}
+Let $f_n,f \in L^1(X,\A,\mu)$. If $f_n \toin{L^1} f$, then:
+\[
+    f_n \to f \text{ in measure}    
+\]
+
+\begin{proof}
+    Suppose by contradiction that:
+    \[
+        f_n \centernot \to f \text{ in measure}    
+    \]
+    then, by definition of convergence in measure (\ref{conv:meas}), $\exists \epsilon, \sigma > 0$ such that:
+    \[
+         \mu \left( \left\{ |f_n-f| \geq \epsilon \right\} \right) \geq \sigma
+    \]
+    for infinitely many $n\in\N$. Thus we may write:
+    \begin{align*}
+        \int_X |f_n-f| \, d\mu & \tikzmarknode{eq1}{\geq} \int_{ \{ |f_n-f| \geq \epsilon \} } |f_n-f| \, d\mu \geq \int_{ \{ |f_n-f| \geq \epsilon \} } \epsilon \, d\mu  \\
+        & \tikzmarknode{eq2}{=} \epsilon \cdot \mu \left( \left\{ |f_n-f| \geq \epsilon \right\} \right) \geq \epsilon \cdot \sigma
+    \end{align*} \tikz[overlay,remember picture]{\draw[shorten >=1pt,shorten <=1pt] (eq1) -- (eq2);}
+    for infinitely many $n\in\N$, thus:
+    \[
+        \implies f_n \centernot{\toin{L^1}} f    
+    \]
+    which is absurd.
+\end{proof}
+
+%==== Question 5 ====%
+
+\question
+Show that convergence in $L^1$ implies convergence a.e. up to subsequences.
+
+\subsection*{Solution}
+
+\subsection{Convergence in \texorpdfstring{$L^1$}{L1} implies convergence a.e. up to subsequences}
+If $f_n \toin{L^1} f$, then:
+\[
+    \exists \subseq{f} \text{ such that } f_{n_k} \xrightarrow{k\to\infty} f \text{ a.e. in } X
+\]
+
+\begin{proof}
+    This can be proven by trivially applying the fact that convergence in $L^1$ implies convergence in measure (\ref{L1->measure}) and that, in turn, convergence in measure implies convergence a.e. up to subsequences (\ref{measure->aesubs}).
+\end{proof}
+
+%==== Question 6 ====%
+
+\question
+Does convergence in measure imply convergence in $L^1$? Does convergence a.e. imply convergence in $L^1$? Justify the answer.
+
+\subsection*{Solution}
+
+\subsection{Convergence in measure or convergence a.e. do not imply convergence in \texorpdfstring{$L^1$}{L1}}
+Neither convergence in measure nor convergence a.e. imply convergence in $L^1$. This can be shown by way of the following counterexample:
+
+\subsection{Counterexample}
+Let $(X=[0,1], \Leb(X), \lambda|_X)$ and $f_n(x) = n \cdot \chi_{[0,1/n]}(x)$ clearly we have that:
+\[
+    f_n \toin{a.e.} 0 \text{ in } [0,1]    
+\]
+and, thus, since $\lambda(X)=1$, we have that:
+\[
+    f_n \toin{\lambda} 0 \text{ in } [0,1]
+\]
+but on the other hand, we have that:
+\[
+    \int_0^1 |f_n-0| \, d\lambda = \int_0^1 f_n \, d\lambda = \int_0^{\frac{1}{n}} n \, d\lambda = n \cdot \frac{1}{n} = 1 \quad \forall n \in \N    
+\]
+so $f_n \toin{L^1} 1$ and it cannot be that $f_n \toin{L^1} 0$. So convergence a.e. and in measure do not imply convergence in $L^1$.
+
+%==== Question 7 ====%
+
+\question
+Write the definitions of: product measurable space, section of a measurable set. What is the product measure? Why is the definition well-posed?
+
+\subsection*{Solution}
+
+\subsection{Product measurable space}
+Let $(X_1, \A_1)$, $(X_2, \A_2)$ be two measurable spaces. Consider the set $R\subseteq \Parts{X_1 \times X_2}$ defined as follows:
+\[
+    R \coloneqq \{ E_1 \times E_2: \; E_1 \in \A_1, \, E_2 \in \A_2 \}    
+\]
+let us defined the \textbf{product $\salg$} as:
+\[
+    \sigma_0(R) \equiv \A_1 \times \A_2   
+\]
+then the measurable space $(X_1 \times X_2, \A_1 \times \A_2)$ is called the \textbf{product measurable space} of $(X_1, \A_1)$ and $(X_2, \A_2)$.
+
+\subsection{Section of a measurable set}
+Let $E\subseteq X_1 \times X_2$, then we define the following two sections:
+\begin{align*}
+    E_{x_1} & \coloneqq \{ x_2 \in X_2: \; (x_1, x_2) \in E \} \quad x_1 \in X_1 \\
+    E_{x_2} & \coloneqq \{ x_1 \in X_1: \; (x_1, x_2) \in E \} \quad x_2 \in X_2
+\end{align*}
+We have that $E_{x_1} \in \A_2$ $\forall x_1\in X_1$ and $E_{x_2} \in \A_1$ $\forall x_2\in X_2$.
+
+\subsection{Product measure}\label{prodmeas}
+Let $(X_1, \A_1, \mu_1)$, $(X_2, \A_2, \mu_2)$ be two $\s{finite}$ measure spaces with measure $\mu_1$ and  $\mu_2$ respectively and let $E\in \A_1 \times \A_2$, then we define the following:
+\begin{align*}
+    \phi_1: X_1 \to \Rcomppos \quad & \phi_1 (x_1) \coloneqq \mu_2(E_{x_1}) \quad \forall x_1 \in X_1 \\
+    \phi_2: X_2 \to \Rcomppos \quad & \phi_2 (x_2) \coloneqq \mu_1(E_{x_2}) \quad \forall x_2 \in X_2
+\end{align*}
+these are well defined thanks to the fact that $E_{x_1} \in \A_2$ and $E_{x_2} \in \A_1$.\\
+Moreover we have that:
+\begin{enumerate}[i)]
+    \item $\phi_i \in \Mes_+(X_i,\A_i)$ $i=1,2$
+    \item \begin{flalign*}
+            & \int_{X_1} \phi_1(x_1) \, d\mu_1 = \int_{X_2} \phi_2(x_2) \, d\mu_2 &   
+        \end{flalign*}
+\end{enumerate}
+We thus define the \textbf{product measure} as the function:
+\[
+    \mu_1 \times \mu_2 : \A_1 \times \A_2 \to \Rcomppos \quad (\mu_1 \times \mu_2)(E) \coloneqq \int_{X_1} \phi_1(x_1) \, d\mu_1 = \int_{X_2} \phi_2(x_2) \, d\mu_2    
+\]
+let us note that this is a $\s{finite}$ measure and it is well-posed since for both $\phi_1$ and $\phi_2$ the Lebesgue integral is well defined because $\phi_1\in \Mes_+(X_1,\A_1)$ and $\phi_2 \in \Mes_+(X_2,\A_2)$. Lastly, let us note that to have this condition it is essential for $\mu_1$ and $\mu_2$ to be $\s{finite}$.
+
+%==== Question 8 ====%
+
+\question
+Is the product measure space complete? Justify the answer. Which is the relation between $(\R^{m+n}, \Leb(\R^{m+n}), \lambda_{m+n})$ and $(\R^{m+n}, \Leb(\R^m) \times \Leb(\R^n), \lambda_m \times \lambda_n)$?
+
+\subsection*{Solution}
+
+\subsection{The product space is incomplete}
+In general the product measure space is incomplete. Let us show this trough an example:
+
+\subsection{Counterexample}
+Let us consider these two spaces:
+\[
+    (\R^m \times \R^n, \Leb(\R^m) \times \Leb(\R^n), \lambda_m \times \lambda_n ) \text{ and } (\R^{m+n}, \Leb(\R^{m+n}), \lambda_{m+n})
+\]
+for simplicity's sake here we take $m=n=1$. As we already know, the space $(\R^2, \Leb(\R^2), \lambda_2)$ is a complete space. Now, let us consider Vitali'set: $V\subseteq[0,1]$, $V\not\in\Leb(\R)$ and let us take the set:
+\[
+    E \coloneqq \{ x_0 \} \times V \quad (x_0\in\R)    
+\]
+Clearly, if we take the section $E_{x_0}$, we have that:
+\[
+    E_{x_0} = V \not\in \Leb(\R) \implies E \not\in \Leb(\R) \times \Leb(\R)    
+\]
+but we have that:
+\[
+    E \subseteq F \coloneqq \{ x_0 \} \times [0,1]    
+\]
+and that $F\in \Leb(\R) \times \Leb(\R)$, furthermore, by the definition of product mesaure (\ref{prodmeas}), we observe that:
+\[
+    (\lambda \times \lambda)(F) = \int_{[0,1]} \cancelnum{0}{\lambda(\{ x_0 \})} \, d\lambda = 0    
+\]
+therefore we have proved that there exists a set $E$ that is contained within a set $F$ of zero measure but isn't measurable itself. In other words we have proved that $(\R^2, \Leb(\R)\times\Leb(\R), \lambda \times \lambda)$ is not a complete measure space.\\
+Futhermore we can observe quite easily that this means that $(\R^2, \Leb(\R^2), \lambda_2)$ is the completion of $(\R^2, \Leb(\R)\times\Leb(\R), \lambda \times \lambda)$. This argument can be extended to all pairs of $m$ and $n$.
+
+%==== Question 9 ====%
+
+\question
+State the Tonelli theorem.
+
+\subsection*{Solution}
+
+\subsection{Tonelli's theorem} \label{Tonelli}
+Let $(X_1, \A_1, \mu_1)$, $(X_2, \A_2, \mu_2)$ be two $\s{finite}$ measure spaces and $f\in\Mes_+(X_1 \times X_2, \A_1 \times \A_2)$. let us define the following:
+\begin{align*}
+    \psi_1: X_1 \to \Rcomppos \quad & \psi_1 (x_1) \coloneqq \int_{X_2} f(x_1, x_2) \, d\mu_2 \quad \forall x_1 \in X_1 \\
+    \psi_2: X_2 \to \Rcomppos \quad & \psi_2 (x_2) \coloneqq \int_{X_1} f(x_1, x_2) \, d\mu_1 \quad \forall x_2 \in X_2
+\end{align*}
+\begin{enumerate}[i)]
+    \item $\psi_i (x_i) \in \Mes_+(X_i,\A_i)$ $i=1,2$
+    \item \begin{flalign*}
+        & \int_{X_1 \times X_2} f(x_1,x_2) \, d(\mu_1\times\mu_2) = \int_{X_1} \biggl[ \underbrace{ \int_{X_2} f(x_1,x_2) \, d\mu_2 }_{\psi_1(x_1)} \biggr] \, d\mu_1 = \int_{X_2}  \biggl[ \underbrace{\int_{X_1} f(x_1,x_2) \, d\mu_1 }_{\psi_2(x_2)} \biggr] \, d\mu_2 &
+    \end{flalign*}
+\end{enumerate}
+
+%==== Question 10 ====%
+
+\question
+State the Fubini theorem. By means of a counterexample, show that it is not possible to omit the hypothesis $f \in L^1$.
+
+\subsection*{Solution}
+
+\subsection{Fubini's theorem} \label{Fubini}
+Let $(X_1, \A_1, \mu_1)$, $(X_2, \A_2, \mu_2)$ be two $\s{finite}$ measure spaces and $f \in L^1(X_1 \times X_2, \A_1 \times \A_2, \mu_1 \times \mu_2)$, then:
+\begin{enumerate}[i)]
+    \item \begin{flalign*}
+            & f(x_1, \cdot) \in L^1(X_1,\A_1,\mu_1) \text{ a.e. for } x_1 \in X_1& \\
+            & f(\cdot, x_2) \in L^1(X_2,\A_2,\mu_2) \text{ a.e. for } x_2 \in X_2&
+        \end{flalign*}
+    \item \begin{flalign*}
+            & \psi_1 (x_1) \coloneqq \int_{X_2} f(x_1, x_2) \, d\mu_2, \quad \psi_1\in L^1(X_1,\A_1,\mu_1) & \\
+            & \psi_2 (x_2) \coloneqq \int_{X_1} f(x_1, x_2) \, d\mu_1, \quad \psi_2\in L^1(X_2,\A_2,\mu_2) & \\
+        \end{flalign*}
+    \item\label{Fubini3} \begin{flalign*} 
+            & \int_{X_1 \times X_2} f(x_1,x_2) \, d(\mu_1\times\mu_2) = \int_{X_1} \biggl[ \underbrace{ \int_{X_2} f(x_1,x_2) \, d\mu_2 }_{\psi_1(x_1)} \biggr] \, d\mu_1 = \int_{X_2}  \biggl[ \underbrace{\int_{X_1} f(x_1,x_2) \, d\mu_1 }_{\psi_2(x_2)} \biggr] \, d\mu_2 &
+        \end{flalign*}
+\end{enumerate}
+
+\subsection{Counterexample}
+The hypothesis that $f \in L^1$ is necessary, let us consider the following example: \\
+\begin{align*}
+    (X_i, \A_i, \mu_i) = ( (0,1), \Leb((0,1)), \lambda) \quad i=1,2 \\
+    f(x_1, x_2) = \frac{x_1^2 - x_2^2}{(x_1^2+x_2^2)^2} \quad (x_1,x_2) \in (0,1)^2
+\end{align*}
+We have that $f \in C\left( (0,1)^2 \right) \implies f \in \Mes$ so let us consider the integral of its positive part:
+\[
+    \int_{X_1 \times X_2} f_+ (x_1, x_2) \, d(\lambda \times \lambda)    
+\]
+\newpage %otherwise tikz makes a whole mess
+and apply Tonelli's theorem (\ref{Tonelli}) since ($f_+\geq 0$):
+\begin{align*}
+    \int_{X_1 \times X_2} f_+ (x_1, x_2) \, d(\lambda \times \lambda) & \tikzmarknode{eq1}{=} \int_{X_1} \left[ \int_{X_2} f_+(x_1,x_2) \, d\lambda \right] \, d\lambda \\
+    & \tikzmarknode{eq2}{=} \int_0^1 \int_0^{x_1} \frac{x_1^2 - x_2^2}{(x_1^2+x_2^2)^2} \, dx_2 \, dx_1 \\
+    & \tikzmarknode{eq3}{=} \frac{1}{2} \int_0^1 \frac{1}{x_1} \, dx_1 = + \infty
+\end{align*} \tikz[overlay,remember picture]{\draw[shorten >=1pt,shorten <=1pt] (eq1) -- (eq2) -- (eq3);}
+thus $f\notin L^1$ and indeed the equality in (\ref{Fubini3}) does not hold:
+\begin{align*}
+    & \int_{X_1} \biggl[ \int_{X_2} f(x_1,x_2) \, d\mu_2 \biggr] \, d\mu_1 = \dots = \frac{\pi}{4} \\
+    & \int_{X_2}  \biggl[ \int_{X_1} f(x_1,x_2) \, d\mu_1 \biggr] \, d\mu_2 = \dots = -\frac{\pi}{4}
+\end{align*}
+
+%==== Question 11 ====%
+
+\question
+Write the definition of Lebesgue point. What is about the measure of the set of points that are not Lebesgue points for a function $f \in L^1$?
+
+\subsection*{Solution}
+
+\subsection{Lebesgue point}
+A point $x_0 \in [a,b]$ is a \textbf{Lebesgue point} of a function $f$ if:
+\[
+    \lim_{h\to0} \frac{1}{h} \int_{x_0}^{x_0+h} |f(t)-f(x_0)| \, dt = 0
+\]
+
+\subsection{Integrable functions and Lebesgue points}\label{intfunc:lebpoi}
+If $f\in L^1((a,b))$ then almost every $x_0 \in X$ is a Lebesgue point of $f$. Therefore the set of points that are not Lebesgue points for $f$ has measure zero.
+
+%==== Question 12 ====%
+
+\question
+State and prove the First Fundamental Theorem of Calculus for $f \in L^1$.
+
+\subsection*{Solution}
+
+\subsection{First Fundamental Theorem of Calculus for \texorpdfstring{$L^1$}{L1}}
+Let $X=[a,b]$ and $f \in L^1([a,b])$, we define the integral function $F$ of $f$ as follows:
+\[
+    F(x) \coloneqq \int_a^x f(t) \, dt \quad x \in [a,b]
+\]
+then $F$ is differentiable almost everywhere in $(a,b)$ and:
+\[
+    F'(x) = f(x)    
+\]
+
+\begin{proof}
+    Let $x_0 \in [a,b]$ be a Lebesgue point for $f$ and $h\neq 0$ be such that $x_0+h \in [a,b]$. Let us write the incremental ratio for F:
+    \[
+        \frac{F(x_0+h)-F(x_0)}{h} - f(x) = \frac{1}{h} \int_{x_0}^{x_0+h} [f(t) - f(x)] \, dt    
+    \]
+    we can do this since $f(x)$ is independent of $t$, we may thus write:
+    \[
+        \left| \frac{F(x_0+h)-F(x_0)}{h} - f(x) \right| \leq \frac{1}{|h|} \int_{x_0}^{x_0+h} |f(t) - f(x)| \, dt \xrightarrow{h\to0} 0
+    \]
+    thanks to the definition of Lebesgue point, hence:
+    \[
+        F'(x) = f(x)    
+    \]
+    but in view of the previous point (\ref{intfunc:lebpoi}) we write:
+    \[
+        F'(x) = f(x) \text{ a.e. in } (a,b)
+    \]
+    since almost every $x$ is a Lebesgue point for $f$.
+\end{proof}
+
+
+%==== Question 13 ====%
+
+\question
+Let $f : [a, b] \to \R$. Write the definitions of: variation of $f$ relative to a partition of $[a, b]$; total variation of f over $[a, b]$; function of bounded variation.
+
+\subsection*{Solution}
+
+\subsection{Variation of \texorpdfstring{$f$}{f} relative to a partition of \texorpdfstring{$[a, b]$}{[a,b]}}
+Let $f : [a, b] \to \R$ and $P$ be a partition of $[a, b]$:
+\[
+    P \coloneqq \{ a \equiv x_0 < x_1 < \dots < x_n \equiv b \}    
+\]
+we define the variation of $f$ with respect to the partition $P$ as:
+\[
+    v_a^b(f,P) \coloneqq \sum_{k=1}^n |f(x_k) - f(x_{k-1})|
+\]
+
+\subsection{Total variation of \texorpdfstring{$f$}{f} over \texorpdfstring{$[a, b]$}{[a,b]}}
+Let $\mathcal{P}$ be the collection of all partitions $P$ of $[a, b]$. We define the total variation of $f$ over $[a, b]$ as:
+\[
+    V_a^b(f) \coloneqq \sup_{P \in \mathcal{P}} v_a^b(f,P)    
+\]
+
+\subsection{Function of bounded variation}
+A function $f : [a, b] \to \R$ is said to be of \textbf{bounded variation} if $V_a^b(f) < +\infty$. We define the set of functions of bounded variation as:
+\[
+    BV([a,b]) \coloneqq \{ f:[a,b]\to\R: \, V_a^b(f)<+\infty \}    
+\]
+
+%==== Question 14 ====%
+
+\question
+Let $f : [a, b] \to \R$ be monotone. Why $f \in BV ([a, b])$? Show that if $f \in BV ([a, b])$, then $f$ is bounded.
+
+\subsection*{Solution}
+
+\subsection{Monotone functions are of bounded variation}
+If $f:[a,b]\to\R$ is a monotone function (either decreasing or increasing), then we have that:
+\[
+    V_a^b(F) = |f(b)-f(a)| < +\infty \implies f \in BV([a,b])    
+\]
+
+\subsection{All functions of bounded variation are bounded}
+If $f\in BV([a,b]) \implies f$ is bounded, in fact we have that:
+\[
+    \sup_{x\in[a,b]} |f(x)| \leq |f(a)| + V_a^b(f)    
+\]
+thus $f$ must be bounded if $f\in BV$.
+
+%==== QUestion 15 ====%
+
+\question
+What is the Jordan decomposition of a BV function?
+
+\subsection*{Solution}
+
+\subsection{Jordan decomposition of a BV function}
+Let $f:[a,b]\to\R$, then \tfae
+\begin{enumerate}[i)]
+    \item $f \in BV([a,b])$
+    \item $\exists \, \phi, \psi : [a,b]\to\R$ both increasing such that:
+        \[
+            f = \phi - \psi    
+        \]
+        this is called the \textbf{Jordan decomposition} of $f$.
+\end{enumerate}
+
+%==== QUestion 16 ====%
+
+\question
+Why a function of bounded variation is differentiable a.e.?
+
+\subsection*{Solution}
+
+\subsection{Monotonicity implies a.e. differentiability}
+Let $f:I\to\R$ be a monotone function, then $f$ is differentiable a.e. in $I$.
+
+\subsection{All BV functions are differentiable a.e.}
+For all functions $f \in BV([a,b])$ we can write its Jordan decomposition as $f = \phi - \psi$. Both $\phi$ and $\psi$ are increasing and thus, by the previous point, are a.e. differentiable in $I$ and so is $f$ since it's the difference of the two and the derivative is a linear operator.
+
+%==== QUestion 17 ====%
+
+\question
+Let $f : [a, b] \to \R$ be an increasing function. What can we cay about $f'$ and $\int_{[a,b]}f' \, d\lambda$? Justify the answer.
+
+\subsection*{Solution}
+
+\subsection[]{Derivative and integral of the derivative of an increasing function}
+If $f:I\to\R$ is increasing, then:
+\begin{align*}
+    & f' \text{ exists a.e. in } I \\
+    & \int_I f' \, d\lambda \leq f(b)-f(a)
+\end{align*}
+
+%==== QUestion 18 ====%
+
+\question
+Can there exists a function $f \in BV ([a, b])$ with $f'\not\in L^1([a, b])$? Justify the answer.
+
+\subsection*{Solution}
+
+\subsection{All BV functions have a Lebesgue-integrable derivative}
+There cannot exist a BV function with an unintegrable derivative. In other words:
+\[
+    f \in BV([a,b]) \implies f' \in L^1([a,b])
+\]
+indeed for any function $f\in BV([a,b])$ we may write it through its Jordan decomposition $f=\phi-\psi$. Now, since both $\phi$ and $\psi$ are increasing we may apply the previous point and say that both $\phi'$ and $\psi'$ are in $L^1$. Thus since $L^1$ is a vector space $\phi,\psi\in L^1 \implies f\in L^1$.
