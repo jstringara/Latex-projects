@@ -1,0 +1,319 @@
+\sheet
+
+%==== Question 1 ====%
+
+\question
+Write the definition of absolutely continuous function. Show that an absolutely continuous function is also uniformly continuous, but the viceversa is not true; furthermore, a Lipschitz function is absolutely continuous, but the viceversa is not true.
+
+\subsection*{Solution}
+
+\subsection{Absolutely continuous function}
+Let $J=[a,b]$,  $f:J\to\R$, we denote by $\mathcal{F}(J)$ the set of finite collections of closed sub-intervals of $J$ without interior points in common.
+We say that the function $f$ is absolutely continuous in $J$, if $\forall \epsilon > 0$, $\exists \delta > 0$ such that:
+\[
+    \forall \{ [a_k, b_k]\} \in \mathcal{F}(J) \quad (k=1,\dots,n)    
+\]
+for which:
+\[
+    \sum_{k=1}^n (b_k-a_k) < \delta   
+\]
+one has:
+\[
+    \sum_{k=1}^n |f(b_k)-f(a_k)| < \epsilon    
+\]
+and we denote by $AC([a,b])$ the set of all absolutely continuous functions in $J=[a,b]$.
+
+\subsection{AC functions are also uniformly continuous}
+Let $J=[a,b]$, $f:J\to\R$, $f \in AC([a,b])$. If we take:
+\[
+    \{ [a_k, b_k] \} = \begin{cases}
+        \{ [x,y] \} & y \geq x \\
+        \{ [y,x] \} & x > y
+    \end{cases}
+\]
+by the definition of absolute continuity we have that:
+\[
+    |x-y| < \delta \implies |f(y) - f(x)| < \epsilon    
+\]
+which is the definition of uniform continuity.
+The converse isn't true, let us see a poignant counterexample:
+
+\subsubsection{Counterexample}
+Let us take the following $f$:
+\[
+    f(x) = \begin{cases}
+       x \sin(\frac{1}{x}) & x\in[-1,1]\setminus\{0\} \\
+       0 & x=0
+    \end{cases}    
+\]
+this function is not absolutely continuous in $[-1,1]$ but is  is uniformly continuous in $[-1,1]$.
+
+\subsection{Lipschitz functions are absolutely continuous}
+Let $f$ be a Lipschitz function in $J=[a,b]$, we have that $f\in AC$.\\
+\begin{proof} Indeed we have that:
+    \[
+        \sum_{k=1}^n |f(b_k)-f(a_k)| \leq L \cdot \sum_{k=1}^n (b_k-a_k) =L \cdot \delta = \epsilon
+    \]
+    thus we can choose $\delta = \epsilon/L$.
+\end{proof}
+The converse is not true, let us show this trough a counterexample:
+
+\subsubsection{Counterexample}
+Let $J=[0,1]$ and $f(x)=\sqrt{x}$. Let us write $f$ as:
+\[
+    f(x) = \int_0^x \frac{1}{2\sqrt{x}} \, dt  \quad x\in[0,1]    
+\]
+and we have that $\frac{1}{2\sqrt{x}}\in\Leb^1(J)\implies f \in AC(J)$ but $f$ is clearly not a Lipschitz function.
+
+%==== Question 2 ====%
+
+\question
+Let $f \in \Mes_+(X, \A)$ be such that $\int_X f \, d\mu < +\infty$. Show that for any $\epsilon > 0$ there exists $\delta > 0$ such that for any $E \in \A$ with $\mu(E) < \delta$ there holds $\int_E f d\mu < \epsilon$.
+
+\subsection*{Solution}
+
+\subsection{If \texorpdfstring{$f\in\Mes_+$}{f is measurable} and integrable, the integral is continuous in the measure}\label{int:cont}
+Let $f \in \Mes_+(X, \A)$ be such that $\int_X f \, d\mu < +\infty$, then $\epsilon>0$, $\exists \delta > 0$ such that:
+\[
+    \forall E \in \A \text{ with } \mu(E) < \delta \quad \int_E f \, d\mu < \epsilon    
+\]
+\begin{proof}
+    Let $F_n \coloneqq \{ f<n \}$ with $n\in\N$. Clealry we have that:
+    \begin{align*}
+        & F_n \in \A \quad F_n \uparrow X \\%\implies \lim_{n\to\infty} F_n = X 
+        & X = \{ f = + \infty \} \cup \left( \bigcup_{n=1}^\infty F_n \right)   
+    \end{align*}
+    So we have that:
+    \[
+        \int_X f \, d\mu < + \infty \implies f \text{ is finite a.e. } \implies \mu\left( \{ f = +\infty\}\right) = 0
+    \]
+    and thus we can write:
+    \[
+        \int_X f \, d\mu = \lim_{n\to\infty} \int_{F_n} f \, d\mu
+    \]
+    and so, by the definition of limit, $\forall \epsilon>0$ $\exists \bar{n}\in\N$ such that $\forall n > \bar{n}$:
+    \[
+        \left| \int_X f \, d\mu - \int_{F_n} f \, d\mu \right| = \left| \int_{F_n^\complement} f \, d\mu \right| < \frac{\epsilon}{2}
+    \]
+    therefore, for a fixed $n>\bar{n}$, we get:
+    \begin{align*}
+        \int_E f \, d\mu & \tikzmarknode{eq1}{=} \int_{ E\cap F_n} f\, d\mu + \int_{E \cap F_n^\complement} f \, d\mu \\
+        & \tikzmarknode{eq2}{<} n\cdot \mu (E) + \frac{\epsilon}{2} \quad \text{ by the above and the fact that } E \supset E\cap F_n \\
+        & \tikzmarknode{eq3}{<} n \cdot \delta + \frac{\epsilon}{2} = \epsilon \quad \text{  if we choose } \delta = \frac{\epsilon}{2n}
+    \end{align*}\tikz[overlay,remember picture]{\draw[shorten >=1pt,shorten <=1pt] (eq1) -- (eq2) -- (eq3);}
+    In short, we have used the fact that $f$ is finite a.e. to get the limit and, in turn, from this we derived the above inequality which yields us the thesis.
+\end{proof}
+
+%==== Question 3 ====%
+
+\question
+Show that if $f \in L^1([a, b])$, then $F(x) \coloneqq \int_{[a,x]} f \, d\lambda$ is absolutely continuous in $[a, b]$.
+
+\subsection*{Solution}
+
+\subsection{The integral function if AC} \label{intfunc:AC}
+Let $I=[a,b]$ and $f\in L^1([a,b])$, then:
+\[
+    F(x) \coloneqq \int_{[a,x]} f \, d\lambda \in AC(I)    
+\]
+
+\begin{proof}
+    Consider the following set $E$:
+    \[
+        E \coloneqq \bigcup_{k=1}^n [a_k, b_k] \text{ with } \{[a_k , b_k]\} \in \mathscr{F}(I)
+    \]
+    then, since such intervals are disjoint, we have that:
+    \[
+        \lambda(E) = \sum_{k=1}^n \lambda([a_k, b_k]) = \sum_{k=1}^n (b_k-a_k)
+    \]
+    thus we may write:
+    \begin{align*}
+        \sum_{k=1}^n |F(b_k) - F(a_k)| & \tikzmarknode{eq1}{=} \sum_{k=1}^n \left| \int_{[a_k, b_k]} f \, d\lambda \right| \\
+        & \tikzmarknode{eq2}{\leq} \sum_{k=1}^n \int_{[a_k, b_k]} |f| \, d\lambda \\
+        & \tikzmarknode{eq3}{=} \int_E |f| \, d\lambda \quad \text{ by the definition of E}
+    \end{align*}\tikz[overlay,remember picture]{\draw[shorten >=1pt,shorten <=1pt] (eq1) -- (eq2) -- (eq3);}
+    and so by the previous point (\ref{int:cont}) we get the thesis.
+\end{proof}
+
+%==== Question 4 ====%
+
+\question
+Which is the relation between the spaces $BV ([a, b])$ and $AC([a, b])$?
+
+\subsection*{Solution}
+
+\subsection{All AC functions are BV}\label{ac:bv}
+Let $f \in AC([a, b])$, then $f\in BV([a, b])$.
+
+%==== Question 5 ====%
+
+\question
+State and prove the Second Fundamental Theorem of Calculus.
+
+\subsection*{Solution}
+
+\subsection{The Second Fundamental Theorem of Calculus}\label{FTC:2}
+Let $F:[a,b]\to\R$, \tfae
+\begin{enumerate}[i)]
+    \item $F\in AC([a,b])$
+    \item $F$ is differentiable a.e. in $[a,b]$ with $F'\in L^1([a,b])$ and we have:
+        \[
+           F(x) = \int_a^x F' \, d\lambda + F(a) \quad \forall x \in [a,b] 
+        \]
+\end{enumerate}
+
+\begin{proof}
+    \hspace*{\fill} %leave a blank line
+    \begin{itemize}
+        \item \textbf{$(i)\implies(ii)$:} 
+            By the previous point we have $F\in AC([a,b])\implies F \in BV([a,b])\implies F$ is differentiable a.e. in $[a,b]$ and $F'\in L^1([a,b])$. Let us also suppose that $F$ is increasing. \\
+            We define the following:
+            \[
+                G(x) \coloneqq \int_a^x F' \, d\lambda \quad x\in [a,b]    
+            \]
+            hence $G$ is differentiabe a.e. in $[a,b]$ by the First Fundamental Theorem of Calculus (\ref{FTC:1}) and we have:
+            \[
+                (F-G)'(x) = F'(x) - G'(x) = F'(x) - F'(x) = 0 \quad \text{ a.e. in } [a,b]
+            \]
+            furthermore $G\in AC$ by (\ref{intfunc:AC}) which implies $F-G\in AC$ and so $\forall a\leq x_1 \leq x_2 \leq b$ we have:
+            \[
+                [F(x_2) - G(x_2)] - [F(x_1) - G(x_1)] = F(x_2) - F(x_1) - \int_{[x_1, x_2]} F' \, d\lambda  \geq 0   
+            \]
+            thanks to the definition of $G$ and the trivial fact that $\int_{[x_1, x_2]} F' \, d\lambda \leq F(x_2)-F(x_1)$. Since this is true for any pair of  $x_1,x_2$ such that $x_1\leq x_2$, it makes $(F-G)$ increasing. However, we have also proved that $(F-G)'=0$ a.e. in $[a,b]$. We must thus conclude that:
+            \begin{align*}
+                & \exists c\in\R \quad F-G\equiv c \text{ in } [a,b] \\
+                & \implies F(x) - G(x) = F(a) - \cancelnum{0}{G(a)} 
+            \end{align*}
+            thus, if we substitute $G$ for its definition and bring to left hand side, we, at last, attain the thesis:
+            \[
+                F(x) = \int_a^x F' \, d\lambda + F(a) \quad \forall x \in [a,b]
+            \]
+        \item \textbf{$(ii)\implies(i)$:} 
+            we already know that the integral function is $AC$ (see \ref{intfunc:AC}), thus its translation by $F(a)$ is also $AC$.
+    \end{itemize}
+\end{proof}
+
+%==== Question 6 ====%
+
+\question
+Write the definitions of: dense set, separable metric space, nowhere dense set, set of first category, set of second category. Provide an example of a nowhere dense and one of a set of first category.
+
+\subsection*{Solution}
+
+Let $X$ be a metric space equipped with a metric $d$.
+
+\subsection{Dense set}
+A set $A \subset X$ is dense in $X$ if $\bar{A} = X$, where:    
+\[
+    \bar{A} = \{ y \in X : \; \exists \seq{x} \subset A, \, x_n \to y \}    
+\]
+
+\subsection{Separable metric space}
+$X$ is a separable metric space if there exists a subset $A$ which is countable and dense in $X$.
+
+\subsection{Nowhere dense set}
+A set $E\subseteq X$ is said to be nowhere dense if:
+\[
+    \interior( \bar{E}) = \emptyset
+\]
+
+\subsubsection{Example}
+We take $E=\mathbb{Z} \subset X=\R$, since $\mathbb{Z}$ is the countable union of all integers and thus its interior is empty. We have:
+\[
+    E = \bar{E} \implies \interior( \bar{E}) = \interior(E)=\emptyset      
+\]
+
+\subsection{Set of first category}
+A set $E\subseteq X$ is said to be of first category (or meagre) in $X$ if $E$ is the union of countably many nowhere dense sets. 
+
+\subsubsection{Example}
+We take $E=\Q$ and $X=\R$, since $\Q$ is the countable union of all rational numbers. Thus $\Q$ is a set of first category in $\R$.
+
+\subsection{Set of second category}
+A set $E \subseteq X$ which is not of first category, is said to be of second category in $X$.
+
+%==== Question 7 ====%
+
+\question
+State the Baire category theorem and its corollary.
+
+\subsection*{Solution}
+
+\subsection{Baire's theorem}
+Let $(X,d)$ be a complete metric space, then $X$ is of second category in itself.
+
+\subsection{Corollary to Baire's theorem}
+The intersection of a countable family of opens sets dense in $X$ is a set dense in $X$.
+
+\question
+Write the definitions of: compact metric space; sequentially compact metric space, totally bounded metric space. Explain how these properties are related.
+
+\subsection*{Solution}
+Let $(X,d)$ be a metric space.
+
+\subsection{Compact metric space}
+$X$ is said to be compact if from any open cover of $X$ we can extract a finite open subcover.
+
+\subsection{Sequentially compact metric space}
+$X$ is said to be sequentially compact if from any sequence $\seq{x} \subset X$ we can extract a subsequence which converges to some $x_0\in X$.
+
+\subsection{Totally bounded metric space}
+$X$ is said to be totally bounded if $\forall \epsilon>0$ $\exists A \subset X$ finite such that:
+\[
+    \dist(x,A)<\epsilon \quad \forall x \in X     
+\]
+where:
+\[
+   \dist(x,A) = \inf_{ y \in A } d(x,y) 
+\]
+
+\subsection{Relation between compactness, sequential compactness and total boundedness} \label{compact:altdef}
+\tfae
+\begin{enumerate}[i)]
+    \item $X$ is compact
+    \item $X$ is sequentially compact
+    \item $X$ is totally bounded and complete.
+\end{enumerate}
+
+%==== Question 9 ====%
+
+\question
+Write the $\epsilon-\delta$ definition of equicontinuous subset $F$ of $C^0(X)$, where $X$ is a compact metric space. Explain from which parameters $\delta$ depends. In particular, write the definition when $F = \{f_n\}_{n\in\N}$.
+
+\subsection*{Solution}
+
+\subsection{Equicontinuous set}
+A subset $A\subset C^0(X)$ is said to be equicontinuous if $\forall\epsilon>0$ there exists $\delta_\epsilon>0$ such that:
+\[
+    \forall f \in A, \, x,y \in X, \, d(x,y)<\delta_\epsilon \implies |f(x) - f(y)| < \epsilon
+\]
+Let us note that here $\delta_\epsilon$ depends on only $\epsilon$ and nothing else.
+Moreover if we take a set $F=\{f_n\}_{n\in\N}$, then  asking that $F$ is equicontinuous is equivalent to asking that every $f_n$ is uniformly continuous with respect to a shared $\delta_\epsilon$.
+
+%==== Question 10 ====%
+
+\question
+State the Ascoli-Arzelà theorem.
+
+\subsection*{Solution}
+
+\subsection{Ascoli-Arzelà theorem}
+$F\subset C^0(X)$ is bounded and equicontinuous if and only if it is relatively compact (i.e. its closure is compact). More succintly:
+\[
+    F \text{ bounded and equicontinuous } \iff \bar{F} \text{ compact }    
+\]
+
+%==== Question 11 ====%
+
+\question
+Write the statement of the Ascoli-Arzelà theorem when the subset of $C^0(X)$ is a sequence $\seq{f}$.
+
+\subsection*{Solution}
+
+\subsection{Ascoli-Arzelà theorem for sequences}
+Let $F=\{f_n\}_{n\in\N} \subset C^0(X)$ be a sequence of functions, then $F$ is bounded and equicontinuous:
+\begin{itemize}
+    \item $d(x,y)<\delta_\epsilon \implies |f_n(x) - f_n(y)| < \epsilon $ $\forall n \in \N$
+    \item $\exists k > 0$ such that $\forall x \in X$ $f_n(x)<k$ $\forall n \in \N$
+\end{itemize}
+if and only if its closure is compact (or alternatively, by \ref{compact:altdef}, sequentially compact).\\
