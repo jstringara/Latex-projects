@@ -19,7 +19,7 @@
 \usepackage{framed} % for framing text
 \usepackage{titling} % for customizing title
 \usepackage{titlesec} %for customizing sections title
-\usepackage[big]{layaureo} % for smaller margins
+\usepackage[ top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry} % for smaller margins
 \usepackage{xifthen} %for conditional statements
 \usepackage{enumerate} %to modify lists
 \usepackage{hyperref} %to insert hyperlinks
@@ -94,6 +94,21 @@
   \vspace{0.5ex}%
 ] % after-code
 
+%==== Subsubsection ====%
+
+%redefine subsubsection
+\titleformat{\subsubsection}[hang]{\normalfont\large\bfseries} % format
+{} % label
+{0pt} % sep
+{} % before-code
+[
+  \vspace{0.5ex}%
+] % after-code
+
+%make it appear in toc
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
 %==== Math sets ====%
 
 \newcommand{\N}{\mathbb{N}} %natural
@@ -120,6 +135,8 @@
 \renewcommand{\phi}{\varphi} %phi
 \DeclareMathOperator*{\esssup}{ess\,sup} %esssup
 \DeclareMathOperator*{\essinf}{ess\,inf} %essinf
+\DeclareMathOperator*{\interior}{int} %interior 
+\DeclareMathOperator*{\dist}{dist} %distance 
 
 %==== Math jargon ====%
 
@@ -156,6 +173,7 @@
 \input{Sheets/sheet_week4.tex}
 \input{Sheets/sheet_week5.tex}
 \input{Sheets/sheet_week6.tex}
+\input{Sheets/sheet_week7.tex}
 
 %==== End Document ====%
 

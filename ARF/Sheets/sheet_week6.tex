@@ -11,9 +11,23 @@ Is it true that if $f_n \to f$ in measure, then $f_n \to f$ a.e.? Justify the an
 In general, convergence in measure does not imply convergence a.e.. This can be clearly shown by way of Rademacher's sequence (a.k.a. the typewriter sequence):
 
 \subsection{Rademacher sequence}
-Coming soon...
-My guess is that we'll cover this sequence next week during the next exercise session.
-%TODO Rademacher sequence
+Let us define the Rademacher sequence iteratively:
+\begin{align*}
+    & f_1(x) = \mathbb{I}_{[0,1]}(x) \\
+    & f_2(x) = \mathbb{I}_{[0,1/2]}(x) \\
+    & f_3(x) = \mathbb{I}_{[1/2,1]} (x)\\
+    & \quad \vdots \\
+    & f_n(x) = \mathbb{I}_{\left[\frac{n-2^k}{2^k}, \frac{n-2^{k}+1}{2^k}\right]}(x) \quad 2^k \leq n \leq 2^{k+1} \; k \in \N
+\end{align*}
+In other words for each $k\in\N$ we divide $[0,1]$ into $2^k$ intervals and "hover" over them.
+This way we have a function whose $L^1$-limit (and thus by extension its limit in measure) is $0$, indeed we have:
+\begin{align*}
+    & \int_{[0,1]} f_1 \, d\mu = 1 \\
+    & \int_{[0,1]} f_2 \, d\mu = \int_{[0,1]} f_3 \, d\mu = \frac{1}{2} \\
+    & \quad \vdots \\
+    & \int_{[0,1]} f_n \, d\mu \xrightarrow{n\to\infty} 0
+\end{align*}
+but, on the other hand, if we fix $x\in [0,1]$ the sequence $\seq{f}$ will oscillate between the value $0$ and $1$ infinitely many times as $n\to\infty$. Thus $f_n$ cannot be said to converge a.e. in $[0,1]$. 
 
 %==== Question 2 ====%
 
@@ -42,7 +56,7 @@ Let $\mu(X)<+\infty$ and $f_n,f \in \Mes(X,\A)$ be finite a.e. in $X$. If $f_n \
 \]
 The assumption that $\mu(X)<+\infty$ is necessary, as the following counterexample shows:
 
-\subsection{Counterexample}
+\subsubsection{Counterexample}
 Let us take $f_n \coloneqq \chi_{[n,+\infty)}$, clearly $f_n \to 0$ pointwise (and thus a.e.) in $\R$ but we have that $\lambda(\R)=+\infty$ and thus $f_n \centernot\to 0$ in measure. Indeed we have:
 \[
     \mu \left( \left\{ f_n \geq \frac{1}{2} \right\} \right) = +\infty \quad \forall n \in \N 
@@ -109,7 +123,7 @@ Does convergence in measure imply convergence in $L^1$? Does convergence a.e. im
 \subsection{Convergence in measure or convergence a.e. do not imply convergence in \texorpdfstring{$L^1$}{L1}}
 Neither convergence in measure nor convergence a.e. imply convergence in $L^1$. This can be shown by way of the following counterexample:
 
-\subsection{Counterexample}
+\subsubsection{Counterexample}
 Let $(X=[0,1], \Leb(X), \lambda|_X)$ and $f_n(x) = n \cdot \chi_{[0,1/n]}(x)$ clearly we have that:
 \[
     f_n \toin{a.e.} 0 \text{ in } [0,1]    
@@ -178,9 +192,9 @@ Is the product measure space complete? Justify the answer. Which is the relation
 \subsection*{Solution}
 
 \subsection{The product space is incomplete}
-In general the product measure space is incomplete. Let us show this trough an example:
+In general the product measure space is incomplete. Let us show this trough a counterexample:
 
-\subsection{Counterexample}
+\subsubsection{Counterexample}
 Let us consider these two spaces:
 \[
     (\R^m \times \R^n, \Leb(\R^m) \times \Leb(\R^n), \lambda_m \times \lambda_n ) \text{ and } (\R^{m+n}, \Leb(\R^{m+n}), \lambda_{m+n})
@@ -247,7 +261,7 @@ Let $(X_1, \A_1, \mu_1)$, $(X_2, \A_2, \mu_2)$ be two $\s{finite}$ measure space
         \end{flalign*}
 \end{enumerate}
 
-\subsection{Counterexample}
+\subsubsection{Counterexample}
 The hypothesis that $f \in L^1$ is necessary, let us consider the following example: \\
 \begin{align*}
     (X_i, \A_i, \mu_i) = ( (0,1), \Leb((0,1)), \lambda) \quad i=1,2 \\
@@ -293,7 +307,7 @@ State and prove the First Fundamental Theorem of Calculus for $f \in L^1$.
 
 \subsection*{Solution}
 
-\subsection{First Fundamental Theorem of Calculus for \texorpdfstring{$L^1$}{L1}}
+\subsection{First Fundamental Theorem of Calculus for \texorpdfstring{$L^1$}{L1}} \label{FTC:1}
 Let $X=[a,b]$ and $f \in L^1([a,b])$, we define the integral function $F$ of $f$ as follows:
 \[
     F(x) \coloneqq \int_a^x f(t) \, dt \quad x \in [a,b]
