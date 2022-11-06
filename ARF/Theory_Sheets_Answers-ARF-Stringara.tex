@@ -1,11 +1,11 @@
 \documentclass[a4paper]{report} %document class and format
 
-%==== Language packages ====%
+%>=====< Language packages >=====<%
 
 \usepackage[T1]{fontenc} % font encoding
 \usepackage[utf8]{inputenc} % input encoding
 
-%==== Math packages ====%
+%>=====< Math packages >=====<%
 
 \usepackage{amsmath} 
 \usepackage{amssymb}
@@ -14,7 +14,7 @@
 \usepackage{mathtools}
 \usepackage{centernot} %for centered negation
 
-%==== Other packages ====%
+%>=====< Other packages >=====<%
 
 \usepackage{framed} % for framing text
 \usepackage{titling} % for customizing title
@@ -29,7 +29,7 @@
 \usepackage{tikz}
 \usetikzlibrary{tikzmark}
 
-%==== Chapter ====% 
+%>=====< Chapter >=====<% 
 
 %redefine chapters
 \titleformat{\chapter}[display]{\normalfont\Huge\bfseries} % format
@@ -52,7 +52,7 @@
 %new sheet command for toc
 \newcommand{\sheet}{\chapter[Sheet n.\thechapter]{}}
 
-%==== Section ====%
+%>=====< Section >=====<%
 
 %redefine section
 \titleformat{\section}[display]{\normalfont\huge\bfseries} % format
@@ -74,7 +74,7 @@
 %new question command for toc
 \newcommand{\question}{\section[Question \thesection]{}}
 
-%==== Subsection ====%
+%>=====< Subsection >=====<%
 
 %redefine subsection
 \titleformat{\subsection}[hang]{\normalfont\large\bfseries} % format
@@ -94,7 +94,7 @@
   \vspace{0.5ex}%
 ] % after-code
 
-%==== Subsubsection ====%
+%>=====< Subsubsection >=====<%
 
 %redefine subsubsection
 \titleformat{\subsubsection}[hang]{\normalfont\large\bfseries} % format
@@ -109,7 +109,7 @@
 \setcounter{tocdepth}{4}
 \setcounter{secnumdepth}{4}
 
-%==== Math sets ====%
+%>=====< Math sets >=====<%
 
 \newcommand{\N}{\mathbb{N}} %natural
 \newcommand{\R}{\mathbb{R}} %real
@@ -128,7 +128,7 @@
 \newcommand{\Mes}{\mathcal{M}} %measurable functions
 \newcommand{\Smes}{\mathcal{S}} %measurable simple functions
 
-%==== Math symbols ====%
+%>=====< Math symbols >=====<%
 
 \renewcommand{\epsilon}{\varepsilon} %epsilon
 \renewcommand{\theta}{\vartheta} %theta
@@ -138,7 +138,7 @@
 \DeclareMathOperator*{\interior}{int} %interior 
 \DeclareMathOperator*{\dist}{dist} %distance 
 
-%==== Math jargon ====%
+%>=====< Math jargon >=====<%
 
 \newcommand{\salg}{\sigma-\text{algebra}} %sigma-algebra
 \newcommand{\s}[1]{\sigma-\text{#1}}%sigma-smth
@@ -153,20 +153,22 @@
 \newcommand{\toin}[1]{\xrightarrow[n\to\infty]{#1} } %to in 
 \newcommand*{\cvrule}{\smash{\rule{0.4pt}{2ex}}}
 
-%==== Custom commands ====%
+%>=====< Custom commands >=====<%
 
 \newcommand{\cancelnum}[2]{\overset{\text{\normalsize#1}}{\xcancel{#2}}}
 
-%==== Document ====%
-\begin{document}
+%>=====< Document >=====<%
 
+\begin{document}
 \input{ARF-titlepage.tex}
 
-%==== Table of contents ====%
+%>=====< Table of contents >=====<%
+
 \tableofcontents
 \newpage
 
-%==== Sheets ====%
+%>=====< Sheets >=====<%
+
 \input{Sheets/sheet_week1.tex}
 \input{Sheets/sheet_week2.tex}
 \input{Sheets/sheet_week3.tex}
@@ -175,7 +177,7 @@
 \input{Sheets/sheet_week6.tex}
 \input{Sheets/sheet_week7.tex}
 
-%==== End Document ====%
+%>=====< End Document >=====<%
 
 \end{document}
 
