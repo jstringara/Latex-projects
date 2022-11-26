@@ -7,12 +7,9 @@
 
 %>=====< Math packages >=====<%
 
-\usepackage{amsmath} 
-\usepackage{amssymb}
-\usepackage{amsthm}
-\usepackage{mathrsfs}
-\usepackage{mathtools}
+\usepackage{amsmath, amssymb, amsthm, mathrsfs, mathtools}
 \usepackage{centernot} %for centered negation
+\usepackage[makeroom]{cancel} %to cancel out stuff
 
 %>=====< Other packages >=====<%
 
@@ -25,7 +22,6 @@
 \usepackage{hyperref} %to insert hyperlinks
 %\usepackage[open]{bookmark} %to have bookmarks open by default
 \usepackage{titletoc} %to modify the toc
-\usepackage[makeroom]{cancel} %to cancel out stuff
 \usepackage{tikz}
 \usetikzlibrary{tikzmark}
 
@@ -35,13 +31,8 @@
 \titleformat{\chapter}[display]{\normalfont\Huge\bfseries} % format
 {Sheet n. \thechapter} % label
 {0ex} % sep
-{
-    \vspace{1ex}
-    \centering
-} % before-code
-[
-\vspace{-2.5ex}%
-] % after-code
+{ \vspace{1ex} \centering } % before-code
+[ \vspace{-2.5ex} ] % after-code
 
 %modify chapter in toc
 \titlecontents{chapter}[0em]{\smallskip\bfseries}%\vspace{1cm}%
@@ -58,12 +49,8 @@
 \titleformat{\section}[display]{\normalfont\huge\bfseries} % format
 {Question \thesection} % label
 {0ex} % sep
-{
-  \vspace{0ex}
-} % before-code
-[
-  \vspace{-1.5ex}%
-] % after-code
+{ \vspace{0ex} } % before-code
+[ \vspace{-1.5ex} ] % after-code
 
 %modify chapter in toc
 \titlecontents{section}[1.5em]{\smallskip\bfseries}%\vspace{1cm}%
@@ -81,18 +68,14 @@
 {} % label
 {0pt} % sep
 {} % before-code
-[
-  \vspace{0.5ex}%
-] % after-code
+[ \vspace{0.5ex} ] % after-code
 
 %redefine subsection*
 \titleformat{name=\subsection, numberless}[hang]{\normalfont\large\bfseries} % format
 {} % label
 {0pt} % sep
 {} % before-code
-[
-  \vspace{0.5ex}%
-] % after-code
+[ \vspace{0.5ex} ] % after-code
 
 %>=====< Subsubsection >=====<%
 
@@ -101,9 +84,7 @@
 {} % label
 {0pt} % sep
 {} % before-code
-[
-  \vspace{0.5ex}%
-] % after-code
+[ \vspace{0.5ex} ] % after-code
 
 %make it appear in toc
 \setcounter{tocdepth}{4}
@@ -118,10 +99,9 @@
 \newcommand{\Rcomppos}{\Rcomp_{+}} %complete positive real
 \newcommand{\Q}{\mathbb{Q}} %rational
 \newcommand{\A}{\mathcal{A}} %calligraphic A
-%Borel algebra
 \newcommand{\B}[1][]{
   \ifthenelse{\isempty{#1}}{\mathcal{B}}{\mathcal{B}\left(#1\right)}
-}
+}%Borel sigma-algebra
 \newcommand{\Parts}[1]{\mathcal{P}\left(#1\right)} %set of all parts
 \renewcommand{\complement}{\mathsf{c}} %complement
 \newcommand{\Leb}{\mathcal{L}} %Lebesgue sigma-algebra
@@ -137,6 +117,7 @@
 \DeclareMathOperator*{\essinf}{ess\,inf} %essinf
 \DeclareMathOperator*{\interior}{int} %interior 
 \DeclareMathOperator*{\dist}{dist} %distance 
+\DeclareMathOperator{\spn}{span} %span
 
 %>=====< Math jargon >=====<%
 
@@ -176,6 +157,7 @@
 \input{Sheets/sheet_week5.tex}
 \input{Sheets/sheet_week6.tex}
 \input{Sheets/sheet_week7.tex}
+\input{Sheets/sheet_week8.tex}
 
 %>=====< End Document >=====<%
 
