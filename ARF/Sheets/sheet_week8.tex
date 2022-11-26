@@ -1,0 +1,442 @@
+\sheet
+
+%>=====< Question 1 >=====<%
+
+\question
+Show that $C^0([a, b])$ is separable.
+
+\subsection*{Solution}
+
+\subsection{Stone-Weierstrass theorem}
+The set of polynomials is dense in $C^0([a,b])$
+
+\subsection{\texorpdfstring{$C^0([a,b])$}{C0} is separable}
+$C^0([a,b])$ is separable.
+
+\begin{proof}
+    By the Stone-Weierstrass theorem we have that, for any $f\in C^0([a,b])$, given any $\epsilon > 0$, there exists a polynomial $p$ such that:
+    \[ \dist(f,p)=\sup_{x\in [a,b]} |f-p| < \frac{\epsilon}{2} \]
+    So we can find a polynomial $r$ with \textbf{rational} coefficients such that:
+    \[ \dist(p,r)<\frac{\epsilon}{2}\]  
+    hence by the triangular inequality:
+    \[ \dist(f,r) \leq \dist(f,p) + \dist(p,r) = \epsilon \]
+    therefore the set of polynomials with rational coefficients is dense in $C^0([a,b])$. So, since such a set is countable, $C^0([a,b])$ is separable and we have the thesis.
+\end{proof}
+
+%>=====< Question 2 >=====<%
+
+\question
+Write the definition of normed space and provide examples. What is the metric space induced by a given normed space?
+
+\subsection*{Solution}
+
+\subsection{Normed space}
+Let $X$ be a vector space, a norm on $X$ is a function such that:
+\[ \|x\| : X \to [0, \infty) \]
+and:
+\begin{enumerate}[i)]
+    \item $\|x\|=0 \iff x=0$
+    \item $\forall \alpha \in \R$, $x \in X$: $\|\alpha x\| = |\alpha| \cdot \|x\|$
+    \item $\forall x,y \in X$: $\|x+y\| \leq \|x\| + \|y\|$ 
+\end{enumerate} 
+and we say that the pair $(X, \| \cdot \|)$ is a normed space.
+
+\subsection{Examples of normed spaces}
+\begin{enumerate}[i)]
+    \item $\R^n$ with a norm of the family:
+        \begin{align*}
+            & \|x\|_p \coloneqq \left( \sum_{i=1}^n |x_i|^p \right)^{1/p} \quad p \in [1,\infty) \\
+            & \|x\|_\infty \coloneqq \max_{i=1,\dots,n} |x_i|
+        \end{align*}
+    \item $C^0([a,b])$ with the norm:
+        \begin{equation*}
+            \|f\|_{C^0} \coloneqq \sup_{x \in [a,b]} |f(x)| = \max_{x \in [a,b]} |f(x)|
+        \end{equation*}
+    \item $L^1(X,\A,\mu)$ with the norm:
+        \begin{equation*}
+            \|f\|_1 \coloneqq \int_a^b |f(x)| \, dx
+        \end{equation*}
+    \item $L^\infty(X,\A,\mu)$ with the norm:
+        \begin{equation*}
+            \|f\|_\infty \coloneqq \esssup_{x \in [a,b]} |f(x)|
+        \end{equation*}
+    \item $C^k([a,b])$ with the norm:
+        \begin{equation*}
+            \|f\|_{C^k} \coloneqq \sum_{i=0}^k \|f^{(i)}\|_{\infty}
+        \end{equation*}
+    \item $BV([a,b])$, with two possible norms:
+        \begin{equation*}
+            \|f\|_{BV} \coloneqq \begin{cases}
+                & |f(a)| + V_a^b(f) \\
+                & \|f\|_1 + V_a^b(f)
+            \end{cases}
+        \end{equation*}
+    \item $AC([a,b])$ with two possible norms:
+        \begin{equation*}
+            \|f\|_{AC} \coloneqq \begin{cases}
+                & |f(a)| + \|f'\|_1 \\
+                & \|f\|_1 + \|f'\|_1
+            \end{cases}
+        \end{equation*}
+    \item $\ell^p, \ell^\infty$, we take a sequence of real numbers of the form:
+        \[ x = \{ x^{(k)} \}_{k\in\N} = (x^{(1)}, x^{(2)}, \dots) \]
+        and we define the norms:
+        \begin{align*}
+            & \|x\|_p \coloneqq \left( \sum_{k=1}^\infty |x^{(k)}|^p \right)^{1/p} \quad p \in [1,\infty) \\
+            & \|x\|_\infty \coloneqq \sup_{k=1,\dots,\infty} |x^{(k)}|
+        \end{align*}
+        we can define two normed spaces as follows:
+        \begin{align*}
+            \ell^p & \coloneqq \{x \text{ sequence of real numbers }: \|x\|_p < \infty\} \\
+            \ell^\infty & \coloneqq \{x \text{ sequence of real numbers }: \|x\|_\infty < \infty\}
+        \end{align*}
+\end{enumerate}
+
+\subsection{Metric space induced by a normed space}
+Let $(X, \| \cdot \|)$ be a normed space. The metric space induced by $(X, \| \cdot \|)$ is the pair $(X, d)$ where $d$ is the distance function defined by:
+\[ \dist(x,y) \coloneqq \|x-y\| \]
+
+%>=====< Question 3 >=====<%
+
+\question
+In a normed space, write the definitions of: convergent sequence; Cauchy sequence; bounded sequence. Which are the relations among these notions? Show that if $x_n \to x$, then $\| x_n \| \to \|x\|$ as $n \to +\infty$.
+
+\subsection*{Solution}
+
+\subsection{Convergent sequence}
+Let $(X, \| \cdot \|)$ be a normed space. A sequence $\seq{x} \subset X$ is said to be convergent to $x \in X$ if:
+\[ x_n \xrightarrow{n \to +\infty} x \iff d(x_n, x) \xrightarrow{n \to +\infty} 0 \iff \|x_n - x\| \xrightarrow{n \to +\infty} 0 \]
+Furthermore:
+\[ x_n \xrightarrow{n \to +\infty} x \implies \|x_n\| \xrightarrow{n \to +\infty} \|x\| \]
+Since:
+\[ | \|x_n\| - \|x\| | \leq \|x_n - x\| \quad \forall n \in \N \]
+
+\subsection{Cauchy sequence}
+Let $(X, \| \cdot \|)$ be a normed space. A sequence $\seq{x} \subset X$ is said to be Cauchy if:
+\[ \forall \epsilon > 0 \; \forall \bar{n} \in \N \quad \| x_m - x_n \| < \epsilon \quad \forall m,n \geq \bar{n} \]
+
+\subsection{Bounded sequence}
+A sequence $\seq{x} \subset X$ is said to be bounded if:
+\[ \exists M>0 \quad \|x_n\| < M \quad \forall n \in \N \]
+
+\subsection{Relations among convergent, Cauchy and bounded sequences}
+\begin{enumerate}[i)]
+    \item $\seq{x}$ is convergent $\implies$ $\seq{x}$ is Cauchy.
+    \item $\seq{x}$ is Cauchy $\implies$ $\seq{x}$ is bounded.
+\end{enumerate}
+
+%>=====< Question 4 >=====<%
+
+\question
+Write the definition of series in a normed space. Is it true that if $\sum^{+\infty}_{n=0} \|x_n\|$ is convergent, then $\sum^{+\infty}_{n=0} x_n$ is convergent.
+
+\subsection*{Solution}
+
+\subsection{Series in a normed space}
+Let $(X, \| \cdot \|)$ be a normed space and $\seq{x} \subset X$ be a sequence. Let us define the sequence of partial sums (series) as the following:
+\[ s_n \coloneqq x_0 + \cdots + x_n + \sum_{k=0}^n x_k \]
+It is said to be convergent if:
+\[ \exists x \in X : \; s_n \xrightarrow{n \to +\infty} x \iff \| s_n - x \| \xrightarrow{n \to +\infty} 0 \]
+and we say that:
+\[ \sum^{+\infty}_{n=0} x_n \text{ is the sum of the series} \]
+Moreover, we have that:
+\[ \sum^{+\infty}_{n=0} \|x_n\| \text{ is convergent } \centernot\implies \sum^{+\infty}_{n=0} x_n \text{ is convergent} \]
+
+%>=====< Question 5 >=====<%
+
+\question
+What is a complete normed space? Write the definition of Banach space, provide examples.
+
+\subsection*{Solution}
+
+\subsection{Complete normed space}
+Let $(X, \| \cdot \|)$ be a normed space. The space $(X, \| \cdot \|)$ is said to be complete if the metric space induced by $(X, \| \cdot \|)$ is complete.
+\[ (X, \|\cdot\|) \text{ is complete } \iff (X, d) \text{ is complete } \iff \text{ every Cauchy sequence in } X \text{ is convergent} \]
+
+\subsection{Banach space}
+A complete normed \textbf{vector} space is called a Banach space. Examples of Banach spaces are the same as those given above for normed spaces.
+
+%>=====< Question 6 >=====<%
+
+\question
+State the criterion, involving convergence of series, for completeness of a normed space.
+
+\subsection*{Solution}
+
+\subsection{Criterion for completeness of a normed space}
+\begin{enumerate}[i)]
+    \item Let $X$ be a Banach space and $\seq{x} \subset X$. If $\sum^{+\infty}_{n=1} \|x_n\|$ is convergent, then $\sum^{+\infty}_{n=1} x_n$ is convergent.
+    \item Let X be a normed space. If for any $\seq{x} \subset X$ such that the series $\sum^{+\infty}_{n=1} \| x_n \|$ is convergent, we also have that $\sum_{n=1}^{+\infty} x_n$ is convergent, then X is a Banach space.
+\end{enumerate}
+
+%>=====< Question 7 >=====<%
+
+\question
+State and prove the Riesz's Lemma.
+
+\subsection*{Solution}
+
+\subsection{Riesz's Lemma}
+Let $X$ be a normed space, $E \subsetneq X$ a closed subspace, then $\forall \epsilon > 0$ $\exists x \in X$ such that:
+\[ \| x \| =1 \text{ and } \dist(x,E) \geq 1 - \epsilon \] 
+where $\dist(x,E) \coloneqq \inf_{\xi \in E} \|x - \xi \|$ and $x$ is called the "almost orthogonal element".
+
+\begin{proof}
+    \hspace*{\fill}\\ %leave a blank line
+    Let $y \in X \setminus E$, then:
+    \[ d \coloneqq \dist(y,E) > 0 \text{ since } E \text{ is closed} \]
+    Now, let $\epsilon \in (0,1)$, then, in view of the definition of $\dist(x,E)$, we have:
+    \[ d = \dist(y,E) = \inf_{\xi \in E} \|y - \xi \| \]
+    and thus we can find $\zeta \in E$ such that:
+    \[ d \leq \| y - \zeta \| \leq \frac{d}{1- \epsilon} \]
+    Now, let us define the following:
+    \[ x \coloneqq \frac{y-\zeta}{ \| y-\zeta \| } \]
+    So by definition $x$ has $\|x\|=1$ and now, thanks to the homogeneity of the norm and the closedness of $E$, $\forall \xi \in E$ we also have that:
+    \begin{align*}
+        \| x - \xi\| & \tikzmarknode{eq1}{=} \left\| \frac{y-\zeta}{ \| y-\zeta \| } - \xi \right\| = \frac{1}{ \| y-\zeta \| } \left\| y-\zeta - \xi \cdot \| y-\zeta \| \right\| \\
+        & \tikzmarknode{eq2}{=} \frac{1}{ \| y-\zeta \| } \left\| y - \underbrace{(\zeta + \xi \cdot \| y-\zeta \| )}_{\in E} \right\| \geq \frac{d}{\| y-\zeta \|} \geq 1 - \epsilon
+    \end{align*}\tikz[overlay,remember picture]{\draw[shorten >=1pt,shorten <=1pt] (eq1) -- (eq2);}
+    therefore we have that $\dist(x,E) \geq 1 - \epsilon$ and we have the thesis.
+\end{proof}
+
+%>=====< Question 8 >=====<%
+
+\question
+State and prove the Riesz's Theorem.
+
+\subsection*{Solution}
+
+\subsection{Riesz's Theorem}
+Let $X$ be a normed space, if the closed ball $\bar{B}_1(0)$ is compact, then $\dim(X)<\infty$.
+
+\begin{proof}
+    \hspace*{\fill}\\ %leave a blank line
+    Let $x_1 \in \bar{B}_1(0)$ and $Y_1 \coloneqq \spn\{x_1 \}$. Clearly $Y_1$ is a vector subspace of $X$ and $\dim(Y_1)=1<+\infty$ $\iff$ $Y_1$ is closed.
+    \begin{itemize}
+        \item If $X=Y_1$, then $\dim(X) < \infty$ and we have the thesis.
+        \item If $X \neq Y$, then we can use Riesz's Lemma with $\epsilon = 1/2$ to find $x-2 \in \bar{B}_1(0)$ such that:
+            \[ \| x_1 - x_2 \| \geq 1/2 \]
+            and we define the following set:
+            \[ Y_2 \coloneqq \spn\{x_1, x_2 \} \]
+        and we repeat the argument above:
+        \begin{itemize}
+            \item If $X=Y_2$, then $\dim(X) < \infty$ and we have the thesis.
+            \item If $X \neq Y_2$, then we can use again Riesz's Lemma $x_3 \in \bar{B}_1(0)$ such that:
+                \[ \| x_3 - x_i \| \geq 1/2 \text{ for } i=1,2 \]
+                and we define the following set:
+                \[ Y_3 \coloneqq \spn\{x_1, x_2, x_3 \} \]
+                \dots
+        \end{itemize}
+    \end{itemize}
+    If $X$ is not finite dimensional this argument can be iterated to construct a sequence:
+    \[ \seq{x} \subseteq \bar{B}_1(0) \text{ such that } \| x_i - x_j \| \geq 1/2 \text{ } i \neq j, \; \forall i,j \in \N \]
+    hence $\seq{x}$ is a bounded sequence ($\|x_n\| \leq 1$ $\forall n \in \N$) but $\seq{x}$ has no convergent subsequence. Thus $\bar{B}_1(0)$ is not sequentially compact and so $\bar{B}_1(0)$ is not compact. 
+\end{proof}
+
+%>=====< Question 9 >=====<%
+
+\question
+Write the definition of equivalent norms. In which type of vector spaces all norms are equivalent? Exhibit an example of a vector space that can be endowed with two norms that are not equivalent.
+
+\subsection*{Solution}
+
+\subsection{Equivalent norms}
+Let $(X,\|\cdot\|)$ and $(X,\|\cdot\|')$ be two normed spaces. We say that $\|\cdot\|$ and $\|\cdot\|'$ are equivalent if there exist two constants $m,M>0$ such that:
+\[ m \cdot \|x\| \leq \|x\|' \leq M \cdot \|x\| \text{ for all } x \in X \]
+
+\subsection{All norms are equivalent in finite dimensional normed spaces}
+If $X$ is a normed space and $\dim(X)<\infty$, then all norms are equivalent.
+
+\subsection{Example of two non equivalent norms}
+Both $(C^0([a,b]),\| \cdot\|_\infty)$ and $((C^0([a,b]),\| \cdot\|_1)$ are normed spaces, but since $\dim(C^0([a,b]))=\infty$ we have that $\| \cdot\|_\infty$ and $\| \cdot\|_1$ are not equivalent.
+
+%>=====< Question 10 >=====<%
+
+\question
+Is it true in general that any vector subspace of a given normed space is closed?
+
+\subsection*{Solution}
+
+\subsection{Closedness of vector subspaces}
+Let $X$ be a normed space and $Y$ a vector subspace of $X$. We have the following:
+\begin{itemize}
+    \item $\dim(Y) < \infty \implies Y$ is closed.
+    \item $\dim(Y) = \infty \centernot\implies Y$ is closed.
+\end{itemize}
+Therefore we can say that in general not all vector subspaces of a normed space are closed.
+
+%>=====< Question 11 >=====<%
+
+\question
+Write the definitions of $\Leb^p$ and $L^p$ . Show that $L^p$ is a vector space (and its preliminary lemma).
+
+\subsection*{Solution}
+
+\subsection{Definition of \texorpdfstring{$\Leb^p$}{Lp}}
+Let $(X,\A, \mu)$ be a measure space, $p\in[1,+\infty]$. We define the space $\Leb^p$ as:
+\[ \Leb^p(X,\A, \mu) \coloneqq \left\{ f:X\to\Rcomp \text{ measurable}, \; \int_X f \, d\mu < +\infty \right\} \]
+
+\subsection{Definition of \texorpdfstring{$L^p$}{Lp}}
+On the space $\Leb^p(X,\A, \mu)$ we define the following equivalence relation $R$:
+\[ f,g\in\Leb^p \quad f R g \iff f=g \text{ a.e. in } X \]
+We define the space $L^p$ as the quotient space $\Leb^p/R$:
+\[ L^p(X,\A, \mu) \coloneqq \Leb^p(X,\A, \mu)/R \]
+
+%>=====< Question 12 >=====<%
+
+\question
+Write the definition of conjugate numbers. Show Young's inequality.
+
+\subsection*{Solution}
+
+\subsection{Definition of conjugate numbers}
+Let $p,q\in[1,+\infty]$. We say that $p$ and $q$ are conjugate if:
+\begin{itemize}
+    \item $p,q \in (1,+\infty)$ and $\frac{1}{p}+\frac{1}{q}=1$.
+    \item $p=1$ and $q=+\infty$ or viceversa.
+\end{itemize}
+
+\subsection{Young's inequality}
+Let $p,q \in (1,+\infty)$ be conjugate numbers and $a,b > 0$, then:
+\[ ab \leq \frac{a^p}{p} + \frac{b^q}{q} \]
+
+\begin{proof}
+    \hspace*{\fill}\\ %leave a blank line
+    Let us define the following convex function:
+    \[ \phi(x) \coloneqq e^x \quad \phi(tx + (1-t)y) \leq t\phi(x) + (1-t)\phi(y) \; \forall x,y \in \R, \, t \in [0,1] \]
+    Now, we choose $t=1/p$, $1-t=1/q$, $x=\log(a^p)$ and $y=\log(b^q)$, thus we have:
+    \begin{align*}
+        ab & \tikzmarknode{eq1}{=} e^{\log(a)} \cdot e^{\log(b)} =  e^{\frac{1}{p}\log(a^p)} \cdot e^{\frac{1}{q}\log(b^q)} \\
+        & \tikzmarknode{eq2}{\leq}  \frac{1}{p}e^{\log(a^p)} \cdot \frac{1}{q}e^{\log(b^q)} \\
+        & \tikzmarknode{eq3}{=} \frac{1}{p} a^p + \frac{1}{q} b^q
+    \end{align*}\tikz[overlay,remember picture]{\draw[shorten >=1pt,shorten <=1pt] (eq1) -- (eq2) -- (eq3);}
+
+\end{proof}
+
+%>=====< Question 13 >=====<%
+
+\question
+Show Hölder's inequality.
+
+\subsection*{Solution}
+
+\subsection{Hölder's inequality}
+Let $f,g \in \Mes(X,\A)$ and $p,q \in [0,+\infty]$ be two conjugate numbers, then:
+\[ \| f \cdot g \|_1 \leq \| f \|_p \cdot \| g \|_q \]
+where we have:
+\begin{align*}
+    & \|f\|_p \coloneqq \left( \int_X |f|^p \, d\mu \right)^{1/p} \quad p \in [1,+\infty) \\
+    & \|f\|_\infty \coloneqq \esssup_X |f|
+\end{align*}
+
+\begin{proof}
+    \hspace*{\fill}\\ %leave a blank line
+    Let us divide the proof into two possible cases:
+    \begin{enumerate}[i)]
+        \item $p,q \in (1,+\infty)$:
+            \begin{itemize}
+                \item If $\|f\|_p\cdot\|g\|_q=+\infty$, the inequality is trivial.
+                \item If $\|f\|_p\cdot\|g\|_q=0$, we have that $f=0$ a.e. $\vee$ $g=0$ a.e. $\implies$ $f\cdot g=0$ a.e. $\implies$ $\|f\cdot g\|_1=0$ and the inequality holds.
+                \item If$\|f\|_p$ and $\|g\|_q$ exist finite and non-zero, we fix $x\in X$ and define the two following quantities:
+                    \[ a \coloneqq \frac{|f|^p}{\|f\|^p_p} \quad b \coloneqq \frac{|g|^q}{\|g\|^q_q} \]
+                    Now we apply Young's inequality to these two quantities:
+                    \begin{align*}
+                        a^{1/p} b ^{1/q} & \tikzmarknode{eq1}{=} \frac{|f|}{\|f\|_p} \cdot \frac{|g|}{\|g\|_q} \\
+                        & \tikzmarknode{eq2}{=} \frac{1}{p}\frac{|f|^p}{\|f\|^p_p} + \frac{1}{q}\frac{|g|^q}{\|g\|^q_q}
+                    \end{align*}\tikz[overlay,remember picture]{\draw[shorten >=1pt,shorten <=1pt] (eq1) -- (eq2);}
+                    Let us integrate both sides of the inequality:
+                    \begin{align*}
+                        \frac{1}{\|f\|_p\|g\|_q} \cdot \int_X |f \cdot g| \, d\mu & \tikzmarknode{eq1}{=} \frac{1}{p}\cancelnum{1}{\frac{\int_X |f|^p \, d\mu}{\|f\|^p_p}} + \frac{1}{q}\cancelnum{1}{\frac{\int_X |g|^q \, d\mu}{\|g\|^q_q}} \\
+                        & \tikzmarknode{eq2}{=} \frac{1}{p} + \frac{1}{q} = 1
+                    \end{align*}\tikz[overlay,remember picture]{\draw[shorten >=1pt,shorten <=1pt] (eq1) -- (eq2);}
+            \end{itemize}
+        \item $p=1$, $q=+\infty$ (or viceversa): \\
+            Let us recall:
+            \[ |g| \leq \|g\|_\infty = \esssup_X |g| \text{ a.e. in X} \implies |fg| \leq |f| \|g\|_\infty \]
+            let us integrate both sides of the inequality:
+            \[ \int_X |fg| \, d\mu = \|fg\|_1 \leq \|g\|_\infty \int_X |f| \, d\mu = \|f\|_1 \|g\|_\infty \]
+            and so the inequality holds.
+    \end{enumerate}
+
+\end{proof}
+
+%>=====< Question 14 >=====<%
+
+\question
+Show Minkowski's inequality.
+
+\subsection*{Solution}
+
+\subsection{Minkowski's inequality}
+Let $f,g \in \Mes(X,\A)$ and $p\in{1,+\infty}$, then:
+\[ \| f + g \|_p \leq \| f \|_p + \| g \|_p \]
+
+\begin{proof}
+    \hspace*{\fill}\\ %leave a blank line
+    Let us divide the proof into three possible cases:
+    \begin{itemize}
+        \item $p\in(1,+\infty)$:
+            \begin{align*}
+                \|f+g\|_p^p & \tikzmarknode{eq1}{=} \int_X |f+g|^p \, d\mu = \int_X \underbrace{|f+g|}_{\leq |f| + |g|} |f+g|^{p-1} \, d\mu \\
+                & \tikzmarknode{eq2}{\leq} \int_X |f| |f+g|^{p-1} \, d\mu + \int_X |g| |f+g|^{p-1} \, d\mu
+            \end{align*}\tikz[overlay,remember picture]{\draw[shorten >=1pt,shorten <=1pt] (eq1) -- (eq2);}
+            We now apply Hölder's inequality to the two integrals, recall $q=p/(p-1)$:
+            \begin{align*}
+                \int_X |f| |f+g|^{p-1} \, d\mu &\leq \|f\|_p \left\| |f+g|^{p-1} \right\|_q \\
+                \int_X |g| |f+g|^{p-1} \, d\mu &\leq \|g\|_p \left\| |f+g|^{p-1} \right\|_q \\
+                \left\| |f+g|^{p-1} \right\|_q & \tikzmarknode{eq1}{=} \left( \int_X |f+g|^{(p-1)q} \, d\mu \right)^{1/q} \\
+                & \tikzmarknode{eq2}{=} \left( \int_X |f+g|^p \, d\mu \right)^{1/q} = \|f+g\|_p^{p/q}
+            \end{align*}\tikz[overlay,remember picture]{\draw[shorten >=1pt,shorten <=1pt] (eq1) -- (eq2);}
+            It thus follows that:
+            \begin{align*}
+                & \|f+g\|_p^p \leq (\|f\|_p\|+\|g\|_p) \cdot \| |f+g| \|_p^{p/q} \\
+                & \implies \|f+g\|_p^{p-p/q=1} \leq \|f\|_p + \|g\|_p\\
+                & \implies \|f+g\|_p \leq \|f\|_p + \|g\|_p
+            \end{align*}
+        \item $p=1$, thanks to the triangular inequality we have:
+            \[ \|f+g\|_1 = \int_X |f+g| \, d\mu \leq \int_X |f| \, d\mu + \int_X |g| \, d\mu\]
+        \item $p=+\infty$, thanks to the triangular inequality we have:
+            \[ \|f+g\|_\infty = \esssup_X |f+g| \leq \esssup_X (|f|+|g|) \leq \esssup_X |f| + \esssup_X |g| \]
+    \end{itemize}
+\end{proof}
+
+%>=====< Question 15 >=====<%
+
+\question
+Show that $L^p$ is a normed space.
+
+\subsection{\texorpdfstring{$L^p$}{Lp} is a normed space}
+$L^p$ is a normed space with norm:
+\begin{align*}
+    & \|f\|_p \coloneqq \left(\int_X |f|^p \, d\mu \right)^{1/p} \quad p\in[1,+\infty) \\
+    & \|f\|_\infty \coloneqq \esssup_X |f| 
+\end{align*}
+
+\begin{proof}
+    Clearly, we have that:
+    \begin{itemize}
+        \item $\|\cdot\|:L^p\to [0,+\infty)$
+        \item $\|f\|_p = 0 \iff f=0$ a.e. in X $\iff f=0$ in $L^p$ thank to its quotientiation with respect to equality a.e.
+        \item $\forall \alpha \in \R$ we have:
+            \[ \|\alpha f\|_p = |\alpha| \|f\|_p \]
+        \item We have the triangular inequality thanks to Minkowski's inequality:
+            \[ \|f+g\|_p \leq \|f\|_p + \|g\|_p \]
+    \end{itemize}
+\end{proof}
+
+%TODO list
+% - [x] Question 1
+% - [x] Question 2
+% - [x] Question 3
+% - [x] Question 4
+% - [x] Question 5
+% - [x] Question 6
+% - [x] Question 7
+% - [x] Question 8
+% - [x] Question 9
+% - [x] Question 10
+% - [x] Question 11
+% - [x] Question 12
+% - [x] Question 13
+% - [x] Question 14
+% - [x] Question 15
