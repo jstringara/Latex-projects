@@ -19,7 +19,7 @@ $C^0([a,b])$ is separable.
     So we can find a polynomial $r$ with \textbf{rational} coefficients such that:
     \[ \dist(p,r)<\frac{\epsilon}{2}\]  
     hence by the triangular inequality:
-    \[ \dist(f,r) \leq \dist(f,p) + \dist(p,r) = \epsilon \]
+    \[ \dist(f,r) \leq \dist(f,p) + \dist(p,r) < \epsilon \]
     therefore the set of polynomials with rational coefficients is dense in $C^0([a,b])$. So, since such a set is countable, $C^0([a,b])$ is separable and we have the thesis.
 \end{proof}
 
@@ -54,11 +54,11 @@ and we say that the pair $(X, \| \cdot \|)$ is a normed space.
         \end{equation*}
     \item $L^1(X,\A,\mu)$ with the norm:
         \begin{equation*}
-            \|f\|_1 \coloneqq \int_a^b |f(x)| \, dx
+            \|f\|_1 \coloneqq \int_X |f(x)| \, dx
         \end{equation*}
     \item $L^\infty(X,\A,\mu)$ with the norm:
         \begin{equation*}
-            \|f\|_\infty \coloneqq \esssup_{x \in [a,b]} |f(x)|
+            \|f\|_\infty \coloneqq \esssup_X |f(x)|
         \end{equation*}
     \item $C^k([a,b])$ with the norm:
         \begin{equation*}
@@ -134,7 +134,7 @@ Write the definition of series in a normed space. Is it true that if $\sum^{+\in
 
 \subsection{Series in a normed space}
 Let $(X, \| \cdot \|)$ be a normed space and $\seq{x} \subset X$ be a sequence. Let us define the sequence of partial sums (series) as the following:
-\[ s_n \coloneqq x_0 + \cdots + x_n + \sum_{k=0}^n x_k \]
+\[ s_n \coloneqq x_0 + \cdots + x_n = \sum_{k=0}^n x_k \]
 It is said to be convergent if:
 \[ \exists x \in X : \; s_n \xrightarrow{n \to +\infty} x \iff \| s_n - x \| \xrightarrow{n \to +\infty} 0 \]
 and we say that:
@@ -163,7 +163,7 @@ State the criterion, involving convergence of series, for completeness of a norm
 
 \subsection*{Solution}
 
-\subsection{Criterion for completeness of a normed space}
+\subsection{Criterion for completeness of a normed space} \label{Series CriterionForComplete}
 \begin{enumerate}[i)]
     \item Let $X$ be a Banach space and $\seq{x} \subset X$. If $\sum^{+\infty}_{n=1} \|x_n\|$ is convergent, then $\sum^{+\infty}_{n=1} x_n$ is convergent.
     \item Let X be a normed space. If for any $\seq{x} \subset X$ such that the series $\sum^{+\infty}_{n=1} \| x_n \|$ is convergent, we also have that $\sum_{n=1}^{+\infty} x_n$ is convergent, then X is a Banach space.
@@ -367,7 +367,7 @@ Show Minkowski's inequality.
 
 \subsection*{Solution}
 
-\subsection{Minkowski's inequality}
+\subsection{Minkowski's inequality} \label{minkowski}
 Let $f,g \in \Mes(X,\A)$ and $p\in{1,+\infty}$, then:
 \[ \| f + g \|_p \leq \| f \|_p + \| g \|_p \]
 
