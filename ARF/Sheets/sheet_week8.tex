@@ -274,7 +274,7 @@ Write the definitions of $\Leb^p$ and $L^p$ . Show that $L^p$ is a vector space 
 
 \subsection{Definition of \texorpdfstring{$\Leb^p$}{Lp}}
 Let $(X,\A, \mu)$ be a measure space, $p\in[1,+\infty]$. We define the space $\Leb^p$ as:
-\[ \Leb^p(X,\A, \mu) \coloneqq \left\{ f:X\to\Rcomp \text{ measurable}, \; \int_X f \, d\mu < +\infty \right\} \]
+\[ \Leb^p(X,\A, \mu) \coloneqq \left\{ f:X\to\Rcomp \text{ measurable}, \; \int_X |f|^p \, d\mu < +\infty \right\} \]
 
 \subsection{Definition of \texorpdfstring{$L^p$}{Lp}}
 On the space $\Leb^p(X,\A, \mu)$ we define the following equivalence relation $R$:
@@ -307,7 +307,7 @@ Let $p,q \in (1,+\infty)$ be conjugate numbers and $a,b > 0$, then:
     Now, we choose $t=1/p$, $1-t=1/q$, $x=\log(a^p)$ and $y=\log(b^q)$, thus we have:
     \begin{align*}
         ab & \tikzmarknode{eq1}{=} e^{\log(a)} \cdot e^{\log(b)} =  e^{\frac{1}{p}\log(a^p)} \cdot e^{\frac{1}{q}\log(b^q)} \\
-        & \tikzmarknode{eq2}{\leq}  \frac{1}{p}e^{\log(a^p)} \cdot \frac{1}{q}e^{\log(b^q)} \\
+        & \tikzmarknode{eq2}{\leq}  \frac{1}{p}e^{\log(a^p)} + \frac{1}{q}e^{\log(b^q)} \\
         & \tikzmarknode{eq3}{=} \frac{1}{p} a^p + \frac{1}{q} b^q
     \end{align*}\tikz[overlay,remember picture]{\draw[shorten >=1pt,shorten <=1pt] (eq1) -- (eq2) -- (eq3);}
 
@@ -321,7 +321,7 @@ Show Hölder's inequality.
 \subsection*{Solution}
 
 \subsection{Hölder's inequality}
-Let $f,g \in \Mes(X,\A)$ and $p,q \in [0,+\infty]$ be two conjugate numbers, then:
+Let $f,g \in \Mes(X,\A)$ and $p,q \in [1,+\infty]$ be two conjugate numbers, then:
 \[ \| f \cdot g \|_1 \leq \| f \|_p \cdot \| g \|_q \]
 where we have:
 \begin{align*}
@@ -342,7 +342,7 @@ where we have:
                     Now we apply Young's inequality to these two quantities:
                     \begin{align*}
                         a^{1/p} b ^{1/q} & \tikzmarknode{eq1}{=} \frac{|f|}{\|f\|_p} \cdot \frac{|g|}{\|g\|_q} \\
-                        & \tikzmarknode{eq2}{=} \frac{1}{p}\frac{|f|^p}{\|f\|^p_p} + \frac{1}{q}\frac{|g|^q}{\|g\|^q_q}
+                        & \tikzmarknode{eq2}{\leq} \frac{1}{p}\frac{|f|^p}{\|f\|^p_p} + \frac{1}{q}\frac{|g|^q}{\|g\|^q_q}
                     \end{align*}\tikz[overlay,remember picture]{\draw[shorten >=1pt,shorten <=1pt] (eq1) -- (eq2);}
                     Let us integrate both sides of the inequality:
                     \begin{align*}
