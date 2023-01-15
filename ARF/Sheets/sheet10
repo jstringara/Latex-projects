@@ -1,0 +1,264 @@
+\sheet
+\begin{itemize}
+    \item[10.1] What is the norm on $\mathcal{L}(X,Y)$? It satisfies two important equalities. Write and show them.
+\end{itemize}
+\subsection{Linear continuous operators}
+Let $X,Y$ be two normed spaces.
+\[\mathcal{L}(X,Y)\coloneqq\{T:X\rightarrow Y \mbox{ s.t. $T$ is linear and continuous}\}\]
+\subsection{Property of the norm on $\mathcal{L}(X,Y)$}
+The norm on $\mathcal{L}(X,Y)$ satisfies two important equalities:
+\begin{enumerate}
+    \item If $T\in\mathcal{L}(X,Y)$, there $\exists\,M>0:\|T(x)\|_Y\leq M\quad\forall\,x\in X,\,\|x\|_X\leq 1$. \\[4pt]
+    We have that $\displaystyle \sup_{x\in X,\|x\|_X\leq1}\|T(x)\|_Y$ is a norm on $\mathcal{L}(X,Y)$ and $(\mathcal{L}(X,Y),\|\cdot\|_{\mathcal{L}})$ is a normed space, 
+    \[\|T\|_\mathcal{L}\coloneqq\sup_{\|x\|_X\leq1}\|T(x)\|_Y\]
+    \item $\displaystyle\|T\|_\mathcal{L}=\sup_{\|x\|_X =1}\|T(x)\|_Y=\sup_{x\in X\setminus\{0\}}\frac{\|T(x)\|_Y}{\|x\|_X}$
+    \begin{proof}
+        \[\sup_{\|x\|_X\leq1}\|T(x)\|_Y\geq\sup_{\|x\|_X=1}\|T(x)\|_Y\qquad (*)\]
+        If $\|x\|_X\leq1$, $x\ne0$ then
+        \[\|T(x)\|_Y=\underbrace{\|x\|_X}_{\leq1}\bigg\|T\bigg(\frac{x}{\|x\|_X}\bigg)\bigg\|_Y\leq\bigg\|T\bigg(\frac{x}{\|x\|_X}\bigg)\bigg\|_Y\implies \sup_{\|x\|_X\leq1}\|T(x)\|_Y\leq\sup_{\|\xi\|=1}\|T(\xi)\|_Y\]
+        \[\begin{aligned}
+        &\implies \|T\|_\mathcal{L}\leq\sup_{\|x\|_X=1}\|T(x)\|_Y\\
+        &\overset{(*)}{\implies} \|T\|_\mathcal{L}\geq\sup_{\|x\|_X=1}\|T(x)\|_Y
+        \end{aligned}\quad\Bigg\rbrace \implies\|T\|_\mathcal{L}=\sup_{\|x\|_X=1}\|T(x)\|_Y\]
+        Furthermore, 
+        \[\frac{\|T(x)\|_Y}{\|x\|_X}=\bigg\|T\bigg(\frac{x}{\|x\|_X}\bigg)\bigg\|_Y\implies\sup_{x\in X\setminus\{0\}}\frac{\|T(x)\|_Y}{\|x\|_X}=\sup_{\|\xi\|=1}\|T(\xi)\|_Y=\| T\|_\mathcal{L}\]
+    \end{proof}
+\end{enumerate}
+
+\begin{itemize}
+    \item[10.2] Under which hypotheses on $X$ and $Y$ is $\mathcal{L}(X,Y)$ a Banach space?
+\end{itemize}
+\subsection{Hypotesis for which $\Leb$(X,Y) is a Banach space} Let $X$ be a normed space and $Y$ be a Banach space. Then $\mathcal{L}(X,Y)$ is a Banach space.
+
+\begin{itemize}
+    \item[10.3] Let $\mathscr{F}\subset\mathcal{L}(X,Y)$. For $\mathscr{F}$ write the definition of pointwise and uniform boundedness. State and prove the UBP (or BS theorem).
+\end{itemize}
+\subsection{Pointwise and uniform boundedness}
+Let $X,Y$ be two Banach spaces and let $\mathscr{F}\subset\mathcal{L}(X,Y)$.
+\begin{itemize}
+    \item $\mathscr{F}$ is pointwise bounded $\iff$ $\forall\,x\in X\,$ $\,\exists\,M_x>0\,:\,$ $\,\displaystyle\sup_{T\in\mathscr{F}}\|T(x)\|_Y\leq M_x$
+    \item $\mathscr{F}$ is uniformly bounded $\iff$ $\exists\,M>0\,:\,$ $\,\displaystyle\sup_{T\in\mathscr{F}}\|T\|_\mathcal{L}\leq M$ $\iff$ $\,\displaystyle\sup_{T\in\mathscr{F}}\sup_{\|x\|\leq1}\|T(x)\|_Y\leq M$ 
+\end{itemize}
+\subsection{Uniform Boundedness Principle (or Banach-Seinhaus Theorem)}
+Let $X,Y$ be Banach spaces, $\mathscr{F}\subset\mathcal{L}(X,Y)$. If $\mathscr{F}$ is pointwise bounded, then $\mathscr{F}$ is also uniformly bounded.
+\begin{proof}
+    $\forall\,n\in\N$ let $C_n\coloneqq\{x\in X: \|T(x)\|_Y\leq n\quad\forall\,T\in\mathscr{F}\}$
+    \begin{itemize}
+        \item $C_n$ is closed.\\
+        In fact, let $\{x_m\}\subset C_n$, $x_m\xrightarrow{m\rightarrow\infty}x_0\in X$. Therefore: \[\begin{aligned}
+            &T(x_m)\xrightarrow[m\rightarrow\infty]{}T(x_0)\quad\forall\,T\in\mathscr{F} \quad\implies\quad \|T(x_m)\|_Y\xrightarrow[m\rightarrow\infty]{}\|T(x_0)\|_Y\quad\implies\quad\|T(x_0)\|_Y \le n\\
+            &\implies\quad x_0\in C_n \quad\implies\quad C_n\mbox{ is closed}
+        \end{aligned}\]
+        \item $\mathscr{F}$ pointwise bounded $\implies$ $\displaystyle\bigcup_{n=1}^\infty C_n=X$\\
+        Due to Baire theorem, there exists $n_0\in\N$ s.t. Int$C_0\ne\emptyset$ $\implies$ $\exists\,\overline{B}_\epsilon(x_0)\subset C_{n_0}$\\
+        If $\|z\|_X\leq\epsilon\quad\implies\quad z+x_0\in\overline{B}_\epsilon(x_0)\subset C_{n_0}$,
+        \[\begin{aligned}
+                \|T(z)\|_Y&=\|T(z)+T(x_0)-T(x_0)\|_Y\leq\|T(z)+T(x_0)\|_Y+\|T(x_0)\|_Y\\
+                &=\|T(z+x_0)\|_Y+\|T(x_0)\|_Y\leq2n_0,\quad\forall\,T\in\mathscr{F}
+        \end{aligned}\]
+        $\forall\,x\in X\setminus\{0\},\quad\forall\,T\in\mathscr{F}$
+         \[\|T(x)\|_Y=\frac{\|x\|_X}{\epsilon}\bigg\|T\bigg(\frac{\epsilon x}{\|x\|_X}\bigg)\bigg\|_Y\leq\frac{2n_0}{\epsilon}\|x\|_X\implies\|T\|_\mathcal{L}\leq\frac{2n_0}{\epsilon}\eqqcolon M \implies\sup_{I\in\mathscr{F}}\|T\|_\mathcal{L}\leq M\]
+    \end{itemize}
+\end{proof}
+
+\begin{itemize}
+    \item[10.4] From the UBP is it possible to infer an important property of operators defined by means of a pointwise limit. What is that? Justify your answer.
+\end{itemize}
+\subsection{Corollay of UBP}
+Let $X,Y$ be Banach spaces, $\{T_n\}_{n\in\N}\subset\mathcal{L}$. Assume that $\forall x\in X$ $\displaystyle\exists\lim_{\toi}T_n(x)$. Let $\displaystyle T(x)\coloneqq\lim_{\toi} T_n(x)$ then $\displaystyle T\in\mathcal{L}(X,Y)$.
+\begin{proof}
+    $T:X\rightarrow Y$ is linear. $\{T_n(x)\}_{n\in\N} \quad $is bounded $\forall x\in X$  
+    \[\begin{aligned}
+        &\iff \forall x\in X\quad\exists\,M_x>0:\quad\|T_n(x)\|_Y\leq M_x\quad\forall\,n\in\N \quad(\mbox{or equivalently } \sup_{n\in\N}\|T_n(x)\|_Y\leq Mx)\\
+        &\iff \mathscr{F}=\{T_n\}_{n\in\N} \mbox{ is pointwise bounded} \overset{\scriptsize{\mbox{UBP}}}{\implies}\mathscr{F}=\{T_n\}_{n\in\N} \mbox{ is uniformly bounded}\\
+        &\iff\exists\,M>0:\quad\sup_{n\in\N}\|T_n\|_\mathcal{L}\leq M\implies\|T_n(x)\|_Y\leq M\|x\|_X\quad\forall\,x\in X,\,\forall\,n\in\N
+    \end{aligned}
+    \]
+    \[\|T(x)\|_Y=\lim_{\toi}\|T_n(x)\|_Y\leq M\|x\|_X\quad\forall\,x\in X\implies T\mbox{ is bounded }\implies T\in \mathcal{L}(X,Y)\]
+\end{proof}
+
+\begin{itemize}
+    \item[10.5] Write the definition of open mapping. Let $f:\R^n\rightarrow\R^m$ be continuous; under which extra hypotheses is $f$ open? Let $T:\R^n\rightarrow\R^n$ be linear and onto; why is $T$ open? State the OMT.
+\end{itemize}
+
+\subsection{Open mapping}
+ Let $X,Y$ be normed space, $T:X\rightarrow Y$ is said to be an open mapping if for any open set $G\subset X$, $T(G)\subset Y$ is open.
+ 
+\subsection{Open mapping from $\R^n\rightarrow\R^m$}
+
+Given a continuous $f$: $\R^n\rightarrow\R^m$,  with the further hypotesis $f$ injective, we can prove that $f$ is open.
+\subsection{Open mapping from $\R^n\rightarrow\R^n$}
+Let $T: R^n\rightarrow\R^n$ be linear and onto, then $T$ is open.
+\begin{proof}
+    $T$ onto from $\R^n$ to itself implies that $T$  is injective.
+    Moreover $\R^n$ has finite dimension hence linear operators from $\R^n$ are also continuous and thus the hypotesis of the previous theorem are satisfied , yielding  that $T$ is open.
+\end{proof}
+\subsection{Open Mapping Theorem}
+Let $X;Y$ be Banach spaces, $T\in\mathcal{L}(X,Y)$ onto. Then $T$ is an open mapping.\\
+\begin{itemize}
+    \item[10.6] State and prove the IBM (or ICM) theorem. What is the analogous result in the finite dimensional case?
+\end{itemize}
+
+\subsection{Inverse Bounded Mapping}
+Let $T\in\mathcal{L}(X,Y)$, $T$ bijective. Then $T^{-1}\in\mathcal{L}(X,Y)$.
+\begin{proof}
+    \[\begin{array}{l}
+        T\in\mathcal{L}(X,Y)\\
+        T \mbox{ is bijective}
+    \end{array}\quad\implies\quad \exists\, T^{-1}:Y\rightarrow X\mbox{ and } T^{-1} \mbox{ is linear}\]
+    Claim: $T^{-1}$ is continuous $\overset{\scriptsize{\mbox{def}}}{\iff}$ $(T^{-1})^{-1}(E)\subset Y$ is open $\forall\,E\subset X$ open \\
+    $(T^{-1})^{-1}(E)=T(E)$ is open, in view of the open mapping theorem.
+\end{proof}
+\subsection{Finite-dimensional case}
+Let $T:V\to W$ with $\dim V < \infty$ and  $\dim W < \infty$ .
+If $T$ is bijective, $T $ is linear and hence continuous.
+\begin{itemize}
+    \item[10.7] By the IBM theorem we can infer an important property about equivalent norms on Banach spaces. What is that? Justify your answer.
+\end{itemize}
+\subsection{IBM Corollary} 
+Let $(X,\|\cdot\|)$, $(X,\|\cdot\|_\#)$ be Banach spaces and s uppose that $\exists\,M>0:$ $\|x\|_\#\leq M\|x\|\quad\forall\,x\in X$. \newline 
+Then $\|\cdot\|$ and $\|\cdot\|_\#$ are equivalent, i.e. 
+\[\exists\,m>0:\quad \|x\|_\#\geq m\|x\|\quad\forall\,x\in X\]
+\begin{proof}
+    \[I:X\rightarrow X,\,\, I(x)=x \; \forall\,x\in X \implies I \text{ is bijective and continuous}\]
+    \[I \text{ continuous} \iff I \text{ bounded } \iff \|x\|_\#=\|I(x)\|_\#\leq M\|x\|\quad\forall\,x\in X\]
+    By IBM, $I^{-1}:X\rightarrow X$ is linear and bounded $\Rightarrow \exists\,m'>0:$
+    \[\|x\|_\#=\|I^{-1}(x)\|\leq m'\|x\|_\#\quad \forall\,x\in X,\quad m=\frac{1}{m'}\]
+\end{proof}
+
+\subsection{Closed Graph Theorem (CGT)}
+\begin{itemize}
+    \item[10.8]  Write the deﬁnitions of: closed operator; graph of an operator. Show that an operator is linear and closed iff its graph is closed.
+\end{itemize}
+\subsection{Closed operator}
+A linear operator $T:X\rightarrow Y$ is called \textbf{closed} if
+    \[\begin{array}{l}
+         x_n\xrightarrow[\toi]{}x\quad\mbox{ in } X\\
+         T(x_n)\xrightarrow[\toi]{}y\quad\mbox{ in } Y
+    \end{array}\bigg\}\implies T(x)=y\]
+     \subsection{Graph of an operator}
+     The graph of a linear operator $T$ is defined as
+    \[\mbox{graph }T\coloneqq\{(x,T(x)):x\in X\}\subseteq X\times Y\]
+    \subsection{Relation between close operator and graph}$T:X\rightarrow Y$ linear and closed $\iff$ graph $T\,\,(\subseteq X\times Y)$ is closed.
+    \begin{proof}
+        Let $\{(x_n,T(x_n)\}\subset\mbox{graph }T$ be s.t.
+        \[(x_n,T(x_n))\xrightarrow{\toi}(x,y)\in X\times Y\]
+        \[\implies x_n\xrightarrow{\toi}x\text{ and } T(x_n)\xrightarrow[]{\toi}y\]
+        \[ \text{graph $T$ is closed} \iff (x,y)\in \text{graph } T\iff y=T(x)\]
+    \end{proof}
+\end{itemize}
+
+\begin{itemize}
+    \item[10.9] State and prove the closed graph theorem.
+\end{itemize}
+\subsection{Closed Graph Theorem} 
+Let $T:X\rightarrow Y$ be a linear closed operator with $X,Y$ Banach spaces, then $T\in\mathcal{L}(X,Y)$.
+\begin{proof}
+Let:
+    \[\|x\|_\#\coloneqq\|x\|_X+\|T(x)\|_Y \implies \|x\|_X\leq\|x\|_\#\]
+    By the previous corollary $\exists\,M\geq1 \text{ s.t.}$:\[
+    \|x\|_\#=\|x\|_X+\|T(x)\|_Y\leq M \|x\|_X\quad\forall\,x\in X
+    \]
+    \[\implies \|T(x)\|_Y\leq (M-1)\|x\|_X\quad\forall\,x\in X\implies T \text{ is bounded } \implies T\in\mathcal{L}(X,Y)\]
+\end{proof}
+
+
+\begin{itemize}
+    \item[10.10] Write the deﬁnition of dual space.
+\end{itemize}
+\subsection{Dual space}
+Let $X$ be a normed space, then its dual space $X^*\coloneqq \Leb(X,\R)$ is a Banach space with the norm $\|L\|=\displaystyle\sup_{\|x\|=1}|L(x)|$
+
+
+\begin{itemize}
+    \item[10.11] Exhibit an example of $T\in (L^p)^*$. Compute $\|T\|_*$.
+\end{itemize}
+
+\subsection{Example of $T\in (L^p)^*$} 
+$X=L^p(X,\mathscr{A},\mu)$, $\frac{1}{p}+\frac{1}{q}=1$, $g\in L^q$, $L_g:L^p\rightarrow \R$, $L_g(f)\coloneqq\int_Xfgd\mu$
+\begin{itemize}
+    \item $L_g$ is linear: $\forall f_1,f_2\in L^p, \quad\alpha_1,\alpha_2\in\R$
+    \[L_g(\alpha_1f_1+\alpha_2f_2)=\int_X(\alpha_1f_1+\alpha_2f_2)gd\mu=\alpha_1\int_Xf_1gd\mu+\alpha_2\int_Xf_2gd\mu=\alpha_1L_g(f_1)+\alpha_2L_g(f_2)\]
+    \item $L_g$ is bounded:
+    \[|L_g(f)|=|\int_Xfgd\mu|\leq\int_X|fg|d\mu\leq \|f\|_p\underbrace{\|g\|_q}_{=M}\qquad\forall f\in L^p\]
+
+\end{itemize}
+From the previous inequality, we deduce that $\|L_g\|_*\leq\|g\|_q$. Consider $\displaystyle \varphi\coloneqq\frac{|g|^{q-2}g}{\|g\|_q^{q-1}}$,
+\[L_g(\phi)=\int_X\phi gd\mu =\frac{1}{\|g\|_{q}^{q-1}}\int_X|g|^qd\mu=\frac{\|g\|_q^q}{\|g\|_q^{q-1}}=\|g\|_q\implies\|L_g\|_{X^*}=\|g\|_{L^q}\]
+
+\begin{itemize}
+    \item[10.12] Let $(V,\langle\cdot,\cdot\rangle)$ be a finite dimensional vector space endowed with an inner product. Characterize $V^*$.
+\end{itemize}
+ \subsection{Characterization of $V^*$}
+Let $(V,\langle \cdot,\cdot \rangle)$ be a finite-dimensional vector space and $L: V \to \R $ be a linear operator. Then:
+\[
+\exists ! \,\,y \in V: L(x) = \langle x,y \rangle ,\quad \forall x \in V
+\]
+\begin{proof}
+
+Let $B = \{v_1,v_2,\dots,v_n\}$ be an orthonormal basis of $V: \\$
+\[
+\forall x \in V, \quad x = \displaystyle\sum_{i=1}^n \alpha_i v_i
+\quad \alpha_i = \langle v,v_i \rangle \quad \forall i=1,\dots,n
+\]
+\begin{align*}
+    L(x) & = \alpha_1 L(x_1) + \dots + \alpha_n L(x_n) = \\
+         & = \langle x,v_1 \rangle L(x_1) + \dots + \langle x,v_n \rangle L(x_n) = \\
+         & = \big\langle x,\underbrace{v_1 L(x_1) + \dots  +  x,v_n L(x_n) }_{\coloneqq y}\big\rangle 
+\end{align*}
+Now we must show that such a $y$ is unique: suppose by contradiction that $\exists ! \,y' \in V: L(x) = \langle x,y' \rangle \quad \forall x \in V $
+\[
+\implies 0 = L(x) - L(x) = \langle x,y \rangle - \langle x,y' \rangle = \langle x,y-y \rangle \quad \forall x \in  V
+\]
+\[
+ \implies y=y' \text{, contradiction}
+\]
+    
+\end{proof}
+
+
+\begin{itemize}
+    \item[10.13] Let $Y$ be a vector subspace of $X=\R^2$. Given $f\in Y^*$ is it possible to find $F\in X^*$ such that $F=f$ in $Y$ and $\|F\|_{X^*}=\|f\|_{Y^*}$?
+\end{itemize}
+
+\subsection{Example}
+
+Take $X=\R^2$ and $Y$ v.s.s. of $X$.
+\[
+f \in Y^* \iff f:Y\to \R \text{ is linear and continuous}
+\]
+We want $F \in X^* $ s.t. $F=f$ in $Y \subset X$ and $\|F\|_{X^*}=\|f\|_{Y^*}$ and we already know:
+\[
+f \in Y^* \implies \exists ! \eta \in Y  \text{ s.t. } f(x) = \langle \eta, x \rangle \quad \forall x \in Y
+\]
+Now let $F: X\to \R $, $F(x)= \langle \eta, x \rangle\quad \forall x \in X\\$
+$F$ is clearly bounded and $\|F\|_{X^*}=\|f\|_{Y^*}$
+\begin{itemize}
+    \item[10.14] State the Hahn-Banach theorem in the continuous extension form.
+\end{itemize}
+
+\subsection{Hahn-Baanch theorem, continuous form}
+Let $X$ be a normed space and $Y$ v.s.s. of $X$, $f \in Y^*$, then $\exists\,f \in\, X^* $ s.t. $F(y)=f(y)\quad \forall y\in Y$, $\,\|F\|_{X^*}=\|f\|_{Y^*}$. 
+
+\begin{itemize}
+    \item[10.15] Let $X$ be a normed space, let $H$ be a hyperplane of $X$. When do we say that $H$ separates (or strictly separates) $A$ and $B$? If $X=\R^2$, under which hypotheses on $A$ and $B$ is it possible to find a line $H$ which separates them?
+\end{itemize}
+
+\subsection{Separating hyperplane}
+Let $X$ be an hyperplane, we say that $H$ separates $A \subseteq X$ and $B\subseteq X$ if:
+\[
+f(a) \le \alpha \le f(b) \quad\forall a\in A,\,\forall b \in B
+\]
+Moreover, we say  that $H$ strictly separates $A \subseteq X$ and $B\subseteq X$ if:
+\[
+\exists \epsilon>0 \text{ s.t. } f(a) \le \alpha - \epsilon,\quad f(b) \ge \alpha + \epsilon \quad \forall a \in A, \forall b \in B
+\]
+\subsection{Weaker hypotesis on $\R^2$}
+If $X= \R^2$, we can say that it is possible to find a line (hyperplane with $n=2$) that separates $A $ and $B$ if $A,B $ are convex and disjoint.
+
+\begin{itemize}
+    \item[10.16] State the Hahn-Banach theorem in the separation form (first and second version).
+\end{itemize}
+\subsection{Hahn-Banach theorem, separation form}
+Let $X $ be a normed space. If $A,B$ are disjoint convex sets $\subseteq X$, $A$ is open and, then there $\exists $ a closed hyperplane $H$ which strictly separates $A$ and $B$.\newline
+With the different hypotesis that $A$ is closed an $B$ is compact, we can say that it exists a closed hyperplane $H$ that strictly separates $A$ and $B$.
