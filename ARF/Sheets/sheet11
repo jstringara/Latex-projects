@@ -1,0 +1,293 @@
+\sheet
+
+\begin{itemize}
+    \item[11.1]  State and prove the three corollaries of the Hanh-Banach Theorem.
+\end{itemize}
+\subsection{First corollary of the Hahn-Banach theorem}
+Let $x_0 \in X \backslash \{0\}$, $X$ normed space, then $\exists L_{x_0} \in X^* \mbox{ s.t.: }$ \[
+\|L_{x_0}\|_{X^*} =1,\quad L_{x_0}(x_0) = \|x_0 \|
+\]
+\begin{proof}
+Let $Y\coloneqq \{\lambda x_0 : \lambda \in \R\}=\text{Span}(x_0)$, $Y$ is a v.s.s. of $X$.
+\[
+L_0:Y\to \R ,\quad L(\lambda x_0) = \lambda \|x_0\|,\quad L_0 \in \Leb
+\]
+By H-B theorem: \[
+\exists \Tilde{L}_0: X \to \R , \quad \Tilde{L}_0 \in X^*, \quad \|\Tilde{L}_0\|_{X^*}= \sup_S |\underbrace{\lambda \|x_0\|}_{=L_0(\lambda x_0)}| = 1 
+\]
+where $S = \{\lambda x_0 : \lambda x_0 \in Y , \| \lambda x_0\| = 1\}$, moreover:
+\[
+\Tilde{L}_0 = L_0(x_0) = \|x_0\| \implies L_{x_0} \coloneqq \Tilde{L}_0 \text{ satisfies the required properties }
+\]
+\end{proof}
+\subsection{Second corollary of the Hahn-Banach theorem}
+Let $y,z \in X$, if $L(y)=L(z),\forall L \in X^*$ then $ y=z$.
+\begin{proof}
+Suppose by contradiction that $\exists y,z \in X, y\neq z$ s.t. $L(y)=L(z)\quad\forall L \in X^*$, then:
+\[
+x \coloneqq y-z \neq 0 \implies L(x)=L(y-z)=L(y)-L(z)=0\quad\forall L \in X^*
+\]
+and by the preceding corollary:
+\[
+\exists L_x \in X^* \mbox{ s.t. } L(x) = \|x\| \neq 0, \mbox{ contradiction}
+\]
+\end{proof}
+\subsection{Third corollary of the Hahn-Banach theorem}
+Let $Y \subseteq X$ be a v.s.s. with $\Bar{Y}\neq X$, $x_0 \in X\backslash \Bar{Y}.$ Then:
+\[
+\exists L \in X^*: L(x_0)\neq 0,\quad L\arrowvert_Y=0
+\]
+\begin{proof}
+Let $Z \coloneqq \{\lambda x_0 + y:\,y\in Y,\,\lambda \in R\} \subset X$ and define:
+\[
+L_0: Z\to\R,\quad L_0(\lambda x_0 + y) \coloneqq \lambda
+\]
+Notice that $L_0(x_0) = L_0(1\cdot x_0+0\cdot y) = 1$ and:
+\[
+\ker(L_0)= \{\lambda x_0 + y \in Z :\,\underbrace{L_0(\lambda x_0 + y)=0}_{\lambda=0}=Y\} \implies L\arrowvert_Y=0
+\]
+By H.-B. theorem: 
+\[
+\exists \Tilde{L}_0 \in X^*: \Tilde{L}_0 = L_0\text{ in }Z \supseteq Y \implies L \coloneqq \Tilde{L}_0 \text{ satisfies } L(x_0)  \neq 0,\;  L\arrowvert_Y=0
+\]
+\end{proof}
+\begin{itemize}
+    \item[11.2] Give a sufficient condition for separability of $X$.
+\end{itemize}
+\subsection{Sufficient condition for separability}
+Let $X$ be a normed space:\[
+X^* \text{ separable } \implies X \text{ separable }
+\]
+
+\begin{itemize}
+    \item[11.3] Write the definition of uniformly convex normed space. What is the geometric interpretation?
+\end{itemize}
+\subsection{Uniform convexity}
+Let $X$ be a normed spcae.
+$X$ is uniformly convex if $\forall \epsilon >0 \;\exists \,\delta$ s.t.:\[
+\forall x,y\in X,\;\|x\|\le 1,\;\|y\|\le 1,\;\|x-y\|\ge \epsilon \implies \|\tfrac{x-y}{2}\|\le 1-\delta \\[0pt]
+\]We can think of it as two different points on the unit sphere imply that the center of the line segment that connects them has to lie inside the unit sphere.
+
+\begin{itemize}
+    \item[11.4] Write the Clarkson’s inequalities in $L^p$. Show that $L^p$ is uniformly convex for any $ p \in(1, \infty)$.
+\end{itemize}
+\subsection{Clarkson's inequality}
+Given $f,g \in L^p(\Omega)$, $\Omega \in \Leb(R^N)$, we have:
+\newline\newline
+$\begin{array}{rl}
+p \ge 2: &     \qquad\|\frac{f+g}{2}\|_p^p + \|\frac{f-g}{2}\|_p^p  \le \frac12 \big (\|f\|_p^p + \|g\|_p^p \big)\\[4pt]
+p \in (1,2): & \qquad\|\tfrac{f+g}{2}\|_p^q + \|\tfrac{f-g}{2}\|_p^q  \le \big (\frac12\|f\|_p^p + \frac12\|g\|_p^p \big)^{\frac1{p-1}}
+\end{array}$
+\subsection{$L^p(\Omega)$ is uniformly convex}
+\begin{proof}
+Take $\epsilon>0,\;f,g \in L^p(\Omega),\;\|f\|\le 1,\;\|g\|\le 1,\;\|f-g\|\ge \epsilon$, we have:$\\[4pt]$
+$p\ge 2$:
+\[
+\big\|\frac{f+g}{2}\big\|_p^p < 1- \big(\frac{\epsilon}{2}\big)^p
+\]
+\[
+\implies  \big\|\frac{f+g}{2}\big\|_p < 1 - \delta,\quad \delta \coloneqq 1-\big[1-\big( \tfrac{\epsilon}{2}\big)^p\big]^{\tfrac1p}
+\]
+$1<p<2$:
+\[
+\big\|\frac{f+g}{2}\big\|_p^q = 1- \big(\frac{\epsilon}{2}\big)^q
+\]
+\[
+\implies \big\|\frac{f+g}{2}\big\|_p < 1 - \delta,\quad \delta \coloneqq 1-\big[1-\big( \tfrac{\epsilon}{2}\big)^q\big]^{\tfrac1q}
+\]
+\end{proof}
+
+
+
+\begin{itemize}
+    \item[11.5] Write the definition of bidual space. Introduce the canonical (or evaluation) map. Show that it is linear and that it preserves the norm.
+\end{itemize}
+\subsection{Bidual space}
+Let $X $ be a normed space and $X^* $ its dual. We defie the bidual of $X$ as:
+\[
+X^{**} \coloneqq (X^*)^*
+\]
+
+\subsection{Canonical map}
+$\forall x \in X$ we define $\Lambda _x: X^* \to \R$ as: 
+\[\Lambda _x(L) \coloneqq L(x),\quad \forall L \in X^*\]
+\[
+\Lambda_x \in \Leb :\quad |\Lambda _x(L)| = |L(x)| \le \|L\|_{X^*} \underbrace{\|x\|_X}_{\le M}
+\]
+\[
+\implies \Lambda _x \in X^{**},\quad \|\Lambda _x\|_{X^{**}} \le \|x\|_X
+\]
+Finally we can define the canonical map as
+\[ \tau: X \to X^{**}, \quad \tau(x) = \Lambda _x,\quad \forall x \in X
+\]
+
+
+\subsection{Properties of the canonical map}
+\begin{itemize}
+    \item [i)] $\tau$ is linear
+    \item [ii)] $\|\tau(x)\|_{X^{**}}=\|x\|_X$
+    \item [iii)] $\tau(x)$ is injective
+\end{itemize}
+\begin{proof} $\\$
+Linearity is trivial and the injectivity comes directly from ii) which is the only one we are proving, clearly: \[\|x\|_X \ge \|\tau(x)\|_{X^{**}},\;\forall x \in X\\ \]
+By a corollary of the H-B theorem:
+\[
+\forall x \in X\backslash\{0\}\; \exists L \in X^*\mbox{ s.t. }\|L\|_{X^{**}} = \|x\|_X
+\]
+and thus:
+\[
+\|\tau(x)\|_{X^{**}} = \|\Lambda \|_{X^{**}}=\displaystyle\sup_{\|x\|_X=1} |\Lambda _x(L)| \ge \|x\|_X
+\]
+\end{proof}
+
+
+\begin{itemize}
+    \item[11.6]  Write the definition of reflexive space. Let $X$ be a reflexive space and $\phi\in X^{**}$. What about $\phi(L)$ for any $L\in X^*$?
+\end{itemize}
+\subsection{Reflexive space}
+$X$ is said to be reflexive if $\tau(X) = X^{**} .$
+
+\subsection{Characterization of reflexive spaces}
+\[X \text{ reflexive } \iff \forall \phi \in X^{**},\;\phi(L)=L(x),\;\forall L\in X^*
+\] 
+
+\begin{itemize}
+    \item[11.7]  State the Milman-Pettis theorem. Show that $L^p$ is reflexive for any $p \in (1,+\infty)$. What about $L^1 $ and $L^\infty$?
+\end{itemize}
+\subsection{Milman-Pettis theorem}
+Let $X$ be an uniformly convex Banach space, then $X$ is reflexive.
+\subsection{Reflexivity of $L^p$}
+$L^p$ is reflexive $\forall p \in (1,+\infty)$.
+
+\begin{proof}
+This follows immediately by Milman-Pettis theorem since for $ p \in (1,+\infty)$, $L^p$ is uniformly convex.\newline
+Moreover, it can be proved that $L^1 $ and $L^\infty$ are not reflexive.
+\end{proof}
+
+\begin{itemize}
+    \item[11.8]  State and prove the Riesz theorem in $L^p$ spaces.
+\end{itemize}
+
+\subsection{Riesz theorem in $L^p$}
+Let $(X,\A,\mu) $ be a complete measure space, $p\in (1,+\infty)$. For any $\Lambda \in (L^p)^*,\,\exists! g \in L^q $ s.t.:
+\[
+\Lambda(f)  = \int_X fg\,d\mu \quad \forall f \in L^p
+\]
+Furthermore: 
+\[
+\|\Lambda \|_{(L^p)^*} = \|g\|_{L^q}
+\]
+\begin{proof}
+Let $p \in (1,+\infty),$ we define: \[
+T: L^q \to (L^p)^*\]
+\[ u\mapsto T(u): L^p \to \R \]
+\[ [T(u)](f) \coloneqq \displaystyle\int_{\Omega} fu\,d\lambda\]
+Now note that our thesis is equivalent to showing that $T$ is surjective, and to prove the latter let:\[
+E\coloneqq T(L^q)\subseteq (L^p)^*, \,E\text{ is closed}
+\]
+and let
+\[
+H \in (L^p)^{**} \quad(\iff H\in \Leb : (L^p)^* \to \R)
+\]
+be such that:   
+\[
+H\arrowvert_E = 0 \quad (\iff H(T(u))=0 \;\,\forall u \in L^q)
+\]
+\[
+\iff H(T) = T(h) \text{ (since $L^p$ is reflexive)}, \,\,h\coloneqq \tau^{-1} (H) \in L^p
+\]
+\[
+\implies \forall u \in L^q,\; \int_\Omega hu\,d\lambda = 0
+\]
+Let $u \coloneqq |h|^{p-2}h,\;u\in L^q$ since $h \in L^p$
+\[
+\implies \int_\Omega |h|^p \,d\lambda = 0 \implies h\equiv 0 \text{ in } L^p \underset{H=\tau(0)}{\Longrightarrow} H=0 \text{ in } (L^q)^* \implies \Bar{E} = E = (L^p)^*
+\]
+
+
+\end{proof}
+We can also prove that the same thesis holds for $p=1, q=\infty$, provided that $\mu$ is $\sigma$-finite.
+\begin{itemize}
+    \item[11.9]  Show that the dual of $L^\infty$ is "strictly bigger" than $L^1$.
+\end{itemize}
+\subsection{"$(L^\infty)^* \supsetneq L^1$"}
+$\exists L \in (L^\infty)^* $ s.t. $L $ is not in the form $Lg$ with $g\in L^1$.
+\begin{proof}
+Indeed consider $L_0 \in (C_c^0 (\R^N))^*$, we have 
+ that $\big(C_c^0 (\R^N),\|\cdot\|_\infty\big)$ is a subset of $L^\infty$.
+ \[L_0(f)\coloneqq f(0),\quad \forall f \in C_c^0 (\R^N)\]
+Clearly $L_0$ is bounded, moreover:
+ \[
+ |L_0(f)| = |f(0)|  \le \|f\|_\infty\quad \forall f \in C_c^0 (\R^N) \implies L_0 \text{ is bounded }
+ \]
+\[
+\overset{\text{H.B.}}{\Longrightarrow} \exists L \in [L^\infty(\R^N)]^* \text{ extension of } L_0
+\]
+Now we claim that:
+\[
+\nexists g \in L^1 \mbox{ s.t. } L(f)=\int_{\R^N}fg\,d\lambda,\quad \forall f \in L^\infty
+\]    
+Suppose by contradiction that such a $g$ exists, then:
+\[
+L(f)=L_0(f) = \int_{\R^N}fg\,d\lambda = f(0) = 0 
+\]
+\[
+f \in C_c^0,\,f(0)=0 \implies g =0 \text{ a.e. in } \R^N
+\]
+\[
+\implies L(f) = \int_{\R^N}0\cdot f\,d\lambda = 0\quad \forall f \in L^\infty
+\]
+\[
+ f \in C_c^0 (\R^N),\; f(0) \neq 0 \implies L(f)=f(0)\neq 0 \implies \text{ contradiction}
+\]
+
+\end{proof}
+
+
+
+
+
+\begin{itemize}
+    \item[11.10] Write the definition of weak convergence. How can it be formulated in $L^p$ and in $\ell^p$?
+
+\end{itemize}
+
+\subsection{Weak convergence}
+Let $X $ be a Banach space, $\{x_n\} \subset X$, $x\in X$, we say that $x_n \wc x$ if $L(x_n) \to L(x) \quad \forall L\in X^*$
+\subsection{Weak convergence in $L^p$}
+In $L^p(\Omega),\text{ with }p\in[1,+\infty) $ we have that:
+\[
+f_n \wc f \iff \int_\Omega f_n g\,d\lambda \xrightarrow{\toi} \int_\Omega f g\,d\lambda  \quad\forall g \in L^q \overset{p\neq 1}{\iff} \int_\Omega f_n \phi\,d\lambda \xrightarrow{\toi} \int_\Omega f \phi\,d\lambda \quad\forall \phi \in C^1_c(\Omega) 
+\]
+
+\subsection{Weak convergence in $\ell^p$}
+In $\ell^p(\Omega),\text{ with }p\in[1,+\infty) $ we have that:
+\[x_n \wc x \iff \sum_{k=1}^\infty x_n^{(k)} y^{(k)} \xrightarrow{\toi} \sum_{k=1}^\infty x^{(k)} y^{(k)}  \quad\forall y \in \ell^q ) \]
+
+\begin{itemize}
+    \item[11.11]  Show that strong convergence implies weak convergence. Provide a counterexample for the
+converse implication.
+\end{itemize}
+
+\subsection{Strong convergence implies weak convergence}
+$x_n \to x \implies x_n \wc x$
+\begin{proof}
+   $\forall L \in X^*:$
+    \[
+    |L(x_n)-L(x)| = |L(x_n-x)| \le \|L\|_{X^*}\overbrace{\|x_n-x\|}^{\to 0}
+    \]
+    \[
+    \implies L(x_n) \xrightarrow{\toi} L(x)
+    \]
+\end{proof}\noindent
+We claim that the converse is not true, for instance, let $X=\ell^2,\; \{e_n\}\subset\ell^2,\;e_n^{(k)}=\delta_{k,n}$
+\[
+e_n \wc 0 \iff T(e_n) \to T(0) = 0\quad \forall T \in (\ell^2)^*
+\]
+\[
+\forall x \equiv x^{(j)} \in \ell^2,\; \sum e^{(j)} x^{(j) }= x^(n) \to 0 \implies e_n \wc 0
+\]
+but:
+\[
+\|e_n\|_2 = 1 \quad \forall n \in \N \implies e_n \nrightarrow 0
+\]
