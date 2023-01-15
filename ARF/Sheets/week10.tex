@@ -1,0 +1,156 @@
+\sheet
+
+%>=====< Question 1 >=====<%
+
+\question
+What is the norm on $\Leb(X,Y)$? It satisfies two important equalities. Write and show them.
+
+\subsection*{Solution}
+
+\subsection{Norm on \texorpdfstring{$\Leb(X,Y)$}{the space of continuous operators}}
+We can define the norm on $\Leb(X,Y)$ as follows:
+\[ \| T \|_{\Leb} = \sup_{x\in X, \; \|x\|_X\leq1} \|T(x)\|_Y \]
+
+%what are the conditions he is talking about
+
+%>=====< Question 2 >=====<%
+
+\question
+Under which hypotheses on $X$ and $Y$ is $\Leb(X,Y)$ a Banach space?
+
+\subsection*{Solution}
+
+\subsection{When \texorpdfstring{$\Leb$}{the space of continuous operators} is a Banach space}
+If $X$ is a normed space and $Y$ a Banach space then $\Leb(X,Y)$ is a Banach space.
+
+%>=====< Question 3 >=====<%
+
+\question
+Let $\mathfrak{F} \subset \Leb(X,Y)$. For $\mathfrak{F}$ write the definition of pointwise and uniform boundedness. State and prove the UBP (or BS theorem).
+
+\subsection*{Solution}
+
+\subsection{Pointwise boundedness}
+A family of operators $\mathfrak{F} \subset \Leb$ is pointwise bounded if and only if:
+\[ \forall x \in X \; \exists M_x > 0: \quad \sup_{T\in\mathfrak{F}} \|T(x)\|_Y < M_x \]
+
+\subsection{Uniform boundedness}
+A family of operators $\mathfrak{F} \subset \Leb$ is uniformly bounded if and only if:
+\[ \forall x \in X \; \exists M > 0: \quad \sup_{T\in\mathfrak{F}} \|T\|_{\Leb} < M \]
+which is equal to writing:
+\[ \forall x \in X \; \exists M > 0: \quad \sup_{T\in\mathfrak{F}} \sup_{\|x\|\leq1} < M \]
+
+\subsection{Uniform boundedness Principle}
+Let $X$,$Y$ be two Banach spaces, $\mathfrak{F}\subset\Leb(X,Y)$. If $\mathfrak{F}$ is pointwise bounded, then $\mathfrak{F}$ is also uniformly bounded.
+
+\begin{proof}
+    For all $n\in\N$ we define:
+    \[ C_n \coloneqq \{ x\in X: \; \|T(x)\|_Y\leq n \; \forall T \in \mathfrak{F} \} \]
+    Let us observe that $C_n$ is closed for all $n$. In fact, let $\seq{x}\subset C_n$ such that $x_n \xrightarrow{n\to\infty} x_0 \in X$, by continuity we have:
+    \[ T(x_n) \xrightarrow{n\to\infty} T(x_0) \; \forall T \in \mathfrak{F} \implies \|T(x_n)\|_Y \xrightarrow{n\to\infty} \|T(x_0)\|_Y \]
+    but since each $x_n \in C_n$ we also have:
+    \begin{align*}
+        & 0 \leq \|T(x_n)\|_Y \leq n \; \forall n \in \N \implies \|T(x_0)\|_Y \leq n \\
+        & \implies x_0 \in C_n \implies X = \bigcup_{n=1}^\infty C_n
+    \end{align*}
+    Now we apply Baire's Theorem (\ref{Baire}) to write:
+    \[ \exists n_0 \in \N \text{ such that } \int(C_{n_0}) \neq \emptyset \implies \exists \bar{B}_\epsilon(x_0) \subset C_{n_0} \]
+    And so we have that:
+    \[ \text{If } \|z\|_X \leq \epsilon \implies z+x_0 \in \bar{B}_\epsilon(x_0) \subset C_{n_0} \]
+    \begin{align*}
+        \implies \|T(z)\|_Y & \tikzmarknode{eq1}{=} \|T(z)+T(x_0)-T(x_0)\|_Y \\
+        & \tikzmarknode{eq2}{\leq} \|T(z)+T(x_0)\|_Y + \|T(x_0)\|_Y \\
+        & \tikzmarknode{eq3}{=} \|T(\underbrace{z+x_0}_{\in C_{n_0}})\|_Y + \|T(\underbrace{x_0}_{\in C_{n_0}})\|_Y \leq 2 n_0 \; \forall T \in \mathfrak{F}
+    \end{align*}
+\end{proof}\tikz[overlay,remember picture]{\draw[shorten >=1pt,shorten <=1pt] (eq1) -- (eq2) -- (eq3);}
+
+%>=====< Question 4 >=====<%
+
+\question
+From the UBP it is possibile to infer an important property of operators defined by means of a point-wise limit. What is that? Justify your answer.
+
+\subsection*{Solution}
+
+%>=====< Question 5 >=====<%
+
+\question
+Write the definition of open mapping. Let $f: \R^n \to \R^m$ be continuous; under which extra hypotheses is $f$ open? Let $T: \R^n \to \R^n$ be linear and onto; why is $T$ open? State the OMT.
+
+\subsection*{Solution}
+
+%>=====< Question 6 >=====<%
+
+\question
+State and prove the IBM (or ICM) theorem. What is the analogous result in the finite dimensional case?
+
+\subsection*{Solution}
+
+%>=====< Question 7 >=====<%
+
+\question
+By the IBM theorem we can infer an important property about equivalent norms on Banach spaces. What is that? Justify your answer.
+
+\subsection*{Solution}
+
+%>=====< Question 8 >=====<%
+
+\question
+Write the definitions of: closed operator; graph of an operator. Show that an operator is linear and closed iff its graph is closed.
+
+\subsection*{Solution}
+
+%>=====< Question 9 >=====<%
+
+\question
+State and prove the closed graph theorem.
+
+\subsection*{Solution}
+
+%>=====< Question 10 >=====<%
+
+\question
+Write the definition of dual space.
+
+\subsection*{Solution}
+
+%>=====< Question 11 >=====<%
+
+\question
+Exhibit an example of $T \in (L^p)^{*}$. Compute $\|T\|_{*}$.
+
+\subsection*{Solution}
+
+%>=====< Question 12 >=====<%
+
+\question
+Let $(V, \langle \cdot, \cdot \rangle)$ be a finite dimensional vector space endowed with an inner product. Characterize $V^{*}$.
+
+\subsection*{Solution}
+
+%>=====< Question 13 >=====<%
+
+\question
+Let $Y$ be a vector subspace of $X = \R^2$. Given $f \in Y^{*}$ is it possibile to find $F \in X^{*}$ such that $F = f$ in $Y$ and $\|F\|_{X^{*}} = \|f\|_{Y^{*}}$ ?
+
+\subsection*{Solution}
+
+%>=====< Question 14 >=====<%
+
+\question
+State the Hahn-Banach theorem in the continuous extension form.
+
+\subsection*{Solution}
+
+%>=====< Question 15 >=====<%
+
+\question
+Let $X$ be a normed space, let $H$ be a hyperplane of $X$. When do we say that $H$ separates (or strictly separates) $A$ and $B$? If $X = \R^2$ , under which hypotheses on $A$ and $B$ is it possibile to find a line $H$ which separates them?
+
+\subsection*{Solution}
+
+%>=====< Question 16 >=====<%
+
+\question
+State the Hahn-Banach theorem in the separation form (first and second version).
+
+\subsection*{Solution}
