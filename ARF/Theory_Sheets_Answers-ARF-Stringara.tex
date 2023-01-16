@@ -137,6 +137,14 @@
 \newcommand{\toin}[1]{\xrightarrow[n\to\infty]{#1} } %to in 
 \newcommand*{\cvrule}{\smash{\rule{0.4pt}{2ex}}}
 
+%>=====< Math commands added for compatibility >=====<%
+
+%\newcommand{\proj}{\mbox{Proj_{H}}} this was the original, I changed it for consistency and good practice
+\DeclareMathOperator*{\proj}{Proj} %projection
+\newcommand{\wc}{\rightharpoonup}
+\newcommand{\wsc}{\overset{\ast}{\rightharpoonup}}
+\newcommand{\toi}{n\to\infty}
+
 %>=====< Custom commands >=====<%
 
 \newcommand{\cancelnum}[2]{\overset{\text{\normalsize#1}}{\xcancel{#2}}}
@@ -163,6 +171,9 @@
 \input{Sheets/week8.tex}
 \input{Sheets/week9.tex}
 \input{Sheets/week10.tex}
+\input{Sheets/week11.tex}
+\input{Sheets/week12.tex}
+\input{Sheets/week13.tex}
 
 %>=====< End Document >=====<%
 
