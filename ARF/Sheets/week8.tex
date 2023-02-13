@@ -214,7 +214,7 @@ Let $X$ be a normed space, if the closed ball $\bar{B}_1(0)$ is compact, then $\
     Let $x_1 \in \bar{B}_1(0)$ and $Y_1 \coloneqq \spn\{x_1 \}$. Clearly $Y_1$ is a vector subspace of $X$ and $\dim(Y_1)=1<+\infty$ $\iff$ $Y_1$ is closed.
     \begin{itemize}
         \item If $X=Y_1$, then $\dim(X) < \infty$ and we have the thesis.
-        \item If $X \neq Y$, then we can use Riesz's Lemma with $\epsilon = 1/2$ to find $x-2 \in \bar{B}_1(0)$ such that:
+        \item If $X \neq Y$, then we can use Riesz's Lemma with $\epsilon = 1/2$ to find $x_2 \in \bar{B}_1(0)$ such that:
             \[ \| x_1 - x_2 \| \geq 1/2 \]
             and we define the following set:
             \[ Y_2 \coloneqq \spn\{x_1, x_2 \} \]
@@ -281,6 +281,25 @@ On the space $\Leb^p(X,\A, \mu)$ we define the following equivalence relation $R
 \[ f,g\in\Leb^p \quad f R g \iff f=g \text{ a.e. in } X \]
 We define the space $L^p$ as the quotient space $\Leb^p/R$:
 \[ L^p(X,\A, \mu) \coloneqq \Leb^p(X,\A, \mu)/R \]
+
+\subsection{Preliminary lemma}
+Let $p\in[1,+\infty)$, $a,b \geq 0$, then:
+\[ (a+b)^p \leq 2^{p-1} (a^p + b^p) \]
+ 
+\begin{proof}
+    The inequality above is equivalent to:
+    \[ \left( \frac{a+b}{2} \right)^p \leq \frac{a^p}{2} + \frac{b^p}{2} \]
+    And this is true since the map $x \mapsto x^p$ is convex on $[0,+\infty)$.
+\end{proof}
+
+\subsection{\texorpdfstring{$L^p$}{Lp} is a vector space}
+$L^p$ is a vector space.
+
+\begin{proof}
+Let $f,g \in L^p$, this also means that $f,g$ are finite a.e. in $X$ and if we choose $\lambda\in\R$ then also $f+\lambda g$ is measurable. Therefore from the preceding lemma we get:
+\[ \int_X |f+\lambda g|^p \, d\mu \leq 2^{p-1} \left( \underbrace{\int_X |f|^p \, d\mu}_{<+\infty} + |\lambda|^p \underbrace{\int_X |g|^p \, d\mu}_{<+\infty} \right) < +\infty \]
+And thus we get that $f+\lambda g \in L^p$.
+\end{proof}
 
 %>=====< Question 12 >=====<%
 

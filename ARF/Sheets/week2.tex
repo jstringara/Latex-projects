@@ -82,7 +82,7 @@ $\nu : K \to \Rcomppos, \; \nu(\emptyset) = 0$. Intuitively, which is the meanin
 We say that a function: $\mu^*:\Parts{X}\to\Rcomppos$ (where $X$ is any set) is an outer measure if:
 \begin{enumerate}[i)]
     \item $\mu^*(\emptyset)=0$
-    \item \label{outer:mono}$E_1\subseteq E_2 \implies \mu^*(E_2) \leq \mu^*(E_2)$
+    \item \label{outer:mono}$E_1\subseteq E_2 \implies \mu^*(E_1) \leq \mu^*(E_2)$
     \item \label{outer:sub}$\mu^*\left( \bigcup_{k=1}^{\infty} E_k \right) \leq \sum_{k=1}^{\infty} \mu^*(E_k)$
 \end{enumerate}
 
@@ -150,22 +150,22 @@ What is the Caratheodory condition? How can it be stated in an equivalent way? P
 \subsection{Caratheodory condition} \label{CarEq}
 Let $\mu^*$ be an outer measure on a set $X$, then we say that $E\subset X$ is $\mu^*$-measurable if:
 \[
-    \mu^*(Z) = \mu^*(Z\cap E) + \mu^*(Z\setminus E) \quad \forall Z\in X
+    \mu^*(Z) = \mu^*(Z\cap E) + \mu^*(Z\setminus E) \quad \forall Z\subset X
 \]
 
 \subsection{Equivalent statement}\label{CarIneq}
-Let $\mu^*$ be an outer measure on a set $X$, then we say that $E\subset X$ is $\mu^*$-measurable if:
+Let $\mu^*$ be an outer measure on a set $X$, then we say that $E\subset X$ is $\mu^*$-measurable if and only if:
 \[
-    \mu^*(Z) \geq \mu^*(Z\cap E) + \mu^*(Z\setminus E) \quad \forall Z\in X
+    \mu^*(Z) \geq \mu^*(Z\cap E) + \mu^*(Z\setminus E) \quad \forall Z\subset X
 \]
 \begin{proof}
     It is enough to note that $\forall E\subseteq X$ we have:
     \[
-        Z = (Z\cap E) \cup (Z \cap E^\complement) \quad \forall Z\in X
+        Z = (Z\cap E) \cup (Z \cap E^\complement) \quad \forall Z\subset X
     \]
     and thus by the subadditivity of $\mu^*$ (\ref{outer:sub}) we get:
-    \[
-        \mu^*(Z) \leq \mu^*(Z\cap E) + \mu^*(Z\setminus E) \quad \forall Z\in X
+        \[
+        \mu^*(Z) \leq \mu^*(Z\cap E) + \mu^*(Z\setminus E) \quad \forall Z\subset X
     \]
     and we may combine this inequality with the other to yield an equality.
 \end{proof}

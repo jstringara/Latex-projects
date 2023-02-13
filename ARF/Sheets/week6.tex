@@ -249,8 +249,8 @@ State the Fubini theorem. By means of a counterexample, show that it is not poss
 Let $(X_1, \A_1, \mu_1)$, $(X_2, \A_2, \mu_2)$ be two $\s{finite}$ measure spaces and $f \in L^1(X_1 \times X_2, \A_1 \times \A_2, \mu_1 \times \mu_2)$, then:
 \begin{enumerate}[i)]
     \item \begin{flalign*}
-            & f(x_1, \cdot) \in L^1(X_1,\A_1,\mu_1) \text{ a.e. for } x_1 \in X_1& \\
-            & f(\cdot, x_2) \in L^1(X_2,\A_2,\mu_2) \text{ a.e. for } x_2 \in X_2&
+            & f(x_1, \cdot) \in L^1(X_2,\A_2,\mu_2) \text{ a.e. for } x_1 \in X_1& \\
+            & f(\cdot, x_2) \in L^1(X_1,\A_1,\mu_1) \text{ a.e. for } x_2 \in X_2&
         \end{flalign*}
     \item \begin{flalign*}
             & \psi_1 (x_1) \coloneqq \int_{X_2} f(x_1, x_2) \, d\mu_2, \quad \psi_1\in L^1(X_1,\A_1,\mu_1) & \\
@@ -444,4 +444,4 @@ There cannot exist a BV function with an unintegrable derivative. In other words
 \[
     f \in BV([a,b]) \implies f' \in L^1([a,b])
 \]
-indeed for any function $f\in BV([a,b])$ we may write it through its Jordan decomposition $f=\phi-\psi$. Now, since both $\phi$ and $\psi$ are increasing we may apply the previous point and say that both $\phi'$ and $\psi'$ are in $L^1$. Thus since $L^1$ is a vector space $\phi,\psi\in L^1 \implies f\in L^1$.
+indeed for any function $f\in BV([a,b])$ we may write it through its Jordan decomposition $f=\phi-\psi$. Now, since both $\phi$ and $\psi$ are increasing we may apply the previous point and say that both $\phi'$ and $\psi'$ are in $L^1$. Thus since $L^1$ is a vector space $\phi',\psi'\in L^1 \implies f'\in L^1$.

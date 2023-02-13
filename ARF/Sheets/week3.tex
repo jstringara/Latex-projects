@@ -209,7 +209,7 @@ Let $f, g \in \Mes(X, \A)$, we have:
 \begin{proof}
     \hspace*{\fill} %leave a blank line
     \begin{enumerate} [i)]
-        \item $\{ f < g \} = \bigcap_{r\in\Q} \left[ \underbrace{\overbrace{\{ f < r \}}^{\in\A} \cap \overbrace{\{ r < g\}}^{\in\A}}_{\in\A} \right]$
+        \item $\{ f < g \} = \bigcup_{r\in\Q} \left[ \underbrace{\overbrace{\{ f < r \}}^{\in\A} \cap \overbrace{\{ r < g\}}^{\in\A}}_{\in\A} \right]$
         \item $ \{ f\leq g \} = \{ f > g \}^\complement\in\A$ by the previous point.
         \item $\{f=g\} = \underset{\in\A}{\{ f\leq g \}} \cap \underset{\in\A}{\{ f\geq g \}} \in \A$
     \end{enumerate}
@@ -241,6 +241,12 @@ Let $\{f_n\} \subset \Mes(X, \A)$, we have:
         \item $\liminf_n f_n = \sup_{k\geq 1} \inf_{n\geq k} f_n \in \Mes(X, \A)$
     \end{enumerate}
 \end{proof}
+
+\subsection{Corollary, \texorpdfstring{$\max\{f,g\}\in\Mes$}{max(f,g) is measurable}}
+There cannot exist two functions $f, g \in \Mes(X, \A)$ such that $\max\{f, g\} \notin \Mes(X, \A)$.
+Indeed we can write:
+\[ \max(f,g) = f\cdot \chi_{\{f\geq g\}} + g \cdot \chi_{\{g>f\}} \]
+In other words the max can be written as the sum and product of measurable functions, hence it is measurable itself.
 
 %>=====< Question 9 >=====<%
 
@@ -420,7 +426,7 @@ Let $(X,\A)$ be a measurable space and $f:X\to\Rcomp$. Then there exists a seque
 \end{enumerate}
 
 \subsection*{Sketch of proof}
-Let $f\leq0$, bounded and $0 \leq f \leq 1$ $\forall x\in X$.
+Let $f\geq0$, bounded and $0 \leq f \leq 1$ $\forall x\in X$.
 \[
     f : X \to [0,1]
 \]
@@ -457,7 +463,7 @@ Let $(X, \A, \mu)$ be a measure space and $f,g\in\Mes(x,\A)$ two functions on $X
     \item $\exists N \in \mathcal{N}_\mu$ such that $\esssup_X f = \sup_{x\in N^\complement} f$ and $f\leq \esssup_X f$ almost surely $x\in X$;
     \item $\esssup_X f = -\essinf_X -f$;
     \item $\esssup_X k\cdot f  = k \cdot \esssup_X f$;
-    \item $f\leq g \implies \esssup_X f \leq \esssup_X g$;
+    \item $f\leq g \text{ a.e. in } X \implies \esssup_X f \leq \esssup_X g$;
     \item $\esssup_X (f+g) \leq \esssup_X f + \esssup_X g$;
     \item $f = g$ almost everywhere in $X$ $\implies \esssup_X f = \esssup_X g$;
     \item $g \geq 0$ almost everywhere in $X$ $\implies f\cdot g \leq (\esssup_X f)\cdot g$ almost everywhere in $X$.

@@ -26,7 +26,7 @@ $\limsup_{n\to\infty} E_n$, $\liminf_{n\to\infty} E_n$, $\lim_{n\to\infty} E_n$.
     \]
     \item \subsection{Liminf for a sequence of sets} analogously:
     \[
-        \limsup_{n\to\infty} E_n \coloneqq \bigcup_{k=1}^{\infty} \bigcap_{n=k}^\infty E_n
+        \liminf_{n\to\infty} E_n \coloneqq \bigcup_{k=1}^{\infty} \bigcap_{n=k}^\infty E_n
     \]
     \item \subsection{Limit for a sequence of sets} as for a sequence of real numbers if the limsup and liminf coincide we may define:
     \[
@@ -257,7 +257,7 @@ Let us state and prove the properties of a measure $\mu$ on a set $X$ and $\salg
     \item \label{meas:add} \textbf{Additivity:} \\
     $\forall \{ E_1, \dots, E_n \} \subseteq \A$ disjoint we have:
     \[
-        \mu\left( \bigcup_{k=1}^{\infty} E_k \right) = \sum_{k=1}^{\infty} \mu(E_k)
+        \mu\left( \bigcup_{k=1}^{n} E_k \right) = \sum_{k=1}^{n} \mu(E_k)
     \]
     \begin{proof}
     indeed if we define a sequence such that:

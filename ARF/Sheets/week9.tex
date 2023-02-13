@@ -263,8 +263,8 @@ How $\ell^p$ and $L^p$ are related? What is the inclusion of $\ell^p$ spaces?
 \subsection{Relation between \texorpdfstring{$\ell^p$}{lp} and \texorpdfstring{$L^p$}{Lp}}
 $\ell^p$ is a Banach space $\forall p \in [1,+\infty]$, with the followig norms:
 \begin{align*}
-    \|x\|_{\ell^p} & \coloneqq \left( \sum_{n=1}^\infty |x^{(k)}|^p \right)^{1/p} \\
-    \|x\|_{\ell^p} & \coloneqq \sup_{n\in\N} |x^{(k)}| 
+    \|x\|_{\ell^p} & \coloneqq \left( \sum_{k=1}^\infty |x^{(k)}|^p \right)^{1/p} \\
+    \|x\|_{\ell^p} & \coloneqq \sup_{k\in\N} |x^{(k)}| 
 \end{align*}
 We can observe that: 
 \[ \ell^p = L^p (\N, \Parts{\N}, \mu^\#)\]
@@ -281,7 +281,7 @@ Moreover, just like for $L^p$ we have that:
 
 \subsection{Inclusion of \texorpdfstring{$\ell^p$}{lp} spaces}
 Since $\mu^\#(\N)=+\infty$ we don't have:
-\[ 1 \leq p \leq q \leq \infty  \implies \ell^p \subseteq \ell^p \]
+\[ 1 \leq p \leq q \leq \infty  \implies \ell^p \subseteq \ell^q \]
 in actuality we have:
 \[ q \leq p \implies \ell^q \subseteq \ell^p \]
 therefore for $\ell^p$ spaces (contrary to what we have for $L^p$ spaces) we have that $\ell^\infty$ is the largest space (w.r. to inclusion).
@@ -325,8 +325,8 @@ State and prove the theorem about the characterization of linear, bounded operat
 Let $T:X\to Y$ be a linear operator, \tfae
 \begin{enumerate}
     \item $T$ is bounded
-    \item $T$ is continuous at $x_0=0$
     \item $T$ is Lipschitz
+    \item $T$ is continuous at $x_0=0$
 \end{enumerate} 
 
 \begin{proof}
@@ -352,7 +352,7 @@ Let $T:X\to Y$ be a linear operator, \tfae
             \end{align*}\tikz[overlay,remember picture]{\draw[shorten >=1pt,shorten <=1pt] (eq1) -- (eq2);}
             \newpage %to make tikz work nicely
             thus we can write:
-            \[ T(\zeta) \xrightarrow{n\to\infty} T(0)=0 \]
+            \[ T(\zeta) \centernot{\xrightarrow{n\to\infty}} T(0)=0 \]
             which means that $T$ is not continuous at $x_0=0$ and this is clearly a contradiction.
     \end{itemize}
 \end{proof}
