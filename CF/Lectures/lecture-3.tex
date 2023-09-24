@@ -1,0 +1,409 @@
+\chapter{lecture 3: 19/09}
+
+\section{Lèvy processes}
+
+In quite simple words a Lèvy process is a stochastic process with independent
+and stationary increments. We will see that this is a very strong property and
+useful property that allows us to model many phenomena. In particular we will
+try to model stocks prices of the form $S_t = S_0 e^{rt + X_t}$ where $X_t$ is a
+Lèvy process. 
+
+\begin{example}
+    $ $ \\
+    \begin{enumerate}
+        \item Brownian motion $W_t$
+        \item $-\frac{\sigma}{2}t + \sigma W_t$
+    \end{enumerate}
+\end{example}
+
+\begin{definition}[Lèvy process]
+    Let $X_t$ be a Cadlag stochastic process, such that $X_0=0$. We say that
+    $X_t$ is a Lèvy process if it satisfies the following properties:
+    \begin{enumerate}[i]
+        \item $X_t$ has independent increments, i.e. for
+            $0 \leq t_1 < t_2 < \dots < t_n$ we have that: 
+            \[
+                X_{t_1} - \cancelto{0}{X_0} \indep X_{t_2} - X_{t_1} \indep \dots \indep
+                    X_{t_n} - X_{t_{n-1}}
+            \]
+        \item $X_t$ has stationary increments, i.e. $\forall t,s > 0$ we have
+            that:
+            \[
+                X_{t+s} - X_t \overset{L}{=} X_s
+            \]
+        \item $X_t$ has stochastic continuity, i.e. $\forall \epsilon > 0$ we
+            have that:
+            \[
+                \lim_{h \to 0} \P(|X_{t+h} - X_t| > \epsilon) = 0
+            \]
+    \end{enumerate}
+\end{definition}
+
+This last property ensures that the process is continuous in probability. In
+other words that there are no jumps in the distribution of the jump times. No
+single instant is more likely than all others to be a jump time. We have no way
+of knowing with any probability when the processes' next jump will occur.
+
+\begin{properties}
+    $ $ \\
+    \begin{itemize}
+        \item \textbf{Infinite divisibility}: $X_t$ is infinitely divisible,
+            i.e. $\forall n \in \N$, $\forall t>0$ we have that:
+            \[
+                X_t = \sum_{i=1}^n \hat{X}_i \quad \hat{X}_i = X_{i\cdot t/N} -
+                X_{(i-1)\cdot t/N} \text{ iid}
+            \]
+            Thus, we can break the process into an infinite (but countable) 
+            number of independent increments.
+        \item \textbf{Characteristic function and exponent}: 
+            \[
+                \Phi_{X_t}(u) = \E[e^{iuX_t}] = e^{t\Psi(u)}
+            \]
+            where $\Psi(u)$ is the characteristic exponent of the process. The
+            function $t\mapsto\Phi_{X_t}$ is the characteristic function of
+            \[
+                \Phi_{X_{t+s}}(u) = \Phi_{X_t}(u) \cdot \Phi_{X_s}(u)
+            \]
+            Indeed:
+            \begin{align*}
+                \Phi_{X_{t+s}}(u) & \tikzmarknode{eq1}{=} \E[e^{iuX_{t+s}}] =
+                \E[e^{iu(X_t-X_s)} \cdot e^{iuX_s}] \\
+                \text{thanks to independence } & \tikzmarknode{eq2}{=} 
+                \E[e^{iu(X_t-X_s)}] \cdot \E[e^{iuX_s}] = \Phi_{X_{t+s}-X_s}(u)
+                \cdot \Phi_{X_s}(u) \\
+                \text{thanks to stationarity } & \tikzmarknode{eq3}{=}
+                \Phi_{X_{t}}(u) \cdot \Phi_{X_s}(u)
+            \end{align*} \tikz[overlay, remember picture]{
+                \draw[shorten >= 1pt, shorten <= 1pt] (eq1) -- (eq2) -- (eq3);
+            }
+    \end{itemize}
+\end{properties}
+
+\begin{remark}
+    The PP is the only Counting process which is also a Lèvy process. On the
+    other hand the CPP is the only Lèvy process with piecewise constant
+    trajectories. Indeed we may recall that $X_t = \sum_{i=1}^N Y_i$ where $Y_i$
+    are iid random variables. Thus, if we make the choice $Y_i = 1$ we get the
+    PP. Furthermore the characteristic function of $X_t$ depends entirely on the
+    distribution of $Y_i$:
+    \begin{align*}
+        \Phi_{X_t}(u) & = \E[e^{iuX_t}] = e^{t\lambda \int_{\R^d} (e^{iuy} - 1) 
+        \cdot f(dy)} \\
+        \implies \Psi_{X_t}(u) & = \lambda \int_{\R^d} (e^{iuy} - 1) \cdot f(dy)
+    \end{align*}
+    where $f$ is the distribution of $Y_i$. Furthermore if $Y_i$ is Lebesgue
+    integrable then $f(dy) = k(y)dy$.
+\end{remark}
+
+\begin{proof}
+    \begin{align*}
+        \E[e^{iuX_t}] & \tikzmarknode{eq1}{=} \E\left[ \E[e^{iuX_t} | N_t]
+            \right] = \E\left[ \E\left[ e^{iu\sum_{i=1}^{N_t} Y_i} \right]
+            \right] = \E\left[ \E\left[ e^{iuN_tY_i} | N_t \right] \right]\\
+        & \tikzmarknode{eq2}{=} \E\left[ \left(\E\left[ e^{iuY_i} \right]
+            \right)^{N_t} \right] = \E\left[ \Phi^{N_t}_{Y_i}(u) \right] =
+            \sum_{n=0}^\infty \Phi^n_{Y_i}(u) \cdot \P(N_t = n) \\
+        & \tikzmarknode{eq3}{=} \sum_{n=0}^\infty \Phi^n_{Y_i}(u) \cdot
+            \frac{(\lambda t)^n}{n!} e^{-\lambda t} = e^{-\lambda t}\cdot e^{
+            \Phi_{Y_i}(u) \cdot \lambda t} = e^{\lambda t \left( \Phi_{Y_i}(u)
+            - 1 \right)}
+    \end{align*} \tikz[overlay, remember picture]{
+        \draw[shorten >= 1pt, shorten <= 1pt] (eq1) -- (eq2) -- (eq3);
+    }
+    Thanks to the indipendence of the $Y_i$ and the Taylor expansion of the
+    exponential function. Now:
+    \[
+        \Phi_{Y_i}(u) = \E\left[ e^{iuY_i} \right] = \int_{\R^d} e^{iuy} \cdot
+        f(dy) = \int_{\R^d} e^{iuy} \cdot k(y)dy
+    \]
+    Hence, by substituting in the previous equation we get:
+    \[
+        \Phi_{X_t}(u) = e^{\lambda t \left( \int_{\R^d} e^{iuy} \cdot k(y)dy -
+        1 \right)} = e^{\lambda t \left( \int_{\R^d} e^{iuy} \cdot k(y)dy - 
+        \int_{\R^d} 1 \cdot k(y)dy \right)}
+    \]
+    thus, thanks to the fact that $k(y)$ is a distribution function, we
+    ultimately get:
+    \[
+        \Phi_{X_t}(u) = e^{\lambda t \int_{\R^d} (e^{iuy} - 1) \cdot k(y)dy}
+    \]
+\end{proof}
+
+Sometimes we encounter the notation $\nu(dy) = \lambda k(y)dy = \lambda f(dy)$.
+This is called the \textbf{Lèvy measure} of the process.
+
+\begin{definition}[Lèvy measure of a CPP]
+    Let $A$ be a Borel set in $\R^d$. We define the following quantities:
+    \begin{align*}
+        & \Delta X_t = X_t - X_{t^-} \\
+        & X_{t^-} = \lim_{s \to t^-} X_s
+    \end{align*}
+    Where $\Delta X_t$ is the jump size of the process at time $t$. Then:
+    \[
+        \nu(A) = \E\left[ \#\left\{ t\in[0,1] :\; \Delta X_t \neq 0, \,
+        \Delta X_t \in A \right\} \right]
+    \]
+    This is the average number of time in a unitary time interval in which a
+    jump occurs in the set $A$.
+\end{definition}
+
+\begin{definition}[Random Measure]
+    While $\nu$ is a deterministic measure on the set of Borel sets of $\R^d$,
+    we can define the following random measure:
+    \[
+        J_X(B) = \#\left\{ (t,\Delta X_t) \in B \right\} \; \forall B \text{
+            open set in } [0,+\infty) \times \R^d 
+    \]
+    This a random variable of the number of jumps times and jump sizes in the 
+    set $B$.
+\end{definition}
+
+\begin{application}
+    Let $X_t$ be a CPP.
+    \[ 
+        X_t = \sum_{i=1}^{N_t} Y_i = \sum_{s\in[0,t]} \Delta X_s = \int_{[0,t]
+        \times \R^d} x \cdot J_X(ds \times dx)
+    \]
+    $J_X$ is a Poisson Random Measure with intensity $\nu(ds)dt = \lambda f(x)
+    dx dt$.
+\end{application}
+
+\section{Exponential Lèvy processes}
+In our framework we will model stocks and other processes as exponential Lèvy
+processes of the form:
+\[
+    S_t = S_0 e^{rt + X_t}
+\]
+where $X_t$ is a Lèvy process. Indeed, different choices of $X_t$ will lead to
+different models. For example:
+\begin{itemize}
+    \item $X_t = -\sigma^2/2 t + \sigma W_t$ is the Black-Scholes model under
+        the risk-neutral measure $\Q$.
+    \item $X_t = \sum_{i=1}^{N_t} Y_i$ yields us the Coumpound Poisson Process
+        model. The problem is that since this model is piecewise constant, it
+        cannot capture the continuous variation of the stock prices on the real
+        market.
+    \item $X_t = \delta t + \sigma W_t + \sum_{i=1}^{N_t} Y_i$ yields us with a
+        jump-diffusion model (either Merton or Kou). We will see later how 
+        $\delta$ shall be chosen in order to fit with the risk-neutral measure
+        $\Q$.
+\end{itemize}
+
+\subsection*{Merton and Kou models}
+\begin{itemize}
+    \item \textbf{Merton model}: $Y_i \sim \mathcal{N}(\mu_j, \delta_j^2)$ hence
+        we have a total of 4 parameters $\sigma, \lambda, \mu_j, \delta_j$.
+        $\mu_j$ and $\delta_j$ are the mean and variance of the jumps size.
+    \item \textbf{Kou model}:
+        \[
+            Y_i = \left\{ \begin{array}{l}
+                    \text{Exp}(\lambda^+) \text{ with probability }
+                    $p$ \\
+                    -\text{Exp}(\lambda^-) \text{ with probability }
+                    $1-p$
+                \end{array} \right.
+        \]
+        Hence we have a total of 5 parameters $\sigma, \lambda, p, \lambda^+,
+        \lambda^-$.
+\end{itemize}
+
+\section{Choice of \texorpdfstring{$\delta$}{delta}}
+Let us recall that we are under the $\Q$ measure if we have that:
+\begin{align*}
+    & \E^\Q \left[ S_t \cdot e^{-rt} \right] = S_0 \\
+    & \implies S_0 \E[e^{X_t}] = S_0 \cdot \Phi_{X_t}(-i)
+\end{align*}
+Thus we must choose $\delta$ such that:
+\[ \Phi_{X_t}(-i) = 1 \iff \Psi_{X_t}(-i) = 0 \]
+in order to satisfy the risk-neutral measure condition. Thus $\delta$ is not a
+parameter of the model that we can freely choose but must calibrated from the
+market in order to adhere to the risk-neutral measure.
+
+\section{Lévy-Itô decomposition}
+So far we have encountered three types of levy processes:
+\begin{itemize}
+    \item Continuous, the family of Brownian motions.
+    \item Finite variation, the Compound Poisson Process, which is unique.
+    \item Jump-diffusion processes.
+\end{itemize}
+But not all levy processes are these types. This dependes on whether $\nu$ can
+be well defined.
+TODO: add picture of how to divide up levy processes
+For example:
+\[ \nu((2,3)) = +\infty \implies \E [ \# \{ t\in[0,1]: \; \Delta X_t \neq 0, \,
+    \Delta X_t \in (2,3) \} ] = +\infty \]
+This is clearly not a Cadlag process. We have infinite activity in the interval
+$(2,3)$. In other words we have an infinite number of terms in the summation
+$\sum \Delta X_t$.
+
+\begin{definition}[Lévy-Itô decomposition]
+    Let $(X_t)_{t\geq0}\in\R^d$ be a Lévy process. Let $\nu$ be its Lévy measure.
+    Then: 
+    \begin{enumerate}[i)]
+        \item $\nu$ is a Radon measure in $\R^d\setminus\{0\}$. In other words
+            any compact set in $\R^d\setminus\{0\}$ is measurable.
+        \item \[ \int_{x\in\R^d: \, |x|\geq1} \, \nu(dx) < +\infty \]
+        \item \[ \int_{x\in\R^d: \, |x|<1} |x|^2 \, \nu(dx) = +\infty \] TODO: missed comment from professor
+        \item We can define a triplet $(\gamma, A, \nu)$ such that:
+            \[ X_t = \gamma t + B_t + X_t^l + \lim_{\epsilon\to0}
+            \hat{X}_t^{\epsilon} \]
+            where:
+            \begin{itemize}
+                \item $B_t$ is a Brownian motion with varianca-covariance matrix
+                    $A$.
+                \item \[ X_t^l = \sum_{ s\in [0,t], \, |\Delta X_s| \geq 1} = 
+                    \int_{[0,t]\times \{x \geq 1\}} x \cdot J_X(ds \times dx) \]
+                \item We have the Compound Poisson process with jumps in 
+                $(\epsilon, 1)$:
+                \[ X^\epsilon_t = \sum_{s\in[0,t], \, \epsilon < |\Delta X_s| 
+                < 1} \Delta X_s \]
+                Thus we get the respective compensated process:
+                \begin{align*}
+                    \hat{X}^\epsilon_t & \tikzmarknode{eq1}{=} \sum_{s\in[0,t],
+                    \, \epsilon < |\Delta X_s| < 1} \Delta X_s - t \int_{\epsilon
+                    < |x| < 1} x \, \nu(dx) \\
+                    & \tikzmarknode{eq2}{=} \int_{[0,t]\times \{\epsilon < |x|
+                    < 1\}} x \cdot (J_X(ds \times d) - \nu(dx) ds) 
+                \end{align*} \tikz[overlay, remember picture]{
+                    \draw[shorten >= 1pt, shorten <= 1pt] (eq1) -- (eq2);
+                }
+            \end{itemize}
+    \end{enumerate}
+Indeed we have that:
+\begin{align*}
+    \int_{x\in\R^d: \, |x|<1} |x|^2 \, \nu(dx) = +\infty & \implies \lim_{
+        \epsilon \to 0^+} \hat{X}^\epsilon_t \\
+    \int_{x\in\R^d: \, |x|<1} |x|^2 \, \nu(dx) = +\infty &  \centernot\impliedby
+        \lim_{ \epsilon \to 0^+} X^\epsilon_t
+\end{align*}
+\end{definition}
+
+\begin{example}[One-dimensional case, from Jump-diffusion to Levy decomposition]
+Since we are starting from a jump-diffusion process, we have that:
+\[
+    X_t = \delta_t + \sigma W_t + \sum_{s\in[0,t]} \Delta X_s \longrightarrow
+   \sum_{s\in[0,t]} \Delta X_s = \left\{\begin{array}{l}\int_{|x|\geq1}\,\nu(dx)
+    < +\infty \\ \int_{|x|<1} \, \nu(dx) = +\infty \end{array}\right.
+\]
+Clearly we have that $A = \sigma^2$. The Levy-Itô decomposition is:
+\[
+    X_t = \delta t + \sigma W_t + \sum_{s\in[0,t]} \Delta X_s + \lim_{
+    \epsilon \to 0^+} \hat{X}^\epsilon_t
+\]
+Now, let $X_t$ be a Jump-Diffusion model: TODO (missed something)
+\[ X_t = \gamma t + \sigma W_t + \sum_{s\in[0,t], \, |\Delta X_s| \geq 1} \Delta
+    X_s + \lim_{\epsilon \to 0^+} \left[ \sum_{s\in[0,t], \, \epsilon < |\Delta
+    X_s| < 1} \Delta X_s - t \int_{\epsilon < |x| < 1} x \, \nu(dx) \right]
+\]
+We can write since when $|\Delta X_s| < 1$ we have that:
+\[ \int_{|x|<1} \,\nu(dx) < +\infty \implies \int_{|x|<1} x\,\nu(dx)<+\infty \]
+Thus we can write:
+\begin{align*}
+    & \tikzmarknode{eq1}{=} \gamma t + \sigma W_t + \sum_{s\in[0,t], \, |\Delta
+    X_s| \geq 1} \Delta X_s + \sum_{s\in[0,t], \, |\Delta X_s| < 1} \Delta X_s
+    - t \int_{|x|<1} x \,\nu(dx) \\
+    & \tikzmarknode{eq2}{=} t \underbrace{\left( \gamma -\int_{|x|<1}x \,\nu(dx)
+    \right)}_{\delta} + \sigma W_t + \sum_{s\in[0,t]} \Delta X_s
+\end{align*} \tikz[overlay, remember picture]{
+    \draw[shorten >= 1pt, shorten <= 1pt] (eq1) -- (eq2);
+}
+\end{example}
+
+\begin{definition}[Levy-Khincin formula]
+    Let $X_t$ be a Lèvy process with Lèvy-Itô decomposition $(\gamma, A, \nu)$.
+    Then: 
+    \[ \Phi_{X_t}(u) = \E[e^{iuX_t}] = e^{t\Psi_{X_t}(u)} \]
+    where:
+    \[
+        \Psi_{X_t}(u) = iu\cdot\gamma-\frac{1}{2}u^TAu+\int_{\R^d}(e^{iux} - 1 -
+        iu\cdot x\I_{|x|\leq1}) \,\nu(dx)
+    \]
+\end{definition}
+\begin{proof}
+Thanks to the Lèvy-Itô decomposition we have that:
+\[
+    X_t = \underbrace{\gamma t + B_t}_{X_t^c, \text{ continuous}} +
+    \underbrace{X_t^l + \lim_{\epsilon \to 0^+} \hat{X}^\epsilon_t}_{X_t^j, 
+    \text{ jump}}
+\]
+Thus we can split the characteristic function into two parts thanks to the fact
+that the continuous and jumping parts are independent:
+\[ \Phi_{X_t}(u) = \E[e^{iuX_t^c}] \cdot \E[e^{iuX_t^j}] \]
+We shall now analyze them separately. For $X_t^c$ we have that:
+\[
+    \E[e^{iuX_t^c}] = \E[e^{iu\gamma t} \cdot e^{iuB_t}] =
+    e^{iu\gamma t} \cdot \E[e^{iuB_t}]  = e^{iu\gamma t} \cdot e^{-\frac{1}{2}t
+    u^T A u}
+\]
+Let us now analyze $X_t^j$, but first let us fix the value of $\epsilon$:
+\begin{align*}
+    X^{\epsilon, j}_t & = \sum_{|\Delta X_s| \geq 1} \Delta X_s + X^\epsilon_t\\
+    X^j_t & = \lim_{\epsilon\to0^+} X^{\epsilon, j}_t
+\end{align*}
+With a fixed value for $\epsilon$ we can observe that $X^{\epsilon, j}_t$ is a
+CPP. Thus:
+\begin{align*}
+    \E[e^{iuX^j_t}] &\tikzmarknode{eq1}{=} \lim_{\epsilon\to0^+}
+    \E[e^{iuX^{\epsilon, j}_t}] = \lim_{\epsilon\to0^+} \E\left[
+    e^{iu\cdot\left( \sum_{\epsilon<|\Delta X_s|} - t\int_{\epsilon<|x|<1} x \,
+    \nu(dx) \right)} \right] \\
+    \lim_{\epsilon\to0^+} &\tikzmarknode{eq2}{=} \E\left[e^{iu\sum_{|\Delta X_s|
+    \geq 1}\Delta X_s}\right] \cdot \E\left[e^{iu\left( \sum_{\epsilon<|
+    \Delta X_s|<1}\Delta X_s - t\int_{\epsilon<|x|<1} x \, \nu(dx) \right)}
+    \right] \\
+    \text{using the CPP properties }\lim_{\epsilon\to0^+} &\tikzmarknode{eq3}{=}
+    e^{t\int_{|x|\geq1}(e^{iux}-1)\,\nu(dx)} \cdot e^{t \left( \int_{\epsilon<|
+    x|<1}(e^{iux}-1)\,\nu(dx) - \int_{\epsilon<|x|<1} ux \, \nu(dx) \right)} \\
+    \lim_{\epsilon\to0^+} &\tikzmarknode{eq4}{=} e^{t\int_{|x|\geq1}(e^{iux}-1)
+    \, \nu(dx)} \cdot e^{t\int_{\epsilon<|x|<1}(e^{iux}-1-iux)\,\nu(dx)} \\
+    \lim_{\epsilon\to0^+} &\tikzmarknode{eq5}{=} e^{t\int (e^{iux}-1-iux \I_{
+        \epsilon<|x|<1})\,\nu(dx)}
+\end{align*} \tikz[overlay, remember picture]{
+    \draw[shorten >= 1pt, shorten <= 1pt] (eq1) -- (eq2) -- (eq3) -- (eq4) --
+    (eq5);
+}
+Now, if we let $\epsilon \to 0^+$ we get:
+\[ \E[e^{iuX^j_t}] = e^{t\int(e^{iux}-1-iux\I_{|x|<1})\,\nu(dx)} \]
+\end{proof}
+
+\begin{property}[Splitting the integral in the Levy-Khincin formula]
+    \item \[ \lim_{\epsilon\to0^+} \hat{X}^\epsilon_t =
+    \lim_{\epsilon\to0^+} \int_{\{epsilon<|x|<1\} \times [0,t]} x \cdot
+    \left( J_X(ds \times dx) - \nu(dx)ds \right) \]
+    For a general Levy process this is finite $(+\infty)$. Under certain
+    conditions we are able to split the integral into two parts:
+    \[ \left. \begin{array}{l}
+        \int_{|x|\geq1} \, \nu(dx) < +\infty \text{ finite activity} \\
+        \int_{|x|<1} |x| \, \nu(dx) < +\infty \text{ finite variation}
+    \end{array} \right\} \implies
+        \lim_{\epsilon\to0^+} \int_{\epsilon<|x|<1} x \, \nu(dx) < +\infty
+    \]
+    TODO unsure about this, check with professor about the integrals before
+    the brackets.
+\end{property}
+
+Let us formally define what variation actually consists of:
+
+\begin{definition*}[Total variation]
+    Let $f:[a,b]\to\R^d$ be a function. We define the total variation of $f$ as:
+    \[ \sup_{a=t_0<\dots<t_n=b} \sum_{i=1}^n |f(t_i)-f(t_{i-1})| \quad n\in\N\]
+    In plainer words, the total variation is the supremum of the sum of the
+    "jumps" of the function over all possible partitions of its domain. 
+    Furthermore a function is said to be of bounded variation if its total
+    variation is finite.
+\end{definition*}
+
+\begin{theorem*}[Finite variation Levy process]
+    Let $X_t$ be a Levy process with Levy-Itô decomposition $(\gamma, A, \nu)$.
+    Then $X_t$ is of finite variation if and only if:
+    \[ \int_{|x|\leq1} |x| \, \nu(dx) < +\infty \text{ and } A = 0 \]
+\end{theorem*}
+This yields us the following hierarchy of Levy processes (with respect to their
+variation):
+\[ \begin{array}{l}
+    \int_{|x|\leq1} \, \nu(dx) < +\infty \text{ CPP} \\
+    \int_{|x|\leq1} |x| \, \nu(dx) < +\infty \text{ Finite variation} \\
+    \int_{|x|\leq1} |x|^2 \, \nu(dx) < +\infty \text{ General Levy process}
+\end{array} \]
+Let us also observe that only the first two are of bounded variation, and thus
+can have their integral limit split into two parts.

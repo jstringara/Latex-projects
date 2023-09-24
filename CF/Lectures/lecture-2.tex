@@ -1,0 +1,283 @@
+\chapter{Lecture 2: }
+
+\section{Poisson Process}
+In order to define the Poisson Processes we must first recall and explore the
+notions of:
+\begin{itemize}
+    \item Exponential Random Variable
+    \item Poisson Distribution
+\end{itemize}
+
+\subsection{Exponential Random Variable}
+A random variable $Y$ is said to be exponentially distributed with parameter
+$\lambda > 0$ if it has the following probability density function:
+\[
+    f_Y(y) = \lambda e^{-\lambda y} \I_{\Rpos}(y)
+\]
+or equivalently that it has the following cumulative distribution function:
+\[
+    F_Y(y) = 1 - e^{-\lambda y} \I_{\Rpos}(y)
+\]
+and we write $Y \sim \text{Exp}(\lambda)$.
+
+\begin{theorem}[Absence of Memory]
+Let $T\geq0$ be a random variable such that:
+\[ \P(T>t+s|T>s) = \Pr(T>t) \quad \forall t,s > 0 \]
+then $T$ can only be exponentially distributed.
+\end{theorem}
+
+In other words, the exponential distribution is the only continuous distribution
+with absence of memory.
+
+\begin{proof}
+% leave a blank line in the pdf
+$ $ \newline
+\begin{itemize}
+    \item $(\impliedby)$ We start with $T\sim\text{Exp}(\lambda)$, then its pdf
+        is:
+        \[
+            f_T(y) = \lambda e^{-\lambda y} \I_{\Rpos}(y)
+        \]
+        Thus:
+        \begin{align*}
+            \P(T>t+s | T>s) & \tikzmarknode{eq1}{=}
+                \frac{\P(T>t+s)}{\P(T>s)}
+                = \frac{\int^\infty_{t+s} \lambda e^{-\lambda y} dy}
+                {\int^\infty_s \lambda e^{-\lambda y} dy} 
+                = \frac{e^{-\lambda(t+s)}}{e^{-\lambda t}}\\
+                & \tikzmarknode{eq2}{=} e^{-\lambda s} =
+                \int^\infty_s \lambda e^{-\lambda y} dy = \P(T>s)
+        \end{align*} \tikz[overlay,remember picture]{
+            \draw[shorten >= 1pt,shorten <= 1pt] (eq1) -- (eq2);
+        }
+    \item $(\implies)$ We define $g(t) = \P(T>t)$, then thanks to the hypothesis
+        we get:
+        \[
+            g(t+s) = \P(T>t+s) = \P(T>t+s|T>t)\P(T>t) =
+            \P(T>s) \P(T>t) = g(s)g(t)
+        \]
+        Now, $g$ is decreasing and right continuous thanks to the definition of
+        a CDF.
+        \begin{theorem*}
+            The function $g(t)=e^{-\lambda t}$ is the only function that
+            satisfies the two requirements above. 
+        \end{theorem*}
+        Thus:
+        \[
+            \P(T\leq t) = 1 - \P(T>t) = 1 - g(t) = 1 - e^{-\lambda t}
+            \implies T\sim\text{Exp}(\lambda)
+        \]
+\end{itemize}
+\end{proof}
+
+\subsection{Poisson Distribution}
+Let $N$ be a random variable with integer values, then $N$ is said to be
+Poisson distributed with parameter $\lambda > 0$ if it has the following
+probability mass function:
+\[
+    \P(N=n) = \frac{\lambda^n}{n!} e^{-\lambda} \I_{\N}(n)
+\]
+and we write $N\sim\text{Pois}(\lambda)$.
+Its moment generating function is given by:
+\[
+    M_N(u) = \E[e^{uN}] = e^{\lambda(e^u-1)}
+\]
+
+We will now create a sort of "bridge" between the exponential distribution and
+the Poisson distribution.
+
+\subsection*{Counting Process}
+
+\begin{theorem}[Counting Process]
+    Let $\seq{\tau}$ be a sequence of iid random variables with exponential
+    distribution with parameter $\lambda > 0$, then $\forall t > 0$, we define:
+    \[
+        N_t = \inf_t \left\{ n\geq 0 : \sum^{n+1}_{i=1} \tau_i > t \right\}
+    \]
+    Then we can say that $N_t$ is a Poisson distributed random variable with
+    parameter $\lambda t$. Hence:
+    \[
+        \P(N_t = n) = \frac{(\lambda t)^n}{n!} e^{-\lambda t} \I_{\N}(n)
+    \]
+\end{theorem}
+
+\begin{remark}
+    For us the sequence $\seq{\tau}$ will be a sequence of inter-arrival times,
+    i.e. the time between two consecutive jumps of the process.
+    $N_t$ is called the \textbf{counting process}. It counts the number of jumps
+    of the process up to time $t$.
+\end{remark}
+
+\begin{proof}
+    Let us define the process $T_n = \sum^n_{i=1} \tau_i$. Now, since 
+    $\tau_i\sim \text{Exp}(\lambda)$, then we have that the PDF of $T_n$ is:
+    \[
+        P_n(t) = \lambda e^{-\lambda t} \frac{(\lambda t)^{n-1}}{(n-1)!}
+        \I_{\Rpos}(t)
+    \]
+    thus:
+    \begin{align*}
+        \P(T_{n+1}>t) & \tikzmarknode{eq1}{=} \int_t^\infty P_{n+1}(s) ds
+            = 1 - \overbrace{\int_0^t P_{n+1}(s) ds}^{\P(T_{n+1}\leq t)} 
+            = 1 - \int_0^t \underbrace{\lambda e^{-\lambda s}}_f
+            \underbrace{\frac{(\lambda s)^n}{n!}}_{g'} ds \\
+        \text{integrating by parts} & \tikzmarknode{eq2}{=} 1 + 
+            \underbrace{e^{-\lambda t}}_f\underbrace{\frac{(\lambda s)^n}{n!}}_g
+            - \int_0^t \underbrace{e^{-\lambda s}}_f
+            \underbrace{\frac{(\lambda s)^n}{n!}n}_{g'} ds \\
+        & \tikzmarknode{eq3}{=} 1 + e^{-\lambda t} \frac{(\lambda t)^n}{n!} -
+            \int_0^t \lambda e^{-\lambda s} \frac{(\lambda s)^{n-1}}{(n-1)!} ds \\
+        & \tikzmarknode{eq4}{=} 1 + e^{-\lambda t} \frac{(\lambda t)^n}{n!} -
+            \P(T_n < t) = e^{-\lambda t} \frac{(\lambda t)^n}{n!} + 
+            \P(T_n \geq t)
+    \end{align*} \tikz[overlay,remember picture]{\draw[shorten >= 1pt,shorten <= 1pt] (eq1) -- (eq2) -- (eq3) -- (eq4);}
+    Hence we can write:
+    \[
+        \P(N_t = t) = \P(T_{n+1}>t) - \P(T_n \geq t) = e^{-\lambda t}
+        \frac{(\lambda t)^n}{n!} 
+    \] 
+    thus $N_t\sim\text{Pois}(\lambda t)$.
+\end{proof}
+
+\begin{remark}
+    $ $ \newline % leave a blank line
+    \begin{enumerate}
+        \item If $Y_1 \sim \text{Pois}(\lambda_1)$ and $Y_2 \sim
+            \text{Pois}(\lambda_2)$ are independent, then $Y_1 + Y_2 \sim
+            \text{Pois}(\lambda_1 + \lambda_2)$.
+        \item If $Y \sim \text{Pois}(\lambda)$, then we can divide it into:
+            \[ 
+                Y = \sum^n_{i=1} Y_i \quad \text{where } Y_i \sim \text{Pois}
+                \left( \frac{\lambda}{n} \right)
+            \]
+    \end{enumerate}
+\end{remark}
+
+TODO: ask if the definition is done with $\geq$ or $>$ in the indicator function.
+\begin{definition}[Poisson Process (PP)]
+Let $\seq{T}$ be a sequence of iid random variables with exponential distribution
+with parameter $\lambda > 0$, and $T_n = \sum^n_{i=1} \tau_i$, then:
+\[ N_t = \sum^\infty_{n=1} \I_{\{t > T_n\}} \]
+is called a Poisson Process with intensity $\lambda$.
+\end{definition}
+
+\begin{properties}
+    $ $ \newline % leave a blank line
+    \begin{itemize}
+        \item $N_t\sim\text{Pois}(\lambda t)$ if $t>0$.
+        \item $N_t$ is a Cadlag process. Hence it is right continuous and has
+            left limits.
+        \item its characteristic function can be computed as:
+            \[
+                \Phi_{N_t}(u) = \E[e^{iuN_t}] = e^{\lambda t(e^{iu}-1)}
+            \]
+            We also call $\psi_{N_t}(u) = \lambda t(e^{iu}-1)$ the characteristic
+            exponent of $N_t$.
+        \item $N_t$ has independent increments, i.e. $\forall t_1,\ldots,t_n$,
+            we have that:
+            \[ N_{t_n} - N_{t_{n-1}} \indep \ldots \indep N_{t_2} - N_{t_1} \indep
+                N_{t_1} - \cancelto{0}{N_0}
+            \]
+    \end{itemize}
+\end{properties}
+
+We have so far defined the Weiner process, the Poisson process and we will at
+this point move onto the compound Poisson process and the compensated Poisson
+process. We will now see that the Poisson process is a special case of the
+compound Poisson process. \\
+Let us take a family of iid random variables $\seq{Y}$ and a sequence of iid
+random variables $\seq{\tau}$ with exponential distribution of parameter 
+$\lambda > 0$. Just like we did above we can define the process $T_n = 
+\sum^n_{i=1} \tau_i$ and the counting process $N_t = \sum^\infty_{n=1}
+\I_{\{t\geq T_n\}}$. Now we move on to define the compound Poisson process.
+
+\begin{definition}[Compoind Poisson Process (CPP)]
+    Let $\seq{Y}$ be a sequence of iid random variables and $\seq{\tau}$ be a
+    sequence of iid random variables with exponential distribution of parameter
+    $\lambda > 0$. Let also these two families be independent, such that
+    $Y_i \indep N_t = \sum^\infty_{n=1} \I_{\{t\geq T_n\}}$. Then we define the
+    compound Poisson process as:
+    \[
+        Y_t = \sum^\infty_{n=1} Y_n \I_{\{t\geq T_n\}}
+    \]
+\end{definition}
+
+Given a compound Poisson process $Y_t$, we can represent graphically its path
+as a step function, where the jump sizes are given by the values of $Y_n$ and
+the time elapsed between two consecutive jumps is given by $\tau_n$.
+
+TODO: add graph of a step function with the jumps and the time elapsed between
+them.
+
+One unsatisfactory aspect of the Poisson process is that it is not
+a Martingale. Indeed, take any two times $s$ and $t$ such that $s<t$, then:
+\[
+    \E[N_t | N_s] = \E[N_t - N_s + N_s | N_s] = \E[N_t - N_s | N_s] + N_s
+    = \E[N_t - N_s] + N_s = \lambda(t-s) + N_s \neq N_s
+\]
+
+\begin{definition}
+    Let $N_t$ be a Poisson process with intensity $\lambda > 0$, then the
+    compensated Poisson process is defined as:
+    \[
+        \tilde{N}_t = N_t - \lambda t
+    \]
+\end{definition}
+
+This is no longer a counting process since (due to the $\lambda t$ term) it is
+not strictly integer valued. However, it is a Martingale. Indeed by the same
+reasoning as above we have that:
+\[
+    \E[\tilde{N}_t | \tilde{N}_s] = \E[\tilde{N}_t - \tilde{N}_s | \tilde{N}_s]
+    + \tilde{N}_s = \E[\tilde{N}_t - \tilde{N}_s] + \tilde{N}_s = 0 + \tilde{N}_s
+    = \tilde{N}_s
+\]
+
+\begin{theorem}[Uniqueness of the Poisson Process]
+    Let $N_t$ be a counting process with intensity $\lambda > 0$, with integer
+    values and independent and stationary increments then it can only be a
+    Poisson process. 
+\end{theorem}
+
+TODO: check definition of stationarity.
+\begin{definition}[Stationary]
+    Let $X_t$ be a stochastic process, then we say that it is stationary if
+    $\forall t_1,\ldots,t_n$ and $\forall h > 0$ we have that:
+    \[
+        (X_{t_1},\ldots,X_{t_n}) \sim (X_{t_1+h},\ldots,X_{t_n+h})
+    \]
+\end{definition}
+
+\begin{recall}
+For the Weiner process we have that $W_t \sim \mathcal{N}(0,t) \overset{L}{=}
+\sqrt{t} \mathcal{N}(0,1)$. Thus simulating a Weiner process is rather simple as
+it only requires to simulate a normal random variable of mean 0 and variance 1.
+On the other hand, for the Poisson process we have:
+\begin{itemize}
+    \item $\seq{\tau}$ iid $\text{Exp}(\lambda)$
+    \item $N_t \sim \text{Pois}(\lambda t)$
+\end{itemize}
+if we want to simulate a Poisson process we need to simulate either the
+inter-arrival times themselves or directly the counting process.
+\begin{itemize}
+    \item The first method, that of simulating is called \textbf{Countdown
+        Sampling}. And can be achieved in MATLAB with the following code:
+        
+\begin{minted}[linenos, breaklines]{matlab}
+% Countdown Simulation
+lambda = 2;
+t = 1;
+tau = icdf('Exponential', rand, 1/lambda);
+while (sum(tau) < t) %this is just the condition that we are before T
+tau_temp = icdf('Exponential', rand, 1/lambda) #?????????
+tau = [tau, tau_temp];
+end
+Nt = length(tau)-1;
+T = cumsum(tau);
+T = T(1:end-1); %the last time is beyond T
+\end{minted}
+
+\end{itemize}
+\end{recall}
+
+TODO: finish the coding part
