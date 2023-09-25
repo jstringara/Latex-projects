@@ -1,0 +1,223 @@
+\chapter{Lecture 4}
+
+\section{Subordinator process}
+In this lecture we will talk about the subordinator process. In very general 
+terms a subordinator is a process that is increasing in time and that we use to
+sub-index another process. In other words we use it to change the "speed" of the
+flow information and of the process. We will see that the subordinator process
+is a very useful tool in the study of L\'evy processes.
+
+We will start by stating the formal definition of a subordinator process.
+
+\begin{definition}[Subordinator process]
+Let $X_t$ be a L\'evy process. We say that $X_t$ is a subordinator process if
+and only if it satisfies all of the following conditions:
+
+\begin{enumerate}[1)]
+    \item $X_t \geq 0$ for all $t \geq 0$ almost surely.
+    \item $\exists \bar{t} > 0$ such that $X_{\bar{t}} \geq 0$ almost surely.
+    \item $X_t$ is not decreasing.
+    \item Given that the L\'evy decomposition of $X_t$ is $(\gamma, A, \nu)$,
+    then:
+    \begin{itemize}
+        \item $\nu((-\infty, 0)) = 0$. In other words, the L\'evy measure of
+        $X_t$ is zero in the negative real line. This is equivalent to saying
+        that the process $X_t$ does not have negative jumps.
+        \item $A=0$. In other words, the process $X_t$ does not have a
+        continuous (Brownian Motion) component.
+        \item $b = \gamma - \int_{|x|\leq1} x \, \nu(dx) > 0$. In other words
+        the drift of the process $X_t$ is non-negative. Recall that $\int_{
+        |x|\leq1} x \, \nu(dx)$ is the compensator process.
+        \item $\int_{|x|\leq 1} x \, \nu(dx) < + \infty$. In other words, the
+        compensator process is finite.
+    \end{itemize}
+\end{enumerate}
+\end{definition}
+
+\begin{remark*}
+Note that the fourth condition is equivalent to saying that $X_t$ is a
+finite variation L\'evy process with and non-negative drift ($b > 0$) and
+no negative jumps ($\nu((-\infty, 0)) = 0$).
+\end{remark*}
+
+\begin{theorem}
+The conditions above are equivalent to one another.    
+\end{theorem}
+
+\begin{proof}
+$ $ \\
+\begin{itemize}
+    \item $1) \implies 2)$: This is trivial. If $X_t \geq 0$ for all $t \geq
+    0$ then $X_{\bar{t}} \geq 0$ for some $\bar{t} > 0$.
+    \item $3) \implies 1)$: This is also trivial. By assumption $X_t$ is not
+    decreasing and since it is L\'evy $X_0=0$ almost surely, then $X_t \geq 0$
+    for all $t \geq 0$ almost surely.
+    \item $2) \implies 3)$: By hypothesis of $2)$ we know that
+    $\exists\bar{t}>0$ such that $X_{\bar{t}} \geq 0$ almost surely. Let us now
+    take $n\in\N$, then we rewrite $X_{\bar{t}}$ as follows:
+    \[ X_{\bar{t}} = \underbrace{X_{\bar{t}} - X_{\bar{t}\frac{(n-1)}{n}}}_{
+         \geq 0} + \underbrace{X_{\bar{t}\frac{(n-1)}{n}} - X_{\bar{t}
+        \frac{(n-2)}{n}}}_{\geq 0} + \dots + \underbrace{X_{\frac{2\bar{t}}{n}}
+        - X_{\frac{\bar{t}}{n}}}_{\geq 0} + \cancelto{0}{X_0} \geq 0 \]
+    Thus since by the assumption on $X_t$ being a L\'evy process we know that 
+    the increments are iid, this becomes a sum of iid random variables, that is
+    it is equal to $n$ times the same random variable. Furthermore since we
+    know that $X_{\bar{t}} \geq 0$ almost surely, then we know that each
+    increment must be non-negative. Hence:
+    \[ \implies \left( X_{\bar{t} \frac{i}{n}} - X_{\bar{t} \frac{i-1}{n}}
+        \right) \geq 0 \quad \forall i \in \{1, \dots, n\} \]
+    This can easily extended to be of the form:
+    \[ \left( X_{\bar{t}p} - X_{\bar{t}q} \right) \geq 0 \quad \forall p > q
+        \in \Q \]
+    Furthermore since the set $\Q$ is dense in the set of reals $\R$ this can be
+    even further be extended to be of the form:
+    \[ \left( X_t - X_s \right) \quad \forall t > s \in \R \]
+    So far we have thus proved that the first 3 conditions are equivalent among
+    each other, now we will pass on to prove that the fourth condition is
+    equivalent to the third.
+    \item $4) \implies 3)$: We can easily see that:
+    \[ \int_{|x|\leq1} x \, \nu(dx) < +\infty \implies
+    X_t = bt + A\cdot B_t + \sum_{s\in[0,t]} \Delta X_s \]
+    Furthermore since we have that $\nu((-\infty, 0)) = 0$ then we know that
+    $\Delta X_s \geq 0$ almost surely. Thus we can conclude that $X_t$ is not
+    decreasing since it is a sum of non-negative random variables.
+    \item $3) \implies 4)$: In order to prove this last result we need a
+    further theorem.
+    \begin{theorem*}
+        Let $f$ be a C\'adl\'ag function and not-decreasing. Then $f$ is also
+        of finite variation.
+    \end{theorem*}
+    Now, we also know that a L\'evy process that is of finite variation also has
+    that:
+    \[ X_t \text{ FV } \implies A=0, \, \int_{|x|\leq1} |x| \, \nu(dx) < +\infty
+    \]
+    These conditions thus lead us to conclude that:
+    \[ X_t = bt + \sum_{s\in[0,t]} \Delta X_s \text{ is not decreasing} \iff
+        \left\{ \begin{array}{l}
+            b > 0 \\ \Delta X_s \geq 0 \text{ a.s.} \iff \nu((-\infty, 0)) = 0
+        \end{array} \right.
+    \]
+\end{itemize}
+\end{proof}
+
+\section{How to construct a subordinator process}
+We will now go on to see how a subordinator process can be constructed at will.
+
+\begin{theorem}
+Let $X_t$ be a L\'evy process in $\R^d$ (with $d\geq1$) with L\'evy-It\^o
+decomposition $(\gamma, A, \nu)$. Let also $f:\R^d\mapsto\Rpos$ such that $f(x) = 
+O(|x|^2)$ in a neighborhood of $0$. Then:
+\[ S_t = \sum_{\begin{subarray}{c} s\in[0,t] \\ \Delta X_s \neq 0 \end{subarray}}
+    f(\Delta X_s) \]
+is a subordinator process.
+\end{theorem}
+
+Before prooving this theorem let us make a few remarks and observations:
+
+\begin{remark*}
+Note that in this theorem we have only used $\nu$ but have not used $A$ or
+$\gamma$ at all.
+\end{remark*}
+
+\begin{remark}
+    Let us note that from the L\'evy-Khintchine formula, we know that given 
+    $(\gamma, A, \nu)$ we can easily write the characteristic exponent:
+    \[ \Psi_{X_s}(z) = i\gamma^T \cdot z - \frac{1}{2} z^T A z + \int_{\R^d}
+        \left( e^{iz^T x} - 1 - iz^T x \I_{|x|\leq1} \right) \nu(dx) \]
+    Where we divide small (i.e. $|x|\leq1$) and large (i.e. $|x|>1$) jumps.
+    Furthermore if we know that $\int_{|x|\leq1} |x| \, \nu(dx) < +\infty$ then:
+    \[ \Psi_{X_s}(z) = i\gamma^T_c \cdot z - \frac{1}{2} z^T A z + \int_{\R^d}
+        \left( e^{iz^T x} - 1 \right) \nu(dx) \]
+    Where $\gamma_c$ is:
+    \[ \gamma_c = \gamma - \int_{|x|\leq1} x \, \nu(dx) \]
+    Or we could also write:
+    \[ \Psi_{X_s}(z) = i\gamma^T_{\hat{C}} \cdot z - \frac{1}{2} z^T A z + \int_{\R^d}
+        \left( e^{iz^T x} - 1 - iz^T x \right) \nu(dx) \]
+    with the alternative choice of $\gamma_{\hat{C}}$:
+    \[ \gamma_{\hat{C}} = \gamma + \int_{|x|>1} x \, \nu(dx) \]
+    Let us notice that the $\int_{|x|\leq1} |x| \, \nu(dx)$ term only
+    appears in the drift.
+    It is rather easy to take a function $g:\R^d\mapsto\R$ such that:
+    \begin{align*}
+        g(x) &= O\left(|x|\right) \text{ for } |x|\to 0 \\
+        g(x) &= O\left(\frac{1}{|x|}\right) \text{ for } |x|\to \infty
+    \end{align*}
+    Then we can write the characteristic exponent as:
+    \begin{align*}
+        \Psi_{X_s}(z) & = i\hat{\gamma}^T \cdot z - \frac{1}{2} z^T A z +
+        \int_{\R^d} \left( e^{iz^T x} - 1 - iz^T x g(x) \right) \nu(dx) \\
+        \text{ with } \hat\gamma & = \gamma - \int_{\R^d} x \left(\I_{|x|\leq1}
+        + g(x)\right) \, \nu(dx)
+    \end{align*}
+    Thus we can freely choose $g$ as we wish and we will still have a valid
+    characteristic exponent. This is a very useful property that we will use
+    later on.
+\end{remark}
+
+Let us also see a few examples of $g$ that we can use:
+\begin{itemize}
+    \item $g(x) = \I_{|x|\leq1}$
+    \item $g(x) = \I_{|x|\leq\epsilon}$ for some $\epsilon > 0$
+\end{itemize}
+
+Finally we move on to the proof of the theorem.
+
+\begin{proof}
+Since $f$ is a non-negative function, then we know that $S_t$ is non-decreasing.
+All we need to prove is that $S_t$ is a L\'evy process. This is equivalent to
+proving that $S_t$ respects the following properties:
+\begin{itemize}
+    \item $S_t$ is right-continuous.
+    \item $S_t$ is left-limited.
+    \item $S_0 = 0$.
+    \item $S_t$ has independent increments.
+    \item $S_t$ is stochastically continuous.
+\end{itemize}
+
+Recall that $S_t$ is defined as:
+\[ S_t = \sum_{\begin{subarray}{c} s\in[0,t] \\ \Delta X_s \neq 0 \end{subarray}}
+    f(\Delta X_s) \]
+Where $X_t$ is a L\'evy process and $f$ is a non-negative function such that
+$f(x) = O(|x|^2)$ in a neighborhood of $0$. 
+
+From the definition, since $t$ is included into the sum, we can quite trivially
+conclude that $S_t$ is right-continuous. Furthermore, by the same logic on the
+definition, we can conclude that $S_0 = 0$.
+It also has independent increments since it is a sum of independent increments
+of $X_t$, and by the same logic it is also stochastically continuous.
+What we really need to prove is that the process is left-limited.
+This entails the two following properties:
+\begin{align*}
+    \int_{|x|>1} \, \nu_S(dx) & < +\infty \\
+    \int_{|x|\leq1} |x|^2 \, \nu_S(dx) & < +\infty
+\end{align*}
+By the hypothesis that $X_t$ be a L\'evy process we know that:
+\[ \int_{|x|\leq1} |x|^2 \, \nu_X(dx) < +\infty \]
+And we want to pass to:
+\[ \int_{|x|\leq1} |x|^2 \, \nu_S(dx) < +\infty \]
+Which is also equivalent to asking that:
+\[ \int_{|x|\leq\epsilon} |x|^2 \, \nu_S(dx) < +\infty \quad \forall \epsilon >
+    0 \]
+Again, from the hypothesis that $f(x) = O(|x|^2)$ in a neighborhood of $0$ we
+have that:
+\[ \forall C>0 \, \exists \epsilon > 0 \quad f(\Delta X_s) \leq C |\Delta X_s|^2
+    \quad \text{if } |\Delta X_s| \leq \epsilon \]
+This can be piecewise extended to write:
+\[ \sum_{\begin{subarray}{c} s\leq t \\ 0 < |\Delta X_s| \leq \epsilon
+\end{subarray}} f(\Delta X_s) \leq C \sum_{\begin{subarray}{c} s\leq t \\ 0 <
+|\Delta X_s| \leq \epsilon \end{subarray}} |\Delta X_s|^2 \]
+Now, we know that $X_t$ is a L\'evy process and thus that this second term is
+bounded. Thus we can conclude that:
+
+\[ 
+    S_t = \sum_{\begin{subarray}{c} s\leq t \\ 0 < |\Delta X_s| \leq \epsilon
+    \end{subarray}} f(\Delta X_s) + \sum_{\begin{subarray}{c} s\leq t \\ |\Delta
+    X_s| > \epsilon \end{subarray}} f(\Delta X_s)
+\]
+And here we have that the first term is bounded as seen above, and the second
+term is of finite cardinality, since we have a finite number of jumps that are
+larger than $\epsilon$. Thus we can conclude that $S_t$ is left-limited and
+therefore that it is a L\'evy process.
+\end{proof}
+
+TODO: add coding part

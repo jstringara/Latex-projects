@@ -243,7 +243,7 @@ $\sum \Delta X_t$.
         \item $\nu$ is a Radon measure in $\R^d\setminus\{0\}$. In other words
             any compact set in $\R^d\setminus\{0\}$ is measurable.
         \item \[ \int_{x\in\R^d: \, |x|\geq1} \, \nu(dx) < +\infty \]
-        \item \[ \int_{x\in\R^d: \, |x|<1} |x|^2 \, \nu(dx) = +\infty \] TODO: missed comment from professor
+        \item \[ \int_{x\in\R^d: \, |x|<1} |x|^2 \, \nu(dx) < +\infty \] TODO: missed comment from professor
         \item We can define a triplet $(\gamma, A, \nu)$ such that:
             \[ X_t = \gamma t + B_t + X_t^l + \lim_{\epsilon\to0}
             \hat{X}_t^{\epsilon} \]
@@ -251,16 +251,23 @@ $\sum \Delta X_t$.
             \begin{itemize}
                 \item $B_t$ is a Brownian motion with varianca-covariance matrix
                     $A$.
-                \item \[ X_t^l = \sum_{ s\in [0,t], \, |\Delta X_s| \geq 1} = 
-                    \int_{[0,t]\times \{x \geq 1\}} x \cdot J_X(ds \times dx) \]
+                \item \[ X_t^l = \sum_{\begin{subarray}{c}
+                    s\in [0,t] \\
+                    |\Delta X_s| \geq 1 
+                \end{subarray}} = \int_{[0,t]\times \{x \geq 1\}} x \cdot
+                J_X(ds \times dx) \]
                 \item We have the Compound Poisson process with jumps in 
                 $(\epsilon, 1)$:
-                \[ X^\epsilon_t = \sum_{s\in[0,t], \, \epsilon < |\Delta X_s| 
-                < 1} \Delta X_s \]
+                \[ X^\epsilon_t = \sum_{\begin{subarray}{c}
+                    s\in[0,t] \\ \epsilon < |\Delta X_s| < 1
+                \end{subarray}} \Delta X_s \]
                 Thus we get the respective compensated process:
                 \begin{align*}
-                    \hat{X}^\epsilon_t & \tikzmarknode{eq1}{=} \sum_{s\in[0,t],
-                    \, \epsilon < |\Delta X_s| < 1} \Delta X_s - t \int_{\epsilon
+                    \hat{X}^\epsilon_t & \tikzmarknode{eq1}{=} \sum_{
+                        \begin{subarray}{c}
+                           s\in[0,t] \\ \epsilon < |\Delta X_s| < 1 
+                        \end{subarray}
+                    } \Delta X_s - t \int_{\epsilon
                     < |x| < 1} x \, \nu(dx) \\
                     & \tikzmarknode{eq2}{=} \int_{[0,t]\times \{\epsilon < |x|
                     < 1\}} x \cdot (J_X(ds \times d) - \nu(dx) ds) 
@@ -271,11 +278,12 @@ $\sum \Delta X_t$.
     \end{enumerate}
 Indeed we have that:
 \begin{align*}
-    \int_{x\in\R^d: \, |x|<1} |x|^2 \, \nu(dx) = +\infty & \implies \lim_{
-        \epsilon \to 0^+} \hat{X}^\epsilon_t \\
-    \int_{x\in\R^d: \, |x|<1} |x|^2 \, \nu(dx) = +\infty &  \centernot\impliedby
-        \lim_{ \epsilon \to 0^+} X^\epsilon_t
+    \int_{x\in\R^d: \, |x|<1} |x|^2 \, \nu(dx) < +\infty & \implies \lim_{
+        \epsilon \to 0^+} \hat{X}^\epsilon_t < +\infty \\
+    \int_{x\in\R^d: \, |x|<1} |x|^2 \, \nu(dx) < +\infty &  \centernot\impliedby
+        \lim_{ \epsilon \to 0^+} X^\epsilon_t < +\infty
 \end{align*}
+Thanks to Martingality and the Central Limiti Theorem.
 \end{definition}
 
 \begin{example}[One-dimensional case, from Jump-diffusion to Levy decomposition]
@@ -283,24 +291,30 @@ Since we are starting from a jump-diffusion process, we have that:
 \[
     X_t = \delta_t + \sigma W_t + \sum_{s\in[0,t]} \Delta X_s \longrightarrow
    \sum_{s\in[0,t]} \Delta X_s = \left\{\begin{array}{l}\int_{|x|\geq1}\,\nu(dx)
-    < +\infty \\ \int_{|x|<1} \, \nu(dx) = +\infty \end{array}\right.
+    < +\infty \\ \int_{|x|<1} \, \nu(dx) < +\infty \end{array}\right.
 \]
 Clearly we have that $A = \sigma^2$. The Levy-Itô decomposition is:
 \[
-    X_t = \delta t + \sigma W_t + \sum_{s\in[0,t]} \Delta X_s + \lim_{
-    \epsilon \to 0^+} \hat{X}^\epsilon_t
+    X_t = \delta t + \sigma W_t + \sum_{\begin{subarray}{c}
+        s\in[0,t] \\ |\Delta X_s| \geq 1
+    \end{subarray}} \Delta X_s
+    + \lim_{ \epsilon \to 0^+} \hat{X}^\epsilon_t
 \]
 Now, let $X_t$ be a Jump-Diffusion model: TODO (missed something)
-\[ X_t = \gamma t + \sigma W_t + \sum_{s\in[0,t], \, |\Delta X_s| \geq 1} \Delta
-    X_s + \lim_{\epsilon \to 0^+} \left[ \sum_{s\in[0,t], \, \epsilon < |\Delta
-    X_s| < 1} \Delta X_s - t \int_{\epsilon < |x| < 1} x \, \nu(dx) \right]
+\[ X_t = \gamma t + \sigma W_t + \sum_{\begin{subarray}{c}
+    s\in[0,t]\\ |\Delta X_s| \geq 1\end{subarray}} \Delta
+    X_s + \lim_{\epsilon \to 0^+} \left[ \sum_{\begin{subarray}{c}
+        s\in[0,t]\\ \epsilon < |\Delta X_s| < 1
+    \end{subarray}} \Delta X_s - t \int_{\epsilon < |x| < 1} x \, \nu(dx) \right]
 \]
 We can write since when $|\Delta X_s| < 1$ we have that:
 \[ \int_{|x|<1} \,\nu(dx) < +\infty \implies \int_{|x|<1} x\,\nu(dx)<+\infty \]
 Thus we can write:
 \begin{align*}
-    & \tikzmarknode{eq1}{=} \gamma t + \sigma W_t + \sum_{s\in[0,t], \, |\Delta
-    X_s| \geq 1} \Delta X_s + \sum_{s\in[0,t], \, |\Delta X_s| < 1} \Delta X_s
+    & \tikzmarknode{eq1}{=} \gamma t + \sigma W_t + \sum_{\begin{subarray}{c}
+        s\in[0,t]\\ |\Delta X_s| \geq 1\end{subarray}}
+        \Delta X_s + \sum_{\begin{subarray}{c} 
+            s\in[0,t]\\ |\Delta X_s| < 1\end{subarray}} \Delta X_s
     - t \int_{|x|<1} x \,\nu(dx) \\
     & \tikzmarknode{eq2}{=} t \underbrace{\left( \gamma -\int_{|x|<1}x \,\nu(dx)
     \right)}_{\delta} + \sigma W_t + \sum_{s\in[0,t]} \Delta X_s
@@ -368,13 +382,13 @@ Now, if we let $\epsilon \to 0^+$ we get:
 
 \begin{property}[Splitting the integral in the Levy-Khincin formula]
     \item \[ \lim_{\epsilon\to0^+} \hat{X}^\epsilon_t =
-    \lim_{\epsilon\to0^+} \int_{\{epsilon<|x|<1\} \times [0,t]} x \cdot
+    \lim_{\epsilon\to0^+} \int_{\{\epsilon<|x|<1\} \times [0,t]} x \cdot
     \left( J_X(ds \times dx) - \nu(dx)ds \right) \]
     For a general Levy process this is finite $(+\infty)$. Under certain
     conditions we are able to split the integral into two parts:
     \[ \left. \begin{array}{l}
-        \int_{|x|\geq1} \, \nu(dx) < +\infty \text{ finite activity} \\
-        \int_{|x|<1} |x| \, \nu(dx) < +\infty \text{ finite variation}
+        \int_{|x|>1} \, \nu(dx) < +\infty \text{ finite activity} \\
+        \int_{|x|\leq1} |x| \, \nu(dx) < +\infty \text{ finite variation}
     \end{array} \right\} \implies
         \lim_{\epsilon\to0^+} \int_{\epsilon<|x|<1} x \, \nu(dx) < +\infty
     \]
@@ -401,9 +415,9 @@ Let us formally define what variation actually consists of:
 This yields us the following hierarchy of Levy processes (with respect to their
 variation):
 \[ \begin{array}{l}
-    \int_{|x|\leq1} \, \nu(dx) < +\infty \text{ CPP} \\
-    \int_{|x|\leq1} |x| \, \nu(dx) < +\infty \text{ Finite variation} \\
-    \int_{|x|\leq1} |x|^2 \, \nu(dx) < +\infty \text{ General Levy process}
+    \int_{|x|\leq1} \, \nu(dx) < +\infty \rightarrow \text{ CPP} \\
+    \int_{|x|\leq1} |x| \, \nu(dx) < +\infty \rightarrow \text{ Finite variation} \\
+    \int_{|x|\leq1} |x|^2 \, \nu(dx) < +\infty \rightarrow \text{ General Levy process}
 \end{array} \]
 Let us also observe that only the first two are of bounded variation, and thus
 can have their integral limit split into two parts.
