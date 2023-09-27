@@ -1,0 +1,218 @@
+\chapter{Lecture 5: 26/09}
+
+In this chapter we will go over how to use Monte Carlo simulation methods to
+price different types of options, with a strong focus on exotic options.
+
+\section{Monte Carlo Simulation}
+
+Monte Carlo methods entail doing multiple simulations of the possible paths of
+the underlying asset, and then averaging the results to get the mean of the
+payoff function conditional on the underlying asset's price at the start of the
+simulation.
+
+Unfortunately because the number of simulation to achieve high accuracy is
+often fairly large, Monte Carlo methods suffer from a very high computational
+overhead.
+
+\section{Theoretical Framework}
+
+First of all, let us understand what are the tools at our disposal.
+Let $(\Omega, \mathcal{F}, \mathbb{P})$ be a probability space, and let $X$
+be a random variable on this space. Our aim is to estimate its mean $\theta = 
+\E[X]$. The easiest unbasied estimator we can construct is the sample mean:
+\[ \hat{\theta}_n = \frac{1}{n} \sum_{i=1}^n X_i \]
+where $X_i$ are i.i.d. copies of $X$.
+Recall that such an estimator has variance:
+\[ \Var[\hat{\theta}_n] = \frac{1}{n} \Var[X] \]
+Now we will see two crucial theorems relating to the convergence and the
+asymptotic distribution of this estimator.
+
+\begin{theorem*}[Law of Large Numbers]
+Let $\seq{X}$ be a sequence of i.i.d. random variables with mean $\theta$.
+If we define the random variable:
+\[ Y(n) = \frac{1}{n} \sum_{i=1}^n X_i \]
+then:
+\[ \lim_{n\to\infty} \P(|Y(n) - \theta| > \epsilon) = 0 \quad \forall \epsilon
+> 0 \]
+\end{theorem*}
+
+\begin{theorem*}[Central Limit Theorem]
+Let $\seq{X}$ be a sequence of i.i.d. random variables with mean $\theta$ and
+variance $\sigma^2$. Then:
+\[ \frac{\sum_{i=0}^n X_i - n\theta}{\sigma\cdot\sqrt{n}} = \frac{\hat{\theta}_n
+- \theta}{\sigma / \sqrt{n}} \toin{d} \mathcal{N}(0,1) \]
+\end{theorem*}
+
+In other words, for a sufficiently large $n$ we have that the distribution of
+$\hat{\theta}_n - \theta$, i.e. the MonteCarlo error, is approximately normal
+with mean $0$ and variance $\frac{\sigma^2}{n}$:
+\[ \hat{\theta}_n - \theta \sim \mathcal{N}\left(0, \frac{\sigma^2}{n}\right) 
+\text{ for } n \text{ large enough}\]
+This an extremely useful result, because, no matter the distribution of $X$,
+we can always rely on the fact that the distribution of the MonteCarlo error
+will be normal.
+One problem that can arise from not knowing the distribution of $X$ is that we
+have no knowledge of the actual variance, so we will use the sample variance
+instead:
+\[ \hat{\sigma} = \sqrt{\frac{1}{n-1} \sum_{i=1}^n (X_i - \hat{\theta}_n)^2}\]
+This is an unbiased estimator of the variance, and it is also consistent.
+More in general, we can say the the Monte Carlo method has a
+$\mathcal{O}\left(\frac{1}{\sqrt{n}}\right)$ convergence rate.
+In other words in order to cut our estimation error in half we need to 
+quadruple the number of samples. This is quite inconvenient and computationally
+onerous.
+
+This is why we often prefer to use confidence intervals instead of point
+estimates. In particular we take two values $a$ and $b$ and estimate the
+probability that $\theta$ lies in the interval $[a,b]$.
+
+Recall that from the law of large numbers we have that for $n$ large enough:
+\[ \P \left( \frac{\hat{\theta}_n - \theta}{\sigma / \sqrt{n}} \leq x \right)
+\approx \Phi(x) \]
+where $\Phi$ is the cumulative distribution function of the standard normal.
+This means that we can construct a confidence interval for $\theta$ by
+inverting the cumulative distribution function:
+\[ \P(a < \theta < b) = \P \left( \frac{\hat{\theta}_n - b}{\sigma/\sqrt{n}}
+< \frac{\hat{\theta}_n-\theta}{\sigma/\sqrt{n}} < \frac{\hat{\theta}_n-a}
+{\sigma/\sqrt{n}} \right) = \Phi(b) - \Phi(-a) \]
+If we take the choice $a = b = z_{\delta/2}$ where $z_{\delta/2}$ is the
+$1-\delta/2$ quantile of the standard normal distribution, we get that:
+\[ \P \left( \hat{\theta}_n - z_{\delta/2} \frac{\sigma}{\sqrt{n}} < \theta <
+\hat{\theta}_n + z_{\delta/2} \frac{\sigma}{\sqrt{n}} \right) = 1 - \delta \]
+This is a $1-\delta$ confidence interval for $\theta$.
+Again, we often do not know the actual variance $\sigma^2$, so we will use the
+sample variance instead:
+\[ \P \left( \hat{\theta}_n - z_{\delta/2} \frac{\hat{\sigma}}{\sqrt{n}} <
+\theta < \hat{\theta}_n + z_{\delta/2} \frac{\hat{\sigma}}{\sqrt{n}} \right) =
+1 - \delta \]
+and we say that the interval:
+\[ \left[ \hat{\theta}_n - z_{\delta/2} \frac{\hat{\sigma}}{\sqrt{n}},
+\hat{\theta}_n + z_{\delta/2} \frac{\hat{\sigma}}{\sqrt{n}} \right] \]
+is an asymptotically valid confidence interval for $\theta$.
+
+\section{Monte Carlo Simulation for Options}
+As we have seen Monte Carlo simulation offer us a very general and powerful
+toolbox for estimating means of random variables. But how can we translate this
+knowledge into a pricing method for options?
+
+Let us recall that under the assumtpions of the fundamental theorem of asset
+pricing, we have that the price of an option is given by the discounted
+expected value of its payoff under the risk-neutral measure $\mathbb{Q}$:
+\[ V_0 = e^{-rT} \E^\Q \left[ \Phi(S(T)) \right]\]
+where $\Phi$ is the payoff function of the option, and $S(T)$ is the price of
+the underlying asset at maturity.
+
+Thus we can use Monte Carlo simulations to estimate the price of an option by
+simulating the possible paths of the underlying asset, and then averaging the
+payoff function over the simulated paths. Or more frequently by estimanting
+the $1-\delta$ confidence interval for the price of the option, where $\delta$
+usually takes the value $0.05$ or $0.01$.
+
+This methodology is often applied to exotic options, i.e. options whose payoff
+function is not a simple function of the underlying asset's price at maturity
+but often depends on the whole path of the underlying asset. This makes it
+impossible to price these options using analytical methods, and thus Monte
+Carlo simulation is often the only viable option.
+
+\subsection*{Asian Options}
+Asian options are a class of exotic options whose payoff depends on the average
+price of the underlying asset over the whole life of the option. In particular
+the average can be calculated as follows:
+
+\begin{itemize}
+    \item Arithmetic average: \[ A = \frac{\sum^M_{i+0} S(i\Delta t)}{M+1} \]
+    \item Geometric average: \[ A = \Pi_{i=0}^M S(i\Delta t) \]
+\end{itemize}
+
+Where $\Delta t$ is the time step of the simulation, and $M$ is the number of
+steps. TODO: frequency might be linked to the market convention.
+Furthermore Asian options can be divided into two categories depending on the
+type of strike price:
+
+\begin{itemize}
+    \item Fixed strike: \begin{align*}
+        \Phi(S(T)) & = (A - K)^+ \text{ for call options} \\
+        \Phi(S(T)) & = (K - A)^+ \text{ for put options}
+    \end{align*}
+    \item Floating strike: \begin{align*}
+    \Phi(S(T)) & = (S(T)-A)^+ \text{ for call options} \\
+    \Phi(S(T)) & = (A-S(T))^+ \text{ for put options}
+\end{align*}
+\end{itemize}
+
+\subsection*{Lookback Options}
+Loockback options are another class of exotic options whose payoff depends on
+the maximum or minimum price of the underlying asset over the whole life of
+the option. In particular, since some of the possible combinations would not be
+reasonable to trade, we only find a subset of the possible payoffs on the
+market:
+
+\begin{itemize}
+    \item Fixed strike: \begin{align*}
+        \Phi(S(T)) & = (M - K)^+ \text{ for call options} \\
+        \Phi(S(T)) & = (K - m)^+ \text{ for put options}
+    \end{align*}
+    \item Floating strike: \begin{align*}
+        \Phi(S(T)) & = (S(T)-m)^+ \text{ for call options} \\
+        \Phi(S(T)) & = (M-S(T))^+ \text{ for put options}
+    \end{align*}
+\end{itemize}
+
+where $M$ is the maximum price of the underlying asset over the life of the
+option, and $m$ is the minimum price of the underlying asset over the life of
+the option. Note that these two quantities assume following values in our
+computational framework:
+\begin{align*}
+    M & = \max_i S(i\Delta t) \\
+    m & = \min_i S(i\Delta t)
+\end{align*}
+
+\subsection*{Barrier Options}
+Barrier options are a class of exotic options whose payoff depends on whether
+the underlying asset prices has visited a certain region of the state space
+during the life of the option, in particular we have Up, Down and Knock options.
+Up options have a payoff that depends on whether the underlying asset price has
+ever been above a certain threshold, Down options have a payoff that depends on
+whether the underlying asset price has ever been below a certain threshold while
+Knock options have a payoff that depends on whether the underlying asset price
+has ever been above or below a certain threshold. Furthermore barrier options
+can be divided into In and Out options depending on whether the payoff is
+activated when the underlying asset price enters or leaves the region of the
+state space.
+
+Let us summarize these combinations in a table:
+
+\begin{center}
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        & Up & Down & Knock \\
+        \hline
+        In & Up and In & Down and In & Knock and In \\
+        \hline
+        Out & Up and Out & Down and Out & Knock and Out \\
+        \hline
+    \end{tabular}
+\end{center}
+
+Just like for lookback options, we only find a subset of the possible payoffs
+on the market due to the reasonableness of the payoff. Let us see a few examples
+of barrier options:
+
+\begin{itemize}
+    \item Down and Out Call:
+        \[ \Phi(S(T)) = (S(T)-K)^+ \cdot \I_{\{ \min_i S(i\Delta t) > b \}}
+        \text{ with } S_0 > b \]
+    \item Up and In Put:
+        \[ \Phi(S(T)) = (K-S(T))^+ \cdot \I_{\{ \max_i S(i\Delta t) \geq u \}}
+        \text{ with } S_0 < u \]
+    \item Knock and Out Call:
+        \[ \Phi(S(T)) = (S(T)-K)^+ \cdot \I_{\{ \min_i S(i\Delta t) > b and
+        \max_i S(i\Delta t) \geq u \}} \]
+    \item Knock and In Call:
+        \[ \Phi(S(T)) = (S(T)-K)^+ \cdot \I_{\{ \min_i S(i\Delta t) \leq b or
+        \max_i S(i\Delta t) < u \}} \]
+\end{itemize}
+
+TODO: code section
+
+
