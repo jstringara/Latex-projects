@@ -204,8 +204,8 @@ have that:
     \quad \text{if } |\Delta X_s| \leq \epsilon \]
 This can be piecewise extended to write:
 \[ \sum_{\begin{subarray}{c} s\leq t \\ 0 < |\Delta X_s| \leq \epsilon
-\end{subarray}} f(\Delta X_s) \leq C \sum_{\begin{subarray}{c} s\leq t \\ 0 <
-|\Delta X_s| \leq \epsilon \end{subarray}} |\Delta X_s|^2 \]
+\end{subarray}} f(\Delta X_s) \leq C \cdot \sum_{\begin{subarray}{c} s\leq t \\
+0 < |\Delta X_s| \leq \epsilon \end{subarray}} |\Delta X_s|^2 \]
 Now, we know that $X_t$ is a L\'evy process and thus that this second term is
 bounded. Thus we can conclude that:
 
@@ -220,4 +220,139 @@ larger than $\epsilon$. Thus we can conclude that $S_t$ is left-limited and
 therefore that it is a L\'evy process.
 \end{proof}
 
-TODO: add coding part
+\section{Kou Model: Matlab implementations}
+We will now move on to write a Matlab function to simulate the Kou model.
+
+We will start off by writing a function that simulates directly the L\'evy
+process $X_t$. Recall that in the Kou model we have the
+following definition:
+\[ X_t = \gamma t + \sigma W_t + \sum_{i=1}^{N_t} Y_i \]
+Where $Y_i$ is a jump of the form:
+\[ Y_i = \left\{ \begin{array}{l} 
+    \text{Exp}(\lambda^+) \text{ with probability } p \\
+    \text{Exp}(\lambda^-) \text{ with probability } 1-p
+\end{array} \right. \]
+Hence the increase in the process is given by:
+\[ \Delta X_t = X_{(i+1)\Delta t} - X_{i\Delta t} = \gamma \Delta t + \sigma
+    (\underbrace{W_{(i+1) \Delta t} - W_{i\Delta t}}_{
+    \sim \mathcal{N}(0, \Delta t)}) + \sum_{\begin{subarray}{c} s\in[i\Delta t,
+    (i+1)\Delta t] \\ Y_s \neq 0 \end{subarray}} Y_s \]
+So, in our function we will need to have the following inputs:
+\begin{itemize}
+    \item $N_{sim}$: the number of simulations to run.
+    \item $T$: the time horizon.
+    \item $M$: the number of time steps.
+    \item Model parameters: $\sigma, \lambda, \lambda^+, \lambda^-, p$.
+\end{itemize}
+
+Furthermore, recall that we are working under the risk-neutral measure and that
+$X_t$ is modeling the exponent of the stock price $S_t = S_0e^{rt+X_t}$. Thus
+we will have:
+\[ \E^\Q[S_te^{-rT}] = S_0 \implies S_0 \E[e^{X_t}] = S_0 \implies \E[e^{X_t}]
+    = 1 \iff \Phi_{X_t}(-i) = 1 \iff \Psi_{X_t}(-i) = 0 \]
+
+For the Kou process the characteristic exponent is given by:
+\begin{align*}
+    \Psi_{X_t}(u) &= -\frac{\sigma^2u^2}{2} + i\gamma u + iu\lambda + iu\lambda
+    \left( \frac{p}{\lambda^+-iu} - \frac{1-p}{\lambda^-+iu}\right) \\
+    \implies \Psi_{X_t}(-i) &= \frac{\sigma^2}{2} + \gamma - \lambda \left(
+    \frac{p}{\lambda^++1} - \frac{1-p}{\lambda^-+1}\right) = 0 \\
+    \implies \gamma &= \lambda \left( \frac{p}{\lambda^++1} -
+    \frac{1-p}{\lambda^-+1}\right) - \frac{\sigma^2}{2}
+\end{align*}
+
+Thus after we can compute $\gamma$ like so in order to obey the assumption of
+working under the risk-neutral measure.
+
+For the actual simulation, we will sample the number of jumps for each simulation
+from a Poisson distribution with parameter $\lambda T$. Then we will sample the
+continuous component and add the jumps. The code is as follows:
+
+\begin{minted}{matlab}
+function X=Kou_Simulation(Nsim,T,params,M)
+
+% get the fuction and model parameters
+dt=T/M;
+X=zeros(Nsim,M+1);
+sigma=params(1);
+lambda=params(2);
+p=params(3);
+lambdap=params(4);
+lambdam=params(5);
+% characteristic exponent (equivalent to the above)
+Psi=@(u) -sigma^2*u^2/2+1i*u*lambda*...
+    (p/(lambdap-1i*u)-(1-p)/(lambdam+1i*u));
+drift=-Psi(-1i);
+
+% Sample number of jumps for each simulation
+NT = icdf('Poisson',rand(Nsim,1),lambda*T);
+% Sample Continuous Component and Add the Jumps
+Z=randn(Nsim,M);
+for j=1:Nsim % simulation loop
+    % sample NT(j) jump times from a uniform distribution from 0 to T
+    Jump_Times=sort( rand(1,NT(j)) )*T;
+    for i=1:M % time loop
+        % continuous part (adjust the standard deviation and add the drift)
+        X(j,i+1)=X(j,i)+drift*dt+sigma*sqrt(dt)*Z(j,i);
+        % add the jump component
+        for jj=1:NT(j) 
+            % if the jump time is in the interval [i*dt,(i+1)*dt]
+            if Jump_Times(jj)>(i-1)*dt &&...
+                    Jump_Times(jj)<=i*dt
+                % sample the jump size
+                if rand<p % positive jump
+                    Y=icdf('Exponential',rand,1/lambdap);
+                else % negative jump
+                    Y=-icdf('Exponential',rand,1/lambdam);
+                end
+                % add jump
+                X(j,i+1)=X(j,i+1)+Y;
+            end
+        end
+    end
+end
+\end{minted}
+
+This is a slightly inefficient but very intuitive way of implementing the Kou
+model. We will now see a more efficient way of implementing the model by 
+refactoring the loops.
+Indeed we can see:
+\[ \sum_{\begin{subarray}{c} s\in[i\Delta t, (i+1)\Delta t] \\ Y_s \neq 0
+\end{subarray}} Y_s \sim \sum_{\begin{subarray}{c} s\in[0, \Delta t] \\ Y_s \neq
+0 \end{subarray}} Y_s \]
+
+\begin{minted}{matlab}
+
+function X=Kou_Simulation_v2(Nsim,T,params,M)
+
+%% parameters and drift
+...
+
+% Sample number of Jumps in each time interval
+Ndt=icdf('Poisson',rand(Nsim,M),lambda*dt);
+% Sample Continuous Component and Add the Jumps
+Z=randn(Nsim,M);
+for i=1:M % time loop
+   % continuous part (matrix multiplication)
+   X(:,i+1)=X(:,i)+drift*dt+sigma*sqrt(dt)*Z(:,i);
+   for j=1:Nsim % simulation loop
+       for jj=1:Ndt(j,i)
+           % sample the jump size
+           if rand<p % positive jump
+               Y=icdf('Exponential',rand,1/lambdap);
+           else % negative jump
+               Y=-icdf('Exponential',rand,1/lambdam);
+           end
+           % add jump
+           X(j,i+1)=X(j,i+1)+Y;
+       end
+   end
+end
+\end{minted}
+
+Here we are directly sampling the number of jumps in each time interval rather
+than in the whole time horizon. This relieves us from having to check whether
+the jump time is in the interval $[i\Delta t, (i+1)\Delta t]$.
+
+\textbf{N.B.} if $N_{\Delta t}(j,i) = 0$ then the loop will not be executed at
+all.
