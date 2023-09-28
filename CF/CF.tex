@@ -14,6 +14,8 @@
 
 %>=====< Other packages >=====<%
 
+\usepackage{xargs} %to use multiple optional arguments
+\usepackage[pdftex,dvipsnames]{xcolor} %for custom colors
 \usepackage{framed} % for framing text
 \usepackage{titling} % for customizing title
 \usepackage{titlesec} %for customizing sections title
@@ -25,6 +27,7 @@
 \usepackage{tikz}
 \usetikzlibrary{tikzmark}
 \usepackage{minted} %for code highlighting
+\usepackage[colorinlistoftodos, prependcaption, textsize=tiny]{todonotes} %for TODOs
 
 %>>=====< Custom commands >=====<%
 \input{custom-commands.tex}
@@ -47,6 +50,9 @@
 \input{Lectures/lecture-3.tex}
 \input{Lectures/lecture-4.tex}
 \input{Lectures/lecture-5.tex}
+
+%>=====< List of todos >=====<%
+\listoftodos
 
 %>=====< End Document >=====<%
 

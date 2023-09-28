@@ -1,4 +1,4 @@
-\chapter{Lecture 2: }
+\chapter{Lecture 2: 18/09}
 
 \section{Poisson Process}
 In order to define the Poisson Processes we must first recall and explore the
@@ -153,13 +153,14 @@ the Poisson distribution.
     \end{enumerate}
 \end{remark}
 
-TODO: ask if the definition is done with $\geq$ or $>$ in the indicator function.
 \begin{definition}[Poisson Process (PP)]
 Let $\seq{T}$ be a sequence of iid random variables with exponential distribution
 with parameter $\lambda > 0$, and $T_n = \sum^n_{i=1} \tau_i$, then:
 \[ N_t = \sum^\infty_{n=1} \I_{\{t > T_n\}} \]
 is called a Poisson Process with intensity $\lambda$.
 \end{definition}
+\unsure{Ask if the definition is done with $\geq$ or $>$ in the indicator
+function.}
 
 \begin{properties}
     $ $ \newline % leave a blank line
@@ -206,8 +207,8 @@ Given a compound Poisson process $Y_t$, we can represent graphically its path
 as a step function, where the jump sizes are given by the values of $Y_n$ and
 the time elapsed between two consecutive jumps is given by $\tau_n$.
 
-TODO: add graph of a step function with the jumps and the time elapsed between
-them.
+\addendum{Add graph of a step function with the jumps and the time elapsed
+between them.}
 
 One unsatisfactory aspect of the Poisson process is that it is not
 a Martingale. Indeed, take any two times $s$ and $t$ such that $s<t$, then:
@@ -239,7 +240,6 @@ reasoning as above we have that:
     Poisson process. 
 \end{theorem}
 
-TODO: check definition of stationarity.
 \begin{definition}[Stationary]
     Let $X_t$ be a stochastic process, then we say that it is stationary if
     $\forall t_1,\ldots,t_n$ and $\forall h > 0$ we have that:
@@ -247,6 +247,7 @@ TODO: check definition of stationarity.
         (X_{t_1},\ldots,X_{t_n}) \sim (X_{t_1+h},\ldots,X_{t_n+h})
     \]
 \end{definition}
+\unsure{Check the definition of stationarity.}
 
 \begin{recall}
 For the Weiner process we have that $W_t \sim \mathcal{N}(0,t) \overset{L}{=}
@@ -280,4 +281,4 @@ T = T(1:end-1); %the last time is beyond T
 \end{itemize}
 \end{recall}
 
-TODO: finish the coding part
+\addendum{Finish up the coding part of the lecture.}

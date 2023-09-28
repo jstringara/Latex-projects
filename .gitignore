@@ -17,3 +17,5 @@ wksp_fin.code-workspace
 */_minted-*
 *.json
 *.jpg
+*.tdo
+*.code-workspace

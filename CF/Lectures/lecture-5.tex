@@ -1,14 +1,106 @@
 \chapter{Lecture 5: 26/09}
 
-In this chapter we will go over how to use Monte Carlo simulation methods to
-price different types of options, with a strong focus on exotic options.
+\section{Merton Model: Matlab implementation}
+Just like we did for the Kou model, we will now implement a Matlab function to
+simulate the Merton model.
+Recall that in the Merton model the L\'evy process $X_t$ is given by:
+\[ X_t = \gamma t + \sigma W_t + \sum_{i=1}^{N_t} Y_i \]
+where $W_t$ is a standard Brownian motion, $N_t$ is a Poisson process with
+intensity $\lambda$, and $Y_i$ are i.i.d. random variables with distribution
+$\mathcal{N}(\mu_J, \sigma_J^2)$ independent of $W_t$ and $N_t$.
+Hence we have to take in the following model and simulation parameters:
+\begin{itemize}
+    \item $N_{sim}$: the number of simulations to run.
+    \item $T$: the time horizon.
+    \item $M$: the number of time steps.
+    \item Model parameters: $\sigma, \lambda, \mu_J, \sigma_J$.
+\end{itemize}
+Let us note that we have one less parameter than in the Kou model.
+The characteristic exponent of the Merton model is given by:
+\[ \Psi_{X_t}(u) = -\frac{\sigma^2u^2}{2} + i\gamma u + \lambda \left( e^{
+\mu_J iu - \frac{\sigma_J^2 u^2}{2}} - 1 \right) \]
+Again, thanks to the requirement that the mean must be done under the risk
+neutral measure, we have that $\Psi_{X_t}(-i)$ must be equal to $0$. Hence:
+\[ \gamma = -\frac{\sigma^2}{2} - \lambda \left( e^{\frac{\sigma^2}{2} + \mu_J}
+- 1 \right) \]
+After computing the drift we then pass on to the actual simulation in which we
+will sample the number of jumps between each time step from a Poisson
+distribution with intensity $\lambda \Delta t$ and the continuous part from a
+Standard Normal which we will then rescale by $\sigma \sqrt{\Delta t}$.
+For each simulation we will sample the jump sizes from a Normal distribution
+with mean $\mu_J$ and variance $\sigma_J^2$.
+Finally we will sum the jumps and the continuous part to get the simulated
+values of the L\'evy process at each time step.
+
+Such a procedure can be implemented into the following Matlab function:
+
+\begin{minted}{matlab}
+function X=Merton_Simulation(Nsim,T,params,M)
+
+% parameters and drift
+dt=T/M;
+X=zeros(Nsim,M+1);
+sigma=params(1);
+lambda=params(2);
+muJ=params(3);
+sigmaJ=params(4);
+Psi=@(u) -sigma^2*u^2/2+lambda*...
+    (exp(-sigmaJ^2*u^2/2+1i*muJ*u)-1);
+drift=-Psi(-1i);
+
+% Sample Number of Jumps in each time-bucket
+Ndt=icdf('Poisson',rand(Nsim,M),lambda*dt);
+% Sample Continuous Component Normal of size Nsim x M
+Z=randn(Nsim,M);
+
+% Simulation
+for i=1:M % time loop
+   % continuous part for the time step (matrix multiplication)
+   X(:,i+1)=X(:,i)+drift*dt+sigma*sqrt(dt)*Z(:,i);
+   for j=1:Nsim % simulation loop
+       if Ndt(j,i)>0 % if there are jumps
+           % sample jumps
+           Y=sum( muJ+sigmaJ*randn(Ndt(j,i),1) );
+           % add jumps
+           X(j,i+1)=X(j,i+1)+Y;
+       end
+   end
+end
+\end{minted}
+
+If we would like to actually simulate the Stock Price process we would have to
+take the exponential of the simulated L\'evy process. We can do it by adding the
+initial stock price to the function parameters and then returning the
+exponential of the simulated L\'evy process. We modify the function like so:
+
+\begin{minted}{matlab}
+function S=Merton_Simulation(Nsim,T,params,M,S0,r)
+
+%% Same code as before ... 
+
+Psi=@(u) -sigma^2*u^2/2+lambda*...
+    (exp(-sigmaJ^2*u^2/2+1i*muJ*u)-1);
+drift=r-Psi(-1i);
+
+%% Same code as before ...
+
+% get the stock price
+S=S0*exp(X);
+
+\end{minted}
+\unsure{Why is there the r in the drift?}
+
 
 \section{Monte Carlo Simulation}
 
-Monte Carlo methods entail doing multiple simulations of the possible paths of
-the underlying asset, and then averaging the results to get the mean of the
-payoff function conditional on the underlying asset's price at the start of the
-simulation.
+Now that we have developed an implementation for both the Merton and Kou models
+to simulate stock prices, how can we use these in order to price options? The
+answer lies in Monte Carlo simulation methods. Hence in this lecture we will go
+over how to use Monte Carlo simulation methods to price different types of
+options, with a strong focus on exotic options. Monte Carlo methods entail doing
+multiple simulations of the possible paths of the underlying asset, and then
+averaging the results to get the mean of the payoff function conditional on the
+underlying asset's price at the start of the simulation.
 
 Unfortunately because the number of simulation to achieve high accuracy is
 often fairly large, Monte Carlo methods suffer from a very high computational
@@ -75,6 +167,7 @@ inverting the cumulative distribution function:
 \[ \P(a < \theta < b) = \P \left( \frac{\hat{\theta}_n - b}{\sigma/\sqrt{n}}
 < \frac{\hat{\theta}_n-\theta}{\sigma/\sqrt{n}} < \frac{\hat{\theta}_n-a}
 {\sigma/\sqrt{n}} \right) = \Phi(b) - \Phi(-a) \]
+\unsure{Ask professor what the passages actually are.}
 If we take the choice $a = b = z_{\delta/2}$ where $z_{\delta/2}$ is the
 $1-\delta/2$ quantile of the standard normal distribution, we get that:
 \[ \P \left( \hat{\theta}_n - z_{\delta/2} \frac{\sigma}{\sqrt{n}} < \theta <
@@ -90,7 +183,7 @@ and we say that the interval:
 \hat{\theta}_n + z_{\delta/2} \frac{\hat{\sigma}}{\sqrt{n}} \right] \]
 is an asymptotically valid confidence interval for $\theta$.
 
-\section{Monte Carlo Simulation for Options}
+\section{Exotic options: refresher}
 As we have seen Monte Carlo simulation offer us a very general and powerful
 toolbox for estimating means of random variables. But how can we translate this
 knowledge into a pricing method for options?
@@ -213,6 +306,11 @@ of barrier options:
         \max_i S(i\Delta t) < u \}} \]
 \end{itemize}
 
-TODO: code section
+\section{Monte Carlo Simulation for Exotic Options (some examples)}
+Now that we have had a refresher on exotic options and their respective payoffs,
+let us see how we can use Monte Carlo simulation to price them using the Matlab
+function that we have developed for the Merton model (we could achieve the same
+with the Kou model).
+
 
 

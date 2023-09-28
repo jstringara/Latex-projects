@@ -228,7 +228,7 @@ So far we have encountered three types of levy processes:
 \end{itemize}
 But not all levy processes are these types. This dependes on whether $\nu$ can
 be well defined.
-TODO: add picture of how to divide up levy processes
+\addendum{Add picture of how to divide up levy processes}
 For example:
 \[ \nu((2,3)) = +\infty \implies \E [ \# \{ t\in[0,1]: \; \Delta X_t \neq 0, \,
     \Delta X_t \in (2,3) \} ] = +\infty \]
@@ -243,7 +243,8 @@ $\sum \Delta X_t$.
         \item $\nu$ is a Radon measure in $\R^d\setminus\{0\}$. In other words
             any compact set in $\R^d\setminus\{0\}$ is measurable.
         \item \[ \int_{x\in\R^d: \, |x|\geq1} \, \nu(dx) < +\infty \]
-        \item \[ \int_{x\in\R^d: \, |x|<1} |x|^2 \, \nu(dx) < +\infty \] TODO: missed comment from professor
+        \item \[ \int_{x\in\R^d: \, |x|<1} |x|^2 \, \nu(dx) < +\infty \]
+        \miss{Missed a comment about this from the lecture}
         \item We can define a triplet $(\gamma, A, \nu)$ such that:
             \[ X_t = \gamma t + B_t + X_t^l + \lim_{\epsilon\to0}
             \hat{X}_t^{\epsilon} \]
@@ -300,7 +301,8 @@ Clearly we have that $A = \sigma^2$. The Levy-Itô decomposition is:
     \end{subarray}} \Delta X_s
     + \lim_{ \epsilon \to 0^+} \hat{X}^\epsilon_t
 \]
-Now, let $X_t$ be a Jump-Diffusion model: TODO (missed something)
+Now, let $X_t$ be a Jump-Diffusion model:
+\miss{Missed something about it being L\'evy + finite variation}
 \[ X_t = \gamma t + \sigma W_t + \sum_{\begin{subarray}{c}
     s\in[0,t]\\ |\Delta X_s| \geq 1\end{subarray}} \Delta
     X_s + \lim_{\epsilon \to 0^+} \left[ \sum_{\begin{subarray}{c}
@@ -392,8 +394,7 @@ Now, if we let $\epsilon \to 0^+$ we get:
     \end{array} \right\} \implies
         \lim_{\epsilon\to0^+} \int_{\epsilon<|x|<1} x \, \nu(dx) < +\infty
     \]
-    TODO unsure about this, check with professor about the integrals before
-    the brackets.
+    \unsure{Check with professor about the integrals before the brackets.}
 \end{property}
 
 Let us formally define what variation actually consists of:
