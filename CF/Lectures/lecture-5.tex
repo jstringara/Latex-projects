@@ -34,7 +34,7 @@ values of the L\'evy process at each time step.
 
 Such a procedure can be implemented into the following Matlab function:
 
-\begin{minted}{matlab}
+\begin{minted}[linenos]{matlab}
 function X=Merton_Simulation(Nsim,T,params,M)
 
 % parameters and drift
@@ -73,7 +73,7 @@ take the exponential of the simulated L\'evy process. We can do it by adding the
 initial stock price to the function parameters and then returning the
 exponential of the simulated L\'evy process. We modify the function like so:
 
-\begin{minted}{matlab}
+\begin{minted}[linenos]{matlab}
 function S=Merton_Simulation(Nsim,T,params,M,S0,r)
 
 %% Same code as before ... 
@@ -91,7 +91,7 @@ S=S0*exp(X);
 \unsure{Why is there the r in the drift?}
 
 
-\section{Monte Carlo Simulation}
+\section{Monte Carlo Simulation techniques}
 
 Now that we have developed an implementation for both the Merton and Kou models
 to simulate stock prices, how can we use these in order to price options? The
@@ -106,7 +106,7 @@ Unfortunately because the number of simulation to achieve high accuracy is
 often fairly large, Monte Carlo methods suffer from a very high computational
 overhead.
 
-\section{Theoretical Framework}
+\subsection{Theoretical Framework}
 
 First of all, let us understand what are the tools at our disposal.
 Let $(\Omega, \mathcal{F}, \mathbb{P})$ be a probability space, and let $X$
@@ -182,6 +182,88 @@ and we say that the interval:
 \[ \left[ \hat{\theta}_n - z_{\delta/2} \frac{\hat{\sigma}}{\sqrt{n}},
 \hat{\theta}_n + z_{\delta/2} \frac{\hat{\sigma}}{\sqrt{n}} \right] \]
 is an asymptotically valid confidence interval for $\theta$.
+
+\subsection{Variance Reduction Techniques}
+As we have said above, Monte Carlo method have a rather slow converge rate of
+$\mathcal{O}\left(\frac{1}{\sqrt{n}}\right)$. We will now pass on to see a few
+techniques that can be used to reduce the variance of the Monte Carlo estimator
+and thus speed up the convergence rate.
+
+\subsubsection{Antithetic Variables}
+Let $\theta$ be the expected value of a monotone function $g$ of a random
+variable $X$. We know that the sample mean $\hat{\theta}_n$ is an unbiased
+estimator of $\theta$:
+\[ \hat{\theta}_n = \frac{1}{n} \sum_{i=1}^n g(X_i) \]
+whose variance is given by:
+\[ \Var[\hat{\theta}_n] = \frac{1}{n} \Var[g(X)] \]
+or rather its unbasied estimator:
+\[ \hat{\sigma}^2 = \frac{1}{n-1} \sum_{i=1}^n (g(X_i) - \hat{\theta}_n)^2 \]
+Now, let us instead take two samples $X_1$, $X_2$ from the same population.
+Clearly we have that:
+\begin{align*}
+    \Var \left[ \frac{g(X_1) + g(X_2)}{2} \right] & = \frac{1}{4} ( \Var[g(X_1)]
+        + \Var[g(X_2)] + 2\Cov[g(X_1), g(X_2)]) \\
+    & = \frac{1}{2} \Var[g(X)] + \frac{1}{2} \Cov[g(X_1), g(X_2)]
+\end{align*}
+Now, if the two sample are statistically independent this quantity will exactly
+coincide with the variance of the sample mean for 2 samples $\hat{\theta}_2$.
+On the other hand, if the two samples are negatively correlated, i.e. if
+$\Cov[g(X_1), g(X_2)] < 0$, then the variance of this quantity will be smaller
+than that of the sample mean $\hat{\theta}_n$.
+
+What we actually do in practice is to take a single sample $X$ and then create
+from this first sample a second one $X'$ that is negatively correlated with $X$.
+For example:
+\begin{align*}
+    U^1 & \sim \mathcal{U}([0,1]) \rightarrow U^2 = 1 - U^1 \implies
+    \Cov(U^1,U^2) < 0 \\
+    Z^1 & \sim \mathcal{N}(0,1) \rightarrow Z^2 = -Z^1 \implies \Cov(Z^1, Z^2)
+    < 0
+\end{align*}
+
+then we can define the antithetic variable estimator:
+\[ \hat{\theta}_{AV} = \frac{1}{n} \sum_{i=1}^n \frac{1}{2}\left( g(X_i) + g(X'_i) \right) \]
+where $X'$ is the antithetic variable of $X$.
+
+\begin{remark*}
+Note that the function $g$ must be monotone for this to be valid. 
+\end{remark*}
+
+\subsection{Merton model: Antithetic Variables implementation}
+Let us now see how we can implement the antithetic variables technique in our
+Merton model simulation.
+ 
+We can modify the Merton asset simulation function as follows:
+
+\begin{minted}[linenos]{matlab}
+function [S,SAV]=Asset_Merton_AV(Nsim,T,params,M,S0,r)
+
+%% same code as in original merton simulation...
+
+% create two samples
+X=zeros(Nsim,M+1); XAV=zeros(Nsim,M+1);
+for i=1:M % time loop
+   % continuous part
+   X(:,i+1)=X(:,i)+drift*dt+sigma*sqrt(dt)*Z(:,i);
+   % antithetic variables is the same but with -sigma*sqrt(dt)*Z(:,i)
+   % since BM is a normal variable
+   XAV(:,i+1)=XAV(:,i)+drift*dt-sigma*sqrt(dt)*Z(:,i);
+   for j=1:Nsim % simulation loop
+       if Ndt(j,i)>0
+           % sample jumps
+           z=randn(Ndt(j,i),1);
+           Y=sum( muJ+sigmaJ*z );
+           % antithetic is a sum of -z
+           YAV=sum( muJ-sigmaJ*z );
+           % add jumps
+           X(j,i+1)=X(j,i+1)+Y;
+           XAV(j,i+1)=XAV(j,i+1)+YAV;
+       end
+   end
+end
+S=S0*exp(X);
+SAV=S0*exp(XAV);
+\end{minted}
 
 \section{Exotic options: refresher}
 As we have seen Monte Carlo simulation offer us a very general and powerful
@@ -312,5 +394,131 @@ let us see how we can use Monte Carlo simulation to price them using the Matlab
 function that we have developed for the Merton model (we could achieve the same
 with the Kou model).
 
+\subsection{European Call}
+First of all let us see how we can use Monte Carlo simulation to price a
+European call option. Recall that the payoff function of a European call option
+is given by:
+\[ \Phi(S(T)) = (S(T) - K)^+ \]
+where $K$ is the strike price of the option.
+Hence we can use Monte Carlo simulation to estimate the price of the option by
+simulating the possible paths of the underlying asset, and then averaging the
+payoff function over the simulated paths. We will also provide a confidence
+interval for the price of the option.
 
+We can do this using the following matlab code:
 
+\begin{minted}[linenos]{matlab}
+%% Contract parameters (maturity and strike price)
+T=1; K=100;
+%% Market parameters (price and interest rate)
+S0=98; r=0.0001;
+%% Model parameters (sigma, lambda, muJ, sigmaJ)
+params=[0.7, 10, -0.01, 0.4];
+%% Numerical parameters
+Nsim=1e7; M=1;
+
+%% Standard MC
+%% Sample S
+S=Asset_Merton(Nsim,T,params,M,S0,r);
+%% Compute the Discounted Payoff
+DiscPayoff=exp(-r*T)*max( S(:,end)-K, 0);
+%% Compute the price
+% get the mean and the confidence interval using normfit
+[Price,~,Price_CI]=normfit(DiscPayoff)
+
+%% Antithetic Variable MC
+[S,SAV]=Asset_Merton_AV(Nsim,T,params,M,S0,r);
+DiscPayoff=exp(-r*T)*max( S(:,end)-K, 0);
+DiscPayoffAV=exp(-r*T)*max( SAV(:,end)-K, 0);
+[Price,~,Price_CI]=normfit( (DiscPayoff+DiscPayoffAV)/2 )
+
+\end{minted}
+
+\subsection{Asian Call with Floating Strike}
+Recall from above that an Asian call option with floating strike has payoff:
+\[ \Phi(S(T)) = (S(T) - A)^+ \]
+where $A$ is the arithmetic average of the underlying asset's price over the
+life of the option. In our particular case we have that the arithmetic average
+is computed with observations taken every week, i.e. $\Delta t$ is equal to
+$1/52$ of a year.
+
+We can use Monte Carlo simulation to estimate the price of the option by
+using the following code in Matlab:
+
+\begin{minted}[linenos]{matlab}
+%% Price an Asian Call Option
+%% ->Floating Strike Call
+%% ->Weekly monitoring
+
+%% Contract parameters (maturity, in years, and number of times steps)
+T=1; M=round(52*T);
+
+%% Same code as above ...
+
+%% Sample S
+S=Asset_Merton(Nsim,T,params,M,S0,r);
+%% Compute the Discounted Payoff
+% the mean is taken across the rows, i.e. across the simulations
+DiscPayoff=exp(-r*T)*max( S(:,end)-mean(S,2), 0);
+%% Compute the price
+[Price,~,Price_CI]=normfit( DiscPayoff )
+\end{minted}
+
+\subsection{Lookback Call with Fixed Strike}
+For a lookback call option with fixed strike we have that the payoff function
+is given by:
+\[ \Phi(S(T)) = (M - K)^+ \]
+where $M$ is the maximum price of the underlying asset over the life of the
+option. In our particular case we have that the maximum price is computed with
+observations taken every month, i.e. $\Delta t$ is equal to $1/12$ of a year.
+
+\begin{minted}[linenos]{matlab}
+%% Price a Lookback Call Option
+%% ->Fixed Strike Call
+%% ->Monthly monitoring
+
+%% Contract parameters (time horizon, strike price, number of time steps)
+T=1; K=100; M=round(12*T);
+
+%% same code as above ...
+
+%% Sample S
+S=Asset_Merton(Nsim,T,params,M,S0,r);
+%% Compute the Discounted Payoff
+% to compute the max across the rows, i.e. across the simulations, we use the
+% we use a dummy variable []
+DiscPayoff=exp(-r*T)*max( max(S,[],2)-K, 0);
+%% Compute the price
+[Price,~,Price_CI]=normfit( DiscPayoff )
+\end{minted}
+
+\subsection{Down and Out Call}
+For a down and out call option we have that the payoff function is given by:
+\[ \Phi(S(T)) = (S(T) - K)^+ \cdot \I_{\{ \min_i S(i\Delta t) > b \}} \]
+where $b$ is the barrier price of the option. In our particular case we have
+that the barrier price is equal to $95$ and the barrier is checked on a Monthly
+basis, i.e. $\Delta t$ is equal to $1/12$ of a year.
+
+\begin{minted}[linenos]{matlab}
+%% Price a Down&Out Call Option
+%% Monthly monitoring
+%% Merton model
+
+%% Contract parameters (time horizon, strike price, barrier price, number of
+%% time steps)
+T=1; K=100; b=95; M=round(12*T);
+
+%% same code as above ...
+
+%% Sample S
+S=Asset_Merton(Nsim,T,params,M,S0,r);
+%% Compute the Discounted Payoff
+% just like for max we use a dummy variable [] to compute the min across the
+% rows, i.e. across the simulations
+% the expression (min(S,[],2)>b) is a logical vector that is 1 if the
+% condition is true and 0 otherwise
+DiscPayoff=(exp(-r*T)*max( S(:,end)-K, 0)).*...
+    (min(S,[],2)>b);
+%% Compute the price
+[Price,~,Price_CI]=normfit( DiscPayoff )
+\end{minted}

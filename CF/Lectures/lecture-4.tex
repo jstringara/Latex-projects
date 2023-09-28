@@ -268,7 +268,7 @@ For the actual simulation, we will sample the number of jumps for each simulatio
 from a Poisson distribution with parameter $\lambda T$. Then we will sample the
 continuous component and add the jumps. The code is as follows:
 
-\begin{minted}{matlab}
+\begin{minted}[linenos]{matlab}
 function X=Kou_Simulation(Nsim,T,params,M)
 
 % get the fuction and model parameters
@@ -321,12 +321,10 @@ Indeed we can see:
 \end{subarray}} Y_s \sim \sum_{\begin{subarray}{c} s\in[0, \Delta t] \\ Y_s \neq
 0 \end{subarray}} Y_s \]
 
-\begin{minted}{matlab}
-
+\begin{minted}[linenos]{matlab}
 function X=Kou_Simulation_v2(Nsim,T,params,M)
 
-%% parameters and drift
-...
+%% same code as above ...
 
 % Sample number of Jumps in each time interval
 Ndt=icdf('Poisson',rand(Nsim,M),lambda*dt);
