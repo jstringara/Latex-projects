@@ -1,0 +1,33 @@
+
+%>=====< Question 8 >=====<%
+
+\question
+
+Let $\{f_n\} \subset \Mes(X, \A)$. Show that $\sup_n f_n, \inf_n f_n, \limsup_n f_n, \liminf_n f_n \in \Mes(X, \A)$. Can there exist two functions $f, g \in \Mes(X, \A)$ such that $\max\{f, g\} \notin \Mes(X, \A)$? Why?
+
+\subsection*{Solution}
+
+\subsection{Measurability of \texorpdfstring{$\sup_n f_n, \inf_n f_n, \limsup_n f_n, \liminf_n f_n$}{sup fn, inf fn, limsup fn, liminf fn}} \label{meas:extremes}
+Let $\{f_n\} \subset \Mes(X, \A)$, we have:
+\begin{enumerate}[i)]
+    \item $\sup_n f_n \in \Mes(X, \A)$
+    \item $\inf_n f_n \in \Mes(X, \A)$
+    \item $\limsup_n f_n \in \Mes(X, \A)$
+    \item $\liminf_n f_n \in \Mes(X, \A)$
+\end{enumerate}
+
+\begin{proof}
+    \hspace*{\fill} %leave a blank line
+    \begin{enumerate} [i)]
+        \item $\forall \alpha \in \R \quad \{ \sup_{n\in\N} f_n > \alpha \} = \bigcup_{n=1}^\infty \{ f_n > \alpha \} \in \A \implies \sup_{n\in\N} f_n \in \Mes$
+        \item $\inf_n f_n = - \sup_{n\in\N} (-f_n) \in \Mes(X,\A)$
+        \item $\limsup_n f_n = \inf_{k\geq 1} \sup_{n \geq k} f_n \in \Mes(X, \A)$
+        \item $\liminf_n f_n = \sup_{k\geq 1} \inf_{n\geq k} f_n \in \Mes(X, \A)$
+    \end{enumerate}
+\end{proof}
+
+\subsection{Corollary, \texorpdfstring{$\max\{f,g\}\in\Mes$}{max(f,g) is measurable}}
+There cannot exist two functions $f, g \in \Mes(X, \A)$ such that $\max\{f, g\} \notin \Mes(X, \A)$.
+Indeed we can write:
+\[ \max(f,g) = f\cdot \chi_{\{f\geq g\}} + g \cdot \chi_{\{g>f\}} \]
+In other words the max can be written as the sum and product of measurable functions, hence it is measurable itself.

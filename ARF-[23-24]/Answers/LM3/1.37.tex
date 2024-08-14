@@ -1,0 +1,53 @@
+
+%>=====< Question 14 >=====<%
+
+\question
+
+Write the definitions of $\esssup_X f$ and $\essinf_X f$. State their properties and prove some of them.
+
+\subsection*{Solution}
+
+\subsection{Definition of \texorpdfstring{$\esssup_X f$}{essup f}}
+Let $(X, \A, \mu)$ be a measure space and $f$ a function on $X$. We define:
+\[
+    \esssup_X f(x) \coloneqq \inf \left\{ \sup_{x\in N^\complement} f(x) : \; N \in \mathcal{N}_{\mu} \right\}
+\]
+
+\subsection{Definition of \texorpdfstring{$\essinf_X f$}{essinf f}}
+Let $(X, \A, \mu)$ be a measurable space and $f$ a function on $X$. We define:
+\[
+    \essinf_X f(x) \coloneqq \sup \left\{ \inf_{x\in N^\complement} f(x) : \; N \in \mathcal{N}_{\mu} \right\}
+\]
+
+\subsection{Properties of \texorpdfstring{$\esssup_X f$}{essup f} and \texorpdfstring{$\essinf_X f$}{essinf f}}
+Let $(X, \A, \mu)$ be a measure space and $f,g\in\Mes(x,\A)$ two functions on $X$. We have that:
+\begin{enumerate}[i)]
+    \item $\exists N \in \mathcal{N}_\mu$ such that $\esssup_X f = \sup_{x\in N^\complement} f$ and $f\leq \esssup_X f$ almost surely $x\in X$;
+    \item $\esssup_X f = -\essinf_X -f$;
+    \item $\esssup_X k\cdot f  = k \cdot \esssup_X f$;
+    \item $f\leq g \text{ a.e. in } X \implies \esssup_X f \leq \esssup_X g$;
+    \item $\esssup_X (f+g) \leq \esssup_X f + \esssup_X g$;
+    \item $f = g$ almost everywhere in $X$ $\implies \esssup_X f = \esssup_X g$;
+    \item $g \geq 0$ almost everywhere in $X$ $\implies f\cdot g \leq (\esssup_X f)\cdot g$ almost everywhere in $X$.
+\end{enumerate}
+
+\begin{proof}
+    Let us give a partial proof:
+    \begin{enumerate}[i)]
+        \item Suppose $\esssup_X f < +\infty$, $\forall k\in\N$ $\exists N_k \in \mathcal{N}_\mu$ such that:
+              \[
+                  \sup_{x\in N_k} f < \esssup_X f + \frac{1}{k}
+              \]
+              We define $N \coloneqq \bigcup_{k=1}^\infty N_k$. Then $N \in \mathcal{N}_\mu$ and:
+              \begin{align*}
+                   & N^\complement = \bigcap_{k=1}^\infty N^\complement_k \subseteq N^\complement_k \quad \forall k \in \N                              \\
+                   & \implies  \esssup_X f \leq \sup_{N^\complement} f \leq \sup_{N^\complement_k} f < \esssup_X f + \frac{1}{k} \quad \forall k \in \N
+              \end{align*}
+              Now we pass apply a limit $k\to+\infty$ and we get:
+              \begin{align*}
+                   & \sup_{N^\complement} f = \esssup_X f                                                             \\
+                   & N \supseteq \bar{N} \coloneqq \{ x\in X: \; f(x) > \esssup_X f(x) \} \in\A                       \\
+                   & \implies \bar{N} \in \mathcal{N}_\mu \implies f \leq \esssup_X f \text{ almost everywhere in } X
+              \end{align*}
+    \end{enumerate}
+\end{proof}

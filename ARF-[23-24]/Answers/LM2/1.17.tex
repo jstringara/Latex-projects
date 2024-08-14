@@ -1,0 +1,18 @@
+%>=====< Question 6 >=====<%
+
+\question
+Show that the measure induced by an outer measure on the $\salg$ of all sets fulfilling the
+Caratheodory condition is complete.
+
+\subsection*{Solution}
+\subsection{Generation of a measure from an outer measure (proof of completeness)}
+Let us see that such a measure as the one described in the previous question is complete. Let $\mu^*$ be an outer measure on $X$ and $\Leb$ the $\salg$ of all sets fulfilling the Caratheodory condition. Let $\mu$ be the measure induced by $\mu^*$ on $\Leb$ ($\mu=\mu^* |_{\Leb}$).
+\begin{proof}
+    Let $N\in\Leb$ such that $\mu(N)=\mu^*(N)=0$ and let $E\subseteq N$.\\
+    By monotonicty of $\mu^*$ (\ref{outer:mono}):
+    \[
+        0\leq \mu^*(E)\leq \mu^*(N)=0 \implies \mu^*(E)=0
+    \]
+    thus by the lemma seen in \ref{outer:zeromeas} we get that $E\in\Leb$ and so $\Leb$ is complete.
+\end{proof}
+

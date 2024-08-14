@@ -1,0 +1,25 @@
+
+%>=====< Question 8 >=====<%
+
+\question
+Prove that any countable subset $E\subset\R$ is Lebesgue measurable and $\lambda(E) = 0$.
+
+\subsection*{Solution}
+
+\subsection{All countable sets are \texorpdfstring{$\Leb$}{L}-measurable and \texorpdfstring{$\lambda(E)=0$}{l(E)=0}}
+Any countable subset $E\subset\R$ is $\Leb$-measurable and $\lambda(E)=0$
+\begin{proof}
+    Let $a\in\R$, clearly $\{ a \} \subseteq (a-\epsilon, a]$ $\forall \epsilon >0$, thus by the definition of $\lambda^*$:
+    \[
+        \lambda^*(\{ a \}) \leq \lambda^*( (a-\epsilon, a] )  = \epsilon \to 0  \implies \{ a \}\in\Leb
+    \]
+    Now if E is countable we may write as follows:
+    \[
+        E = \bigcup_{n=1}^{\infty} \{ a_n \} \quad a_n\in\R, \; n\in\N
+    \]
+    and so by monotonicty (\ref{outer:mono}):
+    \[
+        0 \leq \lambda^*(E) = \lambda^*\left( \bigcup_{n=1}^{\infty} \{ a_n \} \right) \leq \sum_{n=1}^{\infty} \lambda^*(a_n) = 0
+    \]
+    thus $\lambda^*(E)=0 \implies E\in \Leb$ by the lemma seen above (\ref{outer:zeromeas})
+\end{proof}

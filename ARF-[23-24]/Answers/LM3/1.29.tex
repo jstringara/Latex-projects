@@ -1,0 +1,44 @@
+
+%>=====< Question 6 >=====<%
+
+\question
+
+Establish and show all equivalent statements to the fact that $f : X \to \Rcomp$ is measurable.
+
+\subsection*{Solution}
+
+\subsection{Equivalent statements of measurability}
+Let $(X,\A)$ be a measurable space and $f:X\to\Rcomp$ a function, \tfae
+
+\begin{enumerate}[i)]
+    \item \label{statomeas:1} $f$ is measurable;
+    \item \label{statomeas:2} $\{ f>\alpha \}\in\A$ $\forall\alpha\in\R$;
+    \item \label{statomeas:3} $\{ f\geq\alpha \}\in\A$ $\forall\alpha\in\R$;
+    \item \label{statomeas:4} $\{ f<\alpha \}\in\A$ $\forall\alpha\in\R$;
+    \item \label{statomeas:5} $\{ f\leq\alpha \}\in\A$ $\forall\alpha\in\R$.
+\end{enumerate}
+
+\begin{proof}
+    Let us prove all the coimplications:\\
+    \textbf{(\ref{statomeas:1}) $\iff$ (\ref{statomeas:3}):}
+    \begin{align*}
+         & \A'=\B[\Rcomp]=\sigma_0( \overbrace{ \{(\alpha,+\infty]:\; \alpha\in\R\} }^{\mathcal{C}'} )                   \\
+         & f \text{ is measurable } \iff f^{-1} ( \underbrace{(\alpha,+\infty]}_{E} ) \in \A \quad \forall \alpha \in \R
+    \end{align*}
+    \textbf{(\ref{statomeas:2}) $\implies$ (\ref{statomeas:3}):}
+    \[
+        \{ f\geq \alpha \} = \cap_{n=1}^\infty \overbrace{\{ f > \alpha-\frac{1}{n} \}}^{\in\A} \in\A
+    \]
+    \textbf{(\ref{statomeas:3}) $\implies$ (\ref{statomeas:4}):}
+    \[
+        \{ f<\alpha \} = \{ f\geq\alpha \}^\complement \in\A
+    \]
+    \textbf{(\ref{statomeas:4}) $\implies$ (\ref{statomeas:5}):}
+    \[
+        \{ f \leq \alpha \} = \cap_{n=1}^\infty \overbrace{\{ f < \alpha+\frac{1}{n} \}}^{\in\A} \in\A
+    \]
+    \textbf{(\ref{statomeas:5}) $\implies$ (\ref{statomeas:2}):}
+    \[
+        \{ f>\alpha \} = \{ f\leq\alpha \}^\complement \in\A
+    \]
+\end{proof}

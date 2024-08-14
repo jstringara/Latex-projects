@@ -1,0 +1,48 @@
+
+%>=====< Question 8 >=====<%
+
+\question
+Write the definition of the Borel $\salg$ in a metric space. Provide classes of Borel sets.
+Characterize $\B[\R], \B[\Rcomp]$ and $\B[\R^N]$.
+
+\subsection*{Solution}
+
+\subsection{Borel \texorpdfstring{$\salg$}{sigma-algebra}}
+Let $(X,d)$ be a metric space and let $\mathcal{G}$ be the family of open sets of $X$, then we define the Borel $\salg$ as:
+\[
+    \B[X] \coloneqq \sigma_0(\mathcal{G})    
+\]
+The elements of $\mathcal{G}$ are called Borel sets,   let us enumerate some classes of them:
+
+\subsection{Classes of Borel sets} 
+\begin{enumerate}[i)]
+    \item open sets
+    \item closed sets (they are the complementary of open sets and this is a $\salg$)
+    \item countable intersections of open sets, known as the family $G_\delta$
+    \item countable union of closed sets, known as the family $F_\delta$.
+\end{enumerate} 
+Lastly, let us characterize the Borel $\salg$s $\B[\R],\B[\Rcomp]$ and $\B[\R^N]$:
+\subsection{Characterization of \texorpdfstring{$\B[\R],\B[\Rcomp]$}{B(R), B(Rcomp)} and \texorpdfstring{$\B[\R^N]$}{B(Rn)}}
+\begin{enumerate}
+    \item $\B[\R]=\sigma_0(I)=\sigma_0(I_1)=\sigma_0(I_2)=\sigma_0(I_0)=\sigma_0(\hat{I})$\\
+    where:
+    \begin{align*}
+        I&=\{ (a,b): a,b \in \R, a\leq b \} \\
+        I_1&=\{ [a,b]: a,b \in \R, a\leq b \} \\
+        I_2&=\{ (a,b]: a,b \in \R, a\leq b \} \\
+        I_0&=\{ (a,b): -\infty\leq a < b <\infty \} \cup \{ (a,\infty): a\in\R \} \\
+        \hat{I}&=\{ (a,\infty): a\in\R \}
+    \end{align*}
+    \item $\B[\Rcomp]=\sigma_0(\tilde{I})=\sigma_0(\tilde{I}_1)$\\
+    where:
+    \begin{align*}
+        \tilde{I} &= \{ (a,b): a,b \in \R, a < b \} \cup \{ [-\infty,b): b\in\R \} \cup \{ (a,+\infty] : a\in\R \} \\
+        \tilde{I}_1 &= \{ (a,+\infty] : a\in\R \}
+    \end{align*}
+    \item $\B[\R^N] = \sigma_0(K_1)=\sigma_0(K_2)$\\
+    where:
+    \begin{align*}
+        K_1 &= \{ \text{n-dimensional closed rectangles}\}\\
+        K_2 &= \{ \text{n-dimensional open rectangles }\}
+    \end{align*}
+\end{enumerate}

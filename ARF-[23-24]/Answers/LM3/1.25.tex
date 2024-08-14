@@ -1,0 +1,31 @@
+
+%>=====< Question 2 >=====<%
+
+\question
+
+Characterize measurability of functions and prove it.
+
+\subsection*{Solution}
+
+\subsection{Characterization of Measurability}\label{CharMeas}
+
+Let $(X,\A)$ and $(X',\A')$ be two measurable spaces and $\mathcal{C} ' \subseteq \Parts{X'}$ such that $\sigma_0(\mathcal{C}')=\A'$ then:
+\[
+    f:X\to X' \text{ measurable } \iff f^{-1}(E)\in\A \quad \forall E\in\mathcal{C}'
+\]
+
+\begin{proof}
+    Let us prove both sides of the implication:
+    \begin{itemize}
+        \item \textbf{$(\implies)$:} Suppose $f$ be measurable $\implies$ $\mathcal{C}'\subseteq \A'$ and so we get the thesis.
+        \item \textbf{$(\impliedby)$:} Let us define the following:
+              \[
+                  \Sigma \coloneqq \{ E\subseteq X': \; f^{-1}(E)\in\A \}
+              \]
+              We can easily see that $\Sigma$ is a $\salg$ so $\mathcal{C}'\subseteq \Sigma$ and thus:
+              \[
+                  \A'=\sigma_0(\mathcal{C}')\subseteq\Sigma
+              \]
+              and we get the thesis.
+    \end{itemize}
+\end{proof}

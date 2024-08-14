@@ -1,0 +1,30 @@
+
+%>=====< Question 12 >=====<%
+
+\question
+Is it true that any subset $E\subseteq\R$ is $\Leb$-measurable? Is it possibile to find two disjoint sets
+$A,B\subset\R$ for which $\lambda^*(A \cup B) < \lambda^*(A) + \lambda^*(B)$? Why?
+
+\subsection*{Solution}
+
+\subsection{Vitali's non-measurable sets}
+Any measurable set $E\subseteq \R$ with $\lambda(E)>0$ contains a subset that fails to be measurable. \\
+Therefore there exist subsets of $\R$ that are not $\Leb$-measurable.
+
+\subsection{Disjoints sets for which \texorpdfstring{$\lambda^*(A\cup B) < \lambda^*(A)+\lambda^*(B)$}{the measure of the union is less than the sum of the measure}}
+There are disjoint sets $A,B\subseteq\R$ for which:
+\[
+    \lambda^*(A\cup B) < \lambda^*(A)+\lambda^*(B)
+\]
+
+\begin{proof}
+    Assume by contradiction that:
+    \[
+        \lambda^*(A\cup B) = \lambda^*(A)+\lambda^*(B) \quad \forall A,B \subseteq\R, \; A\cap B = \emptyset
+    \]
+    Now $\forall E,Z \subseteq \R$ we write:
+    \[
+        \lambda^*(\underbrace{Z\cap E}_{=A}) + \lambda^*(\underbrace{Z\cap E^{\complement}}_{=B}) = \lambda^*(\underbrace{Z}_{=A\cup B})
+    \]
+    thus any set $E$ would satisfy the Caratheodory condition (\ref{CarEq}) and be $\Leb$-measurable which is absurd since we know that Vitali's sets exist.
+\end{proof}

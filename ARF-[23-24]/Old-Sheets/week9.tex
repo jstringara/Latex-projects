@@ -1,0 +1,393 @@
+\sheet
+
+%>=====< Question 1 >=====<%
+
+\question
+Show the inclusion of $L^p$ spaces. Which hypothesis is essential? Justify the answer.
+
+\subsection*{Solution}
+
+\subsection{Inclusion of \texorpdfstring{$L^p$}{Lp} spaces}
+Suppose that $\mu(X)<+\infty$, then we have:
+\[ 1\leq p \leq q \leq +\infty \implies L^q(X,\A,\mu) \subseteq L^p(X,\A,\mu) \]
+
+\begin{proof}
+    The thesis follow if we can show that there exists a constant $C=C(X,p,q)$ such that:
+    \[ \|f\|_p = C \|f\|_q \quad \forall f  \in L^q\]
+    Let us divide the proof into two cases:
+    \begin{itemize}
+        \item $q=+\infty$:
+            \[ \|f\|_p^p = \int_X |f|^p \, d\mu \leq \|f\|_\infty^p \cdot \mu(X) \]
+            So we can make the following trivial choice:
+            \[ C = ( \mu(X) )^{1/p} \]
+        \item $q\in[1,+\infty)$:
+            By applying Hölder's inequality  with $1/r + 1/s = 1$ we can write:
+            \begin{align*}
+                \|f\|_p^p &\tikzmarknode{eq1}{=} \int_X |f|^p \, d\mu = \int_X 1\cdot|f|^p \, d\mu \\
+                & \tikzmarknode{eq2}{\leq} \left( \int_X 1^r \, d\mu \right)^{1/r} \cdot \left( \int_X |f|^{p\cdot s} \, d\mu \right)^{1/s} \\
+            \end{align*}\tikz[overlay,remember picture]{\draw[shorten >=1pt,shorten <=1pt] (eq1) -- (eq2);}
+            Now, if we take $ps=q$ we have:
+            \[ ps=q \implies \frac{1}{s} = \frac{p}{q} \implies \frac{1}{r} = 1 - \frac{1}{s} = \frac{q-p}{q}\]
+            hence we write:
+            \[ \|f\|_p^p \leq [ \, \mu(X) \, ]^{\frac{q-p}{q}} \cdot \left( \int_X |f|^q \, d\mu \right)^{\frac{p}{q}} \iff \|f\|_p \leq [ \mu(X) ]^{\frac{q-p}{pq}} \cdot \|f\|_q \]
+            thus if we choose:
+            \[ C = [ \mu(X) ]^{\frac{q-p}{pq}} \]
+            the thesis is proved.
+    \end{itemize}
+\end{proof}
+We can observe that the hypothesis that $\mu(X)<+\infty$ is essential, otherwise the two choices of $C$ lose all sense since $\infty$ doesn't obey normal algebraic rules.
+
+%>=====< Question 2 >=====<%
+
+\question
+State and prove the interpolation inequality.
+
+\subsection*{Solution}
+
+\subsection{Interpolation inequality}
+Let $(X,\A,\mu)$ be a measure space and $1\leq p \leq q \leq +\infty$. If $f\in L^p\cap L^q$, then:
+\[ f\in L^r \quad \forall r \in (p,q)\]
+Moreover:
+\[ \|f\|_r \leq \|f\|_p^\alpha \cdot \|f\|_q^\alpha \]
+where $\alpha \in (0,1)$ such that:
+\[ \frac{1}{r} = \frac{\alpha}{p} + \frac{1-\alpha}{q}\]
+\begin{proof}
+    \[\|f\|^r_r = \int_X |f|^r \, d\mu = \int_X \underbrace{ |f|^{\alpha r}}_{\phi} \cdot \underbrace{ |f|^{(1-\alpha)r}}_{\psi} \]
+    Now, since $f\in L^p$, we have that:
+    \[ \phi\in L^{\frac{p}{\alpha r}} \iff \|\phi\|_{\frac{p}{\alpha r}} = \left( \int_X |f|^{\xcancel{\alpha r} \cdot \frac{p}{\xcancel{\alpha r}}} \, d\mu \right)^{\frac{\alpha r}{p}} < +\infty \]
+    and analogously for $\psi$, since $f\in L^q$, we have that:
+    \[ \psi\in L^{\frac{q}{(1-\alpha)r}} \iff \|\psi\|_{\frac{q}{(1-\alpha)r}} = \left( \int_X |f|^{\xcancel{(1-\alpha)r} \cdot \frac{q}{\xcancel{(1-\alpha)r}}} \, d\mu \right)^{\frac{(1-\alpha)r}{q}} < +\infty \]
+    Now, we take the follwing two constants:
+    \[ P \coloneqq \frac{p}{\alpha r} \quad Q \coloneqq \frac{q}{(1-\alpha)r}\]
+    We can immediately see that these two are conjugate numbers and we can apply Hölder's inequality:
+    \begin{align*} %check this
+        & \underbrace{ \int_X |\phi\psi| \, d\mu }_{ \int_X |f|^r \, d\mu } \leq \underbrace{ \left( \int_X |\phi|^P \, d\mu \right)^{1/P} }_{ \left( \int_X |f|^p \, d\mu \right)^{\frac{\alpha r }{p}} } \cdot \underbrace{ \left( \int_X |\psi|^Q \, d\mu \right)^{1/Q} }_{ \left( \int_X |f|^q \, d\mu \right)^{\frac{(1-\alpha)r}{q}} } \\
+        & \iff \|f\|_r \leq \|f\|_p^\alpha \cdot \|f\|_q^{(1-\alpha)}
+    \end{align*}
+    let us note that to arrive at the last coimplication we have elevated both sides to the power of $1/r$.
+\end{proof}
+
+%>=====< Question 3 >=====<%
+
+\question
+Show the completeness of $L^p$ spaces.
+
+\subsection*{Solution}
+
+\subsection{\texorpdfstring{$L^p$}{Lp} is a Banach space}
+$L^p(X,\A,\mu)$ is a Banach space $\forall p\in[1,+\infty]$.
+
+\begin{proof}
+    Let $p\in[1,+\infty)$, to prove the thesis it is enough to show that, given $\seq{f}\subset L^p$, if $\sum_{n=1}^\infty \|f_n\|_p$ converges then $\sum_{n=1}^\infty f_n$ converges in $L^p$. This is due to (\ref{Series CriterionForComplete}).\\
+    Let us see that this is indeed true, if we define:
+    \[ g_k \coloneqq \sum_{n=1}^k |f_n| \]
+    thanks to Minkowski's inequality (\ref{minkowski}) we have that:
+    \[ \|g_k\|_p \leq \|f_1\|_p + \cdots + \|f_k\|_p \leq M \coloneqq \sum_{n=1}^\infty \|f_n\|_p \]
+    Let us now define:
+    \[ g \coloneqq \sum_{n=1}^\infty |f_n|\]
+    And we have that $\seq{g}$ is an increasing sequence and $g_k$ is measurable $\forall k\in\N$, so $\{|g_n|^p\}$ is also an increasing sequence and $|g_k|^p$ is measurable $\forall k \in \N$.\\
+    Therefore we can apply the MCT (\ref{MCT}):
+    \begin{align*}
+        \lim_{k\to +\infty} \int_X |g_k|^p \, d\mu &\tikzmarknode{eq1}{=} \int_X \lim_{k\to +\infty} |g_k|^p \, d\mu \\
+        &\tikzmarknode{eq2}{=} \int_X |g|^p \, d\mu \leq M^p \\
+        & \implies g \in L^p \implies g \text{ finite a.e. in } X \\
+        & \implies \sum_{n=1}^\infty f_n \text{ conveges (absolutely) a.e. in } X
+    \end{align*}\tikz[overlay,remember picture]{\draw[shorten >=1pt,shorten <=1pt] (eq1) -- (eq2);}
+    Now let us define the following:
+    \begin{align*}
+        & s(x) \coloneqq \sum_{n=1}^\infty f_n(x) \\
+        & s_k(x) \coloneqq \sum_{n=1}^k f_n(x)
+    \end{align*}   
+    We know that:
+    \begin{align*}
+        & s_k(x) \xrightarrow{k\to +\infty} s(x) \quad \text{a.e. in } X \\
+        & | s_k - s|^p \leq \left| \sum_{k+1}^\infty f_n \right|^p \leq \left| \sum_{k+1}^\infty |f_n| \right|^p \leq g^p \text{ a.e. in } X \; \forall k \in \N
+    \end{align*}
+    So we have that:
+    \[ s_k\xrightarrow{k\to+\infty} s \iff |s_k-s|^p\xrightarrow{k\to+\infty}0 \]
+    and:
+    \[ g^p \in L^1 \iff g \in L^p \]
+    And by applying the DCT (\ref{DCT}) we have that:
+    \[ \lim_{k\to+\infty} \int_X |s_k-s|^p \, d\mu = \int_X \lim_{k\to+\infty} |s_k-s|^p    \, d\mu =0 \iff \sum_{n=1}^\infty f_n \text{ converges in } L^p \]
+\end{proof}
+
+%>=====< Question 4 >=====<%
+
+\question
+State the Lusin theorem.
+
+\subsection*{Solution}
+
+\subsection{Lusin's theorem}
+Let $\Omega \in \Leb(\R)$, $\lambda(\Omega)<+\infty$, $f:\R\to\R$ measurable, such that $f=0$ in $\Omega^c$. Then:
+\begin{align*}
+    &\forall \epsilon >0 \; \exists g \in C^0_c(\R) \text{ such that }\\
+    & \lambda(\{ x\in \R: \; f(x)\neq g(x)\}) < \epsilon \text{ and } \sup_\R |g| \leq \esssup_\R |f|
+\end{align*} %check this
+
+%>=====< Question 5 >=====<%
+
+\question
+Show that the set of simple functions with support of finite measure is dense in $L^p$ $(p \in [1, +\infty))$.
+
+\subsection*{Solution}
+
+\subsection{Simple functions with support of finite measure}
+Let us define the set of simple functions with support of finite measure:
+\[ \tilde{\Smes}(\R) \coloneqq \{ s\in\Smes(\R): \; \lambda(\supp(s))<+\infty \} \]
+
+\subsection{\texorpdfstring{$\tilde{\Smes}(\R)$}{The set of simple functions with support of finite measure} is dense in \texorpdfstring{$L^p$}{Lp}}
+$\tilde{\Smes}(\R)$ is dense in $L^p$ $\forall p\in[1,+\infty)$.
+
+\begin{proof}
+    We have that:
+    \[ s\in\tilde{\Smes}(\R) \iff s\in\Smes(\R), \; s\in L^p \quad \forall p \in [1,+\infty) \]
+    since: %check punzo's notes
+    \[ \|s\|_p^p = \sum_{k=1}^n c_k \cdot \mu(E_k) < +\infty \iff \mu(E_k) < +\infty \; \forall i +1, \dots, n \]
+    So we have that $\tilde{\Smes(\R)} \subset L^p$. Let $f\in L^p(\R)$ and suppose that $f\geq0$ a.e. in $\R$, thanks to the SAT (\ref{SAT}) we have that $\exists \seq{s} \subset \Smes(\R)$ such that:
+    \begin{align*}
+        \seq{s} \uparrow, \; 0 \leq s_n \leq f, \; s_n\to f \text{ a.e. in } \R \\
+        \implies \seq{s} \subset L^p \implies \seq{s} \subset \tilde{\Smes}(\R)
+    \end{align*}
+    thanks to what we have shown above.
+    We claim that:
+    \[ s_n \to f \text{ in } L^p \iff \|s_n-f\|_p^p \to 0 \iff \lim_{n\to+\infty} \int_\R |s_n-f| \, d\lambda = 0 \]
+    Indeed we have that:
+    \begin{align*}
+        |s_n-f| & \to 0 \text{ a.e in } \R \\
+        | f- s_n|^p & \tikzmarknode{eq1}{\leq} (|f| + |s_n|)^p \leq (|f|+|f|)^p \\
+        & \tikzmarknode{eq2}{=} 2^p |f|^p = g\in L^1(\R)
+    \end{align*}\tikz[overlay,remember picture]{\draw[shorten >=1pt,shorten <=1pt] (eq1) -- (eq2);} %check this
+    So the hypothesis of the DCT (\ref{DCT}) are satisfied and we may apply it:
+    \[ \implies \lim_{n\to\infty} \int_\R |s_n-f|^p \, d\lambda = \int_\R \cancelnum{0}{\lim_{n\to\infty} |s_n-f|^p} \, d\lambda = 0 \]
+    And we get the thesis.
+\end{proof}
+Let us note that if $f$ is sign-changing the same argument can be applied to its positive and negative parts.
+
+%>=====< Question 6 >=====<%
+
+\question
+Show that $C^0_c(\R)$ is dense in $L^p(\R)$ $(p \in [1, +\infty))$.
+
+\subsection*{Solution}
+
+\subsection{\texorpdfstring{$C^0_c$}{The set of continuous functions with compact support} is dense in \texorpdfstring{$L^p$}{Lp}}
+$C^0_c(\R)$ is dense in $L^p(\R)$ $(p \in [1, +\infty))$.
+
+\begin{proof}
+    Let $f\in L^p(\R)$ and $\epsilon>0$. We can find $s\in\tilde{\Smes}(\R)$ such that:
+    \[ \|f-s\| < \epsilon \]
+    Now, we apply Lusin's theorem:
+    \[ \exists g \in C^0_c(\R) \text{ s.t. } \lambda(\{ g\neq s\}) < \epsilon, \; \|g\|_\infty \leq \|s\|_\infty\]
+    which implies:
+    \begin{align*}
+        \|f-g\|_p & \tikzmarknode{eq1}{\leq} \|f-s\|_p + \|s-g\|_p \\
+        & \tikzmarknode{eq2}{=} \epsilon + \left( \int_\R |s-g|^p \, d\lambda \right)^{1/p} \\
+        & \tikzmarknode{eq3}{=} \epsilon + \left( \int_{ \{g\neq s\} } |s-g|^p \, d\lambda \right)^{1/p} \\
+        & \tikzmarknode{eq4}{\leq} \epsilon + 2 \|s\|_\infty \left( \int_{\{g\neq s\}} \, d\lambda \right)^{1/p} \\
+        & \tikzmarknode{eq5}{<} \epsilon + 2 \|s\|_\infty \left( \lambda(\{ g\neq s\}) \right)^{1/p} \\
+        & \tikzmarknode{eq6}{\leq} \epsilon + 2 \|s\|_\infty \epsilon^{1/p}
+    \end{align*}\tikz[overlay,remember picture]{\draw[shorten >=1pt,shorten <=1pt] (eq1) -- (eq2) -- (eq3) -- (eq4) -- (eq5) -- (eq6);}
+\end{proof}
+
+%>=====< Question 7 >=====<%
+
+\question
+Show that $L^p(\R)$ is separable $(p \in [1, +\infty))$.
+
+\subsection*{Solution}
+
+\subsection{\texorpdfstring{$L^p$}{Lp} is separable}
+Let $\Omega \subseteq \R^n$ be an open set, the set:
+\[ L^p(\Omega, \Leb(\Omega), \lambda)\]
+is separable $\forall p \in [1,+\infty)$.
+
+\begin{proof}
+    Let us assume for simplicity that $\Omega = \R$. Let $f\in L^p(\R)$ and $\epsilon>0$. We know that:
+    \[ \exists g \in C^0_c \text{ s.t. } \|f-g\|_p < \epsilon\]
+    thanks to the preceding theorem. Furthermore:
+    \[ \exists n_0 \in \N \text{ s.t. } \supp(g)\subset[-n_0,n_0]\]
+    Since $C^0([-n_0,n_0])$ is separable, there exists a polynomial $\xi$ with rational coefficients such that:
+    \[ \|g-\xi\|_{L^\infty([-n_0,n_0])} < \epsilon \]
+    Therefore we write:
+    \begin{align*}
+        \| f - \xi \cdot \chi_{[-n_0,n_0]} \|_p & \tikzmarknode{eq1}{\leq} \| f - g \|_p + \| g - \xi \cdot \chi_{[-n_0,n_0]} \|_p \\
+        & \tikzmarknode{eq2}{<} \epsilon + \left( \int_{[-n_0,n_0]} |g-\xi|^p \, d\lambda \right)^{1/p} \\
+        & \tikzmarknode{eq3}{<} \epsilon + \|g-\xi\|_\infty \left( \int_{[-n_0,n_0]} \, d\lambda \right)^{1/p} \\
+        & \tikzmarknode{eq4}{<} \epsilon + \|g-\xi\|_\infty \cdot (2n_0)^{1/p} \\
+        & \tikzmarknode{eq5}{<} \epsilon + \epsilon \cdot (2n_0)^{1/p}
+    \end{align*}\tikz[overlay,remember picture]{\draw[shorten >=1pt,shorten <=1pt] (eq1) -- (eq2) -- (eq3) -- (eq4) -- (eq5);}
+    And the set of all such polynomials is countable since they have rational coefficients.
+\end{proof}
+
+%>=====< Question 8 >=====<%
+
+\question
+Show that $L^\infty(\R)$ is not separable.
+
+\subsection*{Solution}
+
+\subsection{Lemma}
+Let $X$ be a Banach space. Assume that there exists a family $\{A_i\}_{i\in I} \subseteq X$ such that:
+\begin{enumerate}[i)]
+    \item $\forall i \in I$ $A_i$ is open
+    \item $A_i \cap A_j = \emptyset$ $\forall i \neq j$
+    \item $I$ is uncountable
+\end{enumerate}
+then $X$ is not separable.
+
+%proof (?)
+
+\subsection{\texorpdfstring{$L^\infty$}{L infinity} is not separable}
+$L_\infty(\R, \Leb(\R), \lambda)$ is not separable.
+
+\begin{proof}
+    Consider the following  uncountable sequence of functions:
+    \[ \{\chi_{[-\alpha,\alpha]}\}_{\alpha>0} \subset L^\infty(\R) \]
+    If $\alpha\neq\alpha'$, then we have:
+    \[ \| \chi_{[-\alpha,\alpha]} - \chi_{[-\alpha',\alpha']} \|_\infty = 1 \]
+    Let us now consider the ball centered in $\chi_{[-\alpha,\alpha]}$ of radius $1/2$:
+    \[ A_\alpha \coloneqq B_{\chi_{[-\alpha,\alpha]}}\left(\frac{1}{2}\right) \coloneqq \left\{ f\in L^\infty(\R): \; \|\chi_{[-\alpha,\alpha]}-f\|<\frac{1}{2} \right\}\] %check this 
+    And we have:
+    \[ A_\alpha \cap A_{\alpha'} = \emptyset \quad \alpha \neq \alpha' \]
+    and so by the previous lemma $L^\infty(\R)$ is not separable.
+\end{proof}
+
+%>=====< Question 9 >=====<%
+
+\question
+How $\ell^p$ and $L^p$ are related? What is the inclusion of $\ell^p$ spaces?
+
+\subsection*{Solution}
+
+\subsection{Relation between \texorpdfstring{$\ell^p$}{lp} and \texorpdfstring{$L^p$}{Lp}}
+$\ell^p$ is a Banach space $\forall p \in [1,+\infty]$, with the followig norms:
+\begin{align*}
+    \|x\|_{\ell^p} & \coloneqq \left( \sum_{k=1}^\infty |x^{(k)}|^p \right)^{1/p} \\
+    \|x\|_{\ell^p} & \coloneqq \sup_{k\in\N} |x^{(k)}| 
+\end{align*}
+We can observe that: 
+\[ \ell^p = L^p (\N, \Parts{\N}, \mu^\#)\]
+where $\mu^\#$ is the counting measure.
+The elements of $\ell^p$ are functions of the form:
+\[ f:\N\to\R, \; f=\{ x^{(n)} \}_{n\in\N} \]
+in other words $\ell^p$ is the space of all sequences of real numbers whose series converges (for $p$ finite) and of all bounded sequences (for $p=\infty$).
+Therefore it's quite trivial to observe that the usual norm on $L^p$ (the integral norm) here becomes an infinite sum.
+Moreover, just like for $L^p$ we have that:
+\begin{itemize}
+    \item $\ell^p$ is separable $p\in[1,\infty)$
+    \item $\ell^\infty$ is not separable
+\end{itemize}
+
+\subsection{Inclusion of \texorpdfstring{$\ell^p$}{lp} spaces}
+Since $\mu^\#(\N)=+\infty$ we don't have:
+\[ 1 \leq p \leq q \leq \infty  \implies \ell^p \subseteq \ell^q \]
+in actuality we have:
+\[ q \leq p \implies \ell^q \subseteq \ell^p \]
+therefore for $\ell^p$ spaces (contrary to what we have for $L^p$ spaces) we have that $\ell^\infty$ is the largest space (w.r. to inclusion).
+
+%>=====< Question 10 >=====<%
+
+\question
+Write the definitions of: linear operator; bounded operator; functional; continuous operator; Lipschitz operator.
+
+\subsection*{Solution}
+
+\subsection{Linear operator}
+We say that an operator $T:X\to Y$ is linear if:
+\[ T(\alpha v_1 + \beta v_2) = \alpha T(v_1) + \beta T(v_2) \quad \forall v_1, v_2 \in X, \; \forall \alpha, \beta \in \R \]
+
+\subsection{Bounded operator}
+We say that an operator $T:X\to Y$ is bounded if:
+\[ \exists M > 0: \; \|T(x)\|_Y \leq M \|x\|_X \quad \forall x \in X \]
+
+\subsection{Functional}
+We say that an operator $T:X\to \R$ is a functional.
+
+\subsection{Continuous operator}
+Let $T:X\to Y$, we say that $T$ is continuous in $x_0 \in X$ if and only if:
+\[ \forall \{x_n\} \subset X,\; x_n \xrightarrow{n\to\infty} x_0 \]
+we have that:
+\[ T(x_n) \xrightarrow{n\to\infty} T(x_0) \]
+
+\subsection{Lipschitz operator}
+Let $T:X\to Y$, we say that $T$ is Lipschitz if and only if:
+\[ \exists L>0 : \; \|T(x) - T(y)\|_Y \leq L\|x-y\|_X \quad \forall x,y \in X \]
+
+%>=====< Question 11 >=====<%
+
+\question
+State and prove the theorem about the characterization of linear, bounded operators.
+
+\subsection*{Solution}
+
+\subsection{Characterization of linear, bounded operators}
+Let $T:X\to Y$ be a linear operator, \tfae
+\begin{enumerate}
+    \item $T$ is bounded
+    \item $T$ is Lipschitz
+    \item $T$ is continuous at $x_0=0$
+\end{enumerate} 
+
+\begin{proof}
+    \hspace*{\fill}\\ %leave a blank line
+    \begin{itemize}
+        \item $(i) \implies (ii)$
+            \[ \|T(x)-T(y)\|_Y = \|T(x-y)\|_Y \leq M \|x-y\|_X \]       
+        \item $(ii) \implies (iii)$, since we have that:
+            \[ \{x_n\}\subset X, \; x_n\xrightarrow{n\to\infty}0 \iff \|x_n\|_X \to 0 \]
+            we also get that:
+            \[ \|T(x_n)-\cancelnum{0}{T(0)}\|_Y = \|T(x_n)\|_Y \leq M\|x_n\|_X \to 0\]
+            see below as to why $T(0)=0$.
+        \item $(iii) \implies (i)$, suppose by contradiction that T is not bounded, then there exists $\seq{x}\subset X$, $x_n\neq0$ such that:
+            \[ \|T(x_n)\|_Y \geq n\|x_n\|_X \]
+            we can define the following sequence:
+            \[ \zeta_n \coloneqq \frac{x_n}{n\|x_n\|_X }\xrightarrow{n\to\infty}0\]
+            in fact:
+            \[ \|\zeta_n\|_X = \frac{1}{n} \xrightarrow{n\to\infty}0 \]
+            but:
+            \begin{align*}
+                T(\zeta_n) = \frac{1}{n\|x_n\|_X} T(x_n) \implies \|T(\zeta_n)\|_Y & \tikzmarknode{eq1}{=} \frac{1}{n\|x_n\|_X} \|T(x_n)\|_Y \\
+                & \tikzmarknode{eq2}{\geq} \frac{1}{n\|x_n\|_X} \cdot n \|x_n\|_X = 1\\
+            \end{align*}\tikz[overlay,remember picture]{\draw[shorten >=1pt,shorten <=1pt] (eq1) -- (eq2);}
+            \newpage %to make tikz work nicely
+            thus we can write:
+            \[ T(\zeta) \centernot{\xrightarrow{n\to\infty}} T(0)=0 \]
+            which means that $T$ is not continuous at $x_0=0$ and this is clearly a contradiction.
+    \end{itemize}
+\end{proof}
+
+%>=====< Question 12 >=====<%
+
+\question
+Let $X, Y$ be normed spaces, $T : X \to Y$ be a linear operator. Prove or disprove the following statement: $T$ is continuous in $X$ if and only if it is continuous at $x_0 = 0$.
+
+\subsection*{Solution}
+
+\subsection{An operator is continuous if and only if it is continuous at \texorpdfstring{$x_0=0$}{x0=0}}
+Since the operator is linear, we have that:
+\[ T(0)=T(0\cdot x)=0\cdot T(x)=\underline{0} \]
+thus thanks to linearity if $T$ is continuous at $x_0=0$ it is continuous for every $x$, indeed if we have:
+\[ \|T(0)-T(x_n)\| \xrightarrow{x_n\to 0} 0 \]
+we can define:
+\[ y = y+0, \; y_n = y + x_n \to y \]
+from which we get:
+\begin{align*}
+    \implies \|T(y)-T(y_n)\| & = \| T(0+y) - T(y+x_n) \| \\
+    & = \| T(0)+T(y)-T(y)-T(x_n) \| = \| T(0)-T(x_n) \| \xrightarrow{x_n\to 0} 0
+\end{align*}
+and, since we have equal signs all the way through, we can navigate through the proof in the opposite sense. So we have the coimplication and the equivalence: $T$ continuous in $0$ if and only if $T$ is continuous in $X$.
+
+%TODO list
+% - [x] Question 1
+% - [x] Question 2
+% - [x] Question 3
+% - [x] Question 4
+% - [x] Question 5
+% - [x] Question 6
+% - [x] Question 7
+% - [ ] Question 8: I could add the proof of the lemma although it isn't strictly required
+% - [x] Question 9
+% - [x] Question 10
+% - [x] Question 11
+% - [x] Question 12

@@ -1,0 +1,25 @@
+%>=====< Question 1.3 >=====<%
+
+\question
+Write the definitions of: equivalence relation, equivalence class, quotient set.
+
+\subsection*{Solution}
+\provdefs
+\begin{itemize}
+    \item \subsection{Equivalence relation} \label{equivrel} a relation $R$ in $X$ (i.e. a subset $R\subseteq X\times X$) is an equivalence relation if:
+    \begin{enumerate}[i)]
+        \item $(x,x) \in R$ $\forall x\in X$ (\textbf{reflexivity})
+        \item $(x,y) \in R \implies (y,x)\in R$ (\textbf{simmetry})
+        \item $(x,y) \in R, \, (y,z)\in R \implies (x,z)\in R$ (\textbf{transitivity})
+    \end{enumerate}
+    \item \subsection{Equivalence class} we define an equivalence class for $x$ w.r.t. $R$ as:
+    \[
+        E_x \coloneqq \{y\in X : yRx\}
+    \]
+    i.e. the set of all elements equivalent to $x$ for $R$
+    \item \subsection{Quotient set} we define the quotient set of $X$ over $R$ as:
+    \[
+        X / R \coloneqq \{E_x: x\in X \}    
+    \]
+    i.e. it is the set of all equivalence classes.
+\end{itemize}

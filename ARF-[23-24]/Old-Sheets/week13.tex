@@ -1,0 +1,146 @@
+\sheet
+
+%>=====< Question  1>=====<%
+
+\question
+Show that the projector operator is continuous.
+
+\subsection*{Solution}
+
+\subsection{Projector operator continuity}
+Let H be a Hilbert space, $M \subset  H$ be a v.s.s. of $H$ and let $ f \in H$, then: 
+\[ u = \proj_{H} f \iff u \in M \quad <f-u,v> = 0 \quad \forall v \in M \]
+Moreover $\forall f \in H$ let 
+\[ P: H \to M,\,\,\,\, P(f) \coloneqq u \]
+\[ Q: H \to M^{\perp},\,\,\,\, Q(f) \coloneqq f-u \]
+We have:
+
+\begin{itemize}
+    \item[i)] $P(f) + Q(f) = f, \,\, \forall f \in H$
+    \item[ii)] $f \in M \,\,\,\,\implies P(f) = f,\, Q(f) = 0$\\
+    $f \in M^{\perp} \implies P(f) = 0,\, Q(f) = f$
+    \item[iii)] $\|f-P(f)\| = dist(f,M) \,\,\,\,\forall f\in H$
+    \item[iv)] $\|f\| = \|P(f)\|+\|Q(f)\|$
+    \item[v)] $P,Q$ are linear. Futhermore, by the equality iv) it follows that: 
+\[ \|P(f)\| \leq \|f\|, \,\,\, |Q(f)\| \leq \|f\| \implies P,Q \in \Leb(H) \]
+\end{itemize}
+
+%>=====< Question 2 >=====<%
+
+\question
+Write the definition of orthonormal basis of a Hilbert space. Exhibit some examples.
+
+\subsection*{Solution}
+
+\subsection{Orthonormal basis}
+A sequence $\{e_n\}_{n\in\N} \subset H$ Hilbet space, is said to be an orthonormal basis of $H$ if:\\
+
+$<e_n,e_m> = 0\,\,\,\forall n\neq m,\,\,\|e_n\|=1\,\,\, \forall n\in\N$
+Some examples of o.n.b. are:
+\begin{itemize}
+    \item[i)] $\B = \{\sqrt{\tfrac{2}{\pi}}\sin{(nx)}\}_{n\ge 1} \cup \{\sqrt{\tfrac{2}{\pi}}\cos{(nx)}\}_{n\ge 0}$  in $\Leb^2((0,\pi))$
+    \item[ii)] $e_n^{(k)} = \delta_{nk}$  in $\ell^2$
+\\
+\end{itemize}
+
+%>=====< Question 3 >=====<%
+
+\question
+What is it possible to say about convergence of an o.n.b.?
+
+\subsection*{Solution}
+
+\subsection{Orthonormal basis convergence}
+Let $\{e_n\}_{n\in\N}$ be an o.n.b., then:
+
+\begin{itemize}
+    \item[a)] $e_n \wc 0$
+    \item[b)] $e_n \nrightarrow 0$
+\end{itemize}
+
+\begin{proof}
+    $\forall f \in H$, Parseval's identity implies:
+    \[\|f\|^2 = \sum_{k=1}^n<f,e_n>^2 \,\,\implies\,\,<f,e_n>\to 0 \iff e_n \wc 0
+    \]
+On the other hand we have $\|e_n\|=1\,\,\forall n\in\N$ and thus $e_n \nrightarrow 0$.
+\end{proof}
+
+%>=====< Question 4 >=====<%
+
+\question
+Write the definitions of $\rho$(T), $\sigma$(T), EV(T), $\sigma\rho$(T). What is the relation between EV(T) and $\sigma$(T)?
+    
+\subsection*{Solution}
+
+Let $E$ be a Banach space and $T\in \Leb(E)$.
+
+\subsection{Resolvent set}
+\[\rho(T)\coloneqq\{\lambda\in\R:T-\lambda I: E\to E \mbox{ is bijective}\}\]
+
+\subsection{Spectrum}
+\[\sigma(T)=\R\backslash\rho(T)\]
+
+\subsection{Eigenvalues}
+\[EV(T)\equiv\sigma_p(T)\coloneqq\big\{\lambda\in\R:Ker(T-\lambda I)\neq \{0\}\big\}\]
+
+\subsection{Relation between \texorpdfstring{$EV(T)$}{the set of Eigenvalues} and \texorpdfstring{$\sigma$(T)}{the spectrum}}
+In general $EV(T)\displaystyle\subseteq \sigma(T)$ but when $\dim(E)<\infty$, we have the equality $EV(T)= \sigma(T)$
+
+\subsubsection{Structure of the spectrum}
+Let $T\in K(E)$, with $\dim(E)=\infty$. Then:
+
+\begin{itemize}
+    \item[i)] $0 \in  \sigma(T)$
+    \item[ii)] $\sigma(T)\backslash \{0\} = EV(T)\backslash \{0\} $
+    \item[iii)] One of the following holds:
+    \begin{itemize}
+        \item[(a)] $\sigma(T)= \{0\}$    
+        \item[(b)] $\sigma(T)\backslash \{0\}$ is a finite set
+        \item[(c)] $\sigma(T)\backslash \{0\}$ is a convergent sequence with limit 0.
+    \end{itemize}
+\end{itemize}
+
+%>=====< Question 5 >=====<%
+
+\question
+State and prove (only partially) the spectral theorem.
+
+\subsection*{Solution}
+
+\subsection{Spectral theorem}
+Let $H$ be a separable Hilbert space and let $T:H\to H $ be a linear, compact, bounded and symmetric operator. Then there exist an o.n.b. of $H$ made of eigenvectors of $T$.
+
+\begin{proof}
+Let $\{\lambda_n\}$ be the set of all distinct non zero eigenvalues of $T$.
+and set: \\
+\[\lambda_0 = 0,\,\, E_0 \coloneqq Ker(T),\,\, E_n \coloneqq Ker(T-\lambda_n I),\, n\geq1 \]\\
+Clearly $0<\dim(E_0)<\infty$ and we claim that:
+
+\begin{itemize}
+    \item[i)]$\dim(E_n)<\infty \,\,\,\forall n\geq 1$:\\\\
+        In fact, suppose by contradiction that $\dim(E_n)=\infty$, we have that $E_n$ is itself an Hilbert space and thus we can construct an o.n.b. $\{v_k\}$ of $E_n$. \\
+        From a previous deduction we know $v_k \nrightarrow 0$, but:\\\\
+        $\begin{aligned}
+            \begin{cases}
+                T(v_k)=\lambda_nv_k\\
+                T  \mbox{ compact} \implies T(v_k) \to 0
+            \end{cases}
+        \end{aligned}$
+        $\implies v_k \rightarrow 0$,\,\, contradiction
+    \item[ii)] $E_n,E_m\,(n\neq m)$ are orthogonal $\iff \forall u\in E_m, \forall v\in E_n \mbox{ we have:  } <u,v>=0$ \\\\
+        To prove this, notice that $T(u)=\lambda_m u,\,\,\, T(v) = \lambda_n v $ and since $T$ is symmetric:\\\\
+        $\begin{aligned}
+            \begin{cases}
+                <T(u),v>=\lambda_m<u,v>\\
+                <u,T(v)>=\lambda_n<u,v>
+            \end{cases}
+        \end{aligned}\implies
+        \begin{array}{rcl}
+            \lambda_m<u,v>& =&<u,v>\\
+            (\lambda_m-\lambda_n)<u,v>&=&0\\
+            <u,v>&=&0
+        \end{array}$      
+    \item[iii)] $F=\text{Span}(\{E_n\}_{n\geq 1})$ is dense in $H$.\\\\
+        Finally we choose in each subspace $E_n$ an o.n.b., the union of these is an o.n.b. of $H$ composed by eigenvectors of $T$ and we are done.
+\end{itemize}
+\end{proof}

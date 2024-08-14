@@ -1,0 +1,67 @@
+%>=====< Question 1 >=====<%
+
+\question
+Write the definition of complete measure space. State the theorem concerning the existence of the completion of a measure space. Give just an idea of the proof.
+
+\subsection*{Solution}
+
+\subsection{Complete measure space}
+A measure space $(X,\A,\mu)$ is said to be complete if $\tau_{\mu}\subseteq\A$
+
+\subsection{Existence of the completion}
+Let $(X,\A,\mu)$ be a measure space. \provdef{$\bar{\A}, \bar{\mu}$}
+\begin{align*}
+    \bar{\A}  & =\{ E\subseteq X: \exists F,G \in \A \text{ s.t. } F\subseteq E \subseteq G \; \mu(G \setminus F) =0 \} \\
+    \bar{\mu} & : \bar{\A}\to\Rcomppos,\quad \bar{\mu}(E) \coloneqq \mu(F)
+\end{align*}
+then:
+\begin{enumerate}
+    \item $\bar{\A}$ is a $\salg$ , $\bar{\A} \supseteq \A$
+    \item $\bar{\mu}$ is a complete measure, $\bar{\mu}|_{\A}=\mu$
+\end{enumerate}
+and the triplet $(X,\bar{A}, \bar{\mu})$ is a complete measure space and is called the completion of $(X,\A,\mu)$, i.e. it the smallest (w.r. to inclusion) complete measure space that cointains $(X,\A,\mu)$
+\subsection*{Sketch of proof} \footnote{
+    This is a partial proof of my own making. It has been review by the TA and professor Punzo and stated to be correct.
+}
+We  must prove two things:
+\begin{itemize}
+    \item \textbf{First:} that $\bar{\A}$ is a $\salg$ and that it contains $\A$, the latter is trivial since $\forall A\in\A \quad A\subseteq A\subseteq A \implies A\in\bar{\A}$ while the former is quite hardous so we shall just assume it to be true.
+    \item \textbf{Second:} that $\bar{\mu}$ is a complete measure and $\bar{\mu}|_{\A}=\mu$.\\
+          The latter is trivial (see above). We can also easily prove that it is a measure:
+          \begin{enumerate}[i)]
+              \item $\bar{\mu}(\emptyset)=\mu(\emptyset)=0$ since the only set contained inside $\emptyset$ is $\emptyset$ itself, as the container set we may take any zero set measure inside $\A$.
+              \item that $\s{additivity}$ holds is clear since for any disjoint sequence $\seq{E}\subseteq\bar{\A}$ we may construct two sequences:
+                    \[
+                        \left\{ \begin{array}{l}
+                            \seq{F}, \; F_k \subseteq E_k \\
+                            \seq{G}, \; G_k \supseteq E_k
+                        \end{array} \right. \forall k\in\N \text{ s.t. } \mu(G_k\setminus F_k) = 0
+                    \]
+                    Let us note the following:
+                    \begin{itemize}
+                        \item $\seq{F}$ is also disjoint because $\seq{E}$ is disjoint.
+                        \item Moreover:
+                              \begin{align*}
+                                   & \bigcup_{k=1}^{\infty} F_k \subseteq \bigcup_{k=1}^{\infty} E_k \subseteq \bigcup_{k=1}^{\infty} G_k                                                                                                 \\
+                                   & \bigcup_{k=1}^{\infty} G_k \setminus \bigcup_{k=1}^{\infty} F_k \subseteq \bigcup_{k=1}^{\infty} (G_k \setminus F_k )                                                                                \\
+                                   & \mu\left(\bigcup_{k=1}^{\infty} G_k \setminus \bigcup_{k=1}^{\infty} F_k \right) \leq \mu\left(\bigcup_{k=1}^{\infty} (G_k \setminus F_k )\right) \leq \sum_{k=1}^{\infty} \mu(G_k\setminus F_k) = 0
+                              \end{align*}
+                              The last inequality is true thanks to the $\s{subadditivity}$ and monotonicty of $\mu$.
+                    \end{itemize}
+                    Thus we can say that:
+                    \[
+                        \bar{\mu}\left( \bigcup_{k=1}^{\infty} E_k \right) = \mu \left( \bigcup_{k=1}^{\infty} F_k \right) = \sum_{k=1}^{\infty} \mu(F_k) = \sum_{k=1}^{\infty} \bar{\mu}(E_k)
+                    \]
+          \end{enumerate}
+          thus $\bar{\mu}$ is a measure.\\
+          Let us prove that $\bar{\mu}$ is complete.
+          Let $E_1 \in X$ and $E_2 \in \bar{\A}$ such that $\bar{\mu}(E_2)=\mu(F_2)=0$ and $E_1 \subseteq E_2$, let us note that:
+          \[
+              \left\{ \begin{array}{l}
+                  \mu(G_2) = \cancelnum{0}{\mu(G_2\setminus F_2)} + \cancelnum{0}{\mu(F_2)}\\
+                  \mu(G_2 \setminus \emptyset) = \mu(G_2) - 0                       \\
+                  \emptyset \subseteq E_1 \subseteq G_2
+              \end{array} \right. \implies E_1\in \bar{\A}, \; \bar{\mu}(E_1)=\mu(\emptyset) = 0
+          \]
+          thus any negligible set is also a zero measure set and $\bar{\mu}$ is complete.
+\end{itemize}

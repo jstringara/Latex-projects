@@ -1,0 +1,97 @@
+
+%>=====< Question 11 >=====<%
+
+\question
+Write the excision property and prove it. Write and prove (partially) the theorem concerning
+the regularity of the Lebesgue measure on $\R$.
+
+\subsection*{Solution}
+\subsection{Excision property}\label{ExcProp}
+If $A\in\Leb(\R)$, $\lambda^*(A)\leq +\infty$ and $A\subseteq B$, then:
+\[
+    \lambda^*(B\setminus A) = \lambda^* (B) - \lambda^*(A)
+\]
+\begin{proof}
+    Since $A\in\Leb(\R)$ we can use the Caratheodory equality (\ref{CarEq}) using $Z=B$, $E=A$:
+    \[
+        \lambda^*(B) = \lambda^*(\underbrace{B\cap A}_{=A \; (A\subseteq B)}) + \lambda^* (B\setminus A)
+    \]
+    so, since $\lambda^*(A)\leq +\infty$ we may write:
+    \[
+        \lambda^*(B\setminus A) = \lambda^*(B)-\lambda^*(A)
+    \]
+\end{proof}
+
+\subsection{Regularity of the Lebesgue Measure}
+Let $E\subseteq\R$, \tfae
+\begin{enumerate}[i)]
+    \item\label{LebReg:1} $E\in\Leb(\R)$
+    \item\label{LebReg:2} $\forall \epsilon >0$ $\exists A \subseteq \R$ open s.t.
+          \[
+              E\subseteq A \quad \lambda^*(A\setminus E) < \epsilon
+          \]
+    \item\label{LebReg:3} $\exists G \subseteq \R$ in the class $G_{\delta}$ (countable intersections of open sets) s.t.
+          \[
+              E\subseteq G \quad \lambda^*(G\setminus E)=0
+          \]
+    \item\label{LebReg:4} $\forall \epsilon >0$ $\exists C \subseteq \R$ closed s.t.
+          \[
+              C\subseteq E \quad \lambda^*(E\setminus C) < \epsilon
+          \]
+    \item\label{LebReg:5} $\exists F \subseteq \R$ in the class $F_{\delta}$ (countable unions of closed sets) s.t.
+          \[
+              F\subseteq E \quad \lambda^*(E\setminus F)=0
+          \]
+\end{enumerate}
+\begin{proof}
+    Let us give a (partial) proof:\\
+    \begin{itemize}
+        \item
+              $(\ref{LebReg:1})\implies(\ref{LebReg:2})$: if $E\in\Leb(\R)$, $\lambda(E)<+\infty$ then by definition of outer measure (\ref{outer:def}):
+              \[
+                  \forall \epsilon >0 \; \exists\seq{I}\text{ that covers } E \text{ and } \sum_{k=1}^{\infty} \lambda_0(I_k) < \lambda^*(E)+\epsilon
+              \]
+              Let us now define the set $O$:
+              \[
+                  O\coloneqq \bigcup_{k=1}^{\infty} I_k, \; O \text{ is open}, \; E\subseteq O
+              \]
+              and so we may write:
+              \begin{align*}
+                   & \lambda^*(O) \overset{sub-add \; (\ref{outer:sub})}{\leq} \sum_{k=1}^{\infty} \lambda_0(I_k) < \lambda^*(E)+\epsilon \\
+                   & \implies \lambda^*(O)-\lambda^*(E) < \epsilon
+              \end{align*}
+              and by the Excision property (\ref{ExcProp}) ($E\in\Leb(\R), \; \lambda^*(E)<+\infty$):
+              \[
+                  \lambda^*(O\setminus E) = \lambda^*(O)-\lambda^*(E) < \epsilon
+              \]
+              and so we have obtained the second statement (\ref{LebReg:2}).
+        \item
+              $(\ref{LebReg:2}) \implies (\ref{LebReg:3})$, $\forall k\in\N$ we choose $O_k \supseteq E$ open for which:
+              \[
+                  \lambda^*(O_k\setminus E) < \frac{1}{k}
+              \]
+              and then define:
+              \[
+                  G = \bigcap_{k=1}^{\infty} O_k \implies G\in G_{\delta}, \; G\supseteq E
+              \]
+              Moreover $\forall k\in \N$:
+              \[
+                  G\setminus E \subseteq O_k\setminus E
+              \]
+              so by monotonicty (\ref{outer:mono}):
+              \[
+                  \lambda^*(G\setminus E) \leq \lambda^*(O_k\setminus E) < \frac{1}{k}
+              \]
+              let us apply a limit $k\to\infty$ to both sides:
+              \[
+                  \lambda^*(G\setminus E) = 0
+              \]
+        \item
+              $(\ref{LebReg:3}) \implies (\ref{LebReg:1})$, let us note that $G\setminus E\in\Leb(\R)$ since $\lambda^*(G\setminus E)=0 $ by lemma \ref{zerosetsaremeas} and:
+              \begin{align*}
+                   & G\in\Leb(\R) \text{ since } G\in G_{\delta} \subseteq \B[\R] \subseteq \Leb(\R)                  \\
+                   & \implies E = \underset{\in\Leb}{G} \cap (\underset{\in\Leb}{G \setminus E})^\complement \in \Leb
+              \end{align*}
+
+    \end{itemize}
+\end{proof}

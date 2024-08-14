@@ -1,0 +1,26 @@
+
+%>=====< Question 4 >=====<%
+
+\question
+
+Prove that continuous functions are both Borel and Lebesgue measurable.
+
+\subsection*{Solution}
+
+\subsection{Continuous functions are \texorpdfstring{$\B$}{Borel}-measurable}
+A continuous function $f:X\to X'$ is $\B$-measurable.
+
+\begin{proof}
+    Let $\mathcal{C}'$ be the class of open sets of $X'$ and $\mathcal{C}$ the class of open sets of $X$. We have:
+    \[
+        \forall E \in \mathcal{C}' \quad f^{-1}(E)\in\mathcal{C} \subseteq \B \; (\text{ by definition of continuity })
+    \]
+    and $\B'=\sigma_0(\mathcal{C}')$ so we get the thesis.
+\end{proof}
+
+\subsection{Continuous functions are \texorpdfstring{$\Leb$}{Lebesgue}-measurable}
+A continuous function $f:X\to X'$ is $\Leb$-measurable.
+
+\begin{proof}
+    Since $\B \subset \Leb$ and the previous statement has been proven true, the thesis follows trivially.
+\end{proof}

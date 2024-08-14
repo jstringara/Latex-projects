@@ -1,0 +1,37 @@
+
+%>=====< Question 4 >=====<%
+
+\question
+
+Let $s \in \Smes_+(X, \A)$. For any $E \in \A$, let $\phi(E) \coloneqq \int_E s d\mu$. Prove that $\phi$ is a measure.
+
+\subsection*{Solution}
+
+\subsection{Measure induced by a function}
+Let $(X,\A,\mu)$ be a measure space and $s\in\Smes_+(X,\A)$ a nonnegative simple function. We define the measure $\phi$ induced by $s$ as:
+\[
+    \phi(E) \coloneqq \int_E s\,d\mu \quad \forall E\in \A
+\]
+
+\begin{proof}
+    Let us see that $\phi$ meets the definition of a measure:\\
+    Clearly:
+    \[
+        \phi : \A \to \Rcomppos    
+    \]
+    Furthermore:
+    \begin{enumerate}[i)]
+        \item $\phi(\emptyset) = 0$ by property 2 of the Lebesgue integral (\ref{LebInt:null}).
+        \item Let $\seq{E}\subseteq\A$ disjoint and $E=\bigcup_{k=1}^\infty E_k$, let us write:
+            \[
+                s \coloneqq \sum_{l=1}^m d_l \chi_{F_l} \quad F_l \in \A    
+            \]
+            thus:
+            \begin{align*}
+                \phi(E) &\tikzmarknode{eq1}{=} \int_E s\,d\mu = \sum_{l=1}^m d_l \mu(F_l\cap E) \\
+                &\tikzmarknode{eq2}{=} \sum_{l=1}^m d_l \sum_{k=1}^\infty \mu(F_l\cap E_k) \text{ by the $\s{additivity}$ of $\mu$ (\ref{meas:mono})}\\
+                &\tikzmarknode{eq3}{=} \sum_{k=1}^\infty \sum_{l=1}^m d_l \mu(F_l\cap E_k) \\
+                &\tikzmarknode{eq4}{=} \sum_{k=1}^\infty \int_{E_k} s \, d\mu = \sum_{k=1}^\infty \phi(E_k)
+            \end{align*} \tikz[overlay,remember picture]{\draw[shorten >=1pt,shorten <=1pt] (eq1) -- (eq2) -- (eq3)--(eq4);}
+    \end{enumerate}
+\end{proof}

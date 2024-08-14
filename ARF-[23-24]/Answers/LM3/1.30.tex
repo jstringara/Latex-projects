@@ -1,0 +1,25 @@
+
+%>=====< Question 7 >=====<%
+
+\question
+
+Let $f, g \in \Mes(X, \A)$. What can we say about measurability of $\{f < g\},\; \{f \leq g\},\; \{f = g\}$? Justify the answer.
+
+\subsection*{Solution}
+
+\subsection{Measurability of \texorpdfstring{$\{f < g\},\; \{f \leq g\},\; \{f = g\}$}{ \{f less than g\}, \{f less or equal to g\}, \{f equal to g\}}}
+Let $f, g \in \Mes(X, \A)$, we have:
+\begin{enumerate}[i)]
+    \item $\{f < g\}\in\A$
+    \item $\{f \leq g\}\in\A$
+    \item $\{f = g\}\in\A$
+\end{enumerate}
+
+\begin{proof}
+    \hspace*{\fill} %leave a blank line
+    \begin{enumerate} [i)]
+        \item $\{ f < g \} = \bigcup_{r\in\Q} \left[ \underbrace{\overbrace{\{ f < r \}}^{\in\A} \cap \overbrace{\{ r < g\}}^{\in\A}}_{\in\A} \right]$
+        \item $ \{ f\leq g \} = \{ f > g \}^\complement\in\A$ by the previous point.
+        \item $\{f=g\} = \underset{\in\A}{\{ f\leq g \}} \cap \underset{\in\A}{\{ f\geq g \}} \in \A$
+    \end{enumerate}
+\end{proof}

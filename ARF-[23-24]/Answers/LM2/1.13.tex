@@ -1,0 +1,71 @@
+
+%>=====< Question 2 >=====<%
+
+\question
+Write the definition of outer measure. State and prove the theorem concerning generation of
+outer measure on a general set $X$, starting from a set $K \in\Parts{X}$, containing $\emptyset$, and a function
+$\nu : K \to \Rcomppos, \; \nu(\emptyset) = 0$. Intuitively, which is the meaning of $(K, \nu)$?
+
+\subsection*{Solution}
+
+\subsection{Outer measure}\label{outer:def}
+We say that a function: $\mu^*:\Parts{X}\to\Rcomppos$ (where $X$ is any set) is an outer measure if:
+\begin{enumerate}[i)]
+    \item $\mu^*(\emptyset)=0$
+    \item \label{outer:mono}$E_1\subseteq E_2 \implies \mu^*(E_1) \leq \mu^*(E_2)$
+    \item \label{outer:sub}$\mu^*\left( \bigcup_{k=1}^{\infty} E_k \right) \leq \sum_{k=1}^{\infty} \mu^*(E_k)$
+\end{enumerate}
+
+\subsection{Generation of an outer measure} \label{outer:gen}
+Let $K\subseteq\Parts{X}, \, \emptyset\in K, \: \nu:K\to\Rcomppos, \; \nu(\emptyset)=0$, then we can generate an outer measure $\mu^*$ on $X$ defined as:
+\[
+    \left\{ \begin{array}{l}
+        \mu^*(E) \coloneqq \inf \left\{ \sum_{k=1}^{\infty} \nu(I_k) : E\subseteq \bigcup_{k=1}^{\infty} I_k,\; \seq{I}\subseteq K \right\} , \text{ if } E \text{ can be covered by a countable union of sets } I_n\in K. \\
+        \mu^*(E) \coloneqq +\infty, \text{ otherwise.}
+    \end{array} \right.
+\]
+
+\begin{proof}
+    Let us verify that such a $\mu^*$ meets the definition of outer measure (\ref{outer:def}):
+    \begin{enumerate}[i)]
+        \item $\emptyset\in K$, $0\leq\mu^*(\emptyset)\leq\nu(\emptyset)=0$ by the definition of $\mu^*$.
+        \item $E_1\subseteq E_2$, we have two possible cases
+              \begin{itemize}
+                  \item if there exists a countable covering of $E_2$ then it is also a covering of $E_1$ and from the definitio of $\mu^*$ it follows that:
+                        \[
+                            \mu^*(E_1) \leq \mu^*(E_2)
+                        \]
+                  \item if there is no countable covering of $E_2$ then:
+                        \[
+                            \mu^*(E_1) \leq \mu^*(E_2) = +\infty
+                        \]
+              \end{itemize}
+        \item this condition is obviously met if:
+              \[
+                  \sum_{k=1}^{\infty} \mu^*(E_k) = +\infty
+              \]
+              otherwise if we suppose that:
+              \[
+                  \sum_{k=1}^{\infty} \mu^*(E_k) < +\infty
+              \]
+              thus $\mu^*(E_k)<+\infty$ $\forall k\in\N$, by the definition of $\mu^*$ and $\inf$:
+              \[
+                  \forall \epsilon>0, \; \forall n\in\N \quad \exists \{ I_{n,k} \} \subseteq K
+              \]
+              such that:
+              \[
+                  E_n \subseteq \bigcup_{k=1}^{\infty} I_{n,k} \quad \text{ and } \quad \mu^*(E_n)+\frac{\epsilon}{2^n} > \sum_{k=1}^{\infty} \nu(I_{n,k})
+              \]
+              Now, since:
+              \[
+                  \bigcup_{n=1}^{\infty} E_n \subseteq \bigcup_{n,k=1}^{\infty} I_{n,k}, \quad \{ I_{n,k} \} \subseteq K
+              \]
+              it clearly follows that:
+              \[
+                  \mu^*(\bigcup_{n=1}^{\infty} E_n) \leq \sum_{n=1}^{\infty} \sum_{k=1}^{\infty} \nu(I_{n,k}) < \sum_{n=1}^{\infty}\mu^*(E_n) + \epsilon\cdot\cancelnum{1}{\sum_{n=1}^{\infty} \frac{1}{2^n}}
+              \]
+              because $\epsilon$ is arbitrary, we have the cocnlusion.
+    \end{enumerate}
+\end{proof}
+
+The intuitive meaning $(K,\nu)$ is that $K$ is a special class of sets in $X$ and $\nu$ is a function that assigns a value to each set in $K$. On the other hand $\nu$ can be any real valued positive function, thus it is not necessary to be a measure.

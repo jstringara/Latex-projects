@@ -1,0 +1,73 @@
+
+%>=====< Question 3 >=====<%
+
+\question
+
+Write the definitions of the Lebesgue integral of a nonnegative measurable simple 
+function over $X$ and over a measurable subset $E \subseteq X$. Write the main properties of the integral and prove some of them.
+
+\subsection*{Solution}
+
+\subsection{Lebesgue integral of nonnegative simple functions}
+Let $(X,\A,\mu)$ be a measure space and $s\in\Smes_+(X,\A)$ a nonnegative simple function with canonical form as in (\ref{simple:canon}). We define the Lebesgue integral of $s$ over $X$ as:
+\[
+    \int_X s\,d\mu \coloneqq \sum_{k=1}^n c_k \mu(E_k)
+\]
+And its integral over a measurable subset $E\in \A$ as:
+\[
+    \int_E s\,d\mu \coloneqq \int_X s\cdot \chi_E \, d\mu = \sum_{k=1}^n c_k \mu(E_k\cap E)
+\]
+
+\subsection{Properties of the Lebesgue integral}
+\begin{enumerate}[i)]
+    \item 
+        \[
+            \int_X \chi_E\,d\mu = \mu(E) \quad \forall E\in \A
+        \]
+    \item \label{LebInt:null}
+        \[
+            \int_N s\,d\mu = 0 \quad \forall N \in \mathcal{N}_\mu
+        \]
+    \item Let $s\in\Smes_+(X,\A)$, $c\geq 0$, then:
+        \[
+            \int_X c\cdot s \,d\mu = c\cdot\int_X  s \,d\mu   
+        \]
+    \item $s,t\in \Smes_+(X,\A)$, then:
+        \[
+            \int_X (s+t) \,d\mu = \int_X s \,d\mu + \int_X t \,d\mu
+        \]
+    \item \label{LebInt:monofunc}$s,t \in \Smes_+(X,\A)$, such that $s\leq t$ then:
+        \[
+            \int_X s \,d\mu \leq \int_X t \,d\mu
+        \]
+    \item \label{LebInt:monoset}$s\in\Smes_+(X,\A)$, $E\subseteq F \in\A$ then:
+        \[
+            \int_E s \,d\mu \leq \int_F s \,d\mu
+        \]
+\end{enumerate}
+
+\begin{proof}
+    \hspace*{\fill} %leave a blank line
+    \begin{enumerate}[i)]
+        \item We may write:
+            \[
+                \chi_E = \sum_{k=1}^2 c_k \chi_{E_k} = \begin{cases}
+                    c_1 = 1 & \;E_1 = E \\
+                    c_2 = 0 & \; E_2 = E^\complement
+                \end{cases}
+            \]
+            thus by applying the definition of the Lebesgue integral we get:
+            \[
+                \int_X \chi_E\,d\mu = \sum_{k=1}^2 c_k \mu(E_k) = 1\cdot\mu(E) + 0 \cdot \mu(E^\complement) = \mu(E)
+            \]
+        \item Let us apply the definition:
+            \[
+                \int_N s\,d\mu = \sum_{k=1}^n c_k \mu(E_k\cap N)
+            \]
+            but by the monotonicity of $\mu$ (\ref{meas:mono}) we have:
+            \[
+                E_k\cap N \subseteq N \implies \mu(E_k\cap N) \leq \mu(N) = 0      
+            \]
+            so the previous sum is equal to $0$.
+    \end{enumerate}
+\end{proof}

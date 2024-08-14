@@ -1,0 +1,30 @@
+
+%>=====< Question 5 >=====<%
+
+\question
+
+Characterize Lebesgue measurability of functions and prove it.
+
+\subsection*{Solution}
+
+\subsection{Characterization of Lebesgue measurability}
+All we must do is apply the Characterization of Measurability (\ref{CharMeas}) taking $(X,\A=\Leb)$, $(X', \A'=\B')$ and $\mathcal{C}'$ the class of open sets of $X'$, since $\B'=\sigma_0(\mathcal{C}')$. We then can write:
+\[
+    f:X\to X' \text{ Lebesgue measurable } \iff f^{-1}(E)\in\Leb \quad \forall E\in\mathcal{C}'
+\]
+
+\begin{proof}
+    Let us prove both sides of the implication:
+    \begin{itemize}
+        \item \textbf{$(\implies)$:} Suppose $f$ be Lebesgue measurable $\implies$ $\mathcal{C}'\subseteq \B'$ and so we get the thesis.
+        \item \textbf{$(\impliedby)$:} Let us define the following:
+              \[
+                  \Sigma \coloneqq \{ E\subseteq X': \; f^{-1}(E)\in\Leb \}
+              \]
+              We can easily see that $\Sigma$ is a $\salg$ so $\mathcal{C}'\subseteq \Sigma$ and thus:
+              \[
+                  \B'=\sigma_0(\mathcal{C}')\subseteq\Sigma
+              \]
+              and we get the thesis.
+    \end{itemize}
+\end{proof}

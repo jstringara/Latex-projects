@@ -1,0 +1,140 @@
+\sheet 
+
+
+
+
+%>=====< Question 8 >=====<%
+
+\question
+
+State and prove the vanishing lemma for functions $f \in \Mes_+(X, \A)$.
+
+\subsection*{Solution}
+
+\subsection{Vanishing lemma for \texorpdfstring{$f \in \Mes_+(X, \A)$}{nonnegative measurable functions}} \label{VanLem}
+
+Let $f \in \Mes_+(X, \A)$ be such that $\int_X f \, d\mu = 0 $, then we have that $f=0$ a.e. in $X$.
+
+\begin{proof}
+    Let us note that the thesis is equivalent to $\mu(\{ f > 0\}) = 0$. Let us define:
+    \[
+        \{ f > 0 \} = \bigcup_{n=1}^\infty \left\{ f > \frac{1}{n} \right\}    
+    \]
+    Clearly we have that:
+    \begin{enumerate}[a)]
+        \item $\left\{ f > \frac{1}{n} \right\} \uparrow \{ f > 0 \}$
+        \item $\frac{1}{n} \cdot \chi_{\left\{ f > \frac{1}{n} \right\}} \leq f \cdot \chi_{\left\{ f > \frac{1}{n} \right\}}$
+    \end{enumerate}
+    by Chebychev inequality (\ref{ChebIneq}) we have:
+    \[
+        \mu \left( \left\{ f > \frac{1}{n} \right\} \right) \leq \frac{1}{1/n} \cdot \int_X f \, d\mu = 0 \quad \forall n\in\N
+    \]
+    thus by the continuity from below of $\mu$ (\ref{meas:contbel}) we have:
+    \[
+        \mu(\{ f > 0 \}) = \mu \left( \bigcup_{n=1}^\infty \left\{ f > \frac{1}{n} \right\} \right) = \lim_{n\to\infty} \mu \left( \left\{ f > \frac{1}{n} \right\} \right) = = 0
+    \]
+\end{proof}
+
+%>=====< Question 9 >=====<%
+
+\question
+
+State and prove the Monotone Convergence Theorem (or Beppo Levi Theorem).
+
+\subsection*{Solution}
+
+\subsection{Monotone Convergence Theorem}\label{MCT}
+Let $\seq{f} \subseteq \Mes_+(X,\A)$ and $f:X\to\Rcomppos$ be such that:
+\begin{enumerate}[i)]
+    \item $f_n \leq f_{n+1}$ in $X$ $\forall n\in\N$
+    \item $f_n \xrightarrow{n\to\infty} f$ pointwise in $X$
+\end{enumerate}
+then:
+\[
+    \lim_{n\to\infty} \int_X f_n \, d\mu = \int_X \lim_{n\to\infty} f_n \, d\mu =\int_X f \, d\mu    
+\]
+
+\begin{proof}
+    $f\in\Mes_+(X,\A)$ \\
+    by monotonicity of the integral for functions (\ref{LebInt:monofunc}) we have:
+    \[
+        \alpha \coloneqq \int_X f_n \, d\mu \leq \int_X f_{n+1} \, d\mu \leq \int_X f \, d\mu  \longrightarrow \alpha \leq \int_X f \, d\mu
+    \]
+    now, we have to prove that $\alpha \geq \int_X f \, d\mu$. Indeed $\forall \epsilon \in (0,1)$, $\forall s \in \Smes_f$ let:
+    \[
+        E_n \coloneqq \{ (1-\epsilon) s \leq f_n \} \quad n\in\N    
+    \]
+    Let us note that:
+    \begin{enumerate}[a)]
+        \item $\seq{E} \subseteq \A$;
+        \item $\seq{E} \uparrow$, since $\seq{f} \uparrow$;
+        \item $X=\bigcup_{n=1}^\infty E_n$.
+    \end{enumerate}
+    Clearly $\bigcup_{n=1}^\infty E_n \subseteq X$, we have to show that $X \subseteq \bigcup_{n=1}^\infty E_n$. Now, let us fix $x\in X$, we have two possibilities:
+    \begin{itemize}
+        \item \textbf{$f(x)=+\infty$:} then $\exists \bar{n}\in\N$ such that $\forall n> \bar{n}$:
+            \[
+                (1-\epsilon) s(x) < f_n(x) \implies x\in E_n \; \forall n > \bar{n} \implies x \in \bigcup_{n=1}^\infty E_n
+            \]
+        \item \textbf{$f(x)<+\infty$:} then $\exists \bar{n}\in\N$ such that $\forall n> \bar{n}$:
+            \[
+                (1-\epsilon) s(x) \leq (1-\epsilon) f(x) < f_n(x) \implies x\in E_n \; \forall n > \bar{n} \implies x \in \bigcup_{n=1}^\infty E_n
+            \]
+    \end{itemize}
+    Thus we have that $X \subseteq \bigcup_{n=1}^\infty E_n$ and $\bigcup_{n=1}^\infty E_n \subseteq X$ $\implies X = \bigcup_{n=1}^\infty E_n$ . \\
+    It clearly follows that:
+    \[
+        (1-\epsilon)\cdot \int_{E_n} s \, d\mu \leq \int_{E_n} f_n \, d\mu \leq \int_X f \, d\mu    
+    \]
+    now let $n\to\infty$ ($E_n \xrightarrow{n\to\infty} X$):
+    \[
+        (1-\epsilon)\cdot \int_{X} s \, d\mu \leq  \lim_{n\to\infty} \int_{X} f_n \, d\mu = \alpha 
+    \]
+    but since $\epsilon \in (0,1)$ can be arbitrarily small we have:
+    \[
+        \int_X s \, d\mu \leq \alpha \implies \sup_{s\in\Smes_f} \int_X s \, d\mu  = \int_X f \, d\mu \leq \alpha    
+    \]
+    thus we have proved that $\int_X f \, d\mu = \alpha $.
+\end{proof}
+
+%>=====< Question 10 >=====<%
+
+\question
+
+State and prove Fatou's Lemma.
+
+\subsection*{Solution}
+
+\subsection{Fatou's lemma}\label{Fatlem}
+
+Let $\seq{f} \subseteq \Mes_+(X,\A)$, then:
+\[
+    \liminf_{n\to\infty} \int_X f_n \, d\mu \geq \int_X \left( \liminf_{n\to\infty} f_n \right) \, d\mu
+\]
+
+\begin{proof}
+    We already know that $\liminf_{n\to\infty} f_n \in \Mes_+(X,\A)$ by (\ref{meas:extremes}).\\
+    Let us a define a new sequence $\seq{g}$ such that:
+    \[
+        g_k: X \to \Rcomppos \quad g_k \coloneqq \inf_{n\geq k} f_n    
+    \]
+    We can clearly see that:
+    \begin{enumerate}[a)]
+        \item $\seq{g} \subseteq \Mes_+(X,\A)$, $\seq{g} \uparrow$;
+        \item $g_k \leq f_k$ for all $k\in\N$;
+        \item $\lim_{k\to\infty} g_k = \sup_{k\geq 1} g_k = \sup_{k\geq 1} \inf_{n\geq k} f_n = \liminf_{n\to\infty} f_n$.
+    \end{enumerate}
+    thus by monotonicty of the integral for functions (\ref{LebInt:monofunc}) and (b) we have:
+    \[
+        \int_X g_k \, d\mu \leq \int_X  f_k \, d\mu \quad \forall k\in\N   
+    \]
+    Now, since $\seq{g}$ is an increasing sequence so is $\int_X g_k \, d\mu$ and thus it admits a limit (which coincides with its $\liminf$), thus, if we apply the $\liminf$ to both sides, we have:
+    \[
+        \liminf_{k\to\infty} \int_X g_k \, d\mu = \lim_{k\to\infty} \int_X  g_k \, d\mu \leq \liminf_{k\to\infty} \int_X f_k \, d\mu 
+    \]
+    Now let us apply the Monotone Convergence Theorem (\ref{MCT}) to the right hand side:
+    \[
+        \int_X \lim_{k\to\infty} g_k \, d\mu \overset{(c)}{=} \int_X \left( \liminf_{n\to\infty} f_n \right) \, d\mu \leq \liminf_{k\to\infty} \int_X f_k \, d\mu
+    \]
+    and so we have obtained our thesis.
+\end{proof}

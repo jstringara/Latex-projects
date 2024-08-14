@@ -1,0 +1,348 @@
+\sheet
+
+%>=====< Question 1 >=====<%
+
+\question
+Show that the weak limit is unique.
+
+\subsection*{Solution}
+
+\subsection{Weak limit uniqueness}
+The weak limit is unique.
+
+\begin{proof}
+    Suppose by contradiction that $\exists x_1,x_2 \mbox{ s.t. }x_n\wc x_1,\,\,x_n\wc x_2$.
+    \[
+    \implies \forall L \in X^*:\, \lvert L(x_n)-L(x_1)\rvert \to 0 \mbox{ and } \lvert L(x_n)-L(x_1)\rvert\to 0
+    \]
+    \[
+    \implies L(x_1)-L(x_2)\,\,\, \forall L\in X^* \implies x_1=x_2 \mbox{, contradiction}
+    \]
+\end{proof}
+
+%>=====< Question 2 >=====<%
+
+\question
+If $\seq{x}$ weakly converges to $x$, can $\seq{x}$ be unbounded? State and prove lower semicontinuity w.r.t. weak convergence of $x\mapsto\|x\|$.
+
+\subsection*{Solution}
+
+\subsection{Boundedness of weak convergent series}
+If $x_n \wc x$ then $\{x_n\}$ is bounded.
+\subsection{Lower semicontinuity w.r.t. weak convergence}
+$x_n \wc x \,\,\implies \displaystyle\liminf_{n\to \infty}\|x_n\|_X \ge \|x\|$
+\begin{proof}
+    Let $x\in X\backslash \{0\},\,\, L \in X^*:\|L\|_X=1,\,\,L(x)=\|x\|$, we have:
+    \[
+    0<\|x\|=L(x)=\displaystyle\lim_{\toi}L(x_n)=\displaystyle\lim_{\toi}\lvert L(x_n)\rvert
+    \]
+    On the other hand: \[
+    \lvert L(x_n)\rvert \le \underbrace{\|L\|_X}_{=1} \|x_n\|_X = \|x_n\|_X
+    \]
+    \[
+    \implies \|x\|_X = \lim_{\toi}\lvert L(x_n)\rvert \le \displaystyle\liminf_{n\to \infty}\|x_n\|_X 
+    \]
+\end{proof}
+
+%>=====< Question 3 >=====<%
+
+\question
+Show that if $x_n \wc x$ and $L_n \to L$ in $X^*$, then $L_n(x_n) \to L(x)$ as $\toi$.
+
+\subsection*{Solution}
+
+\begin{proof}
+    \[
+    \begin{array}{rll}
+       \lvert L_n(x_n)-L(x)\rvert =  & \lvert L_n(x_n)-L(x_n)+L(x_n)-L(x)\rvert &\le     \\
+         \le&\lvert L_n(x_n)-L(x_n)\rvert +\lvert L(x_n)-L(x)\rvert &\le\\
+        \le & \underbrace{\|L_n-L\|_X}_{\to 0}\underbrace{\|x_n\|_X}_{\le M}+\underbrace{\lvert L(x_n)-L(x)\rvert}_{\to 0} &\to 0
+    \end{array}
+    \]
+\end{proof}
+
+%>=====< Question 4 >=====<%
+
+\question
+Show that $T \in \Leb(X, Y )$ is weak-weak continuous.
+
+\subsection*{Solution}
+
+\subsection{Weak-weak continuity}
+Let $X,Y$ be Banach spaces and $T \in L(X, Y)$. Then: $x_n \wc x \implies T(x_n) \wc T(x)$.
+\begin{proof}
+    Let $L\in Y^*$, $\Lambda : X\to \R \mbox{ s.t. } \Lambda(x)=L(T(x)),\,\,\forall x\in X$
+    \[ \begin{array}{rrcl}
+       \Lambda \in X^* \implies &\Lambda (x_n)  & \to & \Lambda(x)\\
+       \implies& L(T(x_n)) & \to & L(T(x))\\
+         \iff& T(x_n) & \wc & T(x)
+   \end{array}\]
+\end{proof}
+
+%>=====< Question 5 >=====<%
+
+\question
+the definition of weak* convergence.
+
+\subsection*{Solution}
+
+\subsection{Weak* convergence}
+We say that $\{L_n\}\subset X^*$ converges weakly* to $L\in X^*$ whenever $L_n(x)\to L(x) ,\,\, \forall x\in X$. We write: $L_n \wsc L $.
+
+%>=====< Question 6 >=====<%
+
+\question
+Which is the relation between weak and weak* convergence? Justify your answer
+
+\subsection*{Solution}
+
+\subsection{Relation between weak and weak* convergence}
+$L_n \wc L \implies L_n \wsc L$. If $X$ is reflexive the converse implication is also true.
+
+\begin{proof}
+\[
+\begin{array}{rcccl}
+L_n \wc L \in X^{ *}\iff & \Lambda (L_n)  & \to & \Lambda(L) & \forall \Lambda\in X^{**} \\
+\implies & \Lambda (L_n) & \to & \Lambda(L) &  \forall \Lambda\in \tau(X) \subseteq X^{**}\\
+\iff & L(x_n) & \wc & L(x) & \forall x \in X \\
+\end{array}\]
+    If $X$ is reflexive, $\tau(X)=X^{**}$ and the converse immediately follows from what we demonstrated above.
+\end{proof}
+
+%>=====< Question 7 >=====<%
+
+\question
+Write the properties of weak* convergence.
+
+\subsection*{Solution}
+
+\subsection{Properties of weak* convergence}
+Let $X$ be a Banach space, then:
+\begin{itemize}
+    \item[i)] Weak* limit is unique.
+    \item[ii)] $L_n \wsc L \implies \{L_n\}$ bounded in $X^*$.
+    \item[iii)] $L\mapsto \|L\|_{X^*}$ is lower semicontinuous w.r.t. weak* convergence.
+    \item[iv)] $L_n \wsc L,\,\,x_n \wsc x \,\implies L_n(x_n)\to L(x)$.
+\end{itemize}
+
+%>=====< Question 8 >=====<%
+
+\question
+State the Banach-Alaoglu theorem. Why can we say that from a bounded sequence in $\Leb^{\infty}$ we can extract a subsequence which weakly* converges in $\Leb^{\infty}$?
+
+\subsection*{Solution}
+
+\subsection{Banach-Alaoglu theorem}
+Let $X$ be a separable Banach space. Then any bounded sequance $\{L_n\} \subset X^*$ admits a subsequence that weakly* converges to some $L \in X^*$.
+
+\subsection{Bounded sequences in \texorpdfstring{$\Leb^{\infty}$}{Linf}}
+Let $\{f_n\} \subset \Leb^{\infty}(\Omega)$ bounded, $L_n: \Leb^1(\Omega)\mapsto \R$.\\
+\[
+L_n \in \big[\Leb^1(\Omega)\big]^* \,\,\,\,\forall n\in \N, \,\,\,\,L_n(g)\coloneqq \displaystyle\int_{\Omega}f_ng d\lambda\,\,\,\forall g \in \Leb^1(\Omega) \implies \{L_n\}\mbox{ is bounded in } \big[\Leb^1(\Omega)\big]^*:
+\]
+\[\lvert L_n(g)\rvert \le \|f_n\|_{\infty} \|g\|_1 \le c\|g\|_1 \implies \|L_n\|_{(\Leb^1)^*}\le c\,\,\,\forall n\in \N\\
+\]
+By B.-A. theorem:
+$\exists \{L_{n_h}\}\subset \{L_n\}\mbox{ s.t. }L_{n_h}\underset{h\to\infty}{\wsc}  L \mbox{ for some } L\in (\Leb^1)^* $
+$\iff L_{n_h}(g)\underset{h\to\infty}{\to} L(g)\,\, \forall g \in \Leb^1 $
+\[
+ \implies \exists ! f \in \Leb^{\infty} \mbox{ s.t. } L(g) = \displaystyle\int_{\Omega}fg d\lambda\,\,\,\forall g \in \Leb^1(\Omega)
+\]
+Therefore, $\{f_n\}$ bounded in $\Leb^{\infty}$ possesses a subsequence $\{f_{n_h}\}$ which weakly* converges to some $f\in\Leb^{\infty} $.
+
+%>=====< Question 9 >=====<%
+
+\question
+State and prove the corollary of the Banach-Alaoglu theorem in a separable and reflexive Banach space.
+
+\subsection*{Solution}
+
+\subsection{Corollary of the Banach-Alaoglu theorem}
+Let $X$ be a separable and reflexive Banach space. Then every bounded sequence $\{x_n\} \subset X$ has a subsequence which weakly converges.
+\begin{proof}
+    $
+    \\\\
+    \begin{aligned}
+        \begin{cases}
+            X^* \text{ separable} \\
+            \{\tau(x_n)\} \subset X^{**} \text{ bounded} 
+        \end{cases}
+    \end{aligned}$ $\implies $ by B.-A. theorem for $X^{**}$  we have: \[
+    \begin{array}{lrclc}
+        & \exists \{\tau(t_{n_h})\} \mbox{ s.t. } \tau(t_{n_h}) & \underset{h\to\infty}{\wsc} & \Lambda & \mbox{for some } \Lambda \in X^{**} \\
+        \iff & \big[\tau(x_{n_h})\big](f) & \underset{h\to\infty}{\to} & \Lambda(f) & \forall f \in X^{**} \\
+        \iff & f(x_{n_h}) & \underset{h\to\infty}{\to} & f(x) & x\coloneqq\tau^{-1}(\Lambda) \\
+        \iff & x_{n_h} & \underset{h\to\infty}{\wc} & x
+    \end{array}
+    \]    
+\end{proof}
+
+%>=====< Question 10 >=====<%
+
+\question
+State the Eberlein-Smulyan theorem.
+
+\subsection*{Solution}
+
+\subsection{Eberlein-Smulyan theorem}
+Let $X$ be a Banach space. If any bounded sequence contains a weakly convergent subsequence, $X$ is reflexive.
+
+%>=====< Question  11 >=====<%
+
+\question
+the definition of compact operator. Write the definition of operator of finite rank.
+
+\subsection*{Solution}
+
+\subsection{Compact operator}
+$K:X\to Y$ is said to be compact if $\forall E \subseteq X$ bounded, $\overline{K(E)}$ is compact (i.e. $K(E)$ is relatively compact).
+\subsection{Finite rank operator}
+$T \in \Leb(X,Y) $ has finite rank if $\dim(Im(T)) <\infty$.
+
+%>=====< Question 12 >=====<%
+
+\question
+How is a compact operator related to operators of finite rank? Can a compact operator be surjective?
+
+\subsection*{Solution}
+
+\subsection{Relation between compact and finite rank operators}
+$T \in \Leb(X,Y)$,\,\, $T$ has finite rank $\implies T$ is compact.
+
+\subsection{Surjectivity of compact operator}
+Let $K \in \Leb(X,Y)\mbox{, with }\dim Y=+\infty$. If $K$ is compact, it can not be surjective.
+
+\begin{proof}
+Suppose $K $ is not surjective. 
+Notice that: \[\\ \begin{array}{lr}
+    &  0 \in B_1(0) \subset X  \\
+     \implies &K(B_1(0))\subset Y\mbox{ is open}  \\
+  \implies   & \exists \,\delta>0 \mbox{ s.t. } B_{\delta}(0) \subseteq K(B_1(0))\\
+  \implies&\overline{B_{\delta}(0)} \subseteq \overline{K(B_{1}(0))}\\
+  \implies & \overline{B_{\delta}(0)}\mbox{ is compact}
+\end{array}\]
+\end{proof}
+
+%>=====< Question 13 >=====<%
+
+\question
+the theorem about the characterization of compact operators.
+
+\subsection*{Solution}
+
+\subsection{Characterization of compact operators}
+\begin{itemize}
+    \item[i)] If $K\in K(X,Y)$ then $x_n \wc x \implies K(x_n)\to K(x)$ 
+    \item[ii)] If the previous implication holds and $K\in \Leb(X,Y)$, then $K\in K(X,Y)$.
+\end{itemize}
+
+%>=====< Question 14 >=====<%
+
+\question
+Write the definition of pre-Hilbert and of Hilbert spaces. Write the parallelogram law.
+
+\subsection*{Solution}
+
+\subsection{Pre-Hilbert space}
+$H$ vector space with a scalar product is called pre-Hilbert space.
+
+\subsection{Hilbert space}
+A Hilbert space H is a pre-Hilbert space that is also a complete metric space w.r.t. the distance induced by its scalar product.
+
+\subsection{Parallelogram law}
+Let $H$ be a pre-Hilbert space, then $\forall x,y\in H:$\[
+\|x+y\|2+\|x-y\|^2 = 2\big(\|x \|^2+\|y\|^2\big)\]
+
+%>=====< Question  15 >=====<%
+
+\question
+State and prove the projection theorem and its corollary.
+
+\subsection*{Solution}
+
+\subsection{Projection theorem}
+Let $H$ be a Hilbert space. Let $K \subset H$ be a closed convex subset. Then $\forall f\in H\,\, \exists ! u\in K\mbox{ s.t. } $
+\[ (*)\,\,\,\,\|f-u\|= \displaystyle\min_{v\in K}\|f-v\| =: dist(f,K) \]
+Moreover, \[ u \mbox{ fulfills } (*) \iff (**)\,\,\,\, u\in K, \langle  f-u,v-u\rangle\,\le 0\,\,\,\forall v \in K \]
+
+\begin{proof}
+Let $\{v_n\} \subset K$ be a minimizing sequence for $\displaystyle\min_{v\in K}\|f-v\|$, i.e:
+\[ d_n \coloneqq\|f-v_n\| \to \displaystyle \inf_{v\in K} \|f-v\| =: d \]
+We claim that $\{v_n\}$ is Cauchy. \newline 
+By the parallelogram law applied with $x= f-v_n,\,\, y=f-v_m$ we get:
+\[ \big\|f-\tfrac{v_n+v_m}{2}\big\|^2+\big\|\tfrac{v_n-v_m}{2}\big\|^2 = \tfrac{1}{2}\big(d_n^2+d_m^2\big) \]
+Since $K$ is convex, 
+\[ \|\tfrac{v_n+v_m}{2}\|^2 \in K \implies\,\, \|f-\tfrac{v_n-v_m}{2}\|^2 \ge d \]
+Therefore,
+\[ \|\tfrac{v_n-v_m}{2}\|^2\le \tfrac{1}{2}\big(d_n^2+d_m^2\big)-d^2 \,\xrightarrow{n,m\to \infty}\, \tfrac{1}{2}\big(d^2+d^2\big)-d^2 = 0 \]
+\[ \implies\displaystyle\lim_{n,m \to \infty} \|v_n-v_m\| = 0\implies \mbox{ $\{v_n\}$ is Cauchy} \]
+Notice that:
+\[
+    \begin{array}{rcl}
+        H \mbox{ complete} & \implies&\,\exists\, u\in H: v_n \xrightarrow{n\to \infty} u \\
+        \{v_n\}\subset  K \mbox{ closed} & \implies& u \in K
+    \end{array}
+\]
+Furthermore,
+\[ d \le \underbrace{\|f-v\|}_{\in K} \le \underbrace{\|f-v_n\|}_{\to d} + \underbrace{\|v_n-u\|}_{\to 0} \xrightarrow{\toi} d \]
+\[ \implies \|f-u\|=d \]
+Now suppose that there exist $u,\tilde{u}\in K$ such that $u\neq\tilde{u}$ and $\|f-u\|=\|f-\tilde{u}\|=d$.
+\newline
+By the parallelogram law with $x=f-u,\,\, y=f-\tilde{u}$:
+\[ \big\|f-\tfrac{u+\tilde{u}}{2}\big\|^2+\underbrace{\big\|\tfrac{u-\tilde{u}}{2}\big\|^2}_{=:\epsilon>0} = \tfrac{1}{2}\big(d^2+d^2\big)=d^2 \]
+\[ \implies d^2 \le \big\|f-\tfrac{u+\tilde{u}}{2}\big\|^2 = d^2 - \epsilon < d^2,\,\,\,\,\mbox{contradiction} \]\newline
+We're left to prove that $(*) \iff (**)$.
+Assume at first that $u \mbox{ fulfills } (*)$ and let $w \in K$, then:
+\[ v \coloneqq (1-t)u +tw \in K\,\,\forall t\in [0,1] \]
+\[ \|f-u\| \le \|f-v\| = \|f-[(1-t)u +tw]\| = \|(f-u)-t(w-u)\| \]
+\[ \implies \|f-u\|^2  \le \|f-v\|^2 = \|f-u\|^2+t^2\|w-u\|^2-2t\langle f-u,w-u\rangle \]
+\[ \implies 2\langle f-u,w-u\rangle  \le t\|w-u\|\,\,\forall t \in [0,1] \] 
+As $t \to 0^+$ we get $(**)$.\newline
+Conversely, suppose $(**)$ holds. Then:
+\[ \|u-f\|^2-\|v-f\|^2=2\underset{\le 0}{\langle f-u,v-u\rangle }-\|u-v\|^2\le 0 ,\,\,\forall v\in K \]
+\end{proof}
+
+\subsection{Corollary of the projection theorem}
+Suppose $M \subset H$ is a closed v.s.s. and let $f\in H$, then:
+\[ u = proj_M f \iff u\in M, \langle f-u,v\rangle = 0\,\,\forall v \in M\,\,\,(***) \]
+
+\begin{proof}
+By $(**)$:
+\[ \langle f-u,v-u \rangle \le 0\,\, \forall v \in M \]
+\[ \implies \langle f-u,tv-u \rangle \le 0\,\,\forall v \in M,\,\forall t \in \R \]
+\[ \implies t\langle f-u,v \rangle \le\langle f-u,u \rangle \,\forall t \in \R \]
+Assume by contradiction that $\langle f-u,v \rangle \neq 0$, wlog let $\langle f-u,v \rangle >0$, then for $t> \displaystyle\frac{\langle f-u,u \rangle}{\langle f-u,v \rangle}$ the above inequality does not hold.
+\newline Conversely, if $u $ satisfies $ (***)$, then
+\[ \langle f-u,\xi -u \rangle = 0\,\,\, \forall \xi \in M\,\,\,\,\,(v=\underset{\in M}{\xi - u}) \iff (**) \iff (*) \]
+\end{proof}
+
+%>=====< Question 16 >=====<%
+
+\question
+State and prove the Riesz theorem.
+
+\subsection*{Solution}
+
+\subsection{Riesz theorem}
+Let $H$ be a Hilbert space, for any $\phi \in H^* \,\,\exists! f\in H\mbox{ so that:}\\$
+\[ (*) \,\,\,\,\phi(u)=\langle f,u\rangle\,\,\,\forall u\in H \]
+Moreover,
+\[ \|\phi\|_{\Leb}=\|f\|_H \]
+
+\begin{proof}
+    Let $M\coloneqq \phi^{-1}(0)$, so $M$ is a closed v.s.s. of $H$, if $M\equiv H $ we simply take $f=0$ and we are done.
+    \newline Consider the case $M \subsetneq H$, we claim that:
+    \[ \exists g \in H\mbox{ s.t. } \|g\|=1,\,\,\, g\in M^{\perp} \]
+    In fact, let $g_0\in H,\,g_0 \notin M.$ Let $g_1\coloneqq P_m g_0$
+    \[ g\coloneqq\displaystyle\frac{g_0-g_1}{\|g_0-g_1\|} \]
+    satisfies $\|g\|=1,\,\,\, g\in M^{\perp}$
+    For any $u \in H$, set:
+    $ v\coloneqq u-\lambda g,\,\,\mbox{where } \lambda = \displaystyle\frac{\phi(u)}{\phi(g)} \,\,\,\,\,\,(\phi(g)\neq 0) $
+    \[ \phi(v) = \phi(u) -\lambda \phi(g) =  \phi(u) - \frac{\phi(u)}{\cancel{\phi(g)}}\cancel{\phi(g)} = \phi(u)-\phi(u) = 0 \implies v \in M \]
+    Therefore,
+    \[ \langle  g,v\rangle=0 \implies\,\, \langle  g,u-\lambda g\rangle =0 \implies\,\, \langle g,u\rangle = \lambda\underset{=1}{\cancel{\|g\|}} \]
+    \[ \implies \phi(u) = \phi(g)\langle g,u\rangle = \langle \underbracket{\phi(g)g}_{\coloneqq f},u\rangle \]
+    Now we can show that such $f$ is unique: suppose by contradiction that there exist $f,f_1 \in H$ that satisfy $(*)$:
+    \[ \implies 0 = \phi(u) - \phi(u) =  \langle  f,u\rangle - \langle  f_1,u\rangle = \langle  f-f_1,u\rangle\,\, \forall u\in H \]
+    \[ \implies f-f_1=0 \implies f=f_1 \mbox{, contradiction.  }    \]
+\end{proof}

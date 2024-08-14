@@ -1,0 +1,47 @@
+
+%>=====< Question 9 >=====<%
+
+\question
+
+Let $f, g \in \Mes(X, \A)$. Show that $f + g, f\cdot g \in \Mes(X, \A)$.
+
+\subsection*{Solution}
+
+\subsection{Measurability of \texorpdfstring{$f + g, f\cdot g$}{sum f and g, product f and g}} \label{meas:sumprod}
+Let $f,g:X\to\R$ and $f,g\in\Mes(X,\A)$, we have that $f+g, f\cdot g \in \Mes(X, \A)$.
+
+\begin{proof}
+    Let us define a few new functions $\phi, \psi$ and $\chi$:
+    \[
+        \left\{ \begin{array}{l}
+            \phi(x) = X\to\R^2 \quad \phi(x) \coloneqq \left( f(x), g(x) \right) \\
+            \psi(x) = \R^2\to\R \quad \psi(s,t) \coloneqq s+t                    \\
+            \chi(x) = \R^2\to\R \quad \chi(s,t) \coloneqq s\cdot t
+        \end{array} \right.
+        \implies
+        \left\{ \begin{array}{l}
+            \psi \circ \phi = f + g \\
+            \chi \circ \phi = f \cdot g
+        \end{array} \right.
+    \]
+    Now, clearly $\psi,\chi \in C^0(\R^2)$ (hence measurable), let us prove that $\phi $ is also measurable. We use the Characterization of Measurability (\ref{CharMeas}):
+    \[
+        \phi: (X,\A)\to (\R^2,\B[\R^2]) \text{ is measurable } \iff \forall E \subseteq \R^2 \text{ open } \phi^{-1}(E) \in \A
+    \]
+    We take:
+    \begin{align*}
+        E            & = R \coloneqq (a,b) \times (c,d)                                                         \\
+        \phi^{-1}(R) & \tikzmarknode{eq1}{=} \{ x\in X: \; (f(x),g(x))\in R \}                                  \\
+                     & \tikzmarknode{eq2}{=} \{ x\in X: \; f(x)\in (a,b) \} \cap \{ x\in X: \; g(x)\in (c,d) \} \\
+                     & \tikzmarknode{eq3}{=} f^{-1}(a,b) \cap g^{-1}(c,d) \in \A
+    \end{align*} \tikz[overlay,remember picture]{\draw[shorten >=1pt,shorten <=1pt] (eq1) -- (eq2) -- (eq3);}
+    Thus $\forall E \subseteq \R^2$ open, we may write:
+    \begin{align*}
+        E         & = \bigcup_{k=1}^\infty R_k, \quad R_k = (a_k,b_k) \times (c_k,d_k)                                       \\
+        \phi^{-1} & = \bigcup_{k=1}^\infty \phi^{-1}(R_k) = \bigcup_{k=1}^\infty f^{-1}(a_k,b_k) \cap g^{-1}(c_k,d_k) \in \A
+    \end{align*}
+    Hence $\phi \in \Mes(X,\A)$, and we have:
+    \[
+        \psi \circ \phi, \; \chi \circ \phi \in \Mes(X,\A)
+    \]
+\end{proof}

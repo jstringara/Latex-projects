@@ -1,0 +1,543 @@
+\sheet 
+
+%>=====< Question 1 >=====<%
+
+\question
+State and prove the theorem concerning integration of series with general terms $f_n \in \Mes_+(X, \A)$.
+
+\subsection*{Solution}
+
+\subsection{Integral of a series with positive terms} \label{IntoS:pos}
+Let $\seq{f}\subseteq \Mes_+(X,\A)$, $f_n :X\to\Rcomppos$ $\forall n \in \N$ then:
+\[
+    \int_X \left( \sum_{n=1}^\infty f_n \right) \, d\mu = \sum_{n=1}^\infty  \left( \int_X f_n \, d\mu \right)   
+\]
+
+\begin{proof} Let us provide a proof of our own making. \footnote{
+        This proof has been reviewed by professor Punzo and stated to be correct.
+    }\\
+    Cleary $\sum_{n=1}^\infty f_n \in \Mes_+(X,\A)$, since each addendum is a non-negative measurable function. Let us now note that:
+    \[
+        \sum_{k=1}^n f_k \underset{n\to\infty}{\uparrow} \sum_{k=1}^\infty f_k
+    \]
+    indeed:
+    \begin{align*}
+        & \sum_{k=1}^n f_k \xrightarrow{n\to\infty} \sum_{k=1}^\infty f_k \text{ pointwise in } X\\
+        & \sum_{k=1}^n f_k \leq \sum_{k=1}^n f_k + f_{n+1} = \sum_{k=1}^{n+1}f_k \text{ in } X \; \forall n\in\N
+    \end{align*}
+    so we may apply the Monotone Convergence Theorem (\ref{MCT}) to conclude:
+    \[
+        \int_X \left( \sum_{n=1}^\infty f_n \right) \, d\mu =  \int_X \left( \lim_{n\to\infty} \sum_{k=1}^n f_k \right) \, d\mu \overset{MCT}{=} \lim_{n\to\infty}\int_X \left(  \sum_{k=1}^n f_k \right) \, d\mu
+    \]
+    Now, for our last step, let us apply the linearity of the integral:
+    \[
+        \lim_{n\to\infty}\int_X \left(  \sum_{k=1}^n f_k \right) \, d\mu = \lim_{n\to\infty} \sum_{k=1}^n \left( \int_X  f_k  \right) = \sum_{k=1}^\infty  \left( \int_X f_k \, d\mu \right)
+    \]
+\end{proof}
+
+%>=====< Question 2 >=====<%
+
+\question
+Let $f \in\Mes_+(X, \A)$. Show that $\nu(E) \coloneqq \int_E f \, d\mu$ is a measure; state and prove its properties.
+
+\subsection*{Solution}
+
+\subsection{Measure induced by a function}
+Let $f \in\Mes_+(X, \A)$, then $\nu(E) \coloneqq \int_E f \, d\mu$, $\nu: \A \to \Rcomppos$ is a measure.
+
+\begin{proof} Let us show that $\nu$ meets the definition of a measure:
+    \begin{enumerate}[i)]
+        \item $\nu(\emptyset) = 0$ thanks to the properties of the integral (see \ref{LebInt:null}), since $\mu(\emptyset)=0$.
+        \item Let $\seq{E}\subseteq \A$ disjoint such that $\bigcup_{k=1}^\infty E_k = X$, then:
+            \begin{align*}
+                \nu(E) & \tikzmarknode{eq1}{=} \int_X f \cdot \chi_E \, d\mu = \int_X \left( f \cdot \sum_{k=1}^\infty \chi_{E_k} \right) \, d\mu \text{ thanks to the disjointedness of } \seq{E} \\
+                & \tikzmarknode{eq2}{=} \sum_{k=1}^\infty \left( \int_X f\cdot \chi_{E_k} \, d\mu \right) = \sum_{k=1}^\infty \nu(E_k)
+            \end{align*} \tikz[overlay,remember picture]{\draw[shorten >=1pt,shorten <=1pt] (eq1) -- (eq2);}
+            The penultimate passage was achieved thanks to (\ref{IntoS:pos})
+    \end{enumerate}
+\end{proof}
+
+\subsection{Properties of the induced measure}
+\begin{enumerate}[i)]
+    \item Let $g\in\Mes_+(X,\A)$, then: 
+        \[
+            \int_X g \, d\nu = \int_X g\cdot f \, d\mu    
+        \]
+    \item $\forall E \in \A$  $\mu(E)=0\implies \nu(E)=0$
+    \item $\forall f\in \Mes_+$  $\nu(E) = 0 \implies \mu(E)=0$
+\end{enumerate}
+
+\begin{proof}
+    \hspace*{\fill} %leave a blank line
+    \begin{enumerate}[i)]
+        \item Let us show this equality with $g\equiv s \in \Smes_+(X,\A)$, with canonical form:
+            \[
+                s = \sum_{k=1}^n c_k\cdot \chi_{F_k} \;, \quad \{F_k\}\subseteq\A \;, \quad X = \bigcup_{k=1}^n F_k   
+            \]
+        then:
+            \begin{align*}
+                \int_X s \, d\nu & \tikzmarknode{eq1}{=} \sum_{k=1}^n c_k \cdot \nu(F_k) = \sum_{k=1}^n c_k \cdot \left( \int_X f \, d\mu \right) \\
+                & \tikzmarknode{eq2}{=} \int_X \left( \sum_{k=1}^n c_k \cdot f \cdot \chi_{F_k} \right)
+            \end{align*} \tikz[overlay,remember picture]{\draw[shorten >=1pt,shorten <=1pt] (eq1) -- (eq2);}
+            If $g\in\Mes_+(X,\A)$ then we can get the thesis by approximation (\ref{SAT}).
+        \item $\nu(E)=0$ thanks to the properties of the integral (\ref{LebInt:null}) since $\mu(E)=0$.
+        \item Let us take the function $\chi_E\in\Mes_+(X,\A)$ (see \ref{AinA:chi}). Then, since the hypothesis is true $\forall f \in \Mes_+$, we may write:
+            \[
+                \nu(E) = \int_E \chi_E \, d\mu = 1 \cdot \mu(E) = 0 \implies \mu(E)=0
+            \]
+    \end{enumerate}
+\end{proof}
+
+%>=====< Question 3 >=====<%
+
+\question
+Let $f, g \in \Mes_+(X, \A)$. Show that if $f = g$ a.e. in $X$ then $\int_X f \, d\mu = \int_X g\, d\mu$.
+
+\subsection*{Solution}
+
+\subsection{\texorpdfstring{$f = g$ a.e. $\implies \int_X f \, d\mu = \int_X g\, d\mu$}{if f and g are equal almost everywhere then their integrals are equal}} \label{fgpos:SfSg}
+Let $f,g\in\Mes_+(X,\A)$ such that $f=g$ a.e. in $X$, then: 
+\[
+    \int_X f \, d\mu = \int_X g\, d\mu
+\]
+
+\begin{proof}
+    Let us define the following set:
+    \[
+        N \coloneqq \left\{ x \in X : \; f(x) \neq g(x) \right\} \in\A  
+    \]
+    Clearly we have that:
+    \begin{align*}
+        & \mu(N) =  0 \\
+        & \int_{N^\complement} f \, d\mu = \int_{N^\complement} g \, d\mu
+    \end{align*}
+    Both results are a consequence of the definition of almost everywhere. Thus we may write:
+    \begin{align*}
+        \int_X f \, d\mu & \tikzmarknode{eq1}{=} \cancelnum{0}{\int_N f \, d\mu} + \int_{N^\complement} f \, d\mu = \int_{N^\complement} g \, d\mu\\
+        & \tikzmarknode{eq2}{=} \underbrace{\int_N g \, d\mu}_{=0} + \int_{N^\complement} g \, d\mu = \int_X g \, d\mu\\
+    \end{align*} \tikz[overlay,remember picture]{\draw[shorten >=1pt,shorten <=1pt] (eq1) -- (eq2);}
+    let us note that we have partitioned $X$ with $N$ and $N^\complement$.
+\end{proof}
+
+%>=====< Question 4 >=====<%
+
+\question
+Write the definition of: integrable functions; Lebesgue integral; $\Leb^1 (X, \A, \mu)$.
+
+\subsection*{Solution}
+
+\subsection{Integrable function}
+Let $f:X\to\Rcomppos$ be a function, we say that $f$ is integrable on X if $f\in\Mes(X,A)$ and:
+\[
+    \int_X f_+ \, d\mu < \infty \quad \int_X f_- \, d\mu < \infty
+\]
+let us note that both $f_+$ and $f_-$ are non-negative measurable functions ($f_\pm\in\Mes_+(X,\A)$).
+
+\subsection{\texorpdfstring{$\Leb^1(X,\A,\mu)$}{L1}}
+We define $\Leb^1(X,\A,\mu)$ as the set of all integrable functions $f:X\to\Rcomp$:
+\[
+    \Leb^1(X,\A,\mu) \coloneqq \left\{ f:X\to\Rcomp: \; f\in\Mes(X,\A), \; \int_X f_\pm \, dx < +\infty  \right\}
+\]
+
+\subsection{Lebesgue integral}
+Let $f\in\Leb^1$, then we define its integral as:
+\[
+    \int_X f \, d\mu \coloneqq \int_X f_+ \, d\mu - \int_X f_- \, d\mu
+\]
+this is called the Lebesgue integral of $f$. Moreover we define:
+\[
+    \int_E f \, d\mu \coloneqq \int_X f\cdot \chi_E \, d\mu = \int_E f_+\cdot \chi_E \, d\mu - \int_E f_-\cdot \chi_E \, d\mu
+\]
+
+%>=====< Question 5 >=====<%
+
+\question
+Let $f : X \to \Rcomp$. How is the integrability of $f$  related to that of $f_\pm$ and of $|f|$? Justify the answer. Show that if $f \in \Leb^1$, then $|\int_X f \, d\mu | \leq \int_X |f| \, d\mu$. Give an alternative definition of $\Leb^1 (X, \A, \mu)$.
+
+\subsection*{Solution}
+
+\subsection{Properties of the Lebesgue integral}
+Let $f:X\to\Rcomp$ be a function, then: 
+\begin{enumerate}[i)]
+    \item $f\in\Leb^1 \iff f_\pm \in \Leb^1$
+    \item $f\in\Leb^1 \iff f \in \Mes$ and $|f|\in\Leb^1$
+    \item $f\in\Leb^1 \implies |\int_X f \, d\mu| \leq \int_X |f| \, d\mu$
+\end{enumerate}
+
+\begin{proof}
+    \hspace*{\fill} %leave a blank line
+    \begin{enumerate}[i)]
+        \item if $f\in\Leb^1$ then by definition ($\iff$) we have that:
+            \[
+                f\in\Mes \quad \text{and} \quad \int f_{\pm} \, d\mu < \infty    
+            \]
+            Now, $f\in\Mes \iff f_{\pm}\in\Mes_+$ by (\ref{fmeas:fpmmeas}) thus we have that:
+            \[
+                f_{\pm}\in \Mes, \;\int f_{\pm} \, d\mu < \infty  \iff f_{\pm}\in\Leb^1
+            \]
+            and the two conditions are equivalent.
+        \item \footnote{
+            We may also use the previous point and the fact that $\Leb^1$ is a vector space, but we'll see this later.
+        } as above, if $f\in\Leb^1$ then by definition ($\iff$) we have that:
+            \[
+                f\in\Mes \quad \text{and} \quad \int f_{\pm} \, d\mu < \infty    
+            \]
+            Now, $f\in\Mes \iff |f|\in\Mes_+$ by (\ref{fmeas:fabsmeas}) thus we have that:
+            \[
+                |f|\in \Mes, \;\int |f| \, d\mu < \infty  \iff |f|\in\Leb^1
+            \]
+            this is true by virtue of the previous point and the fact that $|f| = f_+ + f_-$, indeed:
+            \[
+                \int |f| \, d\mu = \int f_+ \, d\mu + \int f_- \, d\mu < \infty
+            \]
+            since each addendum is finite. Thus the two conditions are equivalent.
+        \item Let $f\in\Leb^1$, then thanks to the triangular inequality:
+            \begin{align*}
+                \left| \int_X f \, d\mu \right| & \tikzmarknode{eq1}{=} \left| \int_X f_+ \, d\mu - \int_X f_- \, d\mu \right| \\
+                & \tikzmarknode{eq2}{\leq} \left| \int_X f_+ \, d\mu \right| + \left| \int_X f_- \, d\mu \right| \\
+                & \tikzmarknode{eq3}{=} \int_X f_+ \, d\mu + \int_X f_- \, d\mu\\
+                & \tikzmarknode{eq4}{=} \int_X |f| \, d\mu
+            \end{align*} \tikz[overlay,remember picture]{\draw[shorten >=1pt,shorten <=1pt] (eq1) -- (eq2) -- (eq3) -- (eq4);}
+    \end{enumerate}    
+\end{proof}
+
+\subsection{ALternative definition of \texorpdfstring{$\Leb^1$}{L1}} \footnote{This definition has not been directly provided by prof. Punzo. I found no reference to this definition neither in my personal notes nor his, rather I found it in a student's notes from last year's course. Nevertheless, it is clearly attested in the literature and it is equivalent and alternative to the previous definition.}
+We can also more compactely define $\Leb^1(X,\A,\mu)$ through the absolute value:
+\[
+    \Leb^1(X,\A,\mu) \coloneqq \left\{ f:X\to\Rcomp: \; f\in\Mes(X,\A), \; \int_X |f| \, dx < +\infty  \right\}
+\]
+
+
+%>=====< Question 6 >=====<%
+
+\question
+Prove that $\Leb^1$ is a vector space.
+
+\subsection*{Solution}
+
+\subsection{ \texorpdfstring{$\Leb^1$}{L1} is a vector space}
+$\Leb^1(X,\A,\mu)$ is a vector space.
+
+\begin{proof}
+    Let $f,g\in\Leb^1$ and $\lambda\in\R$, then:
+    \begin{align*}
+        & \implies f_{\pm}, g_{\pm} \text{ finite a.e. in } X \text{ by (\ref{intfin:ffin})} \\
+        & \implies f,g \text{ finite a.e. in } X
+    \end{align*}
+    so we can define:
+    \[
+        h \coloneqq f+ \lambda g \text{ defined a.e. in } X
+    \]
+    clearly $h\in\Mes$ by the properties of measurable functions (\ref{meas:sumprod}) and:
+    \[
+        \int_X |h| \, d\mu = \int_X |f| + |\lambda| \int_X |g| \, d\mu < \infty 
+    \]
+    since both addenda are finite. Thus $h\in\Leb^1$ and 
+    $\Leb^1$ is a vector space.
+\end{proof}
+
+%>=====< Question 7>=====<%
+
+\question
+State and prove the vanishing lemma for $\Leb^1$ functions.
+
+\subsection*{Solution}
+
+\subsection{Vanishing lemma for \texorpdfstring{$f\in\Leb^1$}{integrable functions}}
+Let $f\in\Leb^1(X,\A,\mu)$ be such that:
+\[
+    \int_E f \, d\mu = 0 \quad \forall E \in \A
+\]
+then $f=0$ a.e. in $X$.
+
+\begin{proof}
+    Let us define two sets:
+    \begin{align*}
+        E_+ & \coloneqq \{x\in X : f(x) \geq 0\} \\
+        E_- & \coloneqq \{x\in X : f(x) \leq 0\}
+    \end{align*}
+    they are both in $\A$ since $f\in\Mes$ (see \ref{statomeas:3}), so we have that:
+    \begin{align*}
+        & \int_{E_+} f \, d\mu = 0 \implies f=0 \text{ a.e. in } E_+\\
+        & \int_{E_-} f \, d\mu = 0 \implies f=0 \text{ a.e. in } E_-
+    \end{align*}
+    so we have that $f=0$ a.e. in $X=E_+\cup E_-$.
+\end{proof}
+
+%>=====< Question 8>=====<%
+
+\question
+Let $f \in \Leb^1$, $g \in \Mes$, $f = g$ a.e. in $X$. Show that $g \in \Leb^1$ and $\int_X g\, d\mu = \int_X f \, d\mu$.
+
+\subsection*{Solution}
+
+\subsection{f = g a.e. \texorpdfstring{$\implies g \in \Leb^1$}{then g is integrable} and \texorpdfstring{$\int_X g\, d\mu = \int_X f \, d\mu$}{its integral is the same as f}}
+Let $f\in\Leb^1$, $g\in\Mes$ and $f=g$ a.e. in $X$. Then:
+\[
+    g \in \Leb^1 \text{ and } \int_X f \, d\mu = \int_X g \, d\mu
+\]
+
+\begin{proof}
+    We have that:
+    \begin{align*}
+        & f_+=g_+ \text{ a.e. in } X  \text{ and } f_-=g_- \text{ a.e. in } X \\
+        & \implies \int_X f_+ \, d\mu = \int_X g_+ \, d\mu \text{ and } \int_X f_- \, d\mu = \int_X g_- \, d\mu
+    \end{align*}
+    thanks to (\ref{fgpos:SfSg}), thus we get:
+    \[
+        \int_X f \, d\mu = \int_X f_+ \, d\mu + \int_X f_- \, d\mu = \int_X g_+ \, d\mu + \int_X g_- \, d\mu = \int_X g \, d\mu
+    \]
+\end{proof}
+
+%>=====< Question 9 >=====<%
+
+\question
+State and prove the Lebesgue theorem. In which case it is simple to find a dominating function?
+
+
+\subsection*{Solution}
+
+\subsection{Lebesgue theorem (or Dominated convergence theorem)}\label{DCT}
+Let $\seq{f}\subseteq \Mes(X,\A)$ be a sequence of measurable functions and $f\in\Mes(X,\A)$ be a function such that:
+\[
+    f_n \xrightarrow{n\to\infty} f \text{ a.e. in } X
+\]
+if $\exists g \in \Leb^1$ such that:
+\[
+    |f_n| \leq g \quad \text{ a.e. in } X \; \forall n \in \N
+\]
+then:
+\[
+    f_n,f \in \Leb^1 \text{ and } \int_X |f_n-f| \, d\mu \xrightarrow{n\to\infty} 0    
+\]
+in particular:
+\[
+    \int_X f_n \, d\mu \xrightarrow{n\to\infty} \int_X f \, d\mu
+\]
+
+\begin{proof}
+    We shall prove this theorem by applying  Fatou's lemma (\ref{Fatlem}). \\
+    Now since $|f_n| \leq g$ we can pass the limit and get:
+    \[
+        |f| \leq g \text{ a.e. in } X
+    \]
+    So we have:
+    \begin{align*}
+        & \int_X |f_n| \, d\mu \leq \int_X g \, d\mu \quad \forall n \in \N \\
+        & \int_X |f| \, d\mu \leq \int_X g \, d\mu
+    \end{align*}
+    so since $f_n,f\in\Mes$ and $g\in\Leb^1$ we can deduce that:
+    \[
+        \implies f_n,f\in\Leb^1    
+    \]
+    So they are also finite a.e., let us now define  a new sequence $\seq{g}$:
+    \[
+        g_n \coloneqq 2g - |f_n -f | \quad \forall n \in \N  
+    \]
+    by the previous inequalities we get:
+    \[
+        |f_n -f | \leq |f_n| + |f|\leq 2g \text{ a.e. in } X \; \forall n \in \N    
+    \]
+    therefore:
+    \[
+        g_n \geq 0 \text{ a.e. in } X \; \forall n \in \N \implies g_n \in Mes_+    
+    \]
+    \newpage
+    thus we can write:
+    \begin{align*}
+        2 \int_X g \, d\mu & \tikzmarknode{eq1}{=} \int_X \left( \lim_{n\to\infty} g_n \right) \, d\mu \\
+        & \tikzmarknode{eq2}{\leq} \liminf_{n\to\infty} \int_X g_n \, d\mu  \text{ by Fatou's lemma \ref{Fatlem}}\\
+        & \tikzmarknode{eq3}{=} \liminf_{n\to\infty} \int_X \left[ 2g - |f_n -f | \; \right] \, d\mu \\
+        & \tikzmarknode{eq4}{=} 2 \int_X g \, d\mu - \limsup_{n\to\infty}  \left( \int_X |f_n-f| \, d\mu \right) \\
+    \end{align*} \tikz[overlay,remember picture]{\draw[shorten >=1pt,shorten <=1pt] (eq1) -- (eq2) -- (eq3) -- (eq4);}
+    thus we may simplify $2\int_X g \, d\mu$ on both sides and invert the inequality sign we get:
+    \[
+        \limsup_{n\to\infty}  \left( \int_X |f_n-f| \, d\mu \right) \leq 0
+    \]
+    so since $\int_X |f_n-f| \, d\mu \geq 0$ it admits a limit and we have:
+    \[
+        \lim_{n\to\infty} \int_X |f_n-f| \, d\mu = 0
+    \]
+    Moreover:
+    \[
+        \left| \int_X f_n \, d\mu - \int_X f \, d\mu \right| \leq \lim_{n\to\infty} \int_X |f_n-f| \, d\mu  \xrightarrow{n\to\infty} 0
+    \]
+\end{proof}
+
+\subsection{Simple case for the Lebesgue Theorem}
+If we have the following situation:
+\begin{enumerate}
+    \item $\mu(X) < + \infty$ 
+    \item $\exists M > 0$:  $| f_n | \leq M$ a.e. in $X$ $\forall n \in \N$
+\end{enumerate}
+Then we can choose $g\coloneqq M$ and we get:
+\[
+    \int_X |g| \, d\mu = \int_X M \, d\mu = M \cdot \mu(X) < +\infty \iff g\in\Leb^1    
+\]
+thus we have easily met the thesis of the Lebesgue Theorem (\ref{DCT}).
+
+%>=====< Question 10 >=====<%
+
+\question
+Describe the relations between Peano-Jordan and Lebesgue measures, and between the Riemann (also in the generalized sense) and the Lebesgue integral.
+
+\subsection*{Solution}
+
+\subsection{Every Peano-Jordan-measurable set is Lebesgue measurable}
+Let $E\subseteq\R^n$, if $E$ is Peano-Jordan-measurable then it is also Lebesgue-measurable ($E\in\Leb(\R^n)$) and the its measures coincide:
+\[
+    m_{PJ} (E) = \lambda(E)    
+\]
+Thus the set of Peano-Jordan-measurable sets is strictly included in the set of Lebesgue-measurable sets. Indeed the set $[0,1]\cap\Q$ is Lebesgue-measurable (with measure zero) but is not Peano-Jordan-measurable (this is due to the fact that Peano-Jordan-measurable sets do not form a $\salg$).
+
+\subsection{The Riemann integral and the Lebesgue integral}
+
+\subsubsection*{Proper integrals}
+Let $I=[a,b]$ be a closed interval and $R(I)$ the set of Riemann-integrable functions over $I$. For any function $f\in R(I)$ we have $f\in\Leb^1(I,\Leb(I),\lambda)$ and:
+\[
+    \int_I f \, d\lambda = \int_a^b f(x) \, dx    
+\]
+To state it plainly, we can say that the set of R-integrable functions and the set of $\Leb$-integrable functions coincide on closed intervals and the integrals of such functions also coincide.
+
+\subsubsection*{Improper integrals}
+Let $I=(\alpha,\beta)$ and let $R^i(I)$ be the set of functions $f:I\to\R$ integrable in the generalized (improper) sense. Then we have:
+\begin{enumerate}[i)]
+    \item $f\in R^i(I) \implies f\in\Mes(I,\Leb(I))$
+    \item $|f|\in R^i(I) \implies f\in \Leb^1(I,\Leb(I),\lambda)$ and moreover:
+        \[
+            \int_I f \, d\lambda = \int_\alpha^\beta f(x) \, dx    
+        \]
+\end{enumerate}
+Let us note here the crucial fact that this statement does not imply (as is instead the case for sets) that all $R^i$-integrable functions are also $\Leb$-integrable. This is due to the requirement that the absolute value of $f$ be in $\Leb^1$.
+\subsubsection{Counter-Example}
+take the function:
+\[
+    f(x) \coloneqq \begin{cases}
+        \frac{sin(x)}{x}  & x\neq 0\\
+        1   & x=0
+    \end{cases} \quad f: I=[0,+\infty)\to \R   
+\]
+and on one hand we have that:
+\[
+    f\in R^i(I) \quad \int_0^\infty \frac{sin(x)}{x} \, dx = \frac{\pi}{2}     
+\]
+while on the other we have:
+\[
+    \int_{\R_+} \left| \frac{sin(x)}{x} \right| \, d\lambda = \int_0^\infty \left| \frac{sin(x)}{x} \right| \, dx = +\infty \implies f\not\in \Leb^1
+\]
+Therefore we may conclude that not all $R^i$-integrable functions are also L-Integrable.
+
+%>=====< Question 11 >=====<%
+
+\question
+State the theorem for integration of series (without sign restriction on the general term $f_n$).
+
+\subsection*{Solution}
+
+\subsection{Integration of series with general terms}
+Let $\seq{f}\subseteq \Leb^1$ be such that:
+\[
+    \sum_{n=1}^\infty \left( \int_X | f_n | \right) \, d\mu < +\infty    
+\]
+then the series $\sum_{n=1}^\infty f_n$ converges a.e. in $X$ and we have that:
+\[
+    \int_X \left( \sum_{n=1}^\infty f_n \right) \, d\mu = \sum_{n=1}^\infty \left( \int_X f_n \, d\mu \right)   
+\] 
+
+%>=====< Question 12 >=====<%
+
+\question
+Write the definitions of $L^1$ and of $L^\infty$. Show that they are metric spaces. Are $\Leb^1$ and $\Leb^\infty$ metric spaces?
+
+\subsection*{Solution}
+
+\subsection{Definition of \texorpdfstring{$L^1$}{L1}}
+Let $(X,\A,\mu)$ be ameasure space and let $R$ be the equivalence relation (see \ref{equivrel}) such that:
+\[
+    fRg \iff f=g \text{ a.e. in } X
+\]
+then we define $L^1$ as the quotient set of $\Leb^1$ with respect to this relation:
+\[
+    L^1 (X,\A,\mu) \coloneqq \Leb^1(X,\A,\mu) / R    
+\]
+and we denote the classes of equivalence inside of it as:
+\[
+    [f] \coloneqq \{ g\in\Leb^1 : \; fRg\}    
+\]
+
+\subsection{Definition of \texorpdfstring{$L^\infty$}{Linf}}
+As done above we define $L^\infty$ as:
+\[
+    L^\infty(X,\A,\mu) \coloneqq \Leb^\infty(X,\A,\mu)/R    
+\]
+
+\subsection{\texorpdfstring{$L^1$}{L1} and \texorpdfstring{$L^\infty$}{Linf} are metric spaces}
+Both $L^1$ and $L^\infty$ are metric spaces with the following distance functions:
+\[
+    d_1(f,g) \coloneqq \int_X |f-g| \, d\mu \quad \quad d_\infty(f,g) \coloneqq \esssup_X |f-g| 
+\]
+
+\begin{proof}
+    Let us prove this for $L^1$ only, as the proof for $L^\infty$ is analogous. \\
+    Now, let us show that $d_1$ meets the definition of a distance, $d_1: L^1\times L^1 \to \R$. Indeed, since $f,g\in L^1$ ($\int_X f \, d\mu, \int_X g \, d\mu < + \infty$), we have:
+    \[
+        \int_X |f-g| \, d\mu \leq \int_X |f| \, d\mu + \int_X |g| \, d\mu < + \infty
+    \]
+    moreover:
+    \begin{enumerate}[i)]
+        \item $d(f,g)\geq 0 $ $\forall f,g \in L^1$;
+        \item $d(f,f)=0$ $\forall f \in L^1$;
+        \item $d(f,g)=0 \iff \int_X |f-g| \, d\mu =0$ by the vanishing lemma (\ref*{VanLem}) we get $|f-g|=0$ a.e. in $X$, thus $f=g$ a.e. in $X$;
+        \item $d(f,g)=d(g,f)$ $\forall f,g \in L^1$;
+        \item $d(f,g)\leq d(f,h)+d(h,g)$ $\forall f,g,h \in L^1$ by the triangular inequality and monotonicity of the integral.
+    \end{enumerate}
+    Let us note that the equality almost everywhere is an exact match under the equivalence relation $R$. In other words $f,g \in [f]$ and they are the same element with respect to $L^1$ and we can say that $d_1(f,g)=0\implies f \overset{L^1}{=}g$. Therefore we can say that $L^1$ is a metric space equipped with the distance $d_1$.\\
+    Let us also note that this isn't true for $\Leb^1$ since it isn't quotiented by the equivalence relation $R$, thus it isn't a metric space. The same argument can be applied to $L^\infty$ and $\Leb^\infty$.
+\end{proof}
+
+%>=====< Question 13 >=====<%
+
+\question
+For a sequence of functions $\seq{f} \subset \Mes$, write the definitions of: pointwise convergence; uniform convergence; almost everywhere convergence; convergence in $L^1$; convergence in $L^\infty$; convergence in measure.
+
+\subsection*{Solution}
+
+Let $\seq{f}\subseteq \Mes(X,\A)$, $f_n:X\to\R$, $f:X\to\Rcomp$. We can define the following:
+
+\subsection{Pointwise convergence}
+We say that $f_n \xrightarrow{n\to\infty} f$ pointwise if:
+\[
+    f_n(x) \xrightarrow{n\to\infty} f(x) \quad \forall x \in X
+\]
+in the sense of a sequence of real numbers ($f_n(x)\in\R$).
+
+\subsection{Uniform convergence}
+We say that $f_n \xrightarrow{n\to\infty} f$ uniformly if:
+\[
+    \sup_{x\in X} |f_n(x)-f(x)| \xrightarrow{n\to\infty} 0
+\]
+
+\subsection{Almost everywhere convergence}
+We say that $f_n \xrightarrow{n\to\infty} f$ almost everywhere if:
+\[
+    \{ x\in X : \; f_n(x) \xrightarrow{n\to\infty} f(x) \}^\complement \in \mathcal{N}_\mu
+\]
+that is to say the set where $f_n$ doesn't converge to $f$ is measurable and has measure zero.
+
+\subsection{Convergence in \texorpdfstring{$L^1$}{L1}}
+Let $\seq{f}\subseteq L^1$ and assume (for now) $f\in L^1$. We say that $f_n \xrightarrow{n\to\infty} f$ in $L^1$ if:
+\[
+    d_1(f_n,f) = \int_X |f_n-f| \, d\mu \xrightarrow{n\to\infty} 0    
+\]
+
+\subsection{Convergence in \texorpdfstring{$L^\infty$}{Linf}}
+Let $\seq{f}\subseteq L^\infty$ and assume (for now) $f\in L^\infty$. We say that $f_n \xrightarrow{n\to\infty} f$ in $L^\infty$ if:
+\[
+    d_\infty(f_n,f) = \esssup_X |f_n-f| \xrightarrow{n\to\infty} 0
+\]
+
+\subsection{Convergence in measure}\label{conv:meas}
+We say that $f_n \xrightarrow{n\to\infty} f$ in measure if:
+\[
+    \mu (\{ |f_n-f| \geq \epsilon \}) \xrightarrow{n\to\infty} 0 \quad \forall \epsilon > 0   
+\]

@@ -1,0 +1,68 @@
+
+%>=====< Question 2 >=====<%
+
+\question
+
+Define the Vitali-Lebesgue function. State its main properties and prove some of 
+them.
+
+\subsection*{Solution}
+
+\subsection{Vitali-Lebesgue Function}
+As for the cantor set we shall define Vitali's function iteratively as a sequence of functions $\seq{f}$. This sequence is defined as follows:
+\begin{align*}
+    & f_0(x) = 0 \quad x\in [0,1] \\
+    & f_1(x) = \begin{cases}
+        \frac{3}{2}t \quad & t\in [0,1/3] \\
+        \frac{1}{2} \quad & t\in (1/3,2/3) \\
+        \frac{3}{2}t - \frac{1}{2} \quad & t\in [2/3,1]
+    \end{cases} \\
+    & \quad \vdots \\
+    & f_{n}(x) = \begin{cases}
+        \frac{1}{2}f_{n-1}(3t) \quad & t\in [0,1/3] \\
+        f_{n-1}(t) \quad & t\in (1/3,2/3) \\
+        \frac{1}{2}f_{n-1}(3t - 2) \quad & t\in [2/3,1]
+    \end{cases}
+\end{align*}
+and we define Vitali's function $V$ as:
+\[
+    f_n \to V \in C([0,1])    
+\]
+let us prove that such a function exists and is unique.
+
+\begin{proof}
+    Let us prove that $f_n$ is a Cauchy sequence in $C([0,1])$, we may prove that:
+    \[
+        || f ||_{\infty} = \max_{t\in[0,1]} |f(t)| \rightarrow ||f_n - f_{n-1} ||_{\infty} < \frac{1}{2^n} 
+    \]
+    let us assume this to be true, for now, then to prove that $\seq{f}$ is Cauchy we have to prove that:\
+    \[
+        ||f_m - f_n ||_{\infty} < \epsilon \quad \forall m>n \in \N, \; \exists \epsilon >0    
+    \]
+    indeed we may write:
+    \begin{align*}
+        ||f_m - f_n ||_{\infty} & \tikzmarknode{eq1}{=} ||f_m - f_{n+1} + f_{n+1} - f_n ||_{\infty} \\
+        & \tikzmarknode{eq2}{\leq} ||f_m - f_{n+1}||_\infty + ||f_{n+1} - f_n ||_{\infty} \text{ by the triangular inequality} \\
+        & \tikzmarknode{eq3}{\leq} \sum_{k=n}^m ||f_{k+1} - f_k ||_{\infty} \text{by repeating the previous step} \\
+        & \tikzmarknode{eq4}{\leq} \sum_{k=n}^{m-1} \frac{1}{2^{k+1}} < \epsilon \text{ since the series is convergent}
+    \end{align*} \tikz[overlay,remember picture]{\draw[shorten >=1pt,shorten <=1pt] (eq1) -- (eq2) -- (eq3) -- (eq4);}
+    thus the limit exists and is unique and we have a function:
+    \[
+        V:[0,1]\to [0,1]
+    \]
+\end{proof}
+
+\subsection{Properties of Vitali's function}
+Vitali's function has the following properties:
+\begin{enumerate}[i)]
+    \item $V(0)=0$, $V(1)=1$ and $V$ is continuous since it is the uniform limit of continuous functions.
+    \item $V$ is non-decreasing in $[0,1]$ since $f_n$ is non-decreasing for all $n\in\N$.
+        \begin{proof}
+            Let $0\leq x < y \leq 1$ then:
+            \[
+                V(x) = \lim_{n\to\infty} f_n(x) \leq \lim_{n\to\infty} f_n(y) = V(y)   
+            \]
+        \end{proof}
+    \item $V([0,1]) = [0,1]$ since $V\in C([0,1])$ and $V(0)=0$ and $V(1)=1$. Thus by Intermediate value theorem $V$ must cross all the values in between.
+    \item $V'=0$ almost everywhere since $V$ is constant on $[0,1]\setminus \mathcal{C}$ and $\lambda(\mathcal{C})=0$. 
+\end{enumerate}

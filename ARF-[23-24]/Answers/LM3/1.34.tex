@@ -1,0 +1,35 @@
+
+%>=====< Question 11 >=====<%
+
+\question
+
+Prove or disprove the following statements:
+\begin{enumerate}[a)]
+    \item\label{fmeas:fpmmeas} $f \in \Mes(X, \A) \iff f_{\pm} \in \Mes_+(X, \A)$;
+    \item\label{fmeas:fabsmeas} $f \in \Mes(X, \A) \iff |f| \in \Mes(X, \A)$.
+\end{enumerate}
+
+\subsection*{Solution}
+
+\subsection{Measurability of \texorpdfstring{$f_{\pm}$}{f positive, f negative} and \texorpdfstring{$|f|$}{absolute value of f}}
+
+Let $f:X\to\R$, we have:
+\begin{enumerate}[i)]
+    \item $f \in \Mes(X, \A) \iff f_{\pm} \in \Mes_+(X, \A)$
+    \item $f \in \Mes(X, \A) \iff |f| \in \Mes(X, \A)$
+\end{enumerate}
+
+\begin{proof}
+    \hspace*{\fill} %leave a blank line
+    \begin{enumerate} [i)]
+        \item \begin{itemize}
+                  \item \textbf{($\implies$):} if $f \in \Mes(X, \A)$, then we define $f_+$ as:
+                        \[
+                            f_+(x) = \max\{f(x),0\} \geq 0 \quad \forall x\in X
+                        \]
+                        and since $f,0 \in \Mes(X,\A)$ and $\max$ is a measurable function we have that $f_+ = \max \circ (f,0) \in \Mes_+(X,\A)$ by (\ref{meas:comp}). We may analogously prove the same for $f_-$.
+                  \item \textbf{($\impliedby$):} if $f_+ \in \Mes_+(X, \A)$, then we define $f = f_+ - f_-$, and since $f_+,f_-,f \in \Mes(X,\A)$ we have that $f \in \Mes(X,\A)$ by (\ref{meas:sumprod}).
+              \end{itemize}
+        \item $f\in\Mes \implies f_{+}, f_{-} \in \Mes$ by the previous point $\implies |f|=f_+ + f_- \in \Mes$ by (\ref{meas:sumprod}).
+    \end{enumerate}
+\end{proof}

@@ -1,0 +1,121 @@
+
+%>=====<  Question 10 >=====<%
+
+\question
+State and prove the theorem regarding properties of measures. Why the two continuity properties
+are called in this way? For what concerns continuity w.r.t. a descending sequence ${E_k}$, show that
+the hypothesis $\mu(E_1) < +\infty$ is essential.
+
+\subsection*{Solution}
+\subsection{Properties of measures}
+Let us state and prove the properties of a measure $\mu$ on a set $X$ and $\salg$ $\A$:
+\begin{enumerate}[i)]
+    \item \label{meas:add} \textbf{Additivity:} \\
+    $\forall \{ E_1, \dots, E_n \} \subseteq \A$ disjoint we have:
+    \[
+        \mu\left( \bigcup_{k=1}^{n} E_k \right) = \sum_{k=1}^{n} \mu(E_k)
+    \]
+    \begin{proof}
+    indeed if we define a sequence such that:
+    \[
+        \seq{E} = \left\{ \begin{array}{l}
+            B_k = E_k \quad \forall k \leq n\\
+            B_k = \emptyset \quad \forall k > n
+        \end{array} \right.
+    \]
+    this sequence is also disjoint ($E\cap\emptyset = \emptyset$ $\forall E\in X$), thus we may write:
+    \[
+        \mu \underbrace{ \left( \bigcup_{k=1}^{\infty} E_k \right) }_{=\bigcup_{k=1}^{n} E_k \cup \emptyset}
+         = \sum_{k=1}^{\infty} \mu(E_k) = \sum_{k=1}^{n} \mu(E_k) + \sum_{k=n+1}^{\infty} \underbrace{\cancelnum{}{\mu(E_k)}}_{=0}
+    \]
+    \end{proof}
+
+    \item \label{meas:mono} \textbf{Monotonicity:} \\
+    $\forall E,F \in \A$ we have:
+    \[
+        E\subseteq F \implies \mu(E) \leq \mu(F)    
+    \]
+    \begin{proof}
+    We may write $F$ in the following way:
+    \[
+        F=E\cup (F \setminus E) 
+    \]
+    and since these two sets are obviously disjoint we may use (\ref{meas:add}) to write:
+    \[
+        \mu(F) = \mu(E)+\underbrace{\mu(E \setminus F)}_{\geq 0} > \mu(E)
+    \]
+    \end{proof}
+    
+    \item \label{meas:sub} \textbf{$\s{subadditivity}$:} \\
+    $\forall \seq{E}\subseteq\A$ (\textbf{not} disjoint) we have:
+    \[
+        \mu\left( \bigcup_{k=1}^{\infty} E_k \right) \leq \sum_{k=1}^{\infty} \mu(E_k)
+    \]
+    \begin{proof}
+    \provdef{}
+    \[
+        \left\{ \begin{array}{l}
+            F_1 \coloneqq E_1 \\
+            F_n \coloneqq E_n \setminus \bigcup_{k=1}^{n-1} E_k \quad \forall n > 1
+        \end{array} \right.  
+    \]
+    Clearly $\seq{F} \subseteq \A$ and $\seq{F}$ is a disjoint sequence and:
+    \[
+        \begin{array}{l}
+            F_k \subseteq E_k \quad \forall k\in\N \implies \mu(F_k) \leq \mu(E_k) \text{ by (\ref{meas:mono})} \\
+            \bigcup_{k=1}^{\infty} F_k = \bigcup_{k=1}^{\infty} E_k    
+        \end{array}
+    \]
+    thus we may write:
+    \[
+        \mu\left( \bigcup_{k=1}^{\infty} E_k \right) = \mu\left( \bigcup_{k=1}^{\infty} F_k \right) = \sum_{k=1}^{\infty} \mu(F_k) \leq \sum_{k=1}^{\infty} \mu(E_k)   
+    \]
+    \end{proof}
+
+    \item \label{meas:contbel} \textbf{Continuity from below:} \\
+    $\forall \seq{E}\subseteq\A, \; E_k \nearrow$ we have:
+    \[
+        \mu \left( \lim_{k\to\infty}E_k \right)  = \lim_{k\to\infty} \mu(E_k)    
+    \]
+    \begin{proof}
+    \provdef[a new sequence $\seq{F}$]
+    \[
+        \left\{ \begin{array}{l}
+            F_k \coloneqq E_k \setminus E_{k-1} \quad \forall k \in\N \text{ and } E_0 \coloneqq \emptyset \\
+            \implies \bigcup_{k=1}^n F_k = E_n ,\; \bigcup_{k=1}^{\infty} F_k = \bigcup_{k=1}^{\infty} E_k
+        \end{array} \right.
+    \]
+    and since $\seq{F}$ is a disjoint sequence (we may visually think of it as a set of ever increasing rings) we may use (\ref{meas:add}) to write:
+    \begin{align*}
+        \mu\left( \lim_{n\to\infty} E_n \right) &\tikzmarknode{eq1}{=} \mu\left( \bigcup_{k=1}^{\infty} E_k \right) = \mu\left( \bigcup_{k=1}^{\infty} F_k \right) \\
+        & \tikzmarknode{eq2}{=} \lim_{n\to\infty}\sum_{k=1}^{n} \mu(F_k) = \lim_{n\to\infty} \mu \left( \bigcup_{k=1}^{n} F_k \right) \\
+        & \tikzmarknode{eq3}{=} \lim_{n\to\infty} \mu(E_n)
+    \end{align*} \tikz[overlay,remember picture]{\draw[shorten >=1pt,shorten <=1pt] (eq1) -- (eq2) -- (eq3);}
+    \end{proof}
+
+    \item \label{meas:contab} \textbf{Continuity from above:} \\
+    $\forall \seq{E} \subseteq \A$, $E_k\searrow$, $\mu(E_1) < +\infty$ we have:
+    \[
+        \mu\left( \lim_{n\to\infty} E_n \right) = \lim_{n\to\infty} \mu(E_n)
+    \]
+    \begin{proof}
+    Like we did above \provdef{a new sequence $\seq{F}$}
+    \[
+            F_k \coloneqq E_1 \setminus E_k \quad \forall k \in\N
+    \]
+    let us note that $\seq{F}$ is an increasing sequence thus by (\ref{meas:contbel}) we can write:
+    \[
+        \mu\left( \bigcup_{k=1}^{\infty} F_k \right) = \lim_{k\to\infty} \mu(F_k) = \mu(E_1) - \lim_{k\to\infty}  (E_k)   
+    \]
+    because by (\ref*{meas:mono}) $\mu(F \setminus E) = \mu(F)-\mu(E)$, moreover:
+    \begin{align*}
+        \bigcup_{k=1}^{\infty} F_k & = \bigcup_{k=1}^{\infty} (E_1\cap E_k^\complement) = E_1\cap \left( \bigcup_{k=1}^{\infty} E_k^\complement \right) = E_1 \setminus \left( \bigcap_{k=1}^{\infty} E_k \right) \\
+        &\implies \mu\left( \bigcup_{k=1}^{\infty} F_k \right) = \mu(E_1) - \mu \left( \bigcap_{k=1}^{\infty} E_k \right)
+    \end{align*}
+    thus combining these two and canceling the $\mu(E_1)$ on both sides we obtain:
+    \[
+        \lim_{k\to\infty} \mu(E_k) = \mu \left( \bigcap_{k=1}^{\infty} E_k \right)
+    \]
+    \end{proof}
+    let us note that for this last, crucial, step $\mu(E_1)$ must be finite, otherwise we would not be able to cancel it out from both sides.
+\end{enumerate}

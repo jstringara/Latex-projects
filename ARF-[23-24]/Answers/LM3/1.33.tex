@@ -1,0 +1,29 @@
+
+%>=====< Question 10 >=====<%
+
+\question
+
+Prove that A is measurable if and only if $\chi_A$ is a measurable function.
+
+\subsection*{Solution}
+
+\subsection{A is measurable if and only if \texorpdfstring{$\chi_A$}{the indicator function of A} is a measurable function} \label{AinA:chi}
+
+Let $A\subseteq X$ and $\chi_A$ be the indicator function of $A$. We have:
+\[
+    \chi_A \in \Mes(X, \A) \iff \quad A \in \A
+\]
+
+\begin{proof}
+    \[
+        \{ \chi_A > \alpha \}  = \left\{ \begin{array}{l}
+            X \quad \alpha <0         \\
+            A \quad 1 > \alpha \geq 0 \\
+            \emptyset \quad \alpha \geq 1
+        \end{array} \right.
+    \]
+    Now, $X,\emptyset\in\A$ by definition, so:
+    \[
+        A\in\A \iff \chi_A \in \Mes
+    \]
+\end{proof}

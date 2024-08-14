@@ -1,0 +1,27 @@
+
+%>=====< Question 7 >=====<%
+
+\question
+
+Let $f \in \Mes_+(X, \A)$ be such that $\int_X f \, d\mu < +\infty$. Show that $f$ is finite a.e. in $X$.
+
+\subsection*{Solution}
+
+\subsection{f is finite a.e. in X if \texorpdfstring{$\int_X f d\mu < +\infty$}{ its integral is finite}} \label{intfin:ffin}
+Let $f \in \Mes_+(X, \A)$ be such that $\int_X f \, d\mu < +\infty$, then $f$ is finite a.e. in $X$.
+
+\begin{proof}
+    Let us note that the thesis is equivalent to $\mu(\{ f = +\infty\}) = 0$. Let us define:
+    \[
+        \{ f = + \infty \} = \bigcap_{n=1}^\infty \{ f > n \}    
+    \]
+    Clearly we have that:
+    \begin{enumerate}[a)]
+        \item $\{ f > n\} \downarrow \{ f = +\infty \}$
+        \item $\mu (\{ f > n \}) \leq \frac{1}{n}\cdot \int_X f\, d\mu$ $\forall n\in\N$ by the Chebychev inequality (\ref{ChebIneq}).
+    \end{enumerate}
+    So since $\mu(\{f > 1\}) \leq \frac{1}{1}\cdot \int_X f \, d\mu < +\infty$ we may apply the continuity from above of $\mu$ (\ref{meas:contab}):
+    \[
+        \mu (\{ f= +\infty \}) = \mu \left( \bigcap_{n=1}^\infty \{f>n\} \right) = \lim_{n\to\infty} \mu(\{f>n\}) = \lim_{n\to\infty} \frac{1}{n}\cdot \underbrace{\int_X f \, d\mu}_{<+\infty} \longrightarrow 0  
+    \]
+\end{proof}

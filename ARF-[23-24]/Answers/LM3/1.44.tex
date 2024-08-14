@@ -1,0 +1,30 @@
+
+%>=====< Question 6 >=====<%
+
+\question
+
+State and prove the Chebychev inequality.
+
+\subsection*{Solution}
+
+\subsection{Chebychev inequality}\label{ChebIneq}
+
+Let $f\in\Mes_+(X,\A)$ then $\forall c>0$ we have:
+\[
+    \mu( \{  f\geq c \}) \leq \frac{1}{c} \int_{ \{ f \geq c \}} f\; d\mu \leq \frac{1}{c} \int_X f\; d\mu    
+\]
+\begin{proof}
+    Clearly
+    \[
+        E_C \coloneqq \{ f\geq c \} \in \A \text{ since } f\in\Mes_+(X,\A) \text{ (see (\ref{statomeas:3}))} 
+    \]
+    and we have that:
+    \[
+        c\cdot \chi_{E_C} \leq f \cdot \chi_{E_C}    
+    \]
+    thus by the monotonicity of the integral for functions (\ref{LebInt:monofunc}) and for sets (\ref{LebInt:monoset}) we have:
+    \[
+        c\cdot \mu(E_C) = \int_ X c\cdot \chi_{E_C} \, d\mu \leq \int_ X f \cdot \chi_{E_C} \, d\mu = \int_{E_C} f \, d\mu \leq \int_X f \, d\mu
+    \]
+    so we have the Chebychev inequality.
+\end{proof}

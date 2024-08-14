@@ -1,0 +1,33 @@
+
+%>=====< Question 1 >=====<%
+
+\question
+
+Write the definition of measurable function. Show the measurability of the composite function.
+
+\subsection*{Solution}
+
+\subsection{Measurable function}
+
+Let $(X,\A)$ and $(X',\A')$ be two measurable spaces and $f$ a function:
+\[
+    f:X\to X'
+\]
+$f$ is said to be measurable if:
+\[
+    f^{-1}(A)\in\A\quad\forall A\in\A'
+\]
+
+\subsection{Measurability of the composite function} \label{meas:comp}
+Let $(X,\A)$, $(X',\A')$ and $(X'',\A'')$ be three measurable spaces and $f:X\to X'$ and $g:X'\to X''$ two measurable functions. Then the composite function $g\circ f:X\to X''$ is measurable.
+
+\begin{proof}
+    \begin{align*}
+         & \forall E \in \A' \quad f^{-1}(E)\in\A   \\
+         & \forall F \in \A'' \quad g^{-1}(F)\in\A' \\
+    \end{align*}
+    thus:
+    \[
+        \forall F\in \A'' \quad (g\circ f)^{-1}(F) = f^{-1} \left[ \underbrace{g^{-1}(F)}_{\coloneqq E \in \A'} \right] \in\A
+    \]
+\end{proof}

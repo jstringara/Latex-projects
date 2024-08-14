@@ -1,0 +1,31 @@
+
+%>=====< Question 5 >=====<%
+
+\question
+
+Write the two possible equivalent definitions of Lebesgue integral of a measurable nonnegative function.
+
+\subsection*{Solution}
+
+Let $f:X\to\Rcomppos$ be a measurable nonnegative function ($f\in\Mes_+(X,\A))$. Let us define the set $\Smes_f$:
+\[
+    \Smes_f = \{ s\in \Smes_+ : \; s\leq f \text{ in } X\}    
+\]
+We then have two possible and equivalent definitions of the Lebesgue integral of $f$.
+
+\subsection{Definition by \texorpdfstring{$\sup$}{the supremum}}
+We define the integral of $f$ as:
+\[
+    \int_X f \,d\mu = \sup_{s\in\Smes_f} \int_X s \,d\mu
+\]
+
+\subsection{Definition by \texorpdfstring{$\lim$}{the limit}}
+Thanks to the Simple Approximation Theorem (\ref{SAT}) we know:
+\[
+    \exists \seq{s} \subseteq \Smes_f \quad s_n\leq s_{n+1} \; n\in\N, \; s_n\xrightarrow{n\to\infty} s \text{ in } X
+\]
+So we can define the integral as:
+\[
+    \int_X f \,d\mu = \lim_{n\to\infty} \int_X s_n \,d\mu    
+\]
+Let us note that the integral must be independent of the choice of the sequence $\seq{s}$.

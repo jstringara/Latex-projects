@@ -1,0 +1,46 @@
+
+%>=====< Question 12 >=====<%
+
+\question
+
+Write the definition of simple function. What is its canonical form? How can we characterize measurability of a simple function? Write the definition of step function.
+
+\subsection*{Solution}
+
+\subsection{Definition of simple function}
+Let $X$ be a set and $s:X\to\R$ a function. We say that $s$ is a simple function if $s(X)$ is a finite set. \\
+Furthermore we define the two sets:
+\begin{align*}
+     & \Smes(X, \A) \coloneqq \{ \text{ measurable simple functions}  \}                           \\
+     & \Smes_+(X, \A) \coloneqq \{ \text{ measurable simple functions with non-negative values} \}
+\end{align*}
+
+\subsection{Canonical form of simple function} \label{simple:canon}
+The canonical form of a simple function is:
+\[
+    s(x) = \sum_{i=1}^n c_i \chi_{E_i}(x)
+\]
+where:
+\begin{align*}
+     & c_i \in \R \; \forall i=1,\dots,n                                      \\
+     & E_i = \{ x\in X : \; s(x)=c_i \} \; \forall i=1,\dots,n                \\
+     & X = \bigcup_{i=1}^n E_i, \; E_k\cap E_l = \emptyset \; \forall k\neq l
+\end{align*}
+i.e. $E_i$ is a partition of $X$.
+
+\subsection{Measurability of simple function}
+A simple function is measurable if and only if we have the following:
+\[
+    E_i \in \A \; \forall i=1,\dots,n
+\]
+i.e. :
+\[
+    s(x)\in \Mes(X,\A) \iff E_i \in \A \; \forall i=1,\dots,n
+\]
+this is because $s(x)$ is a linear combination of indicator functions.
+
+\subsection{Step Functions}
+Let $I=[a_0,a_1)$ be an interval and $P=\{ a_o \equiv x_0 < x_1 < \dots < x_n \equiv a_1 \}$ a partition of $I$. A function $f:I\to\R$ is a step function if:
+\[
+    f \coloneqq \sum_{k=0}^{n-1} c_k \chi_{[x_k,x_{k+1})} (x)
+\]

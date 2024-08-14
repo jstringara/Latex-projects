@@ -1,0 +1,27 @@
+%>=====< Question 1.5 >=====<%
+
+\question
+Write the definitions of: algebra, $\salg$, measurable space, measurable set. Show that if $\A$
+is a $\salg$ and $\{E_k\}\subset \A$, then $\bigcap^{+\infty}_{k=1} E_k \in \A $.
+
+\subsection*{Solution}
+\provdefs
+\begin{itemize}
+    \item \subsection{Algebra} A family $\A\subseteq\Parts{X}$ is an algebra if:
+    \begin{enumerate}[i)]
+        \item $\emptyset \in \A$
+        \item $E\in\A \implies E^\complement \in\A$
+        \item $A,B\in\A \implies A\cup B\in\A$
+    \end{enumerate}
+    \item \subsection{\texorpdfstring{$\salg$}{Sigma-algebra}} A family $\A\subseteq\Parts{X}$ is a $\salg$ if:
+    \begin{enumerate}[i)]
+        \item $\emptyset \in \A$
+        \item $E\in\A \implies E^\complement \in\A$
+        \item $\seq{E}_{n\in\N} \subseteq\A \implies \bigcup_{n=1}^\infty E_n \in\A$
+    \end{enumerate}
+    \item \subsection{Measurable space} The couplet $(X,\A)$ where $\A$ is a $\salg$ is called a measurable space.
+    \item \subsection{Measurable set} the elements of the $\salg$ of a measurable space are called measurable sets.
+\end{itemize}
+
+Clearly $\bigcap^{+\infty}_{k=1} E_k = \left(\bigcup^{+\infty}_{k=1} E_k^\complement\right)^\complement$
+and since $\A$ is a $\salg$ we have that $\bigcup^{+\infty}_{k=1} E_k^\complement \in \A$ and thus $\bigcap^{+\infty}_{k=1} E_k \in \A$.

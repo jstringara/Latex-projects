@@ -1,0 +1,182 @@
+\documentclass[a4paper]{report} %document class and format
+
+
+%>=====< Language  and bibliography packages >=====<%
+
+\usepackage[T1]{fontenc} % font encoding
+\usepackage[utf8]{inputenc} % input encoding
+\usepackage[style=numeric-comp,useprefix,hyperref,backend=bibtex]{biblatex}
+
+%>=====< Math packages >=====<%
+
+\usepackage{amsmath, amssymb, amsthm, mathrsfs, mathtools}
+\usepackage{centernot} %for centered negation
+\usepackage[makeroom]{cancel} %to cancel out stuff
+
+%>=====< Other packages >=====<%
+
+\usepackage{framed} % for framing text
+\usepackage{titling} % for customizing title
+\usepackage{titlesec} %for customizing sections title
+\usepackage[ top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry} % for smaller margins
+\usepackage{xifthen} %for conditional statements
+\usepackage{enumerate} %to modify lists
+\usepackage{hyperref} %to insert hyperlinks
+%\usepackage[open]{bookmark} %to have bookmarks open by default
+\usepackage{titletoc} %to modify the toc
+\usepackage{tikz}
+\usetikzlibrary{tikzmark}
+
+%>=====< Chapter >=====<% 
+
+%redefine chapters
+\titleformat{\chapter}[display]{\normalfont\Huge\bfseries} % format
+{Sheet n. \thechapter} % label
+{0ex} % sep
+{ \vspace{1ex} \centering } % before-code
+[ \vspace{-2.5ex} ] % after-code
+
+%modify chapter in toc
+\titlecontents{chapter}[0em]{\smallskip\bfseries}%\vspace{1cm}%
+{}%
+{\itshape\bfseries}%numberless%
+{\hfill\contentspage}[\medskip]%
+
+%new sheet command for toc
+\newcommand{\sheet}{\chapter[Sheet n.\thechapter]{}}
+
+%>=====< Section >=====<%
+
+%redefine section
+\titleformat{\section}[display]{\normalfont\huge\bfseries} % format
+{Question \thesection} % label
+{0ex} % sep
+{ \vspace{0ex} } % before-code
+[ \vspace{-1.5ex} ] % after-code
+
+%modify chapter in toc
+\titlecontents{section}[1.5em]{\smallskip\bfseries}%\vspace{1cm}%
+{}%
+{\itshape\bfseries}%numberless%
+{\hfill\contentspage}[\medskip]%
+
+%new question command for toc
+\newcommand{\question}{\section[Question \thesection]{}}
+
+%>=====< Subsection >=====<%
+
+%redefine subsection
+\titleformat{\subsection}[hang]{\normalfont\large\bfseries} % format
+{} % label
+{0pt} % sep
+{} % before-code
+[ \vspace{0.5ex} ] % after-code
+
+%redefine subsection*
+\titleformat{name=\subsection, numberless}[hang]{\normalfont\large\bfseries} % format
+{} % label
+{0pt} % sep
+{} % before-code
+[ \vspace{0.5ex} ] % after-code
+
+%>=====< Subsubsection >=====<%
+
+%redefine subsubsection
+\titleformat{\subsubsection}[hang]{\normalfont\large\bfseries} % format
+{} % label
+{0pt} % sep
+{} % before-code
+[ \vspace{0.5ex} ] % after-code
+
+%make it appear in toc
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+%>=====< Math sets >=====<%
+
+\newcommand{\N}{\mathbb{N}} %natural
+\newcommand{\R}{\mathbb{R}} %real
+\newcommand{\Rpos}{\R_{+}} %positive real
+\newcommand{\Rcomp}{\overline{\R}} %complete real
+\newcommand{\Rcomppos}{\Rcomp_{+}} %complete positive real
+\newcommand{\Q}{\mathbb{Q}} %rational
+\newcommand{\A}{\mathcal{A}} %calligraphic A
+\newcommand{\B}[1][]{
+  \ifthenelse{\isempty{#1}}{\mathcal{B}}{\mathcal{B}\left(#1\right)}
+}%Borel sigma-algebra
+\newcommand{\Parts}[1]{\mathcal{P}\left(#1\right)} %set of all parts
+\renewcommand{\complement}{\mathsf{c}} %complement
+\newcommand{\Leb}{\mathcal{L}} %Lebesgue sigma-algebra
+\newcommand{\Mes}{\mathcal{M}} %measurable functions
+\newcommand{\Smes}{\mathcal{S}} %measurable simple functions
+
+%>=====< Math symbols >=====<%
+
+\renewcommand{\epsilon}{\varepsilon} %epsilon
+\renewcommand{\theta}{\vartheta} %theta
+\renewcommand{\phi}{\varphi} %phi
+\DeclareMathOperator*{\esssup}{ess\,sup} %esssup
+\DeclareMathOperator*{\essinf}{ess\,inf} %essinf
+\DeclareMathOperator*{\interior}{int} %interior 
+\DeclareMathOperator*{\dist}{dist} %distance 
+\DeclareMathOperator{\spn}{span} %span
+\DeclareMathOperator{\supp}{supp} %support
+
+%>=====< Math jargon >=====<%
+
+\newcommand{\salg}{\sigma-\text{algebra}} %sigma-algebra
+\newcommand{\s}[1]{\sigma-\text{#1}}%sigma-smth
+\newcommand{\provdef}[1][]{
+  \ifthenelse{\isempty{#1}}{Let us define:}{Let us define #1 as:}
+} %smart definition
+%define #1
+\newcommand{\provdefs}{Let us define the following:} %multiple definitions
+\newcommand{\seq}[1]{ \{ #1_n \} } %sequence
+\newcommand{\subseq}[1]{ \{ #1_{n_k} \} } %subsequence
+\newcommand{\tfae}{the following are equal:}  %the following are equal
+\newcommand{\toin}[1]{\xrightarrow[n\to\infty]{#1} } %to in 
+\newcommand*{\cvrule}{\smash{\rule{0.4pt}{2ex}}}
+
+%>=====< Math commands added for compatibility >=====<%
+
+%\newcommand{\proj}{\mbox{Proj_{H}}} this was the original, I changed it for consistency and good practice
+\DeclareMathOperator*{\proj}{Proj} %projection
+\newcommand{\wc}{\rightharpoonup}
+\newcommand{\wsc}{\overset{\ast}{\rightharpoonup}}
+\newcommand{\toi}{n\to\infty}
+
+%>=====< Custom commands >=====<%
+
+\newcommand{\cancelnum}[2]{\overset{\text{\normalsize#1}}{\xcancel{#2}}}
+
+%>=====< Document >=====<%
+
+\begin{document}
+\input{ARF-titlepage.tex}
+
+%>=====< Table of contents >=====<%
+
+\tableofcontents
+\newpage
+
+%>=====< Sheets >=====<%
+
+\input{LM/LM1.tex}
+\input{LM/LM2.tex}
+\input{LM/LM3.tex}
+
+%>=====< End Document >=====<%
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+

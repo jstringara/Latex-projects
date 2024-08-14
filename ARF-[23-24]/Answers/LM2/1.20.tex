@@ -1,0 +1,48 @@
+
+%>=====< Question 9 >=====<%
+
+\question
+Show that $\B[\R] \subseteq \Leb(\R)$. Is the inclusion strict? Which is the relation between $(\R,\Leb(\R), \lambda)$ and
+$(\R, \B[\R], \lambda)$?
+
+\subsection*{Solution}
+
+\subsection{\texorpdfstring{$\B[\R] \subseteq \Leb(\R)$}{B(R) is included in L(R)}}
+\begin{proof}
+    Since $\B[\R]=\sigma_0((a,+\infty))$ it is enough to show that $(a,+\infty)\in\Leb(\R)$. We already know from above that all bounded intervals belong to $\Leb(\R)$. \\
+    Now, let $A\subseteq\R$ be any set. We assume $a\notin A$, otherwise we would replace $A$ with $A\setminus\{a\}$ and this would leave the Lebesgue outer measure unchanged. Furthermore $(a,+\infty)\in\Leb(\R) \iff (a,+\infty)$ satisfies the Caratheodory Condition (\ref{CarIneq}):
+    \[
+        \lambda^*(A_1)+\lambda^*(A_2)\leq\lambda^*(A) \label{a}
+    \]
+    where $A_1 = A\cap (-\infty,a)$ and $A_2 = A \cap (a,+\infty)$.\\
+    Since $\lambda^*(A)$ is defined as an $\inf$, to verify the above, it is necessary and sufficient to show that for \textbf{any countable collection} $\seq{I}$ of \textbf{open bounded} intervals that \textbf{covers} $A$ we have that:
+    \[
+        \lambda^*(A_1)+\lambda^*(A_2)\leq \sum_{k=1}^{\infty} \lambda_0(I_k)
+    \]
+    For every $k\in\N$ we define:
+    \begin{align*}
+        I_k' \coloneqq I_k \cap (-\infty, a) \\
+        I_k'' \coloneqq I_k \cap (a,+\infty)
+    \end{align*}
+    then:
+    \[
+        I_k' \cap I_k'' = \emptyset (\text{disjoint}) \implies \lambda_o(I_k) = \lambda_0(I_k') + \lambda_0 (I_k'')
+    \]
+    Let us note that $\seq{I'}$ is a countable cover for $A_1$ and $\seq{I''}$ is a countable cover for $A_2$.
+    Hence:
+    \begin{align*}
+        \lambda^*(A_1)=\sum_{k=1}^{\infty} \lambda_0(I_k') \\
+        \lambda^*(A_2)=\sum_{k=1}^{\infty} \lambda_0(I_k'')
+    \end{align*}
+    therefore:
+    \[
+        \lambda^*(A_1)+\lambda^*(A_2)\leq \sum_{k=1}^{\infty} \lambda_0(I_k') + \sum_{k=1}^{\infty} \lambda_0(I_k'') = \sum_{k=1}^{\infty} \lambda_0(I_k)
+    \]
+    which equivalento to the condition above.
+\end{proof}
+
+\subsection{\texorpdfstring{$\B[\R] \subsetneqq \Leb(\R)$}{B(R) is strictly included in L(R)}}
+The inclusion demonstrated above can be shown to be strict. A counterexample can be produced (see \href{https://math.stackexchange.com/questions/141017/lebesgue-measurable-set-that-is-not-a-borel-measurable-set}{\color{blue}{here}}) but it is quite pathological.
+
+\subsection{Relation between \texorpdfstring{$(\R,\Leb(\R),\lambda)$}{(R,L(R),l)} and \texorpdfstring{$(\R,\B[\R],\lambda)$}{(R,B(R),l)}}
+$(\R,\Leb(\R),\lambda)$ is the completion of $(\R,\B[\R],\lambda|_{\B[\R]})$. Indeed as we have shown above $\B[\R]$ is not a complete $\salg$ while $\Leb(\R)$ is.

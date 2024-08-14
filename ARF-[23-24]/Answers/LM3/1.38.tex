@@ -1,0 +1,50 @@
+
+%>=====< Question 15 >=====<%
+
+\question
+
+What is $\Leb^\infty$? Which is the relation between functions finite a.e. and essentially bounded functions? Justify the answer.
+
+\subsection*{Solution}
+
+\subsection{Definition of \texorpdfstring{$\Leb^\infty$}{the set of essentially bounded functions}}
+Let $(X, \A, \mu)$ be a measure space. A function $f\in\Mes(X,\A)$ is said to be essentially bounded if:
+\[
+    \esssup_X f < +\infty
+\]
+and we define the set of essentially bounded functions as:
+\[
+    \Leb^\infty (X,\A,\mu) \coloneqq \{ f:X\to\Rcomp : \; \text{ f is essentially bounded }\}
+\]
+
+\subsection{Relation between functions finite a.e. and essentially bounded functions}
+We have that:
+\begin{enumerate}
+    \item $f\in\Leb^\infty \implies f$ is finite a.e. in $X$;
+    \item in general if $f$ is finite a.e. in $X$ $\centernot\implies f\in\Leb^\infty$.
+\end{enumerate}
+
+\begin{proof}
+    \begin{enumerate}
+        \item We can easily see that:
+              \[
+                  |f| \leq \esssup |f| < + \infty \text{ almost everywhere in } X
+              \]
+              thus $f$ is finite almost everywhere in $X$;
+        \item Let us assume that:
+              \[
+                  f \text{ is finite a.e. in }  X \implies f\in\Leb^\infty
+              \]
+              and let us see a clear counterexample of this, take:
+              \[
+                  f(x): \R \to \Rcomp \coloneqq \begin{cases}
+                      \frac{1}{|x|} & x \neq 0 \\
+                      + \infty      & x = 0
+                  \end{cases}
+              \]
+              Clearly $f$ is finite in $E=\R\setminus\{0\}$, i.e. $f$ is finite a.e. in $\R$. Let us note that $\lambda(\{0\}) = 0 $. Thus:
+              \[
+                  \esssup_X |f| = +\infty \implies f \notin \Leb^\infty
+              \]
+    \end{enumerate}
+\end{proof}

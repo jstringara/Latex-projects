@@ -1,0 +1,34 @@
+
+%>=====< Question 9 >=====<%
+
+\question
+Write the definitions of: measure, finite measure, $\s{finite measure}$, measure space, probability
+space. Provide some examples of measures.
+
+\subsection*{Solution}
+\provdefs
+\begin{itemize}
+    \item \subsection{Measure} Let $X$ be a set and $\mathcal{C}\subseteq\Parts{X}$, then a function $\mu$:
+    \[
+        \mu:\mathcal{C}\to\Rcomppos    
+    \]
+    is a measure if:
+    \begin{enumerate}
+        \item $\mu(\emptyset)=0$
+        \item \textbf{$\s{additivity}$:}\\
+        $\forall \seq{E}\subseteq\mathcal{C}$ disjoint ($E_i\cap E_j\quad \forall i\neq j$) such that $\bigcup_{k=1}^{\infty} E_k \in \mathcal{C}$ we have that:
+        \[
+            \mu \left( \bigcup_{k=1}^{\infty} E_k \right) = \sum_{k=1}^{\infty} \mu(E_k) 
+        \]
+    \end{enumerate}
+    \item \subsection{Finite measure} a measure $\mu$ defined as above is said to be finite if:
+    \[
+        \mu(X) < + \infty    
+    \]
+    \item \subsection{\texorpdfstring{$\s{finite measure}$}{Sigma-finite measure}} a measure $\mu$ is said to be $\s{finite}$ if there exists a sequence $\seq{E}$ such that:
+    \[
+        X = \bigcup_{k=1}^\infty E_k, \quad \mu(E_k) <+\infty
+    \]
+    \item \subsection{Measure space} Let $\A\subseteq\Parts{X}$ be a $\salg$ and $\mu:\A\to\Rcomppos$ a measure, then the triplet $(X,\A,\mu)$ is called  a measure space.
+    \item \subsection{Probability space} if $\mu(X)=1$ then we say that $(X,\A,\mu)$ is a probability space.
+\end{itemize}

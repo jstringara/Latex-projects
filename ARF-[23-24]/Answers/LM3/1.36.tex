@@ -1,0 +1,32 @@
+
+%>=====< Question 13 >=====<%
+
+\question
+
+State and give a sketch of the proof of the Simple Approximation Theorem.
+
+\subsection*{Solution}
+
+\subsection{Simple Approximation Theorem}\label{SAT}
+Let $(X,\A)$ be a measurable space and $f:X\to\Rcomp$. Then there exists a sequence of simple functions $\seq{s}$ such that:
+\[
+    s_n \xrightarrow{n\to\infty} f \text{ in } X \text{ (pointwise)}
+\]
+\textbf{Furthermore:}
+\begin{enumerate}[i)]
+    \item if $f\in\Mes(X,\A)$, then $\seq{s}\subseteq\Smes(X,\A)$;
+    \item if $f\geq 0 \implies \seq{s} \uparrow$, $0\leq s_n \leq f$;
+    \item $f$ bounded $\implies s_n \xrightarrow{n\to\infty} f$ uniformly in $X$.
+\end{enumerate}
+
+\subsection*{Sketch of proof}
+Let $f\geq0$, bounded and $0 \leq f \leq 1$ $\forall x\in X$.
+\[
+    f : X \to [0,1]
+\]
+Let us divide $[0,1]$ in $2^n$ intervals of equal length $\forall n \in \N$, then we define:
+\begin{align*}
+     & E_k^{(n)} \coloneqq \left\{ x\in X: \; \frac{k}{2^n} \leq f(x) \leq \frac{k+1}{2^n} \right\} \quad k = 0,\dots,2^n-1 \\
+     & s_n \coloneqq \sum_{k=0}^{2^n-1} \frac{k}{2^n} \chi_{E_k^{(n)}}(x) \quad \forall n\in\N
+\end{align*}
+Clearly $\seq{s}$ has the desired properties.

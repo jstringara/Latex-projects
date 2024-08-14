@@ -1,0 +1,17 @@
+
+%>=====< Question 4 >=====<%
+
+\question
+Can it exist a set of zero outer measure, which does not fulfill the Caratheodory condition? Prove it.
+
+\subsection*{Solution}
+
+\subsection{All zero measure sets are in \texorpdfstring{$\Leb$}{L}} \label{zerosetsaremeas}
+There cannot exist such a set $E$ because all sets of zero aouter measure meet the Caratheodory Inequality (\ref{CarIneq}).
+
+\begin{proof}\label{outer:zeromeas}
+    Indeed $\forall Z \subseteq X$ by the monotonicty of $\mu^*$ (\ref{outer:mono}) we have:
+    \[
+        \mu^*(\underbrace{Z\cap E}_{\subseteq E}) + \mu^*(\underbrace{Z\setminus E}_{\subseteq Z}) \leq \cancelnum{0}{\mu^*(E)} + \mu^*(Z)
+    \]
+\end{proof}

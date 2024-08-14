@@ -1,0 +1,33 @@
+%>=====< Question 1.1 >=====<%
+
+\question
+Write the definitions of: sequence of sets $\seq{E}$; increasing and decreasing sequence of sets $\seq{E}$;
+$\limsup_{n\to\infty} E_n$, $\liminf_{n\to\infty} E_n$, $\lim_{n\to\infty} E_n$.
+
+\subsection*{Solution}
+
+\provdefs
+\begin{itemize}
+    \item \subsection{Sequence of sets} A family (or collection) of sets $\{E_i\}_{i\in I}$ is called a sequence of sets if $I=\N$ (i.e. it is indexed by the set of natural numbers $\N$)
+    \item \subsection{Increasing sequence of sets} a sequence of sets $\seq{E}$ is said to be increasing (or ascending) if:
+    \[
+        E_n \subseteq E_{n+1} \quad \forall n\in\N    
+    \]
+    \item \subsection{Decreasing sequence of sets}
+    A sequence of sets $\seq{E}$ is said to be decreasing (or descending) if:
+    \[
+        E_n \supseteq E_{n+1} \quad \forall n\in\N    
+    \]
+    \item \subsection{Limsup for a sequence of sets} for a sequence of sets $\seq{E}$ we define:
+    \[
+        \limsup_{n\to\infty} E_n \coloneqq \bigcap_{k=1}^{\infty} \bigcup_{n=k}^\infty E_n
+    \]
+    \item \subsection{Liminf for a sequence of sets} analogously:
+    \[
+        \liminf_{n\to\infty} E_n \coloneqq \bigcup_{k=1}^{\infty} \bigcap_{n=k}^\infty E_n
+    \]
+    \item \subsection{Limit for a sequence of sets} as for a sequence of real numbers if the limsup and liminf coincide we may define:
+    \[
+        \lim_{n\to\infty} E_n \coloneqq \liminf_{n\to\infty} E_n = \limsup_{n\to\infty} E_n    
+    \]
+\end{itemize}

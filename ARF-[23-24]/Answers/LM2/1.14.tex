@@ -1,0 +1,30 @@
+
+%>=====< Question 3 >=====<%
+
+\question
+What is the Caratheodory condition? How can it be stated in an equivalent way? Prove it.
+
+\subsection*{Solution}
+
+\subsection{Caratheodory condition} \label{CarEq}
+Let $\mu^*$ be an outer measure on a set $X$, then we say that $E\subset X$ is $\mu^*$-measurable if:
+\[
+    \mu^*(Z) = \mu^*(Z\cap E) + \mu^*(Z\setminus E) \quad \forall Z\subset X
+\]
+
+\subsection{Equivalent statement}\label{CarIneq}
+Let $\mu^*$ be an outer measure on a set $X$, then we say that $E\subset X$ is $\mu^*$-measurable if and only if:
+\[
+    \mu^*(Z) \geq \mu^*(Z\cap E) + \mu^*(Z\setminus E) \quad \forall Z\subset X
+\]
+\begin{proof}
+    It is enough to note that $\forall E\subseteq X$ we have:
+    \[
+        Z = (Z\cap E) \cup (Z \cap E^\complement) \quad \forall Z\subset X
+    \]
+    and thus by the subadditivity of $\mu^*$ (\ref{outer:sub}) we get:
+        \[
+        \mu^*(Z) \leq \mu^*(Z\cap E) + \mu^*(Z\setminus E) \quad \forall Z\subset X
+    \]
+    and we may combine this inequality with the other to yield an equality.
+\end{proof}

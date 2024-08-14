@@ -1,0 +1,23 @@
+%>=====<  Question 11 >=====<%
+
+\question
+Write the definitions of: sets of zero measure; negligible sets. What is meant by saying that a property holds a.e.? Provide typical properties that can be true a.e. .
+
+\subsection*{Solution}
+
+\provdefs
+\begin{itemize}
+    \item \subsection{Sets of zero measure} 
+    Given a measure space $(X,\A,\mu)$, we say that a set $E\subseteq X$ has zero measure if $E\in\A$ and $\mu(E)=0$. We denote the set of all sets of zero measure by $\mathcal{N}_{\mu}$
+    \item \subsection{Negligible sets} a set $E\subseteq X$ is negligible if:
+    \[
+        \exists N\in\A \text{ s.t. } E \subseteq N, \; \mu(N)=0
+    \]
+    So any subset of a set of zero measure is negligible, we denote the collection of all negligible sets by $\tau_{\mu}$. Moreover let us note that $E$ doesn't need to be an element of $\A$ ($E\notin\A$)
+    \item \subsection{Almost Everywhere} a property $P$ on $X$ is said to hold almost everywhere if:
+    \[
+       \mu( \{ x\in X: P(x) \text{ is false } \} ) = 0    
+    \]
+    We may also say that $\{ x\in X: P(x) \text{ is false } \} \in \mathcal{N}_{\mu}$\\
+    \subsection*{Examples} typical properties that can be true a.e. are: equality, continuity, monotonicity, etc. etc.
+\end{itemize}
